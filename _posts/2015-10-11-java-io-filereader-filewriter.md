@@ -49,7 +49,7 @@ reader.close();
 
 #FileWriter
 
-[原文链接](http://tutorials.jenkov.com/java-io/filereader.html)
+[原文链接](http://tutorials.jenkov.com/java-io/filewriter.html)
 
 　　FileWriter能够把数据以字符流的形式写入文件。同样是处理文件，FileWriter处理字符，FileOutputStream处理字节。根据不同的编码方案，一个字符可能会相当于一个或者多个字节。代码如下：
 
