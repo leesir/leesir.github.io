@@ -18,7 +18,7 @@ tags: [Code Convention]
 　　“Talk is cheap. Show me the code.”-- Linus Torvalds(http://coolshell.cn/articles/1278.html)
 
 　　本人从业多年，却依旧写不好一行代码。决心踏出舒适区，从变量命名开始，重塑编码习惯。本文将从代码规范实践的3个等级(初学乍练，融会贯通，登峰造极)，指导开发者如何在项目中引入代码规范。
-题外话：引入代码规范，是为了后续能够顺利进行Code Review。有很多优秀博文已经论述了code review的重要性，其中一篇：http://coolshell.cn/articles/11432.html。
+题外话：引入代码规范，是为了后续能够顺利进行Code Review。有很多优秀博文已经论述了code review的重要性，其中一篇：http://coolshell.cn/articles/11432.html 。
 
 注：
 
