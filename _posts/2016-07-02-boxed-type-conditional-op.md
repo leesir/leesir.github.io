@@ -81,7 +81,7 @@ private static class InnerClass {
 }
 {% endhighlight %}
 
-根据if判断和条件运算符的等价关系，我在程序中用了如下的方式实现逻辑：
+根据if判断和条件运算的等价关系，我在程序中用了如下的方式实现逻辑：
 
 {% highlight java %}
 private static void testBoxedTypeWithConditionalOperation() {
@@ -111,11 +111,11 @@ private static void testBoxedTypeWithIf() {
     System.out.println(idValue);
 }
 {% endhighlight %}
-可以看到，testBoxedTypeWithConditionalOperation中将条件运算符中的包装类型解包装了，在testBoxedTypeWithIf中将原始类型包装了。
+可以看到，testBoxedTypeWithConditionalOperation中将条件运算中的包装类型解包装了，在testBoxedTypeWithIf中将原始类型包装了。
 
-在我以往的认知中，包装类型与原始类型的自动包装与解包装的操作，就像在testBoxedTypeWithIf中，是在这些变量之间有直接的比较、复制或者计算（如加减乘除）的时候。然而在条件运算符中，即使看似没有直接的关系，编译器依然对包装类型做了解包装的操作。
+在我以往的认知中，包装类型与原始类型的自动包装与解包装的操作，就像testBoxedTypeWithIf中，是在这些变量之间有直接的比较、赋值或者计算（如加减乘除）的时候。然而在本例的条件运算中，即使看似没有直接的关系，编译器依然对包装类型做了解包装的操作。
 
-所以，在包装类型与条件运算符混用的时候，要么用if判断替代条件运算符，要么在条件运算符的判断条件中先对包装类型是否为空做判断，做法如下：
+所以，在包装类型与条件运算混用的时候，要么用if判断替代条件运算，要么在条件运算的判断条件中先对包装类型是否为空做判断，做法如下：
 
 {% highlight java %}
 private static void testBoxedTypeWithCorrectConditionalOperation() {
@@ -126,4 +126,4 @@ private static void testBoxedTypeWithCorrectConditionalOperation() {
 {% endhighlight %}
 对于本例中用的测试用例，即flag == true，testBoxedTypeWithCorrectConditionalOperation将输出0。
 
-通过反编译代码发现，条件运算符与if判断只是在程序的执行路径上保持一致，具体的执行细节，因不同编程语言而异。而今Java前端与后端编译器越来越聪明，对程序员来说不见得是一件好事儿。
+通过反编译代码发现，条件运算与if判断只是在程序的执行路径上保持一致，具体的执行细节，因不同编程语言而异。而今Java前端与后端编译器越来越聪明，对程序员来说不见得是一件好事儿。
