@@ -15,7 +15,7 @@ tags: [Summary]
 
 <!-- more -->
 
-#### 同步synchronized的底层实现原理是什么？
+#### 1. 同步synchronized的底层实现原理是什么？
 
 在对象上使用synchronized，会尝试获取对象的锁。获取成功之后，程序可以进入到同步代码块中执行逻辑。如果获取失败，则会进入到等待该对象锁的等待队列中。试图获取null的锁的操作都将抛出空指针异常，null在虚拟机内部的表示不属于虚拟机规范，所以不同的虚拟机可能会有不同的实现方式。
 
@@ -27,7 +27,7 @@ tags: [Summary]
 javap -c -p yourPath/TestClass
 ```
 注：TestClass是类名，不是TestClass.class或者TestClass.java等文件名。
-#### 对非常量或者非单例对象上使用synchronized，会有什么效果？
+#### 2. 对非常量或者非单例对象上使用synchronized，会有什么效果？
 
 理解了synchronized的实现原理，就来看看对非常量或者非单例对象上使用synchronized，会有什么效果。
 
@@ -41,7 +41,7 @@ private static final Object monitor = new Object();
 
 对于Spring等对象容器来说，你需要关注通过配置文件往容器加入的对象，是否是单例（Spring默认是单例，既scope = singleton）。非单例的对象，当应用程序向容器索取对象时，容器可能会返回一个新建的对象。
 
-#### 对包装类型使用synchronized，会有什么效果？
+#### 3. 对包装类型使用synchronized，会有什么效果？
 
 首先，因为包装类型是对象，所以对包装类型使用synchronized同样适用第2点，即存在非常量及非单例对同步逻辑的影响。
 
@@ -68,4 +68,4 @@ synchronized (flag) {
 
 不过运气好的话，执行flag = false后立即获取对象锁，则thread2会等到thread1执行完毕后才进入同步代码块，同步会生效，因为获取的是同一个对象锁。
 
-因此，这种程序不仅是面向对象的程序，还是面向对象的运气程序。
+因此，这种程序不仅是面向对象程序，还是面向运气程序。
