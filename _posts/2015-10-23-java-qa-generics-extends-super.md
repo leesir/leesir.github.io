@@ -11,7 +11,7 @@ tags: [Q&A]
 
 　　我们会经常发现List&lt;? super T>、Set&lt;? extends T>的声明，是什么意思呢？&lt;? super T>表示包括T在内的任何T的父类，&lt;? extends T>表示包括T在内的任何T的子类，下面我们详细分析一下两种通配符具体的区别。
 
-#extends
+# extends
 
 　　List&lt;? extends Number> foo3的通配符声明，意味着以下的赋值是合法的：
 
@@ -43,7 +43,7 @@ List<? extends Number> foo3 = new ArrayList<Double>();
 * 你不能插入一个Number元素，因为foo3可能指向List&lt;Integer>。
 * 你不能往List&lt;? extends T>中插入任何类型的对象，因为你不能保证列表实际指向的类型是什么，你并不能保证列表中实际存储什么类型的对象。唯一可以保证的是，你可以从中读取到T或者T的子类。
 
-#super
+# super
 
 　　现在考虑一下List&lt;? super T>。List&lt;? super Integer> foo3的通配符声明，意味着以下赋值是合法的：
 
@@ -74,7 +74,7 @@ List<? super Integer> foo3 = new ArrayList<Object>();
 * 你不能插入Number对象，因为foo3可能指向ArrayList&lt;Integer>。
 * 你不能插入Object对象，因为foo3可能指向ArrayList&lt;Integer>。
 
-#PECS
+# PECS
 
 请记住PECS原则：生产者（Producer）使用extends，消费者（Consumer）使用super。
 
@@ -85,7 +85,7 @@ List<? super Integer> foo3 = new ArrayList<Object>();
 3.	即是生产者，也是消费者
 如果一个列表即要生产，又要消费，你不能使用泛型通配符声明列表，比如List&lt;Integer>。
 
-#例子
+# 例子
 
 　　请参考java.util.Collections里的copy方法：
 
