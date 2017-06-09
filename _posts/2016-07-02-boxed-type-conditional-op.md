@@ -15,8 +15,6 @@ tags: [Summary]
 
 <!-- more -->
 
-##进入正题
-
 这第一个问题便是：
 
 ```
@@ -41,7 +39,7 @@ if (b) {
 所以
 
 {% highlight java %}
-int a = b ? x : y
+int a = (b ? x : y);
 {% endhighlight %}
 
 等价于
@@ -58,6 +56,15 @@ if (b) {
 接下来介绍我的发现。
 
 {% highlight java %}
+//InnerClass的简化定义如下：
+private class InnerClass {
+    private Long id;
+    
+    Long getId() {
+        return this.id;
+    }
+}
+
 private static void testBoxedTypeWithIf() {
     InnerClass innerClass = new InnerClass();
     Long idValue;
@@ -69,17 +76,7 @@ private static void testBoxedTypeWithIf() {
     System.out.println(idValue);
 }
 {% endhighlight %}
-flag的值为true，所以程序毫无疑问会打印出null。InnerClass的简化定义如下：
-
-{% highlight java %}
-private static class InnerClass {
-    private Long id;
-    
-    Long getId() {
-        return this.id;
-    }
-}
-{% endhighlight %}
+flag的值为true，所以程序毫无疑问会打印出null。
 
 根据if判断和条件运算的等价关系，我在程序中用了如下的方式实现逻辑：
 
@@ -101,7 +98,6 @@ private static void testBoxedTypeWithConditionalOperation() {
 
 private static void testBoxedTypeWithIf() {
     InnerClass innerClass = new InnerClass(null);
-    Long idValue;
     Long idValue;
     if (flag)
       idValue = innerClass.getId();
