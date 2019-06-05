@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Derrick Lee's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Derrick Lee's Blog</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="active visible-xs-block"><a href="/links.html">Links</a></li>
+					<li class="active"><a href="/archive.html">Archive</a></li>
+					<li class="active"><a href="/categories.html">Categories</a></li>
+                    <li class="active"><a href="/tags.html">Tags</a></li>
+                    <li class="active"><a href="/about.html">About</a></li>
+                    <li class="active"><a href="/feed.xml">RSS</a></li>
+                    
+                      <li class="active"><a href="https://github.com/leesir/leesir.github.io">Github</a></li>
+                    
+                </ul>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container container-left">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+译文分享
+</div>
+
+<div class="sidebar well">
+    <h1>Recent Posts</h1>
+    <ul>
+        
+          <li><a href="/2016/08/java-history">Java的历史</a></li>
+        
+          <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
+        
+          <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
+        
+          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
+        
+          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
+        
+          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
+        
+          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
+        
+          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
+        
+    </ul>
+</div>
+
+<div class="sidebar well">
+<h1>Links</h1>
+<ul>
+  <li><a href="http://ifeve.com/" target="_blank">并发编程网</a></li>
+  <li><a href="http://www.infoq.com/cn" target="_blank">InfoQ</a></li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="/2015/10/java-io-outputstream">Oct 12, 2015 - Java IO: OutputStream</a></h1>
+            
+            <div class="post-content">
+            <link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/outputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　OutputStream类是Java IO API中所有输出流的基类。子类包括BufferedOutputStream，FileOutputStream等等。参考Java IO概述这一小节底部的表格，可以浏览完整的子类的列表。</p>
+
+<p>#输出流和目标媒介</p>
+
+<p>　　输出流往往和某些数据的目标媒介相关联，比如文件，网络连接，管道等。更多细节请参考Java IO概述。当写入到输出流的数据逐渐输出完毕时，目标媒介是所有数据的归属地。</p>
+
+<!-- more -->
+
+<p>#Write(byte)</p>
+
+<p>　　write(byte)方法用于把单个字节写入到输出流中。OutputStream的write(byte)方法将一个包含了待写入数据的int变量作为参数进行写入。只有int类型的第一个字节会被写入，其余位会被忽略。(译者注：写入低8位，忽略高24位)</p>
+
+<p>　　OutputStream的子类可能会包含write()方法的替代方法。比如，DataOutputStream允许你利用writeBoolean()，writeDouble()等方法将基本类型int，long，float，double，boolean等变量写入。</p>
+
+<p>这是一个OutputStream的write()方法例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-text.txt"</span><span class="o">);</span>
+
+<span class="k">while</span><span class="o">(</span><span class="n">hasMoreData</span><span class="o">())</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMoreData</span><span class="o">();</span>
+
+    <span class="n">output</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+
+<span class="o">}</span>
+
+<span class="n">output</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    </code></pre></figure>
+
+<p>　　这个例子首先创建了待写入的FileOutputStream。在进入while循环之后，循环的判断条件是hasMoreData()方法的返回值。hasMoreData()方法的实现不予展示，请把这个函数理解为：当有剩余可写数据时，返回true，否则返回false。</p>
+
+<p>　　请注意，为了清晰，这里忽略了必要的异常处理。想了解更多异常处理的信息，请参考<a href="http://leesir.github.io/2015/10/java-io-exception/">Java IO异常处理</a>。</p>
+
+<!-- more -->
+
+<p>#write(byte[])</p>
+
+<p>　　OutputStream同样包含了将字节数据中全部或者部分数据写入到输出流中的方法，分别是:</p>
+
+<ul>
+  <li>
+    <p>write(byte[])把字节数组中所有数据写入到输出流中。</p>
+  </li>
+  <li>
+    <p>write(byte[], int offset, int length)把字节数据中从offset位置开始，length个字节的数据写入到输出流。</p>
+  </li>
+</ul>
+
+<p>#flush()</p>
+
+<p>　　OutputStream的flush()方法将所有写入到OutputStream的数据冲刷到相应的目标媒介中。比如，如果输出流是FileOutputStream，那么写入到其中的数据可能并没有真正写入到磁盘中。即使所有数据都写入到了FileOutputStream，这些数据还是有可能保留在内存的缓冲区中。通过调用flush()方法，可以把缓冲区内的数据刷新到磁盘(或者网络，以及其他任何形式的目标媒介)中。</p>
+
+<p>#close()</p>
+
+<p>　　当你结束数据写入时，需要关闭OutputStream。通过调用close()可以达到这一点。因为OutputStream的各种write()方法可能会抛出IO异常，所以你需要把调用close()的关闭操作方在finally块中执行。这是一个OutputStream调用close()的例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+<span class="k">try</span><span class="o">{</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-text.txt"</span><span class="o">);</span>
+
+    <span class="k">while</span><span class="o">(</span><span class="n">hasMoreData</span><span class="o">())</span> <span class="o">{</span>
+
+        <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMoreData</span><span class="o">();</span>
+
+        <span class="n">output</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+
+    <span class="k">if</span><span class="o">(</span><span class="n">output</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="n">output</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+    </code></pre></figure>
+
+<p>　　这个例子在finally块中调用close()方法。虽然这种方式可以确保OutputStream关闭，但却不是一个完美的异常处理方案。我在<a href="http://leesir.github.io/2015/10/java-io-exception/">Java IO异常处理</a>这文章中更加详细地探讨了IO的异常处理。</p>
+
+            </div>
+            
+            </div>
+          </div>
+          <div class="pagination">
+              
+                <a class="btn btn-default" href="/2015/10/java-io-ByteArray-Filter" class="next">Newer Post</a>
+              
+              
+                <a class="btn btn-default" href="/2015/10/java-io-inputstream" class="previous">Older Post</a>
+              
+		  </div>
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="/2015/10/java-io-outputstream" data-title="Java IO: OutputStream" data-url="/2015/10/java-io-outputstream"></div>
+			<!-- 多说评论框 end -->
+			<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+			<script type="text/javascript">
+				var duoshuoQuery = {short_name:"leesir-github-io"};
+					(function() {var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+		<!-- 多说公共JS代码 end -->
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
+            under
+            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+

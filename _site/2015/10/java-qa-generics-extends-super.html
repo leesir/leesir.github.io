@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Derrick Lee's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Derrick Lee's Blog</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="active visible-xs-block"><a href="/links.html">Links</a></li>
+					<li class="active"><a href="/archive.html">Archive</a></li>
+					<li class="active"><a href="/categories.html">Categories</a></li>
+                    <li class="active"><a href="/tags.html">Tags</a></li>
+                    <li class="active"><a href="/about.html">About</a></li>
+                    <li class="active"><a href="/feed.xml">RSS</a></li>
+                    
+                      <li class="active"><a href="https://github.com/leesir/leesir.github.io">Github</a></li>
+                    
+                </ul>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container container-left">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+译文分享
+</div>
+
+<div class="sidebar well">
+    <h1>Recent Posts</h1>
+    <ul>
+        
+          <li><a href="/2016/08/java-history">Java的历史</a></li>
+        
+          <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
+        
+          <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
+        
+          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
+        
+          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
+        
+          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
+        
+          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
+        
+          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
+        
+    </ul>
+</div>
+
+<div class="sidebar well">
+<h1>Links</h1>
+<ul>
+  <li><a href="http://ifeve.com/" target="_blank">并发编程网</a></li>
+  <li><a href="http://www.infoq.com/cn" target="_blank">InfoQ</a></li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="/2015/10/java-qa-generics-extends-super">Oct 23, 2015 - 泛型中&lt;? super T>和&lt;? extends T>的区别</a></h1>
+            
+            <div class="post-content">
+            <link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://stackoverflow.com/questions/4343202/difference-between-super-t-and-extends-t-in-java">原文链接</a></p>
+
+<p>　　我们会经常发现List&lt;? super T&gt;、Set&lt;? extends T&gt;的声明，是什么意思呢？&lt;? super T&gt;表示包括T在内的任何T的父类，&lt;? extends T&gt;表示包括T在内的任何T的子类，下面我们详细分析一下两种通配符具体的区别。</p>
+
+<h1 id="extends">extends</h1>
+
+<p>　　List&lt;? extends Number&gt; foo3的通配符声明，意味着以下的赋值是合法的：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Number "extends" Number (in this context)</span>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;();</span>  
+<span class="c1">// Integer extends Number</span>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span> 
+<span class="c1">// Double extends Number</span>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;();</span>  </code></pre></figure>
+
+<!-- more -->
+
+<p>　　读取操作</p>
+
+<p>　　通过以上给定的赋值语句，你一定能从foo3列表中读取到的元素的类型是什么呢？</p>
+
+<ul>
+  <li>你可以读取到Number，因为以上的列表要么包含Number元素，要么包含Number的类元素。</li>
+  <li>你不能保证读取到Integer，因为foo3可能指向的是List&lt;Double&gt;。</li>
+  <li>你不能保证读取到Double，因为foo3可能指向的是List&lt;Integer&gt;。</li>
+</ul>
+
+<p>　　写入操作</p>
+
+<p>　　通过以上给定的赋值语句，你能把一个什么类型的元素合法地插入到foo3中呢？</p>
+
+<ul>
+  <li>你不能插入一个Integer元素，因为foo3可能指向List&lt;Double&gt;。</li>
+  <li>你不能插入一个Double元素，因为foo3可能指向List&lt;Integer&gt;。</li>
+  <li>你不能插入一个Number元素，因为foo3可能指向List&lt;Integer&gt;。</li>
+  <li>你不能往List&lt;? extends T&gt;中插入任何类型的对象，因为你不能保证列表实际指向的类型是什么，你并不能保证列表中实际存储什么类型的对象。唯一可以保证的是，你可以从中读取到T或者T的子类。</li>
+</ul>
+
+<h1 id="super">super</h1>
+
+<p>　　现在考虑一下List&lt;? super T&gt;。List&lt;? super Integer&gt; foo3的通配符声明，意味着以下赋值是合法的：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Integer is a "superclass" of Integer (in this context)</span>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>  
+<span class="c1">// Number is a superclass of Integer</span>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;();</span>   
+<span class="c1">// Object is a superclass of Integer</span>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;();</span>   </code></pre></figure>
+
+<p>　　读取操作</p>
+
+<p>　　通过以上给定的赋值语句，你一定能从foo3列表中读取到的元素的类型是什么呢？</p>
+
+<ul>
+  <li>你不能保证读取到Integer，因为foo3可能指向List&lt;Number&gt;或者List&lt;Object&gt;。</li>
+  <li>你不能保证读取到Number，因为foo3可能指向List&lt;Object&gt;。</li>
+  <li>唯一可以保证的是，你可以读取到Object或者Object子类的对象（你并不知道具体的子类是什么）。</li>
+</ul>
+
+<p>　　写入操作</p>
+
+<p>　　通过以上给定的赋值语句，你能把一个什么类型的元素合法地插入到foo3中呢？</p>
+
+<ul>
+  <li>你可以插入Integer对象，因为上述声明的列表都支持Integer。</li>
+  <li>你可以插入Integer的子类的对象，因为Integer的子类同时也是Integer，原因同上。</li>
+  <li>你不能插入Double对象，因为foo3可能指向ArrayList&lt;Integer&gt;。</li>
+  <li>你不能插入Number对象，因为foo3可能指向ArrayList&lt;Integer&gt;。</li>
+  <li>你不能插入Object对象，因为foo3可能指向ArrayList&lt;Integer&gt;。</li>
+</ul>
+
+<h1 id="pecs">PECS</h1>
+
+<p>请记住PECS原则：生产者（Producer）使用extends，消费者（Consumer）使用super。</p>
+
+<ol>
+  <li>生产者使用extends
+如果你需要一个列表提供T类型的元素（即你想从列表中读取T类型的元素），你需要把这个列表声明成&lt;? extends T&gt;，比如List&lt;? extends Integer&gt;，因此你不能往该列表中添加任何元素。</li>
+  <li>消费者使用super
+如果需要一个列表使用T类型的元素（即你想把T类型的元素加入到列表中），你需要把这个列表声明成&lt;? super T&gt;，比如List&lt;? super Integer&gt;，因此你不能保证从中读取到的元素的类型。</li>
+  <li>即是生产者，也是消费者
+如果一个列表即要生产，又要消费，你不能使用泛型通配符声明列表，比如List&lt;Integer&gt;。</li>
+</ol>
+
+<h1 id="例子">例子</h1>
+
+<p>　　请参考java.util.Collections里的copy方法：</p>
+
+<p><img src="/images/post_2015_10_23_image1.png" alt="collections_copy_code" /></p>
+
+<p>　　我们可以从Java开发团队的代码中获得到一些启发，copy方法中使用到了PECS原则，实现了对参数的保护。</p>
+
+            </div>
+            
+            </div>
+          </div>
+          <div class="pagination">
+              
+                <a class="btn btn-default" href="/2015/11/java-cr-code-convention" class="next">Newer Post</a>
+              
+              
+                <a class="btn btn-default" href="/2015/10/java-fp-java8-lambda" class="previous">Older Post</a>
+              
+		  </div>
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="/2015/10/java-qa-generics-extends-super" data-title="泛型中&lt;? super T>和&lt;? extends T>的区别" data-url="/2015/10/java-qa-generics-extends-super"></div>
+			<!-- 多说评论框 end -->
+			<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+			<script type="text/javascript">
+				var duoshuoQuery = {short_name:"leesir-github-io"};
+					(function() {var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+		<!-- 多说公共JS代码 end -->
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
+            under
+            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+

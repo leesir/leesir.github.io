@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Derrick Lee's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Derrick Lee's Blog</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="active visible-xs-block"><a href="/links.html">Links</a></li>
+					<li class="active"><a href="/archive.html">Archive</a></li>
+					<li class="active"><a href="/categories.html">Categories</a></li>
+                    <li class="active"><a href="/tags.html">Tags</a></li>
+                    <li class="active"><a href="/about.html">About</a></li>
+                    <li class="active"><a href="/feed.xml">RSS</a></li>
+                    
+                      <li class="active"><a href="https://github.com/leesir/leesir.github.io">Github</a></li>
+                    
+                </ul>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container container-left">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+译文分享
+</div>
+
+<div class="sidebar well">
+    <h1>Recent Posts</h1>
+    <ul>
+        
+          <li><a href="/2016/08/java-history">Java的历史</a></li>
+        
+          <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
+        
+          <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
+        
+          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
+        
+          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
+        
+          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
+        
+          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
+        
+          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
+        
+    </ul>
+</div>
+
+<div class="sidebar well">
+<h1>Links</h1>
+<ul>
+  <li><a href="http://ifeve.com/" target="_blank">并发编程网</a></li>
+  <li><a href="http://www.infoq.com/cn" target="_blank">InfoQ</a></li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="/2015/10/java-fp-java8-functional">Oct 21, 2015 - Function接口 – Java8中java.util.function包下的函数式接口</a></h1>
+            
+            <div class="post-content">
+            <link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，你会发现java.util.function中 Function, Supplier, Consumer, Predicate和其他函数式接口广泛用在支持lambda表达式的API中。这些接口有一个抽象方法，会被lambda表达式的定义所覆盖。在这篇文章中，我会简单描述Function接口，该接口目前已发布在java.util.function中。</p>
+
+<p>　　Function接口的主要方法：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> <span class="c1">//将Function对象应用到输入的参数上，然后返回计算结果。</span>
+
+<span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="c1">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></code></pre></figure>
+
+<!-- more -->
+
+<p>　　译者注：Function接口中除了apply()之外全部接口如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="nf">andThen</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">R</span><span class="o">,?</span> <span class="kd">extends</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">after</span><span class="o">)</span> <span class="c1">//返回一个先执行当前函数对象apply方法再执行after函数对象apply方法的函数对象。</span>
+
+<span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="nf">compose</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">V</span><span class="o">,?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">before</span><span class="o">)</span> <span class="c1">//返回一个先执行before函数对象apply方法再执行当前函数对象apply方法的函数对象。</span>
+
+<span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">identity</span><span class="o">()</span> <span class="c1">//返回一个执行了apply()方法之后只会返回输入参数的函数对象。</span></code></pre></figure>
+
+<p>　　本章节将会通过创建接受Function接口和参数并调用相应方法的例子探讨apply方法的使用。我们同样能够看到API的调用者如何利用lambda表达式替代接口的实现。除了传递lambda表达式之外，API使用者同样可以传递方法的引用，但这样的例子不在本篇文章中。</p>
+
+<p>　　如果你想把接受一些输入参数并将对输入参数处理过后的结果返回的功能封装到一个方法内，Function接口是一个不错的选择。输入的参数类型和输出的结果类型可以一致或者不一致。一起来看看接受Function接口实现作为参数的方法的例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FunctionDemo</span> <span class="o">{</span>
+
+    <span class="c1">//API which accepts an implementation of</span>
+
+    <span class="c1">//Function interface</span>
+
+    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">modifyTheValue</span><span class="o">(</span><span class="kt">int</span> <span class="n">valueToBeOperated</span><span class="o">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">function</span><span class="o">){</span>
+
+        <span class="kt">int</span> <span class="n">newValue</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">valueToBeOperated</span><span class="o">);</span>
+
+        <span class="cm">/*     
+         * Do some operations using the new value.     
+         */</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newValue</span><span class="o">);</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span>
+    </code></pre></figure>
+
+<p>　　下面是调用上述方法的例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">incr</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>  <span class="kt">int</span> <span class="n">myNumber</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+
+    <span class="n">modifyTheValue</span><span class="o">(</span><span class="n">myNumber</span><span class="o">,</span> <span class="n">val</span><span class="o">-&gt;</span> <span class="n">val</span> <span class="o">+</span> <span class="n">incr</span><span class="o">);</span>
+
+    <span class="n">myNumber</span> <span class="o">=</span> <span class="mi">15</span><span class="o">;</span>  <span class="n">modifyTheValue</span><span class="o">(</span><span class="n">myNumber</span><span class="o">,</span> <span class="n">val</span><span class="o">-&gt;</span> <span class="n">val</span> <span class="o">*</span> <span class="mi">10</span><span class="o">);</span>
+
+    <span class="n">modifyTheValue</span><span class="o">(</span><span class="n">myNumber</span><span class="o">,</span> <span class="n">val</span><span class="o">-&gt;</span> <span class="n">val</span> <span class="o">-</span> <span class="mi">100</span><span class="o">);</span>
+
+    <span class="n">modifyTheValue</span><span class="o">(</span><span class="n">myNumber</span><span class="o">,</span> <span class="n">val</span><span class="o">-&gt;</span> <span class="s">"somestring"</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">+</span> <span class="n">val</span> <span class="o">-</span> <span class="mi">100</span><span class="o">);</span>
+
+<span class="o">}</span>
+    </code></pre></figure>
+
+<p>　　你可以看到，接受1个参数并返回执行结果的lambda表达式创建在例子中。这个例子的输入如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="mi">30</span>
+
+<span class="mi">150</span>
+
+<span class="o">-</span><span class="mi">85</span>
+
+<span class="o">-</span><span class="mi">75</span>
+    </code></pre></figure>
+
+            </div>
+            
+            </div>
+          </div>
+          <div class="pagination">
+              
+                <a class="btn btn-default" href="/2015/10/java-fp-java8-predicate-consumer" class="next">Newer Post</a>
+              
+              
+                <a class="btn btn-default" href="/2015/10/java-fp-predicate2" class="previous">Older Post</a>
+              
+		  </div>
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="/2015/10/java-fp-java8-functional" data-title="Function接口 – Java8中java.util.function包下的函数式接口" data-url="/2015/10/java-fp-java8-functional"></div>
+			<!-- 多说评论框 end -->
+			<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+			<script type="text/javascript">
+				var duoshuoQuery = {short_name:"leesir-github-io"};
+					(function() {var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+		<!-- 多说公共JS代码 end -->
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
+            under
+            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+

@@ -1,2 +1,10 @@
-_cache
-_site
+/target/
+.settings/
+.project
+.classpath
+target/
+*.iml
+.idea/
+.settings/
+.classpath
+.project

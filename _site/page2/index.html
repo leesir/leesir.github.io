@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Derrick Lee's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Derrick Lee's Blog</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="active visible-xs-block"><a href="/links.html">Links</a></li>
+					<li class="active"><a href="/archive.html">Archive</a></li>
+					<li class="active"><a href="/categories.html">Categories</a></li>
+                    <li class="active"><a href="/tags.html">Tags</a></li>
+                    <li class="active"><a href="/about.html">About</a></li>
+                    <li class="active"><a href="/feed.xml">RSS</a></li>
+                    
+                      <li class="active"><a href="https://github.com/leesir/leesir.github.io">Github</a></li>
+                    
+                </ul>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container container-left">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+译文分享
+</div>
+
+<div class="sidebar well">
+    <h1>Recent Posts</h1>
+    <ul>
+        
+          <li><a href="/2016/08/java-history">Java的历史</a></li>
+        
+          <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
+        
+          <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
+        
+          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
+        
+          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
+        
+          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
+        
+          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
+        
+          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
+        
+    </ul>
+</div>
+
+<div class="sidebar well">
+<h1>Links</h1>
+<ul>
+  <li><a href="http://ifeve.com/" target="_blank">并发编程网</a></li>
+  <li><a href="http://www.infoq.com/cn" target="_blank">InfoQ</a></li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="col-md-9">
+            
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/07/project-summary-1">Jul 11, 2016 - Project Summary 1</a></h1>
+        
+        <div class="content">
+		<h1 id="项目总结-2016年07月11日">项目总结-2016年07月11日</h1>
+
+<h3 id="线上服务健康状况监控与统计">线上服务健康状况监控与统计</h3>
+
+<p>统计与监控，个人感觉主要是离线与在线的区别。统计强调的是定时或者定量的离线数据分析，产生各项报表，用于对后续程序的优化及重构做决策。监控则对线上程序的实时状态做出反馈，需要在很短的时间间隔内对程序健康状况生成可视化的结果。一般来说，能满足监控需求的组件，也可满足统计的需求。</p>
+
+<p>针对进程的监控，市面上已经有许多解决方案了。如可以通过zabbix监控PHP实例，通过JMX端口 + jConsole或者visual VM远程监控JVM实例。</p>
+
+<p>对于web服务，利用nginx + zabbix（本身可监控服务器各项指标，如cpu、IO、网络等），可实现单个接口粒度的执行情况统计，如次数、平均响应时间、总响应时间等等。</p>
+
+<p>对于RPC服务的程序，同样可以利用入口的负载均衡LB实现监控</p>
+
+		<h1><a href="/2016/07/project-summary-1">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/07/summary-synchronized-error">Jul 3, 2016 - 对包装类型变量使用synchronized不当造成的同步不正确</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>关于关键字synchronized使用不当，造成未同步或者同步不正确，是开发过程中常见的问题。先引出3个问题：</p>
+
+<ol>
+  <li>同步synchronized的底层实现原理是什么？</li>
+  <li>对非常量或者非单例对象上使用synchronized，会有什么效果？</li>
+  <li>对包装类型使用synchronized，会有什么效果？</li>
+</ol>
+
+
+		<h1><a href="/2016/07/summary-synchronized-error">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/07/boxed-type-conditional-op">Jul 2, 2016 - 包装类型在条件运算中的使用不当造成的空指针异常</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>虽然已有几年开发经验，但是工作中发现，这程序中的坑啊，踩的也真是不亦乐乎，很是惭愧。</p>
+
+<p>即使是最最基础的Java语言本身的特性，也有点儿说不清道不明了。大家都曾努力学习过，都正在努力地工作，为什么一些错误总是一而再再而三的犯呢？我想这不是个人基础的问题，而是没有认真总结与回顾。</p>
+
+<p>所以，即日起，小弟我会把工作上学习中遇到的问题都记录下来，可能有些问题会很白痴，然而不惧贻笑大方方能进步。</p>
+
+
+		<h1><a href="/2016/07/boxed-type-conditional-op">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="pagination">
+  
+      
+        <a class="btn btn-default" href="/index.html" class="previous">Newer</a>
+      
+  
+  <span class="page_number ">Page: 2 of 15</span>
+  
+    <a class="btn btn-default" href="/page3" class="next">Older</a>
+  
+</div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
+            under
+            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+

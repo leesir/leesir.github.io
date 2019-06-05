@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Derrick Lee's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Derrick Lee's Blog</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="active visible-xs-block"><a href="/links.html">Links</a></li>
+					<li class="active"><a href="/archive.html">Archive</a></li>
+					<li class="active"><a href="/categories.html">Categories</a></li>
+                    <li class="active"><a href="/tags.html">Tags</a></li>
+                    <li class="active"><a href="/about.html">About</a></li>
+                    <li class="active"><a href="/feed.xml">RSS</a></li>
+                    
+                      <li class="active"><a href="https://github.com/leesir/leesir.github.io">Github</a></li>
+                    
+                </ul>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container container-left">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+译文分享
+</div>
+
+<div class="sidebar well">
+    <h1>Recent Posts</h1>
+    <ul>
+        
+          <li><a href="/2016/08/java-history">Java的历史</a></li>
+        
+          <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
+        
+          <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
+        
+          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
+        
+          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
+        
+          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
+        
+          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
+        
+          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
+        
+    </ul>
+</div>
+
+<div class="sidebar well">
+<h1>Links</h1>
+<ul>
+  <li><a href="http://ifeve.com/" target="_blank">并发编程网</a></li>
+  <li><a href="http://www.infoq.com/cn" target="_blank">InfoQ</a></li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="/2015/10/java-fp-faking-closure-factory">Oct 20, 2015 - Java Functional Programming: 伪造闭包工厂，创建域对象</a></h1>
+            
+            <div class="post-content">
+            <link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2012/03/java-faking-closure-with-factory-to.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mark-Needham/">Mark Needham</a></p>
+
+<p>　　最近我们想构建一个需要使用外部依赖进行计算的域对象，同时我们希望在测试的时候能够忽略这些依赖。</p>
+
+<p>　　最开始，我们简单地在域对象中创建依赖，这使得在测试的过程中，不能随意修改依赖的值。</p>
+
+<p>　　同样，由于外部依赖仅仅只是域对象的计算所需，并非定义域对象的可变状态，我们不应该把依赖通过构造函数传入域对象内部。</p>
+
+<p>　　最后，我们把域对象定义成内部类，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooFactory</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">RandomService</span> <span class="n">randomService</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">FooFactory</span><span class="o">(</span><span class="n">RandomService</span> <span class="n">randomService</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">randomService</span> <span class="o">=</span> <span class="n">randomService</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Foo</span> <span class="nf">createFoo</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Foo</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span> <span class="n">baz</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">bar</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">Foo</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">bar</span> <span class="o">=</span> <span class="n">bar</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">baz</span> <span class="o">=</span> <span class="n">baz</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">awesomeStuff</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">random</span> <span class="o">=</span> <span class="n">randomService</span><span class="o">.</span><span class="na">random</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span> <span class="n">baz</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">random</span> <span class="o">*</span> <span class="mi">3</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+    </code></pre></figure>
+
+<!-- more -->
+
+<p>　　测试这段代码的测试用例如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooFactoryTest</span> <span class="o">{</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createsAFoo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">RandomService</span> <span class="n">randomService</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="n">RandomService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">when</span><span class="o">(</span><span class="n">randomService</span><span class="o">.</span><span class="na">random</span><span class="o">(</span><span class="s">"bar"</span><span class="o">,</span> <span class="mi">12</span><span class="o">)).</span><span class="na">thenReturn</span><span class="o">(</span><span class="mi">13</span><span class="o">);</span>
+        <span class="n">FooFactory</span><span class="o">.</span><span class="na">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FooFactory</span><span class="o">(</span><span class="n">randomService</span><span class="o">).</span><span class="na">createFoo</span><span class="o">(</span><span class="s">"bar"</span><span class="o">,</span> <span class="mi">12</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">foo</span><span class="o">.</span><span class="na">awesomeStuff</span><span class="o">(),</span> <span class="n">equalTo</span><span class="o">(</span><span class="mi">39</span><span class="o">));</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+    </code></pre></figure>
+
+<p>　　代码看似冗余，却合理地解决了测试与外部依赖的解耦问题。</p>
+
+<p>#参考文献</p>
+
+<ul>
+  <li><a href="http://www.markhneedham.com/blog/2012/02/26/java-faking-a-closure-with-a-factory-to-create-a-domain-object/">Java: Faking a closure with a factory to create a domain object</a></li>
+</ul>
+
+            </div>
+            
+            </div>
+          </div>
+          <div class="pagination">
+              
+                <a class="btn btn-default" href="/2015/10/java-fp-predicate1" class="next">Newer Post</a>
+              
+              
+                <a class="btn btn-default" href="/2015/10/java-fp-map-fold" class="previous">Older Post</a>
+              
+		  </div>
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="/2015/10/java-fp-faking-closure-factory" data-title="Java Functional Programming: 伪造闭包工厂，创建域对象" data-url="/2015/10/java-fp-faking-closure-factory"></div>
+			<!-- 多说评论框 end -->
+			<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+			<script type="text/javascript">
+				var duoshuoQuery = {short_name:"leesir-github-io"};
+					(function() {var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+		<!-- 多说公共JS代码 end -->
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
+            under
+            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+

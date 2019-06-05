@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Derrick Lee's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Derrick Lee's Blog</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="active visible-xs-block"><a href="/links.html">Links</a></li>
+					<li class="active"><a href="/archive.html">Archive</a></li>
+					<li class="active"><a href="/categories.html">Categories</a></li>
+                    <li class="active"><a href="/tags.html">Tags</a></li>
+                    <li class="active"><a href="/about.html">About</a></li>
+                    <li class="active"><a href="/feed.xml">RSS</a></li>
+                    
+                      <li class="active"><a href="https://github.com/leesir/leesir.github.io">Github</a></li>
+                    
+                </ul>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container container-left">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+译文分享
+</div>
+
+<div class="sidebar well">
+    <h1>Recent Posts</h1>
+    <ul>
+        
+          <li><a href="/2016/08/java-history">Java的历史</a></li>
+        
+          <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
+        
+          <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
+        
+          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
+        
+          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
+        
+          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
+        
+          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
+        
+          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
+        
+    </ul>
+</div>
+
+<div class="sidebar well">
+<h1>Links</h1>
+<ul>
+  <li><a href="http://ifeve.com/" target="_blank">并发编程网</a></li>
+  <li><a href="http://www.infoq.com/cn" target="_blank">InfoQ</a></li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="col-md-9">
+            
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-fp-java8-lambda-template">Oct 22, 2015 - 采用Java 8中Lambda表达式和默认方法的模板方法模式</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2013/05/template-method-pattern-using-lambda-expressions-default-methods.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　模板方法模式是“四人帮”（译者注：Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides）所著<a href="http://www.flipkart.com/design-patterns-elements-reusable-object-oriented-software-1st/p/itmdytsswfy3qeqn?pid=9788131700075&amp;affid=INMohamblo">《Design Patterns book》</a>一书中所描述的23种设计模式其中的一种，该模式旨在：</p>
+
+<blockquote>
+  <p>“Define the skeleton of an algorithm in an operation, deferring some steps to subclasses.
+ TemplateMethod lets subclasses redefine certain steps of an algorithm without changing the algorithm’s structure”。</p>
+</blockquote>
+
+<p>　　即模板方法定义一个算法的架构，并将某些步骤推迟到子类中实现。模板方法允许子类在不改变算法架构的情况下，重新定义算法中某些步骤。</p>
+
+<p>　　为了以更简单的术语描述模板方法，考虑这个场景：假设在一个工作流系统中，为了完成任务，有4个任务必须以给定的执行顺序执行。在这4个任务中，不同工作流系统的实现可以根据自身情况自定义任务的执行内容。</p>
+
+<p>　　模板方法可以应用在上述场景中：将工作流系统的4个核心任务封装到抽象类当中，如果任务可以被自定义，则将可自定义的任务推迟到子类中实现。</p>
+
+
+		<h1><a href="/2015/10/java-fp-java8-lambda-template">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-fp-java8-predicate-consumer">Oct 21, 2015 - Predicate和Consumer接口– Java 8中java.util.function包下的接口</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，我也提及了Predicate接口属于java.util.function包，在这篇文章中，我将展示如何应用Predicate接口和Consumer接口。</p>
+
+<p>　　一起看一下Predicate的官方文档：：</p>
+
+<blockquote>
+  <p>Determines if the input object matches some criteria.</p>
+</blockquote>
+
+<p>　　即判断输入的对象是否符合某个条件。</p>
+
+
+		<h1><a href="/2015/10/java-fp-java8-predicate-consumer">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-fp-java8-functional">Oct 21, 2015 - Function接口 – Java8中java.util.function包下的函数式接口</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，你会发现java.util.function中 Function, Supplier, Consumer, Predicate和其他函数式接口广泛用在支持lambda表达式的API中。这些接口有一个抽象方法，会被lambda表达式的定义所覆盖。在这篇文章中，我会简单描述Function接口，该接口目前已发布在java.util.function中。</p>
+
+<p>　　Function接口的主要方法：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> <span class="c1">//将Function对象应用到输入的参数上，然后返回计算结果。</span>
+
+<span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="c1">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></code></pre></figure>
+
+
+		<h1><a href="/2015/10/java-fp-java8-functional">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="pagination">
+  
+      
+        <a class="btn btn-default" href="/page3" class="previous">Newer</a>
+      
+  
+  <span class="page_number ">Page: 4 of 15</span>
+  
+    <a class="btn btn-default" href="/page5" class="next">Older</a>
+  
+</div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
+            under
+            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+

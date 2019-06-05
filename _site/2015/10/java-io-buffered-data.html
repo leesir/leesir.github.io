@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Derrick Lee's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Derrick Lee's Blog</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="active visible-xs-block"><a href="/links.html">Links</a></li>
+					<li class="active"><a href="/archive.html">Archive</a></li>
+					<li class="active"><a href="/categories.html">Categories</a></li>
+                    <li class="active"><a href="/tags.html">Tags</a></li>
+                    <li class="active"><a href="/about.html">About</a></li>
+                    <li class="active"><a href="/feed.xml">RSS</a></li>
+                    
+                      <li class="active"><a href="https://github.com/leesir/leesir.github.io">Github</a></li>
+                    
+                </ul>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container container-left">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+译文分享
+</div>
+
+<div class="sidebar well">
+    <h1>Recent Posts</h1>
+    <ul>
+        
+          <li><a href="/2016/08/java-history">Java的历史</a></li>
+        
+          <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
+        
+          <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
+        
+          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
+        
+          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
+        
+          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
+        
+          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
+        
+          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
+        
+    </ul>
+</div>
+
+<div class="sidebar well">
+<h1>Links</h1>
+<ul>
+  <li><a href="http://ifeve.com/" target="_blank">并发编程网</a></li>
+  <li><a href="http://www.infoq.com/cn" target="_blank">InfoQ</a></li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="/2015/10/java-io-buffered-data">Oct 14, 2015 - Java IO: Buffered和Data</a></h1>
+            
+            <div class="post-content">
+            <link rel="stylesheet" href="/css/pygments.css" />
+
+<p>作者: Jakob Jenkov</p>
+
+<p>　　本小节会简要概括Java IO中Buffered和data的输入输出流，主要涉及以下4个类型的流：BufferedInputStream，BufferedOutputStream，DataInputStream，DataOutputStream。</p>
+
+<p>#BufferedInputStream</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/bufferedinputstream.html">原文链接</a></p>
+
+<p>　　BufferedInputStream能为输入流提供缓冲区，能提高很多IO的速度。你可以一次读取一大块的数据，而不需要每次从网络或者磁盘中一次读取一个字节。特别是在访问大量磁盘数据时，缓冲通常会让IO快上许多。</p>
+
+<p>　　为了给你的输入流加上缓冲，你需要把输入流包装到BufferedInputStream中，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
+
+    </code></pre></figure>
+
+<p>　　很简单，不是吗？你可以给BufferedInputStream的构造函数传递一个值，设置内部使用的缓冲区设置大小(译者注：默认缓冲区大小8 * 1024B)，就像这样：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+
+    </code></pre></figure>
+
+<p>　　
+　　这个例子设置了8KB的缓冲区。最好把缓冲区大小设置成1024字节的整数倍，这样能更高效地利用内置缓冲区的磁盘。</p>
+
+<p>　　除了能够为输入流提供缓冲区以外，其余方面BufferedInputStream基本与InputStream类似。</p>
+
+<!-- more -->
+
+<p>#BufferedOutputStream</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/bufferedoutputstream.html">原文链接</a></p>
+
+<p>　　与BufferedInputStream类似，BufferedOutputStream可以为输出流提供缓冲区。可以构造一个使用默认大小缓冲区的BufferedOutputStream(译者注：默认缓冲区大小8 * 1024B)，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">));</span>
+    </code></pre></figure>
+
+<p>　　也可以手动设置缓冲区大小，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+    </code></pre></figure>
+
+<p>　　为了更好地使用内置缓冲区的磁盘，同样建议把缓冲区大小设置成1024的整数倍。</p>
+
+<p>　　除了能够为输出流提供缓冲区以外，其余方面BufferedOutputStream基本与OutputStream类似。唯一不同的时，你需要手动flush()方法确保写入到此输出流的数据真正写入到磁盘或者网络中。</p>
+
+<p>#DataInputStream</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/datainputstream.html">原文链接</a></p>
+
+<p>　　DataInputStream可以使你从输入流中读取Java基本类型数据，而不必每次读取字节数据。你可以把InputStream包装到DataInputStream中，然后就可以从此输入流中读取基本类型数据了，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">DataInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"binary.data"</span><span class="o">));</span>
+
+<span class="kt">int</span> <span class="n">aByte</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="kt">int</span> <span class="n">anInt</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+
+<span class="kt">float</span> <span class="n">aFloat</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">readFloat</span><span class="o">();</span>
+
+<span class="kt">double</span> <span class="n">aDouble</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">readDouble</span><span class="o">();</span><span class="c1">//etc.</span>
+
+<span class="n">input</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    </code></pre></figure>
+
+<p>　　当你要读取的数据中包含了int，long，float，double这样的基本类型变量时，DataInputStream可以很方便地处理这些数据。</p>
+
+<p>#DataOutputStream</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/dataoutputstream.html">原文链接</a></p>
+
+<p>　　DataOutputStream可以往输出流中写入Java基本类型数据，例子如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="n">DataOutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"binary.data"</span><span class="o">));</span>
+
+<span class="n">output</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="mi">45</span><span class="o">);</span>
+
+<span class="c1">//byte data output.writeInt(4545);</span>
+
+<span class="c1">//int data output.writeDouble(109.123);</span>
+
+<span class="c1">//double data  output.close();</span>
+
+    </code></pre></figure>
+
+<p>　　其他方面与DataInputStream类似，不再赘述。</p>
+
+            </div>
+            
+            </div>
+          </div>
+          <div class="pagination">
+              
+                <a class="btn btn-default" href="/2015/10/java-io-bufferedreaderwriter-filterreaderwriter" class="next">Newer Post</a>
+              
+              
+                <a class="btn btn-default" href="/2015/10/java-io-randomaccessfile" class="previous">Older Post</a>
+              
+		  </div>
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="/2015/10/java-io-buffered-data" data-title="Java IO: Buffered和Data" data-url="/2015/10/java-io-buffered-data"></div>
+			<!-- 多说评论框 end -->
+			<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+			<script type="text/javascript">
+				var duoshuoQuery = {short_name:"leesir-github-io"};
+					(function() {var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+		<!-- 多说公共JS代码 end -->
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
+            under
+            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+

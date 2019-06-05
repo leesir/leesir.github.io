@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Derrick Lee's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Derrick Lee's Blog</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="active visible-xs-block"><a href="/links.html">Links</a></li>
+					<li class="active"><a href="/archive.html">Archive</a></li>
+					<li class="active"><a href="/categories.html">Categories</a></li>
+                    <li class="active"><a href="/tags.html">Tags</a></li>
+                    <li class="active"><a href="/about.html">About</a></li>
+                    <li class="active"><a href="/feed.xml">RSS</a></li>
+                    
+                      <li class="active"><a href="https://github.com/leesir/leesir.github.io">Github</a></li>
+                    
+                </ul>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container container-left">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+译文分享
+</div>
+
+<div class="sidebar well">
+    <h1>Recent Posts</h1>
+    <ul>
+        
+          <li><a href="/2016/08/java-history">Java的历史</a></li>
+        
+          <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
+        
+          <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
+        
+          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
+        
+          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
+        
+          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
+        
+          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
+        
+          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
+        
+          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
+        
+    </ul>
+</div>
+
+<div class="sidebar well">
+<h1>Links</h1>
+<ul>
+  <li><a href="http://ifeve.com/" target="_blank">并发编程网</a></li>
+  <li><a href="http://www.infoq.com/cn" target="_blank">InfoQ</a></li>
+</ul>
+
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="/2015/10/java-io-otherstream">Oct 16, 2015 - Java IO: 其他字节流(上)</a></h1>
+            
+            <div class="post-content">
+            <link rel="stylesheet" href="/css/pygments.css" />
+
+<p>作者: Jakob Jenkov</p>
+
+<p>　　本小节会简要概括Java IO中的PushbackInputStream，SequenceInputStream和PrintStream。其中，最常用的是PrintStream，System.out和System.err都是PrintStream类型的变量，请查看<a href="http://leesir.github.io/2015/10/java-io-systemstream/">Java IO: System.in, System.out, System.err</a>浏览更多关于System.out和System.err的信息。</p>
+
+<p>#PushbackInputStream</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/pushbackinputstream.html">原文链接</a></p>
+
+<p>　　PushbackInputStream用于解析InputStream内的数据。有时候你需要提前知道接下来将要读取到的字节内容，才能判断用何种方式进行数据解析。PushBackInputStream允许你这么做，你可以把读取到的字节重新推回到InputStream中，以便再次通过read()读取。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
+
+<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="n">input</span><span class="o">.</span><span class="na">unread</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+    </code></pre></figure>
+
+<p>　　可以通过PushBackInputStream的构造函数设置推回缓冲区的大小，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
+    </code></pre></figure>
+
+<p>　　这个例子设置了8个字节的缓冲区，意味着你最多可以重新读取8个字节的数据。</p>
+
+<!-- more -->
+
+<p>#SequenceInputStream</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/sequenceinputstream.html">原文链接</a></p>
+
+<p>　　SequenceInputStream把一个或者多个InputStream整合起来，形成一个逻辑连贯的输入流。当读取SequenceInputStream时，会先从第一个输入流中读取，完成之后再从第二个输入流读取，以此推类。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">InputStream</span> <span class="n">input1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\file1.txt"</span><span class="o">);</span>
+
+<span class="n">InputStream</span> <span class="n">input2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\file2.txt"</span><span class="o">);</span>
+
+<span class="n">InputStream</span> <span class="n">combined</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SequenceInputStream</span><span class="o">(</span><span class="n">input1</span><span class="o">,</span> <span class="n">input2</span><span class="o">);</span>
+    </code></pre></figure>
+
+<p>　　通过SequenceInputStream，例子中的2个InputStream使用起来就如同只有一个InputStream一样(译者注：SequenceInputStream的read()方法会在读取到当前流末尾时，关闭流，并把当前流指向逻辑链中的下一个流，最后返回新的当前流的read()值)。</p>
+
+<p>#PrintStream</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/printstream.html">原文链接</a></p>
+
+<p>　　PrintStream允许你把格式化数据写入到底层OutputStream中。比如，写入格式化成文本的int，long以及其他原始数据类型到输出流中，而非它们的字节数据。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">PrintStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintStream</span><span class="o">(</span><span class="n">outputStream</span><span class="o">);</span>
+
+<span class="n">output</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+<span class="n">output</span><span class="o">.</span><span class="na">print</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="mi">123</span><span class="o">);</span>
+
+<span class="n">output</span><span class="o">.</span><span class="na">print</span><span class="o">((</span><span class="kt">float</span><span class="o">)</span> <span class="mf">123.456</span><span class="o">);</span>
+
+<span class="n">output</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="n">Locale</span><span class="o">.</span><span class="na">UK</span><span class="o">,</span> <span class="s">"Text + data: %1$"</span><span class="o">,</span> <span class="mi">123</span><span class="o">);</span>
+
+<span class="n">output</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    </code></pre></figure>
+
+<p>　　PrintStream包含2个强大的函数，分别是format()和printf()(这两个函数几乎做了一样的事情，但是C程序员会更熟悉printf())。</p>
+
+<p>　　译者注：其中一个printf()函数实现如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">public</span> <span class="n">PrintStream</span> <span class="nf">printf</span><span class="o">(</span><span class="n">String</span> <span class="n">format</span><span class="o">,</span> <span class="n">Object</span> <span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">return</span> <span class="nf">format</span><span class="o">(</span><span class="n">format</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+
+<span class="o">}</span>
+    </code></pre></figure>
+
+            </div>
+            
+            </div>
+          </div>
+          <div class="pagination">
+              
+                <a class="btn btn-default" href="/2015/10/java-fp-functional-programming-overview" class="next">Newer Post</a>
+              
+              
+                <a class="btn btn-default" href="/2015/10/java-io-otherreader" class="previous">Older Post</a>
+              
+		  </div>
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="/2015/10/java-io-otherstream" data-title="Java IO: 其他字节流(上)" data-url="/2015/10/java-io-otherstream"></div>
+			<!-- 多说评论框 end -->
+			<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+			<script type="text/javascript">
+				var duoshuoQuery = {short_name:"leesir-github-io"};
+					(function() {var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+		<!-- 多说公共JS代码 end -->
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
+            under
+            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+
