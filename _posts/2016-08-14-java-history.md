@@ -64,3 +64,10 @@ Oracle在收购Sun之后，把JDK 1.7的计划做了重大调整，把Lambda、J
 ## 总结
 &#160; &#160; &#160; &#160;从Java的历史版本更新内容来看，在语法及语言特性层面，有新功能对旧功能的取代，比如JDK 1.8的时间日期库。有不断增强的新功能，比如集合和并发库。有汲取其他语言的优秀特性，比如Lambda函数式编程。<br>
 &#160; &#160; &#160; &#160;在JVM层面，Java开发团队更是做出了巨大的努力，让内存管理逐渐由多方诟病转变为语言优势。垃圾收集器的推陈出新，内存管理的改造，锁优化，类加载优化，所有这些努力都为了让Java更高效，更具竞争力。
+
+## 参考文献
+[1] 周志明.[深入理解Java虚拟机](https://item.jd.com/11252778.html)[M].北京：机械工业出版社，2013：5-9.<br>
+[2] Jon Masamitsu.[JEP 122: Remove the Permanent Generation](http://openjdk.java.net/jeps/122)[EB/OL].http://openjdk.java.net/jeps/122，2010-08-15/2019-06-05.<br>
+[3] Oracle.[What's New in JDK 8](https://www.oracle.com/technetwork/java/javase/8-whats-new-2157071.html)[EB/OL].https://www.oracle.com/technetwork/java/javase/8-whats-new-2157071.html.<br>
+[4] Oracle.[Java SE 7 Features and Enhancements](https://www.oracle.com/technetwork/java/javase/jdk7-relnotes-418459.html)[EB/OL].https://www.oracle.com/technetwork/java/javase/jdk7-relnotes-418459.html.<br>
+[5] Oracle.[Highlights of Technology Changes in Java SE 6](https://www.oracle.com/technetwork/java/javase/features-141434.html)[EB/OL].https://www.oracle.com/technetwork/java/javase/features-141434.html.<br>
