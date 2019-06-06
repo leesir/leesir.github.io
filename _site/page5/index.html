@@ -55,6 +55,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
+        
           <li><a href="/2016/08/java-history">Java的历史</a></li>
         
           <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
@@ -73,8 +75,6 @@
         
           <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
         
-          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
-        
     </ul>
 </div>
 
@@ -92,134 +92,198 @@
             
 <div class="article">
     <div class="well">
-        <h1><a href="/2015/10/java-fp-predicate2">Oct 20, 2015 - Java中函数式编程的谓词函数(Predicates)第二部分</a></h1>
+        <h1><a href="/2015/10/java-io-serializable-objectstream">2015-10-14 - Java IO: 序列化与ObjectInputStream、ObjectOutputStream</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with_23.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Cyrille-Martraire/">Cyrille Martraire</a></p>
+<p>作者: Jakob Jenkov</p>
 
-<p>　　在上一篇文章中我们介绍了谓词函数。通过一个简单的只带一个返回值是true或者false的函数的接口，把函数式编程语言的优势带入到了类似Java的面向对象编程语言中。这一小节，我们将会介绍一些高级特性，方便你高效利用谓词函数。</p>
+<p>　　本小节会简要概括Java IO中的序列化以及涉及到的流，主要包括ObjectInputStream和ObjectOutputStream。</p>
 
-<p>#测试</p>
+<p>#Serializable</p>
 
-<p>　　在测试代码中使用谓词的优势尤为明显。当你需要测试一个混合了数据结构与某些条件逻辑的方法时，通过使用谓词，你可以先单独测试数据结构，再测试条件逻辑。</p>
+<p>　　<a href="http://tutorials.jenkov.com/java-io/serializable.html">原文链接</a></p>
 
-<p>　　第一步，先利用永真谓词或者永假谓词屏蔽用于判断的逻辑，将注意力集中在测试数据结构上：</p>
+<p>　　如果你希望类能够序列化和反序列化，必须实现Serializable接口，就像所展示的ObjectInputStream和ObjectOutputStream例子一样。</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="c1">// check with the always-true predicate</span>
+<p>　　对象序列化本身就是一个主题。Java IO系列教程主要关注流、reader和writer，所以我不会深入探讨对象序列化的细节。并且，目前在网上已经有很多文章探讨了对象序列化，我将给出几个深入分析的资料链接，不再赘述。链接如下：</p>
 
-<span class="kd">final</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">all</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysTrue</span><span class="o">());</span>
-
-<span class="n">assertEquals</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">Iterables</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="n">all</span><span class="o">));</span> 
-
-<span class="c1">// check with the always-false predicat</span>
-
-<span class="n">eassertTrue</span><span class="o">(</span><span class="n">Iterables</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysFalse</span><span class="o">())));</span>
-    </code></pre></figure>
-
-<p>　　第二步，你可以分开测试每个谓词了：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">final</span> <span class="n">CustomerPredicate</span> <span class="n">isForCustomer1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomerPredicate</span><span class="o">(</span><span class="n">CUSTOMER_1</span><span class="o">);</span>
-
-<span class="n">assertTrue</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">ORDER_1</span><span class="o">));</span> <span class="c1">// ORDER_1 is for CUSTOMER_1</span>
-
-<span class="n">assertFalse</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">ORDER_2</span><span class="o">));</span> <span class="c1">// ORDER_2 is for CUSTOMER_2</span>
-    </code></pre></figure>
-
-<p>　　例子简单，却见微知著。为了测试更加复杂的逻辑，你可能需要构建模拟谓词应对测试不够充分的情况。比如，一个第一次返回true，之后都返回false的谓词。通过严格分离关注点，谓词可以大大简化你的测试计划。</p>
-
-<p>　　如果你想测试驱动开发（TDD），谓词是一个不错的选择，如果你能通过测试的方式影响你的设计，之后你便会发现谓词很容易就融入到你的设计中。</p>
+<p>http://java.sun.com/developer/technicalArticles/Programming/serialization/</p>
 
 
-		<h1><a href="/2015/10/java-fp-predicate2">阅读全文</a></h1>
+		<h1><a href="/2015/10/java-io-serializable-objectstream">阅读全文</a></h1>
         </div>
     </div>
 </div>
 
 <div class="article">
     <div class="well">
-        <h1><a href="/2015/10/java-fp-predicate1">Oct 20, 2015 - Java中函数式编程的谓词函数(Predicates)第一部分</a></h1>
+        <h1><a href="/2015/10/java-io-pipedreaderwriter-chararrayreaderwriter">2015-10-14 - Java IO: 字符流的Piped和CharArray</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Cyrille-Martraire/">Cyrille Martraire</a></p>
+<p>作者: Jakob Jenkov</p>
 
-<p>　　你一直在听说函数式编程将称霸整个编程届，而自己仍然沉浸在普通的Java里？请不要担心，因为你已经在日常Java代码中加入了函数式编程的特性。此外，函数式编程很有趣，能够帮你节省多行代码并且降低错误率。</p>
+<p>　　本章节将简要介绍管道与字符数组相关的reader和writer，主要涉及PipedReader、PipedWriter、CharArrayReader、CharArrayWriter。</p>
 
-<p>#什么是谓词函数？</p>
+<p>#PipedReader</p>
 
-<p>　　许久之前，那时我还在用Java 1.4进行编码，当我第一次发现Apache Commons Collections，便爱上了谓词函数。Apache Commons Collections里的谓词函数仅仅只是一个只有一个方法的接口：</p>
+<p>　　<a href="http://tutorials.jenkov.com/java-io/pipedreader.html">原文链接</a></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">evaluate</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">):</span> <span class="kt">boolean</span>
-    </code></pre></figure>
-
-<p>　　这就是谓词函数，输入一个对象，返回true或者false。最近诞生了类似Apache Commons Collections的持有Apache 2.0许可的Google Guava。在Google Guava中，定义了Predicate接口，该接口包含一个带有泛型参数的方法：</p>
+<p>　　PipedReader能够从管道中读取字符流。与PipedInputStream类似，不同的是PipedReader读取的是字符而非字节。换句话说，PipedReader用于读取管道中的文本。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">input</span><span class="o">):</span> <span class="kt">boolean</span>
-    </code></pre></figure>
+<span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedReader</span><span class="o">(</span><span class="n">pipedWriter</span><span class="o">);</span>
 
-<p>　　如果想在程序中使用谓词函数，只需要利用自己的逻辑实现该接口即可。</p>
+<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
+<span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
 
-		<h1><a href="/2015/10/java-fp-predicate1">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
+    <span class="c1">//do something with data...</span>
 
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-fp-faking-closure-factory">Oct 20, 2015 - Java Functional Programming: 伪造闭包工厂，创建域对象</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
+    <span class="n">doSomethingWithData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
 
-<p><a href="http://www.javacodegeeks.com/2012/03/java-faking-closure-with-factory-to.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mark-Needham/">Mark Needham</a></p>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
-<p>　　最近我们想构建一个需要使用外部依赖进行计算的域对象，同时我们希望在测试的时候能够忽略这些依赖。</p>
-
-<p>　　最开始，我们简单地在域对象中创建依赖，这使得在测试的过程中，不能随意修改依赖的值。</p>
-
-<p>　　同样，由于外部依赖仅仅只是域对象的计算所需，并非定义域对象的可变状态，我们不应该把依赖通过构造函数传入域对象内部。</p>
-
-<p>　　最后，我们把域对象定义成内部类，代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooFactory</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">RandomService</span> <span class="n">randomService</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">FooFactory</span><span class="o">(</span><span class="n">RandomService</span> <span class="n">randomService</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">randomService</span> <span class="o">=</span> <span class="n">randomService</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="n">Foo</span> <span class="nf">createFoo</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">Foo</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span> <span class="n">baz</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="n">String</span> <span class="n">bar</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">;</span>
-
-        <span class="kd">public</span> <span class="nf">Foo</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">bar</span> <span class="o">=</span> <span class="n">bar</span><span class="o">;</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">baz</span> <span class="o">=</span> <span class="n">baz</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">awesomeStuff</span><span class="o">()</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">random</span> <span class="o">=</span> <span class="n">randomService</span><span class="o">.</span><span class="na">random</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span> <span class="n">baz</span><span class="o">);</span>
-            <span class="k">return</span> <span class="n">random</span> <span class="o">*</span> <span class="mi">3</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
 <span class="o">}</span>
+
+<span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    </code></pre></figure>
+
+<p>　　注意：为了清晰，代码忽略了一些必要的异常处理。想了解更多异常处理的信息，请参考<a href="http://leesir.github.io/2015/10/java-io-exception/">Java IO异常处理</a>。</p>
+
+<p>　　read()方法返回一个包含了读取到的字符内容的int类型变量(译者注：0~65535)。如果方法返回-1，表明PipedReader中已经没有剩余可读取字符，此时可以关闭PipedReader。-1是一个int类型，不是byte或者char类型，这是不一样的。</p>
+
+<p>　　正如你所看到的例子那样，一个PipedReader需要与一个PipedWriter相关联，当这两种流联系起来时，就形成了一条管道。要想更多地了解Java IO中的管道，请参考<a href="http://leesir.github.io/2015/10/java-io-pipe/">Java IO管道</a>。</p>
+
+
+		<h1><a href="/2015/10/java-io-pipedreaderwriter-chararrayreaderwriter">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-inputstreamreader-outputstreamwriter">2015-10-14 - Java IO: InputStreamReader和OutputStreamWriter</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>作者: Jakob Jenkov</p>
+
+<p>　　本章节将简要介绍InputStreamReader和OutputStreamWriter。细心的读者可能会发现，在之前的文章中，IO中的类要么以Stream结尾，要么以Reader或者Writer结尾，那这两个同时以字节流和字符流的类名后缀结尾的类是什么用途呢？简单来说，这两个类把字节流转换成字符流，中间做了数据的转换，类似适配器模式的思想。</p>
+
+<p>#InputStreamReader</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/inputstreamreader.html">原文链接</a></p>
+
+<p>　　InputStreamReader会包含一个InputStream，从而可以将该输入字节流转换成字符流，代码例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">);</span>
+
+<span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">inputStream</span><span class="o">);</span>
+
+<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
+
+    <span class="kt">char</span> <span class="n">theChar</span> <span class="o">=</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">data</span><span class="o">;</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="o">}</span>
+
+<span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
     </code></pre></figure>
 
 
-		<h1><a href="/2015/10/java-fp-faking-closure-factory">阅读全文</a></h1>
+		<h1><a href="/2015/10/java-io-inputstreamreader-outputstreamwriter">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-bufferedreaderwriter-filterreaderwriter">2015-10-14 - Java IO: 字符流的Buffered和Filter</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>作者: Jakob Jenkov</p>
+
+<p>　　本章节将简要介绍缓冲与过滤相关的reader和writer，主要涉及BufferedReader、BufferedWriter、FilterReader、FilterWriter。</p>
+
+<p>#BufferedReader</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/bufferedreader.html">原文链接</a></p>
+
+<p>　　BufferedReader能为字符输入流提供缓冲区，可以提高许多IO处理的速度。你可以一次读取一大块的数据，而不需要每次从网络或者磁盘中一次读取一个字节。特别是在访问大量磁盘数据时，缓冲通常会让IO快上许多。</p>
+
+<p>　　BufferedReader和BufferedInputStream的主要区别在于，BufferedReader操作字符，而BufferedInputStream操作原始字节。只需要把Reader包装到BufferedReader中，就可以为Reader添加缓冲区(译者注：默认缓冲区大小为8192字节，即8KB)。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">Reader</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
+    </code></pre></figure>
+
+<p>　　你也可以通过传递构造函数的第二个参数，指定缓冲区大小，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">Reader</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+    </code></pre></figure>
+
+<p>　　这个例子设置了8KB的缓冲区。最好把缓冲区大小设置成1024字节的整数倍，这样能更高效地利用内置缓冲区的磁盘。</p>
+
+<p>　　除了能够为输入流提供缓冲区以外，其余方面BufferedReader基本与Reader类似。BufferedReader还有一个额外readLine()方法，可以方便地一次性读取一整行字符。</p>
+
+
+		<h1><a href="/2015/10/java-io-bufferedreaderwriter-filterreaderwriter">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-buffered-data">2015-10-14 - Java IO: Buffered和Data</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>作者: Jakob Jenkov</p>
+
+<p>　　本小节会简要概括Java IO中Buffered和data的输入输出流，主要涉及以下4个类型的流：BufferedInputStream，BufferedOutputStream，DataInputStream，DataOutputStream。</p>
+
+<p>#BufferedInputStream</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/bufferedinputstream.html">原文链接</a></p>
+
+<p>　　BufferedInputStream能为输入流提供缓冲区，能提高很多IO的速度。你可以一次读取一大块的数据，而不需要每次从网络或者磁盘中一次读取一个字节。特别是在访问大量磁盘数据时，缓冲通常会让IO快上许多。</p>
+
+<p>　　为了给你的输入流加上缓冲，你需要把输入流包装到BufferedInputStream中，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
+
+    </code></pre></figure>
+
+<p>　　很简单，不是吗？你可以给BufferedInputStream的构造函数传递一个值，设置内部使用的缓冲区设置大小(译者注：默认缓冲区大小8 * 1024B)，就像这样：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+
+    </code></pre></figure>
+
+<p>　　
+　　这个例子设置了8KB的缓冲区。最好把缓冲区大小设置成1024字节的整数倍，这样能更高效地利用内置缓冲区的磁盘。</p>
+
+<p>　　除了能够为输入流提供缓冲区以外，其余方面BufferedInputStream基本与InputStream类似。</p>
+
+
+		<h1><a href="/2015/10/java-io-buffered-data">阅读全文</a></h1>
         </div>
     </div>
 </div>
@@ -231,7 +295,7 @@
         <a class="btn btn-default" href="/page4" class="previous">Newer</a>
       
   
-  <span class="page_number ">Page: 5 of 15</span>
+  <span class="page_number ">Page: 5 of 10</span>
   
     <a class="btn btn-default" href="/page6" class="next">Older</a>
   

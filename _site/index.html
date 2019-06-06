@@ -55,6 +55,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
+        
           <li><a href="/2016/08/java-history">Java的历史</a></li>
         
           <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
@@ -73,8 +75,6 @@
         
           <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
         
-          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
-        
     </ul>
 </div>
 
@@ -92,7 +92,30 @@
             
 <div class="article">
     <div class="well">
-        <h1><a href="/2016/08/java-history">Aug 14, 2016 - Java的历史</a></h1>
+        <h1><a href="/2019/06/java-javasuger">2019-06-06 - Java语法糖</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>       语法糖并不是Java独有的概念，而是一个计算机术语，先来看看百度百科的释义：</p>
+
+<blockquote>
+  <p>语法糖（Syntactic sugar），也译为糖衣语法，是由英国计算机科学家彼得·约翰·兰达（Peter J. Landin）发明的一个术语，指计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。通常来说使用语法糖能够增加程序的可读性，从而减少程序代码出错的机会。</p>
+</blockquote>
+
+<p>       语法糖可以在性能无损的情况下，提高编程的效率，增加代码可读性，几乎所有的现代编程语言都含有语法糖成分。今天来简单回顾一下Java语言截止至今所包含的语法糖。</p>
+
+<p class="center"><img src="/images/post_2019_06_06_image1.jpg" alt="Syntactic Suger" height="70%" width="70%" /></p>
+
+
+		<h1><a href="/2019/06/java-javasuger">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/08/java-history">2016-08-14 - Java的历史</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
@@ -113,7 +136,7 @@
 
 <div class="article">
     <div class="well">
-        <h1><a href="/2016/07/java-history-beginning-words">Jul 15, 2016 - Java历史开篇语</a></h1>
+        <h1><a href="/2016/07/java-history-beginning-words">2016-07-15 - Java历史开篇语</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
@@ -121,6 +144,8 @@
 <p>       见过不少技术团队的leader，写过多年的业务，做了管理岗。说好听点叫业务，难听点就是增删改查，顶多加上mq、缓存、rpc之类的。</p>
 
 <p>       如果在一家公司做了多年，晋升做管理，确实无可厚非，因为这位管理者对本公司的业务和技术架构的演变都非常熟悉。怕就怕在跳到了其他公司做管理，业务背景不同，技术架构又不适用，之前积累的深厚经验就大打折扣了。</p>
+
+<p><img src="/images/post_2016-07-15_image1.jpg" alt="Java" height="100%" width="100%" /></p>
 
 
 		<h1><a href="/2016/07/java-history-beginning-words">阅读全文</a></h1>
@@ -130,7 +155,7 @@
 
 <div class="article">
     <div class="well">
-        <h1><a href="/2016/07/project-summary-2">Jul 11, 2016 - 项目总结-2016年07月11日</a></h1>
+        <h1><a href="/2016/07/project-summary-2">2016-07-11 - 项目总结-2016年07月11日</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
@@ -146,10 +171,32 @@
     </div>
 </div>
 
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/07/project-summary-1">2016-07-11 - Project Summary 1</a></h1>
+        
+        <div class="content">
+		<h1 id="项目总结-2016年07月11日">项目总结-2016年07月11日</h1>
+
+<h3 id="线上服务健康状况监控与统计">线上服务健康状况监控与统计</h3>
+
+<p>统计与监控，个人感觉主要是离线与在线的区别。统计强调的是定时或者定量的离线数据分析，产生各项报表，用于对后续程序的优化及重构做决策。监控则对线上程序的实时状态做出反馈，需要在很短的时间间隔内对程序健康状况生成可视化的结果。一般来说，能满足监控需求的组件，也可满足统计的需求。</p>
+
+<p>针对进程的监控，市面上已经有许多解决方案了。如可以通过zabbix监控PHP实例，通过JMX端口 + jConsole或者visual VM远程监控JVM实例。</p>
+
+<p>对于web服务，利用nginx + zabbix（本身可监控服务器各项指标，如cpu、IO、网络等），可实现单个接口粒度的执行情况统计，如次数、平均响应时间、总响应时间等等。</p>
+
+<p>对于RPC服务的程序，同样可以利用入口的负载均衡LB实现监控</p>
+
+		<h1><a href="/2016/07/project-summary-1">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 
 <div class="pagination">
   
-  <span class="page_number ">Page: 1 of 15</span>
+  <span class="page_number ">Page: 1 of 10</span>
   
     <a class="btn btn-default" href="/page2" class="next">Older</a>
   

@@ -55,6 +55,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
+        
           <li><a href="/2016/08/java-history">Java的历史</a></li>
         
           <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
@@ -73,8 +75,6 @@
         
           <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
         
-          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
-        
     </ul>
 </div>
 
@@ -92,76 +92,196 @@
             
 <div class="article">
     <div class="well">
-        <h1><a href="/2015/10/java-fp-java8-lambda-template">Oct 22, 2015 - 采用Java 8中Lambda表达式和默认方法的模板方法模式</a></h1>
+        <h1><a href="/2015/10/java-fp-faking-closure-factory">2015-10-20 - Java Functional Programming: 伪造闭包工厂，创建域对象</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p><a href="http://www.javacodegeeks.com/2013/05/template-method-pattern-using-lambda-expressions-default-methods.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+<p><a href="http://www.javacodegeeks.com/2012/03/java-faking-closure-with-factory-to.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mark-Needham/">Mark Needham</a></p>
 
-<p>　　模板方法模式是“四人帮”（译者注：Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides）所著<a href="http://www.flipkart.com/design-patterns-elements-reusable-object-oriented-software-1st/p/itmdytsswfy3qeqn?pid=9788131700075&amp;affid=INMohamblo">《Design Patterns book》</a>一书中所描述的23种设计模式其中的一种，该模式旨在：</p>
+<p>　　最近我们想构建一个需要使用外部依赖进行计算的域对象，同时我们希望在测试的时候能够忽略这些依赖。</p>
 
-<blockquote>
-  <p>“Define the skeleton of an algorithm in an operation, deferring some steps to subclasses.
- TemplateMethod lets subclasses redefine certain steps of an algorithm without changing the algorithm’s structure”。</p>
-</blockquote>
+<p>　　最开始，我们简单地在域对象中创建依赖，这使得在测试的过程中，不能随意修改依赖的值。</p>
 
-<p>　　即模板方法定义一个算法的架构，并将某些步骤推迟到子类中实现。模板方法允许子类在不改变算法架构的情况下，重新定义算法中某些步骤。</p>
+<p>　　同样，由于外部依赖仅仅只是域对象的计算所需，并非定义域对象的可变状态，我们不应该把依赖通过构造函数传入域对象内部。</p>
 
-<p>　　为了以更简单的术语描述模板方法，考虑这个场景：假设在一个工作流系统中，为了完成任务，有4个任务必须以给定的执行顺序执行。在这4个任务中，不同工作流系统的实现可以根据自身情况自定义任务的执行内容。</p>
+<p>　　最后，我们把域对象定义成内部类，代码如下：</p>
 
-<p>　　模板方法可以应用在上述场景中：将工作流系统的4个核心任务封装到抽象类当中，如果任务可以被自定义，则将可自定义的任务推迟到子类中实现。</p>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooFactory</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">RandomService</span> <span class="n">randomService</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">FooFactory</span><span class="o">(</span><span class="n">RandomService</span> <span class="n">randomService</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">randomService</span> <span class="o">=</span> <span class="n">randomService</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Foo</span> <span class="nf">createFoo</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Foo</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span> <span class="n">baz</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">bar</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">Foo</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">bar</span> <span class="o">=</span> <span class="n">bar</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">baz</span> <span class="o">=</span> <span class="n">baz</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">awesomeStuff</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">random</span> <span class="o">=</span> <span class="n">randomService</span><span class="o">.</span><span class="na">random</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span> <span class="n">baz</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">random</span> <span class="o">*</span> <span class="mi">3</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+    </code></pre></figure>
 
 
-		<h1><a href="/2015/10/java-fp-java8-lambda-template">阅读全文</a></h1>
+		<h1><a href="/2015/10/java-fp-faking-closure-factory">阅读全文</a></h1>
         </div>
     </div>
 </div>
 
 <div class="article">
     <div class="well">
-        <h1><a href="/2015/10/java-fp-java8-predicate-consumer">Oct 21, 2015 - Predicate和Consumer接口– Java 8中java.util.function包下的接口</a></h1>
+        <h1><a href="/2015/10/java-fp-map-fold">2015-10-19 - Java Functional Programming: Java中函数式编程的Map和Fold(Reduce)</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+<p><a href="http://www.javacodegeeks.com/2012/03/functional-programming-with-map-and.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Cyrille-Martraire/">Cyrille Martraire</a></p>
 
-<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，我也提及了Predicate接口属于java.util.function包，在这篇文章中，我将展示如何应用Predicate接口和Consumer接口。</p>
+<p>　　在函数式编程中，Map和Fold是两个非常有用的操作，它们存在于每一个函数式编程语言中。既然Map和Fold操作如此强大和重要，但是Java语言缺乏Map和Fold机制，那么该如何解释我们使用Java完成日常编码工作呢？实际上你已经在Java中利用手动编写循环的方式实现了Map和Fold操作（译者注：许多动态语言如python都提供了内置的实现）。</p>
 
-<p>　　一起看一下Predicate的官方文档：：</p>
+<p>　　免责声明：本篇文章仅仅只是一篇入门简介，并非函数式编程的参考。函数式编程爱好者可能会不赞同本文观点。</p>
 
-<blockquote>
-  <p>Determines if the input object matches some criteria.</p>
-</blockquote>
+<p>#你已经很熟悉Map和Fold</p>
 
-<p>　　即判断输入的对象是否符合某个条件。</p>
+<p>　　假设这里有一个List<Double>，存储了不含增值税VAT（译者注：Value Added Tax）的金额列表，现在我们想把这个列表转换成包含增值税金额的列表。首先我们定义一个方法，为金额添加增值税：</Double></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">public</span> <span class="kt">double</span> <span class="nf">addVAT</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span><span class="o">,</span> <span class="kt">double</span> <span class="n">rate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="o">);</span>
+<span class="o">}</span>
+    </code></pre></figure>
 
 
-		<h1><a href="/2015/10/java-fp-java8-predicate-consumer">阅读全文</a></h1>
+		<h1><a href="/2015/10/java-fp-map-fold">阅读全文</a></h1>
         </div>
     </div>
 </div>
 
 <div class="article">
     <div class="well">
-        <h1><a href="/2015/10/java-fp-java8-functional">Oct 21, 2015 - Function接口 – Java8中java.util.function包下的函数式接口</a></h1>
+        <h1><a href="/2015/10/java-fp-functional-programming-overview">2015-10-17 - 函数式编程 Functional Programming</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+<p>　　<a href="http://www.javacodegeeks.com/tutorials/java-tutorials/core-java-tutorials/#Functional%20programming">原文链接</a></p>
 
-<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，你会发现java.util.function中 Function, Supplier, Consumer, Predicate和其他函数式接口广泛用在支持lambda表达式的API中。这些接口有一个抽象方法，会被lambda表达式的定义所覆盖。在这篇文章中，我会简单描述Function接口，该接口目前已发布在java.util.function中。</p>
+<p>　　在Java程序员的世界里，第一要素是“类”，而在函数式编程里，第一要素则是“函数”。完全不同的编程理念，确实很难让函数式编程出现在Java工程师日常工作的代码中。</p>
 
-<p>　　Function接口的主要方法：</p>
+<p>　　先来2篇优秀博文扫盲：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> <span class="c1">//将Function对象应用到输入的参数上，然后返回计算结果。</span>
+<ul>
+  <li><a href="http://www.ruanyifeng.com/blog/2012/04/functional_programming.html">函数式编程初探</a></li>
+  <li><a href="http://www.cnblogs.com/kym/archive/2011/03/07/1976519.html">函数式编程扫盲篇</a></li>
+</ul>
 
-<span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="c1">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></code></pre></figure>
+<p>　　仔细阅读过上面2篇文章之后，相信你已经对函数式编程有了一定的了解。同时，在许多高级语言(Java、C#等)都陆续加入了函数式编程特性的形势下，不难预测函数式编程将再次成为未来的主流编程模型。</p>
+
+<p>　　本系列译文如下：</p>
+
+<ol>
+  <li><a href="http://www.javacodegeeks.com/2012/03/functional-programming-with-map-and.html">Functional programming with Map and Fold in Java</a></li>
+  <li><a href="http://www.javacodegeeks.com/2012/03/java-faking-closure-with-factory-to.html">Java: Faking a closure with a factory to create a domain object</a></li>
+  <li><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with.html">Functional style in Java with predicates – Part 1</a></li>
+  <li><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with_23.html">Functional style in Java with predicates – Part 2</a></li>
+  <li><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">Function interface – A functional interface in the java.util.function package in Java 8</a></li>
+  <li><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">Predicate and Consumer Interface in java.util.function package in Java 8</a></li>
+  <li><a href="http://www.javacodegeeks.com/2013/05/a-simple-application-of-lambda-expressions-in-java-8.html">A simple application of Lambda Expressions in Java 8</a></li>
+  <li><a href="http://www.javacodegeeks.com/2013/05/template-method-pattern-using-lambda-expressions-default-methods.html">Template Method Pattern – Using Lambda Expressions, Default Methods</a></li>
+  <li><a href="http://www.javacodegeeks.com/2013/06/java-8-lambda-walkthrough.html">Java 8 lambda walkthrough</a>（此篇文章代码居多，不进行翻译，感兴趣的读者可以点击链接阅读原文章）</li>
+</ol>
+
+		<h1><a href="/2015/10/java-fp-functional-programming-overview">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-otherstream">2015-10-16 - Java IO: 其他字节流(上)</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>作者: Jakob Jenkov</p>
+
+<p>　　本小节会简要概括Java IO中的PushbackInputStream，SequenceInputStream和PrintStream。其中，最常用的是PrintStream，System.out和System.err都是PrintStream类型的变量，请查看<a href="http://leesir.github.io/2015/10/java-io-systemstream/">Java IO: System.in, System.out, System.err</a>浏览更多关于System.out和System.err的信息。</p>
+
+<p>#PushbackInputStream</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/pushbackinputstream.html">原文链接</a></p>
+
+<p>　　PushbackInputStream用于解析InputStream内的数据。有时候你需要提前知道接下来将要读取到的字节内容，才能判断用何种方式进行数据解析。PushBackInputStream允许你这么做，你可以把读取到的字节重新推回到InputStream中，以便再次通过read()读取。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
+
+<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="n">input</span><span class="o">.</span><span class="na">unread</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+    </code></pre></figure>
+
+<p>　　可以通过PushBackInputStream的构造函数设置推回缓冲区的大小，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
+    </code></pre></figure>
+
+<p>　　这个例子设置了8个字节的缓冲区，意味着你最多可以重新读取8个字节的数据。</p>
 
 
-		<h1><a href="/2015/10/java-fp-java8-functional">阅读全文</a></h1>
+		<h1><a href="/2015/10/java-io-otherstream">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-otherreader">2015-10-16 - Java IO: 其他字符流(下)</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>作者: Jakob Jenkov</p>
+
+<p>　　本小节会简要概括Java IO中的PushbackReader，LineNumberReader，StreamTokenizer，PrintWriter，StringReader，StringWriter。</p>
+
+<p>#PushbackReader</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/pushbackreader.html">原文链接</a></p>
+
+<p>　　PushbackReader与PushbackInputStream类似，唯一不同的是PushbackReader处理字符，PushbackInputStream处理字节。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
+
+<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="n">reader</span><span class="o">.</span><span class="na">unread</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+    </code></pre></figure>
+
+<p>　　同样可以设置缓冲区大小，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
+    </code></pre></figure>
+
+
+		<h1><a href="/2015/10/java-io-otherreader">阅读全文</a></h1>
         </div>
     </div>
 </div>
@@ -173,7 +293,7 @@
         <a class="btn btn-default" href="/page3" class="previous">Newer</a>
       
   
-  <span class="page_number ">Page: 4 of 15</span>
+  <span class="page_number ">Page: 4 of 10</span>
   
     <a class="btn btn-default" href="/page5" class="next">Older</a>
   

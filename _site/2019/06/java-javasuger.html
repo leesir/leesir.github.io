@@ -55,6 +55,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
+        
           <li><a href="/2016/08/java-history">Java的历史</a></li>
         
           <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
@@ -73,8 +75,6 @@
         
           <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
         
-          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
-        
     </ul>
 </div>
 
@@ -89,78 +89,49 @@
 
         </div>
         <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="/2019/06/java-javasuger">Jun 6, 2019 - Java语法糖</a></h1>
             
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/09/java-io-files">Sep 27, 2015 - Java IO 文件</a></h1>
-        
-        <div class="content">
-		<p><a href="http://tutorials.jenkov.com/java-io/files.html">原文链接</a> 作者: Jakob Jenkov</p>
+            <div class="post-content">
+            <link rel="stylesheet" href="/css/pygments.css" />
 
-<p>在Java应用程序中，文件是一种常用的数据源或者存储数据的媒介。所以这一小节将会对Java中文件的使用做一个简短的概述。这篇文章不会对每一个技术细节都做出解释，而是会针对文件存取的方法提供给你一些必要的知识点。在之后的文章中，将会更加详细地描述这些方法或者类，包括方法示例等等。</p>
+<p>       语法糖并不是Java独有的概念，而是一个计算机术语，先来看看百度百科的释义：</p>
 
+<blockquote>
+  <p>语法糖（Syntactic sugar），也译为糖衣语法，是由英国计算机科学家彼得·约翰·兰达（Peter J. Landin）发明的一个术语，指计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。通常来说使用语法糖能够增加程序的可读性，从而减少程序代码出错的机会。</p>
+</blockquote>
 
-		<h1><a href="/2015/09/java-io-files">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
+<p>       语法糖可以在性能无损的情况下，提高编程的效率，增加代码可读性，几乎所有的现代编程语言都含有语法糖成分。今天来简单回顾一下Java语言截止至今所包含的语法糖。</p>
 
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/09/java-io-overview">Sep 24, 2015 - Java IO 概述</a></h1>
-        
-        <div class="content">
-		<p><a href="http://tutorials.jenkov.com/java-io/overview.html">原文链接</a> 作者: Jakob Jenkov</p>
+<p class="center"><img src="/images/post_2019_06_06_image1.jpg" alt="Syntactic Suger" height="70%" width="70%" /></p>
 
-<p>在这一小节，我会试着给出Java IO(java.io)包下的类的概述。更具体地说，我会根据类的用途对类进行分组。这个分组将会使你在未来的工作中，在对类的用途的判定或者是为某个特定用途选择类时，更加容易。</p>
+<!-- more -->
 
 
-		<h1><a href="/2015/09/java-io-overview">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/09/why-zero">Sep 14, 2015 - 为何从10开始到99连续相乘会得到0?</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>这是一块非常简单的Java代码片段</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="o">{</span>      
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="o">[]</span><span class="n">args</span><span class="o">)</span> <span class="o">{</span>        
-        <span class="kt">int</span> <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>        
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">99</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>            
-             <span class="n">product</span> <span class="o">*=</span> <span class="n">i</span><span class="o">;</span>        	 
-        <span class="o">}</span>        
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>    
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></figure>
-
-<p>为什么得出的结果是0呢?</p>
-
-
-		<h1><a href="/2015/09/why-zero">阅读全文</a></h1>
+            </div>
+            
+            </div>
+          </div>
+          <div class="pagination">
+              
+              
+                <a class="btn btn-default" href="/2016/08/java-history" class="previous">Older Post</a>
+              
+		  </div>
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="/2019/06/java-javasuger" data-title="Java语法糖" data-url="/2019/06/java-javasuger"></div>
+			<!-- 多说评论框 end -->
+			<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+			<script type="text/javascript">
+				var duoshuoQuery = {short_name:"leesir-github-io"};
+					(function() {var ds = document.createElement('script');ds.type = 'text/javascript';ds.async = true;ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';ds.charset = 'UTF-8';(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);})();</script>
+		<!-- 多说公共JS代码 end -->
         </div>
     </div>
 </div>
 
 
-<div class="pagination">
-  
-      
-        <a class="btn btn-default" href="/page14" class="previous">Newer</a>
-      
-  
-  <span class="page_number ">Page: 15 of 15</span>
-  
-</div>
-
-        </div>
-    </div>
-</div>
 
 <div class="container-fluid">
     <div class="row-fluid">
@@ -179,4 +150,5 @@
 
 </body>
 </html>
+
 
