@@ -146,10 +146,53 @@
     </div>
 </div>
 
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/07/project-summary-1">Jul 11, 2016 - Project Summary 1</a></h1>
+        
+        <div class="content">
+		<h1 id="项目总结-2016年07月11日">项目总结-2016年07月11日</h1>
+
+<h3 id="线上服务健康状况监控与统计">线上服务健康状况监控与统计</h3>
+
+<p>统计与监控，个人感觉主要是离线与在线的区别。统计强调的是定时或者定量的离线数据分析，产生各项报表，用于对后续程序的优化及重构做决策。监控则对线上程序的实时状态做出反馈，需要在很短的时间间隔内对程序健康状况生成可视化的结果。一般来说，能满足监控需求的组件，也可满足统计的需求。</p>
+
+<p>针对进程的监控，市面上已经有许多解决方案了。如可以通过zabbix监控PHP实例，通过JMX端口 + jConsole或者visual VM远程监控JVM实例。</p>
+
+<p>对于web服务，利用nginx + zabbix（本身可监控服务器各项指标，如cpu、IO、网络等），可实现单个接口粒度的执行情况统计，如次数、平均响应时间、总响应时间等等。</p>
+
+<p>对于RPC服务的程序，同样可以利用入口的负载均衡LB实现监控</p>
+
+		<h1><a href="/2016/07/project-summary-1">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/07/summary-synchronized-error">Jul 3, 2016 - 对包装类型变量使用synchronized不当造成的同步不正确</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>关于关键字synchronized使用不当，造成未同步或者同步不正确，是开发过程中常见的问题。先引出3个问题：</p>
+
+<ol>
+  <li>同步synchronized的底层实现原理是什么？</li>
+  <li>对非常量或者非单例对象上使用synchronized，会有什么效果？</li>
+  <li>对包装类型使用synchronized，会有什么效果？</li>
+</ol>
+
+
+		<h1><a href="/2016/07/summary-synchronized-error">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 
 <div class="pagination">
   
-  <span class="page_number ">Page: 1 of 15</span>
+  <span class="page_number ">Page: 1 of 9</span>
   
     <a class="btn btn-default" href="/page2" class="next">Older</a>
   

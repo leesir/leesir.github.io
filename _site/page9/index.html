@@ -92,102 +92,93 @@
             
 <div class="article">
     <div class="well">
-        <h1><a href="/2015/10/java-io-randomaccessfile">Oct 13, 2015 - Java IO: RandomAccessFile</a></h1>
+        <h1><a href="/2015/10/java-io-array">Oct 10, 2015 - Java IO 字节和字符数组</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p><a href="http://tutorials.jenkov.com/java-io/randomaccessfile.html">原文链接</a> 作者: Jakob Jenkov</p>
+<p><a href="http://tutorials.jenkov.com/java-io/arrays.html">原文链接</a> 作者: Jakob Jenkov</p>
 
-<p>　　RandomAccessFile允许你来回读写文件，也可以替换文件中的某些部分。FileInputStream和FileOutputStream没有这样的功能。</p>
-
-<p>#创建一个RandomAccessFile</p>
-
-<p>　　在使用RandomAccessFile之前，必须初始化它。这是例子：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
-
-    </code></pre></figure>
-
-<p>　　请注意构造函数的第二个参数：“rw”，表明你以读写方式打开文件。请查阅Java文档获知你需要以何种方式构造RandomAccessFile。</p>
+<p>　　Java中的字节和字符数组经常被用于临时存储应用程序内部的数据。所以数组也是常见的数据来源以及数据流目的地。如果你在程序执行过程中需要频繁访问文件的内容，你可能会愿意将文件加载到数组中去。当然你可以通过索引直接访问这些数组。但是如果你有一个组件的设计初衷是从InputStream或者Reader而非数组中读取某些数据呢？</p>
 
 
-		<h1><a href="/2015/10/java-io-randomaccessfile">阅读全文</a></h1>
+		<h1><a href="/2015/10/java-io-array">阅读全文</a></h1>
         </div>
     </div>
 </div>
 
 <div class="article">
     <div class="well">
-        <h1><a href="/2015/10/java-io-file">Oct 13, 2015 - Java IO: File</a></h1>
+        <h1><a href="/2015/10/java-io-networking">Oct 9, 2015 - Java IO 网络</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p><a href="http://tutorials.jenkov.com/java-io/file.html">原文链接</a> 作者: Jakob Jenkov</p>
+<p><a href="http://tutorials.jenkov.com/java-io/networking.html">原文链接</a> 作者: Jakob Jenkov</p>
 
-<p>　　Java IO API中的FIle类可以让你访问底层文件系统，通过File类，你可以做到以下几点：</p>
+<p>　　Java中网络的内容或多或少地超出了Java IO的范畴。关于Java网络更多的是在我的Java网络教程中探讨。但是既然网络是一个常见的数据来源以及数据流向地，并且因为你使用Java IO API通过网络连接进行通信，本文将简要触及网络。</p>
 
-<ul>
-  <li>检测文件是否存在</li>
-  <li>读取文件长度</li>
-  <li>重命名或移动文件</li>
-  <li>删除文件</li>
-  <li>检测某个路径是文件还是目录</li>
-  <li>读取目录中的文件列表</li>
-</ul>
-
-<p>　　请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream或者RandomAccessFile。如果你正在使用Java NIO，并且想使用完整的NIO解决方案，你会使用到java.nio.FileChannel(否则你也可以使用File)。</p>
-
-<p>#实例化一个java.io.File对象</p>
-
-<p>　　在使用File之前，必须拥有一个File对象，这是实例化的代码例子：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
-
-    </code></pre></figure>
-
-<p>　　很简单，对吗？File类同样拥有多种不同实例化方式的构造函数。</p>
+<p>　　当两个进程之间建立了网络连接之后，他们通信的方式如同操作文件一样：利用InputStream读取数据，利用OutputStream写入数据。换句话来说，Java网络API用来在不同进程之间建立网络连接，而Java IO则用来在建立了连接之后的进程之间交换数据。</p>
 
 
-		<h1><a href="/2015/10/java-io-file">阅读全文</a></h1>
+		<h1><a href="/2015/10/java-io-networking">阅读全文</a></h1>
         </div>
     </div>
 </div>
 
 <div class="article">
     <div class="well">
-        <h1><a href="/2015/10/java-io-PipedOutputStream">Oct 13, 2015 - Java IO: PipedOutputStream</a></h1>
+        <h1><a href="/2015/09/java-io-files">Sep 27, 2015 - Java IO 文件</a></h1>
+        
+        <div class="content">
+		<p><a href="http://tutorials.jenkov.com/java-io/files.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>在Java应用程序中，文件是一种常用的数据源或者存储数据的媒介。所以这一小节将会对Java中文件的使用做一个简短的概述。这篇文章不会对每一个技术细节都做出解释，而是会针对文件存取的方法提供给你一些必要的知识点。在之后的文章中，将会更加详细地描述这些方法或者类，包括方法示例等等。</p>
+
+
+		<h1><a href="/2015/09/java-io-files">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/09/java-io-overview">Sep 24, 2015 - Java IO 概述</a></h1>
+        
+        <div class="content">
+		<p><a href="http://tutorials.jenkov.com/java-io/overview.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>在这一小节，我会试着给出Java IO(java.io)包下的类的概述。更具体地说，我会根据类的用途对类进行分组。这个分组将会使你在未来的工作中，在对类的用途的判定或者是为某个特定用途选择类时，更加容易。</p>
+
+
+		<h1><a href="/2015/09/java-io-overview">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/09/why-zero">Sep 14, 2015 - 为何从10开始到99连续相乘会得到0?</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p><a href="http://tutorials.jenkov.com/java-io/pipedoutputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
+<p>这是一块非常简单的Java代码片段</p>
 
-<p>　　PipedOutputStream可以往管道里写入读取字节流数据，代码如下：</p>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="o">{</span>      
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="o">[]</span><span class="n">args</span><span class="o">)</span> <span class="o">{</span>        
+        <span class="kt">int</span> <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>        
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">99</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>            
+             <span class="n">product</span> <span class="o">*=</span> <span class="n">i</span><span class="o">;</span>        	 
+        <span class="o">}</span>        
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>    
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedOutputStream</span><span class="o">(</span><span class="n">pipedInputStream</span><span class="o">);</span>
-
-<span class="k">while</span><span class="o">(</span><span class="n">moreData</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMoreData</span><span class="o">();</span>
-
-    <span class="n">output</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-
-<span class="o">}</span>
-
-<span class="n">output</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-
-    </code></pre></figure>
+<p>为什么得出的结果是0呢?</p>
 
 
-		<h1><a href="/2015/10/java-io-PipedOutputStream">阅读全文</a></h1>
+		<h1><a href="/2015/09/why-zero">阅读全文</a></h1>
         </div>
     </div>
 </div>
@@ -199,9 +190,7 @@
         <a class="btn btn-default" href="/page8" class="previous">Newer</a>
       
   
-  <span class="page_number ">Page: 9 of 15</span>
-  
-    <a class="btn btn-default" href="/page10" class="next">Older</a>
+  <span class="page_number ">Page: 9 of 9</span>
   
 </div>
 
