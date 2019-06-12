@@ -3,7 +3,7 @@ layout: post
 title: "Java的历史"
 description: ""
 category: [Java Basics]
-tags: [Java History]
+tags: [History]
 ---
 <link rel="stylesheet" href="{{ site.baseurl }}/css/pygments.css">
 

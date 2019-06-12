@@ -55,6 +55,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
+        
           <li><a href="/2016/08/java-history">Java的历史</a></li>
         
           <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
@@ -73,8 +75,6 @@
         
           <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
         
-          <li><a href="/2015/10/java-fp-java8-lambda-template">采用Java 8中Lambda表达式和默认方法的模板方法模式</a></li>
-        
     </ul>
 </div>
 
@@ -90,6 +90,71 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+<<<<<<< HEAD
+        <h1><a href="/2015/10/java-fp-java8-predicate-consumer">Oct 21, 2015 - Predicate和Consumer接口– Java 8中java.util.function包下的接口</a></h1>
+=======
+        <h1><a href="/2015/10/java-fp-java8-lambda-template">Oct 22, 2015 - 采用Java 8中Lambda表达式和默认方法的模板方法模式</a></h1>
+>>>>>>> feature_20190606
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<<<<<<< HEAD
+<p><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，我也提及了Predicate接口属于java.util.function包，在这篇文章中，我将展示如何应用Predicate接口和Consumer接口。</p>
+
+<p>　　一起看一下Predicate的官方文档：：</p>
+
+<blockquote>
+  <p>Determines if the input object matches some criteria.</p>
+</blockquote>
+
+<p>　　即判断输入的对象是否符合某个条件。</p>
+
+
+		<h1><a href="/2015/10/java-fp-java8-predicate-consumer">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-fp-java8-functional">Oct 21, 2015 - Function接口 – Java8中java.util.function包下的函数式接口</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，你会发现java.util.function中 Function, Supplier, Consumer, Predicate和其他函数式接口广泛用在支持lambda表达式的API中。这些接口有一个抽象方法，会被lambda表达式的定义所覆盖。在这篇文章中，我会简单描述Function接口，该接口目前已发布在java.util.function中。</p>
+
+<p>　　Function接口的主要方法：</p>
+
+=======
+<p><a href="http://www.javacodegeeks.com/2013/05/template-method-pattern-using-lambda-expressions-default-methods.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　模板方法模式是“四人帮”（译者注：Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides）所著<a href="http://www.flipkart.com/design-patterns-elements-reusable-object-oriented-software-1st/p/itmdytsswfy3qeqn?pid=9788131700075&amp;affid=INMohamblo">《Design Patterns book》</a>一书中所描述的23种设计模式其中的一种，该模式旨在：</p>
+
+<blockquote>
+  <p>“Define the skeleton of an algorithm in an operation, deferring some steps to subclasses.
+ TemplateMethod lets subclasses redefine certain steps of an algorithm without changing the algorithm’s structure”。</p>
+</blockquote>
+
+<p>　　即模板方法定义一个算法的架构，并将某些步骤推迟到子类中实现。模板方法允许子类在不改变算法架构的情况下，重新定义算法中某些步骤。</p>
+
+<p>　　为了以更简单的术语描述模板方法，考虑这个场景：假设在一个工作流系统中，为了完成任务，有4个任务必须以给定的执行顺序执行。在这4个任务中，不同工作流系统的实现可以根据自身情况自定义任务的执行内容。</p>
+
+<p>　　模板方法可以应用在上述场景中：将工作流系统的4个核心任务封装到抽象类当中，如果任务可以被自定义，则将可自定义的任务推迟到子类中实现。</p>
+
+
+		<h1><a href="/2015/10/java-fp-java8-lambda-template">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-fp-java8-predicate-consumer">Oct 21, 2015 - Predicate和Consumer接口– Java 8中java.util.function包下的接口</a></h1>
@@ -128,6 +193,7 @@
 
 <p>　　Function接口的主要方法：</p>
 
+>>>>>>> feature_20190606
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> <span class="c1">//将Function对象应用到输入的参数上，然后返回计算结果。</span>
 
 <span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="c1">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></code></pre></figure>
@@ -146,6 +212,7 @@
 		<link rel="stylesheet" href="/css/pygments.css" />
 
 <p><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with_23.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Cyrille-Martraire/">Cyrille Martraire</a></p>
+<<<<<<< HEAD
 
 <p>　　在上一篇文章中我们介绍了谓词函数。通过一个简单的只带一个返回值是true或者false的函数的接口，把函数式编程语言的优势带入到了类似Java的面向对象编程语言中。这一小节，我们将会介绍一些高级特性，方便你高效利用谓词函数。</p>
 
@@ -164,6 +231,26 @@
 
 <span class="c1">// check with the always-false predicat</span>
 
+=======
+
+<p>　　在上一篇文章中我们介绍了谓词函数。通过一个简单的只带一个返回值是true或者false的函数的接口，把函数式编程语言的优势带入到了类似Java的面向对象编程语言中。这一小节，我们将会介绍一些高级特性，方便你高效利用谓词函数。</p>
+
+<p>#测试</p>
+
+<p>　　在测试代码中使用谓词的优势尤为明显。当你需要测试一个混合了数据结构与某些条件逻辑的方法时，通过使用谓词，你可以先单独测试数据结构，再测试条件逻辑。</p>
+
+<p>　　第一步，先利用永真谓词或者永假谓词屏蔽用于判断的逻辑，将注意力集中在测试数据结构上：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="c1">// check with the always-true predicate</span>
+
+<span class="kd">final</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">all</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysTrue</span><span class="o">());</span>
+
+<span class="n">assertEquals</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">Iterables</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="n">all</span><span class="o">));</span> 
+
+<span class="c1">// check with the always-false predicat</span>
+
+>>>>>>> feature_20190606
 <span class="n">eassertTrue</span><span class="o">(</span><span class="n">Iterables</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysFalse</span><span class="o">())));</span>
     </code></pre></figure>
 
@@ -201,6 +288,7 @@
 <p>#什么是谓词函数？</p>
 
 <p>　　许久之前，那时我还在用Java 1.4进行编码，当我第一次发现Apache Commons Collections，便爱上了谓词函数。Apache Commons Collections里的谓词函数仅仅只是一个只有一个方法的接口：</p>
+<<<<<<< HEAD
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="n">evaluate</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">):</span> <span class="kt">boolean</span>
@@ -268,6 +356,23 @@
 
 
 		<h1><a href="/2015/10/java-fp-faking-closure-factory">阅读全文</a></h1>
+=======
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">evaluate</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">):</span> <span class="kt">boolean</span>
+    </code></pre></figure>
+
+<p>　　这就是谓词函数，输入一个对象，返回true或者false。最近诞生了类似Apache Commons Collections的持有Apache 2.0许可的Google Guava。在Google Guava中，定义了Predicate接口，该接口包含一个带有泛型参数的方法：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">input</span><span class="o">):</span> <span class="kt">boolean</span>
+    </code></pre></figure>
+
+<p>　　如果想在程序中使用谓词函数，只需要利用自己的逻辑实现该接口即可。</p>
+
+
+		<h1><a href="/2015/10/java-fp-predicate1">阅读全文</a></h1>
+>>>>>>> feature_20190606
         </div>
     </div>
 </div>
@@ -279,7 +384,11 @@
         <a class="btn btn-default" href="/page2" class="previous">Newer</a>
       
   
+<<<<<<< HEAD
   <span class="page_number ">Page: 3 of 9</span>
+=======
+  <span class="page_number ">Page: 3 of 10</span>
+>>>>>>> feature_20190606
   
     <a class="btn btn-default" href="/page4" class="next">Older</a>
   
