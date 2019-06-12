@@ -16,18 +16,21 @@
   &lt;p&gt;语法糖（Syntactic sugar），也译为糖衣语法，是由英国计算机科学家彼得·约翰·兰达（Peter J. Landin）发明的一个术语，指计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。通常来说使用语法糖能够增加程序的可读性，从而减少程序代码出错的机会。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;       Java语言可以支持某些关键字或者语法的使用，但在编译后的字节码中，却看不到这些代码的痕迹。语法糖可以在性能无损的情况下，提高编程的效率，增加代码可读性，几乎所有的现代编程语言都含有语法糖成分。今天来简单回顾一下Java语言截止至今所包含的语法糖。&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
 &lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/images/post_2019_06_06_image1.jpg&quot; alt=&quot;Syntactic Suger&quot; height=&quot;70%&quot; width=&quot;70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+       Java语言可以支持某些关键字或者语法的使用，但在编译后的字节码中，却看不到这些代码的痕迹。语法糖可以在性能无损的情况下，提高编程的效率，增加代码可读性，几乎所有的现代编程语言都含有语法糖成分。今天来简单回顾一下Java语言截止至今所包含的语法糖。
+注：必须显示指定vm启动参数-ea或者-enableassertions，才可以让assert生效:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt; 
+&lt;span class=&quot;c1&quot;&gt;//以下代码为命令行启动java的范例，各个IDE也有相应修改参数的地方，这里不再赘述&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ea&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Main&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enableassertions&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Main&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;!-- more --&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-//TODO&quot;&gt;find out 
-&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;语法糖列表&quot;&gt;&lt;strong&gt;语法糖列表&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;内部类、条件编译&lt;/li&gt;
@@ -36,6 +39,54 @@
   &lt;li&gt;switch-with-String、switch-with-enum、try-with-resource(JDK 1.7)&lt;/li&gt;
   &lt;li&gt;lambda(JDK 1.8)&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;学习前准备&quot;&gt;学习前准备&lt;/h3&gt;
+
+&lt;p&gt;       如果想要查看反编译后的代码，强烈建议不要使用IDE自带的反编译插件，因为这类图形化工具很可能会把语法糖重新”糖化“，让代码高度还原，
+但这会对学习语法糖造成一定困惑。&lt;/p&gt;
+
+&lt;p&gt;       以IDEA IntelliJ 2019.1版本为例，断言测试代码：&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/images/post_2019_06_06_image1.png&quot; alt=&quot;assert1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+       以IDEA IntelliJ 反编译后的代码为：&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/images/post_2019_06_06_image2.png&quot; alt=&quot;assert1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+       可以看到代码是高度一致的，然而用javap工具查看字节码文件，可以看到代码里会抛出AssertionError:&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/images/post_2019_06_06_image3.png&quot; alt=&quot;assert1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;       很明显，IDE反编译插件给出的代码，并不是真正字节码的样子，而是优化后的代码。
+现在我们用另外一个&lt;a href=&quot;http://www.benf.org/other/cfr/&quot;&gt;反编译工具CFR&lt;/a&gt;尝试一下。笔者下载的版本是cfr-0.145.jar，执行以下命令：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt; 
+&lt;span class=&quot;c1&quot;&gt;//参数sugarasserts为false，表示不需要把assert重新糖化&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cfr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.145&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TestAssertByteCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sugarasserts&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;       执行CFR后得到的反编译代码如下：&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/images/post_2019_06_06_image4.png&quot; alt=&quot;assert1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+       这才是我们想要的效果，可以看到assert实际上是通过是否开启断言的变量$assertionsDisabled和源代码里的断言表达式进行逻辑与&amp;amp;&amp;amp;来实现的，如果为false，则抛出AssertionError。
+本篇博文以CFR为例，浅析Java目前所包含的语法糖。&lt;/p&gt;
+
+&lt;h3 id=&quot;jdk-14的语法糖&quot;&gt;JDK 1.4的语法糖&lt;/h3&gt;
+
+&lt;h4 id=&quot;1assert关键字&quot;&gt;1、assert关键字&lt;/h4&gt;
+
+&lt;p&gt;assert的2种用法：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt; 
+&lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;error msg&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 </description>
 				<pubDate>Thu, 06 Jun 2019 00:00:00 +0800</pubDate>
 				<link>http://localhost:4000/2019/06/java-javasuger</link>
