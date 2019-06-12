@@ -28,16 +28,6 @@ java -enableassertions Main
 
 <!-- more -->
 
-## **语法糖列表**
-
-* 内部类、条件编译
-* assert关键字(JDK 1.4)
-* 泛型、for-each、自动拆装箱、枚举、可变参数列表(JDK 1.5)
-* switch-with-String、switch-with-enum、try-with-resource(JDK 1.7)
-* lambda(JDK 1.8)
-
-* * *
-
 ### 学习前准备
 
 &#160; &#160; &#160; &#160;如果想要查看反编译后的代码，强烈建议不要使用IDE自带的反编译插件，因为这类图形化工具很可能会把语法糖重新”糖化“，让代码高度还原，
@@ -78,14 +68,18 @@ java -jar cfr-0.145.jar TestAssertByteCode.class --sugarasserts false
 &#160; &#160; &#160; &#160;这才是我们想要的效果，可以看到assert实际上是通过是否开启断言的变量$assertionsDisabled和源代码里的断言表达式进行逻辑与&&来实现的，如果为false，则抛出AssertionError。
 本篇博文以CFR为例，浅析Java目前所包含的语法糖。
 
-### JDK 1.4的语法糖
+## **语法糖列表**
 
-#### 1、assert关键字
+* 内部类、条件编译、assert关键字(JDK 1.4及更早版本)
+* 泛型、for-each、自动拆装箱、枚举、可变参数列表(JDK 1.5)
+* switch-with-String、switch-with-enum、try-with-resource(JDK 1.7)
+* lambda(JDK 1.8)
 
-assert的2种用法：
+## 参考文献
 
-{% highlight java %} 
-assert condition; 
-assert condition : "error msg";
-{% endhighlight %}
+[1] [CFR - another java decompiler](http://www.benf.org/other/cfr/)[EB/OL].http://www.benf.org/other/cfr/，2019-06-06.<br>
+[2] [Programming With Assertions](https://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html)[EB/OL].https://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html，2019-06-06.<br>
+
+
+
 

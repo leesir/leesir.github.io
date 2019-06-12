@@ -117,18 +117,6 @@
 
 <!-- more -->
 
-<h2 id="语法糖列表"><strong>语法糖列表</strong></h2>
-
-<ul>
-  <li>内部类、条件编译</li>
-  <li>assert关键字(JDK 1.4)</li>
-  <li>泛型、for-each、自动拆装箱、枚举、可变参数列表(JDK 1.5)</li>
-  <li>switch-with-String、switch-with-enum、try-with-resource(JDK 1.7)</li>
-  <li>lambda(JDK 1.8)</li>
-</ul>
-
-<hr />
-
 <h3 id="学习前准备">学习前准备</h3>
 
 <p>       如果想要查看反编译后的代码，强烈建议不要使用IDE自带的反编译插件，因为这类图形化工具很可能会把语法糖重新”糖化“，让代码高度还原，
@@ -164,15 +152,19 @@
        这才是我们想要的效果，可以看到assert实际上是通过是否开启断言的变量$assertionsDisabled和源代码里的断言表达式进行逻辑与&amp;&amp;来实现的，如果为false，则抛出AssertionError。
 本篇博文以CFR为例，浅析Java目前所包含的语法糖。</p>
 
-<h3 id="jdk-14的语法糖">JDK 1.4的语法糖</h3>
+<h2 id="语法糖列表"><strong>语法糖列表</strong></h2>
 
-<h4 id="1assert关键字">1、assert关键字</h4>
+<ul>
+  <li>内部类、条件编译、assert关键字(JDK 1.4及更早版本)</li>
+  <li>泛型、for-each、自动拆装箱、枚举、可变参数列表(JDK 1.5)</li>
+  <li>switch-with-String、switch-with-enum、try-with-resource(JDK 1.7)</li>
+  <li>lambda(JDK 1.8)</li>
+</ul>
 
-<p>assert的2种用法：</p>
+<h2 id="参考文献">参考文献</h2>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="k">assert</span> <span class="n">condition</span><span class="o">;</span> 
-<span class="k">assert</span> <span class="n">condition</span> <span class="o">:</span> <span class="s">"error msg"</span><span class="o">;</span></code></pre></figure>
+<p>[1] <a href="http://www.benf.org/other/cfr/">CFR - another java decompiler</a>[EB/OL].http://www.benf.org/other/cfr/，2019-06-06.<br />
+[2] <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html">Programming With Assertions</a>[EB/OL].https://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html，2019-06-06.<br /></p>
 
 
                     </div>
