@@ -92,8 +92,6 @@
             
 <div class="article">
     <div class="well">
-<<<<<<< HEAD
-=======
         <h1><a href="/2015/10/java-io-serializable-objectstream">Oct 14, 2015 - Java IO: 序列化与ObjectInputStream、ObjectOutputStream</a></h1>
         
         <div class="content">
@@ -121,7 +119,6 @@
 
 <div class="article">
     <div class="well">
->>>>>>> feature_20190606
         <h1><a href="/2015/10/java-io-pipedreaderwriter-chararrayreaderwriter">Oct 14, 2015 - Java IO: 字符流的Piped和CharArray</a></h1>
         
         <div class="content">
@@ -145,7 +142,6 @@
 <span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="c1">//do something with data...</span>
-<<<<<<< HEAD
 
     <span class="n">doSomethingWithData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
 
@@ -153,15 +149,6 @@
 
 <span class="o">}</span>
 
-=======
-
-    <span class="n">doSomethingWithData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-
-    <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="o">}</span>
-
->>>>>>> feature_20190606
 <span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
     </code></pre></figure>
 
@@ -280,7 +267,6 @@
 
 <span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
 
-<<<<<<< HEAD
     </code></pre></figure>
 
 <p>　　很简单，不是吗？你可以给BufferedInputStream的构造函数传递一个值，设置内部使用的缓冲区设置大小(译者注：默认缓冲区大小8 * 1024B)，就像这样：</p>
@@ -298,54 +284,6 @@
 
 
 		<h1><a href="/2015/10/java-io-buffered-data">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-randomaccessfile">Oct 13, 2015 - Java IO: RandomAccessFile</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://tutorials.jenkov.com/java-io/randomaccessfile.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　RandomAccessFile允许你来回读写文件，也可以替换文件中的某些部分。FileInputStream和FileOutputStream没有这样的功能。</p>
-
-<p>#创建一个RandomAccessFile</p>
-
-<p>　　在使用RandomAccessFile之前，必须初始化它。这是例子：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
-
-    </code></pre></figure>
-
-<p>　　请注意构造函数的第二个参数：“rw”，表明你以读写方式打开文件。请查阅Java文档获知你需要以何种方式构造RandomAccessFile。</p>
-
-
-		<h1><a href="/2015/10/java-io-randomaccessfile">阅读全文</a></h1>
-=======
-    </code></pre></figure>
-
-<p>　　很简单，不是吗？你可以给BufferedInputStream的构造函数传递一个值，设置内部使用的缓冲区设置大小(译者注：默认缓冲区大小8 * 1024B)，就像这样：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
-
-    </code></pre></figure>
-
-<p>　　
-　　这个例子设置了8KB的缓冲区。最好把缓冲区大小设置成1024字节的整数倍，这样能更高效地利用内置缓冲区的磁盘。</p>
-
-<p>　　除了能够为输入流提供缓冲区以外，其余方面BufferedInputStream基本与InputStream类似。</p>
-
-
-		<h1><a href="/2015/10/java-io-buffered-data">阅读全文</a></h1>
->>>>>>> feature_20190606
         </div>
     </div>
 </div>
@@ -357,11 +295,7 @@
         <a class="btn btn-default" href="/page4" class="previous">Newer</a>
       
   
-<<<<<<< HEAD
-  <span class="page_number ">Page: 5 of 9</span>
-=======
   <span class="page_number ">Page: 5 of 10</span>
->>>>>>> feature_20190606
   
     <a class="btn btn-default" href="/page6" class="next">Older</a>
   

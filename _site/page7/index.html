@@ -92,43 +92,11 @@
             
 <div class="article">
     <div class="well">
-<<<<<<< HEAD
-        <h1><a href="/2015/10/java-io-inputstream">Oct 12, 2015 - Java IO: InputStream</a></h1>
-=======
         <h1><a href="/2015/10/java-io-outputstream">Oct 12, 2015 - Java IO: OutputStream</a></h1>
->>>>>>> feature_20190606
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<<<<<<< HEAD
-<p><a href="http://tutorials.jenkov.com/java-io/inputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　InputStream类是Java IO API中所有输入流的基类。InputStream子类包括FileInputStream，BufferedInputStream，PushbackInputStream等等。参考Java IO概述这一小节底部的表格，可以浏览完整的InputStream子类的列表。</p>
-
-<p>#Java InputStream例子</p>
-
-<p>　　InputStream用于读取基于字节的数据，一次读取一个字节，这是一个InputStream的例子：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">InputStream</span> <span class="n">inputstream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">inputstream</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span> 
-
-    <span class="c1">//do something with data...  </span>
-
-    <span class="n">doSomethingWithData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>   
-
-    <span class="n">data</span> <span class="o">=</span> <span class="n">inputstream</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="o">}</span>
-
-<span class="n">inputstream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-
-=======
 <p><a href="http://tutorials.jenkov.com/java-io/outputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
 
 <p>　　OutputStream类是Java IO API中所有输出流的基类。子类包括BufferedOutputStream，FileOutputStream等等。参考Java IO概述这一小节底部的表格，可以浏览完整的子类的列表。</p>
@@ -176,7 +144,6 @@
 
 <span class="n">inputstream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 
->>>>>>> feature_20190606
     </code></pre></figure>
 
 
@@ -193,20 +160,6 @@
 		<link rel="stylesheet" href="/css/pygments.css" />
 
 <p><a href="http://tutorials.jenkov.com/java-io/fileoutputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
-<<<<<<< HEAD
-
-<p>　　FileOutputStream可以往文件里写入字节流，它是OutputStream的子类，所以你可以像使用OutputStream那样使用FileOutputStream。</p>
-
-<p>　　这是一个FileOutputStream的例子：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-text.txt"</span><span class="o">);</span>
-
-<span class="k">while</span><span class="o">(</span><span class="n">moreData</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMoreData</span><span class="o">();</span>
-=======
 
 <p>　　FileOutputStream可以往文件里写入字节流，它是OutputStream的子类，所以你可以像使用OutputStream那样使用FileOutputStream。</p>
 
@@ -227,20 +180,8 @@
 <span class="n">output</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 
     </code></pre></figure>
->>>>>>> feature_20190606
-
-    <span class="n">output</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-
-<<<<<<< HEAD
-<span class="o">}</span>
-
-<span class="n">output</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-
-    </code></pre></figure>
 
 
-=======
->>>>>>> feature_20190606
 		<h1><a href="/2015/10/java-io-fileoutputstream">阅读全文</a></h1>
         </div>
     </div>
@@ -254,7 +195,6 @@
 		<link rel="stylesheet" href="/css/pygments.css" />
 
 <p><a href="http://tutorials.jenkov.com/java-io/fileinputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
-<<<<<<< HEAD
 
 <p>　　FileInputStream可以以字节流的形式读取文件内容。FileInputStream是InputStream的子类，这意味着你可以把FileInputStream当做InputStream使用(FileInputStream与InputStream的行为类似)。</p>
 
@@ -294,68 +234,6 @@
 <p><a href="http://tutorials.jenkov.com/java-io/io-exception-handling.html">原文链接</a> 作者: Jakob Jenkov</p>
 
 <p>　　流与Reader和Writer在结束使用的时候，需要正确地关闭它们。通过调用close()方法可以达到这一点。不过这需要一些思考。请看下边的代码：</p>
-=======
-
-<p>　　FileInputStream可以以字节流的形式读取文件内容。FileInputStream是InputStream的子类，这意味着你可以把FileInputStream当做InputStream使用(FileInputStream与InputStream的行为类似)。</p>
-
-<p>　　这是一个FileInputStream的例子：</p>
->>>>>>> feature_20190606
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
-<<<<<<< HEAD
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-=======
->>>>>>> feature_20190606
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span><span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="c1">//do something with data...  </span>
-
-    <span class="n">doSomethingWithData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-
-    <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="o">}</span>
-
-<span class="n">input</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-
-    </code></pre></figure>
-
-
-<<<<<<< HEAD
-		<h1><a href="/2015/10/java-io-exception">阅读全文</a></h1>
-=======
-		<h1><a href="/2015/10/java-io-fileinputstream">阅读全文</a></h1>
->>>>>>> feature_20190606
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-<<<<<<< HEAD
-        <h1><a href="/2015/10/java-io-concurrent-io">Oct 12, 2015 - Java IO: 并发IO</a></h1>
-=======
-        <h1><a href="/2015/10/java-io-exception">Oct 12, 2015 - Java IO: 异常处理</a></h1>
->>>>>>> feature_20190606
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<<<<<<< HEAD
-<p><a href="http://tutorials.jenkov.com/java-io/concurrent-io.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　有时候你可能需要并发地处理输入和输出。换句话说，你可能有超过一个线程处理输入和产生输出。比如，你有一个程序需要处理磁盘上的大量文件，这个任务可以通过并发操作提高性能。又比如，你有一个web服务器或者聊天服务器，接收许多连接和请求，这些任务都可以通过并发获得性能的提升。</p>
-
-
-		<h1><a href="/2015/10/java-io-concurrent-io">阅读全文</a></h1>
-=======
-<p><a href="http://tutorials.jenkov.com/java-io/io-exception-handling.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　流与Reader和Writer在结束使用的时候，需要正确地关闭它们。通过调用close()方法可以达到这一点。不过这需要一些思考。请看下边的代码：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
@@ -379,7 +257,6 @@
 
 
 		<h1><a href="/2015/10/java-io-exception">阅读全文</a></h1>
->>>>>>> feature_20190606
         </div>
     </div>
 </div>
@@ -391,11 +268,7 @@
         <a class="btn btn-default" href="/page6" class="previous">Newer</a>
       
   
-<<<<<<< HEAD
-  <span class="page_number ">Page: 7 of 9</span>
-=======
   <span class="page_number ">Page: 7 of 10</span>
->>>>>>> feature_20190606
   
     <a class="btn btn-default" href="/page8" class="next">Older</a>
   

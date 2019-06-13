@@ -92,9 +92,6 @@
             
 <div class="article">
     <div class="well">
-<<<<<<< HEAD
-        <h1><a href="/2015/10/java-fp-map-fold">Oct 19, 2015 - Java Functional Programming: Java中函数式编程的Map和Fold(Reduce)</a></h1>
-=======
         <h1><a href="/2015/10/java-fp-faking-closure-factory">Oct 20, 2015 - Java Functional Programming: 伪造闭包工厂，创建域对象</a></h1>
         
         <div class="content">
@@ -177,77 +174,10 @@
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-fp-functional-programming-overview">Oct 17, 2015 - 函数式编程 Functional Programming</a></h1>
->>>>>>> feature_20190606
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<<<<<<< HEAD
-<p><a href="http://www.javacodegeeks.com/2012/03/functional-programming-with-map-and.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Cyrille-Martraire/">Cyrille Martraire</a></p>
-
-<p>　　在函数式编程中，Map和Fold是两个非常有用的操作，它们存在于每一个函数式编程语言中。既然Map和Fold操作如此强大和重要，但是Java语言缺乏Map和Fold机制，那么该如何解释我们使用Java完成日常编码工作呢？实际上你已经在Java中利用手动编写循环的方式实现了Map和Fold操作（译者注：许多动态语言如python都提供了内置的实现）。</p>
-
-<p>　　免责声明：本篇文章仅仅只是一篇入门简介，并非函数式编程的参考。函数式编程爱好者可能会不赞同本文观点。</p>
-
-<p>#你已经很熟悉Map和Fold</p>
-
-<p>　　假设这里有一个List<Double>，存储了不含增值税VAT（译者注：Value Added Tax）的金额列表，现在我们想把这个列表转换成包含增值税金额的列表。首先我们定义一个方法，为金额添加增值税：</Double></p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="kt">double</span> <span class="nf">addVAT</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span><span class="o">,</span> <span class="kt">double</span> <span class="n">rate</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="o">);</span>
-<span class="o">}</span>
-    </code></pre></figure>
-=======
-<p>　　<a href="http://www.javacodegeeks.com/tutorials/java-tutorials/core-java-tutorials/#Functional%20programming">原文链接</a></p>
-
-<p>　　在Java程序员的世界里，第一要素是“类”，而在函数式编程里，第一要素则是“函数”。完全不同的编程理念，确实很难让函数式编程出现在Java工程师日常工作的代码中。</p>
-
-<p>　　先来2篇优秀博文扫盲：</p>
-
-<ul>
-  <li><a href="http://www.ruanyifeng.com/blog/2012/04/functional_programming.html">函数式编程初探</a></li>
-  <li><a href="http://www.cnblogs.com/kym/archive/2011/03/07/1976519.html">函数式编程扫盲篇</a></li>
-</ul>
-
-<p>　　仔细阅读过上面2篇文章之后，相信你已经对函数式编程有了一定的了解。同时，在许多高级语言(Java、C#等)都陆续加入了函数式编程特性的形势下，不难预测函数式编程将再次成为未来的主流编程模型。</p>
-
-<p>　　本系列译文如下：</p>
->>>>>>> feature_20190606
-
-<ol>
-  <li><a href="http://www.javacodegeeks.com/2012/03/functional-programming-with-map-and.html">Functional programming with Map and Fold in Java</a></li>
-  <li><a href="http://www.javacodegeeks.com/2012/03/java-faking-closure-with-factory-to.html">Java: Faking a closure with a factory to create a domain object</a></li>
-  <li><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with.html">Functional style in Java with predicates – Part 1</a></li>
-  <li><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with_23.html">Functional style in Java with predicates – Part 2</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">Function interface – A functional interface in the java.util.function package in Java 8</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">Predicate and Consumer Interface in java.util.function package in Java 8</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/05/a-simple-application-of-lambda-expressions-in-java-8.html">A simple application of Lambda Expressions in Java 8</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/05/template-method-pattern-using-lambda-expressions-default-methods.html">Template Method Pattern – Using Lambda Expressions, Default Methods</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/06/java-8-lambda-walkthrough.html">Java 8 lambda walkthrough</a>（此篇文章代码居多，不进行翻译，感兴趣的读者可以点击链接阅读原文章）</li>
-</ol>
-
-<<<<<<< HEAD
-		<h1><a href="/2015/10/java-fp-map-fold">阅读全文</a></h1>
-=======
-		<h1><a href="/2015/10/java-fp-functional-programming-overview">阅读全文</a></h1>
->>>>>>> feature_20190606
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-<<<<<<< HEAD
-        <h1><a href="/2015/10/java-fp-functional-programming-overview">Oct 17, 2015 - 函数式编程 Functional Programming</a></h1>
-=======
-        <h1><a href="/2015/10/java-io-otherstream">Oct 16, 2015 - Java IO: 其他字节流(上)</a></h1>
->>>>>>> feature_20190606
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<<<<<<< HEAD
 <p>　　<a href="http://www.javacodegeeks.com/tutorials/java-tutorials/core-java-tutorials/#Functional%20programming">原文链接</a></p>
 
 <p>　　在Java程序员的世界里，第一要素是“类”，而在函数式编程里，第一要素则是“函数”。完全不同的编程理念，确实很难让函数式编程出现在Java工程师日常工作的代码中。</p>
@@ -305,26 +235,6 @@
 <span class="n">input</span><span class="o">.</span><span class="na">unread</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
     </code></pre></figure>
 
-=======
-<p>作者: Jakob Jenkov</p>
-
-<p>　　本小节会简要概括Java IO中的PushbackInputStream，SequenceInputStream和PrintStream。其中，最常用的是PrintStream，System.out和System.err都是PrintStream类型的变量，请查看<a href="http://leesir.github.io/2015/10/java-io-systemstream/">Java IO: System.in, System.out, System.err</a>浏览更多关于System.out和System.err的信息。</p>
-
-<p>#PushbackInputStream</p>
-
-<p>　　<a href="http://tutorials.jenkov.com/java-io/pushbackinputstream.html">原文链接</a></p>
-
-<p>　　PushbackInputStream用于解析InputStream内的数据。有时候你需要提前知道接下来将要读取到的字节内容，才能判断用何种方式进行数据解析。PushBackInputStream允许你这么做，你可以把读取到的字节重新推回到InputStream中，以便再次通过read()读取。代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="n">input</span><span class="o">.</span><span class="na">unread</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-    </code></pre></figure>
-
->>>>>>> feature_20190606
 <p>　　可以通过PushBackInputStream的构造函数设置推回缓冲区的大小，代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
@@ -335,7 +245,6 @@
 
 
 		<h1><a href="/2015/10/java-io-otherstream">阅读全文</a></h1>
-<<<<<<< HEAD
         </div>
     </div>
 </div>
@@ -373,66 +282,6 @@
 
 
 		<h1><a href="/2015/10/java-io-otherreader">阅读全文</a></h1>
-=======
->>>>>>> feature_20190606
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-<<<<<<< HEAD
-        <h1><a href="/2015/10/java-io-serializable-objectstream">Oct 14, 2015 - Java IO: 序列化与ObjectInputStream、ObjectOutputStream</a></h1>
-=======
-        <h1><a href="/2015/10/java-io-otherreader">Oct 16, 2015 - Java IO: 其他字符流(下)</a></h1>
->>>>>>> feature_20190606
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>作者: Jakob Jenkov</p>
-
-<<<<<<< HEAD
-<p>　　本小节会简要概括Java IO中的序列化以及涉及到的流，主要包括ObjectInputStream和ObjectOutputStream。</p>
-
-<p>#Serializable</p>
-
-<p>　　<a href="http://tutorials.jenkov.com/java-io/serializable.html">原文链接</a></p>
-
-<p>　　如果你希望类能够序列化和反序列化，必须实现Serializable接口，就像所展示的ObjectInputStream和ObjectOutputStream例子一样。</p>
-
-<p>　　对象序列化本身就是一个主题。Java IO系列教程主要关注流、reader和writer，所以我不会深入探讨对象序列化的细节。并且，目前在网上已经有很多文章探讨了对象序列化，我将给出几个深入分析的资料链接，不再赘述。链接如下：</p>
-
-<p>http://java.sun.com/developer/technicalArticles/Programming/serialization/</p>
-
-
-		<h1><a href="/2015/10/java-io-serializable-objectstream">阅读全文</a></h1>
-=======
-<p>　　本小节会简要概括Java IO中的PushbackReader，LineNumberReader，StreamTokenizer，PrintWriter，StringReader，StringWriter。</p>
-
-<p>#PushbackReader</p>
-
-<p>　　<a href="http://tutorials.jenkov.com/java-io/pushbackreader.html">原文链接</a></p>
-
-<p>　　PushbackReader与PushbackInputStream类似，唯一不同的是PushbackReader处理字符，PushbackInputStream处理字节。代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="n">reader</span><span class="o">.</span><span class="na">unread</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-    </code></pre></figure>
-
-<p>　　同样可以设置缓冲区大小，代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
-    </code></pre></figure>
-
-
-		<h1><a href="/2015/10/java-io-otherreader">阅读全文</a></h1>
->>>>>>> feature_20190606
         </div>
     </div>
 </div>
@@ -444,11 +293,7 @@
         <a class="btn btn-default" href="/page3" class="previous">Newer</a>
       
   
-<<<<<<< HEAD
-  <span class="page_number ">Page: 4 of 9</span>
-=======
   <span class="page_number ">Page: 4 of 10</span>
->>>>>>> feature_20190606
   
     <a class="btn btn-default" href="/page5" class="next">Older</a>
   
