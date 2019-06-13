@@ -55,6 +55,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-innerclass">Java语法糖-内部类</a></li>
+        
           <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
         
           <li><a href="/2016/08/java-history">Java的历史</a></li>
@@ -73,8 +75,6 @@
         
           <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
         
-          <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
-        
     </ul>
 </div>
 
@@ -90,6 +90,43 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-otherreader">Oct 16, 2015 - Java IO: 其他字符流(下)</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>作者: Jakob Jenkov</p>
+
+<p>　　本小节会简要概括Java IO中的PushbackReader，LineNumberReader，StreamTokenizer，PrintWriter，StringReader，StringWriter。</p>
+
+<p>#PushbackReader</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/pushbackreader.html">原文链接</a></p>
+
+<p>　　PushbackReader与PushbackInputStream类似，唯一不同的是PushbackReader处理字符，PushbackInputStream处理字节。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
+
+<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="n">reader</span><span class="o">.</span><span class="na">unread</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+    </code></pre></figure>
+
+<p>　　同样可以设置缓冲区大小，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
+    </code></pre></figure>
+
+
+		<h1><a href="/2015/10/java-io-otherreader">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-serializable-objectstream">Oct 14, 2015 - Java IO: 序列化与ObjectInputStream、ObjectOutputStream</a></h1>
@@ -240,50 +277,6 @@
 
 
 		<h1><a href="/2015/10/java-io-bufferedreaderwriter-filterreaderwriter">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-buffered-data">Oct 14, 2015 - Java IO: Buffered和Data</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>作者: Jakob Jenkov</p>
-
-<p>　　本小节会简要概括Java IO中Buffered和data的输入输出流，主要涉及以下4个类型的流：BufferedInputStream，BufferedOutputStream，DataInputStream，DataOutputStream。</p>
-
-<p>#BufferedInputStream</p>
-
-<p>　　<a href="http://tutorials.jenkov.com/java-io/bufferedinputstream.html">原文链接</a></p>
-
-<p>　　BufferedInputStream能为输入流提供缓冲区，能提高很多IO的速度。你可以一次读取一大块的数据，而不需要每次从网络或者磁盘中一次读取一个字节。特别是在访问大量磁盘数据时，缓冲通常会让IO快上许多。</p>
-
-<p>　　为了给你的输入流加上缓冲，你需要把输入流包装到BufferedInputStream中，代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
-
-    </code></pre></figure>
-
-<p>　　很简单，不是吗？你可以给BufferedInputStream的构造函数传递一个值，设置内部使用的缓冲区设置大小(译者注：默认缓冲区大小8 * 1024B)，就像这样：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
-
-    </code></pre></figure>
-
-<p>　　
-　　这个例子设置了8KB的缓冲区。最好把缓冲区大小设置成1024字节的整数倍，这样能更高效地利用内置缓冲区的磁盘。</p>
-
-<p>　　除了能够为输入流提供缓冲区以外，其余方面BufferedInputStream基本与InputStream类似。</p>
-
-
-		<h1><a href="/2015/10/java-io-buffered-data">阅读全文</a></h1>
         </div>
     </div>
 </div>

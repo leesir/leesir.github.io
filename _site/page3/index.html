@@ -55,6 +55,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-innerclass">Java语法糖-内部类</a></li>
+        
           <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
         
           <li><a href="/2016/08/java-history">Java的历史</a></li>
@@ -73,8 +75,6 @@
         
           <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
         
-          <li><a href="/2015/10/java-fp-java8-lambda">一个Java 8中简单Lambda表达式程序</a></li>
-        
     </ul>
 </div>
 
@@ -90,6 +90,29 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-fp-java8-lambda">Oct 22, 2015 - 一个Java 8中简单Lambda表达式程序</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2013/05/a-simple-application-of-lambda-expressions-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　我尝试过把Lambda表达式融入到我的代码中，下面的代码例子是此次尝试的结果。对于那些完全不知道Lambda表达式的Java程序员，我强烈建议在继续阅读之前，浏览一下<a href="http://blog.sanaulla.info/2013/03/11/using-lambda-expression-to-sort-a-list-in-java-8-using-netbeans-lambda-support/">这篇文章</a>。</p>
+
+<p>　　Ok，现在你已经熟悉Lambda表达式了（在阅读过推荐的Lambda入门文章之后），那我们现在开始学习一个我认为很好的Lambda表达式的例子。</p>
+
+<p>　　考虑一下这种场景：某些操作在执行之前需要做预处理，执行之后需要做后期处理。待执行的操作会随着行为的不同而变化。预处理会提取出这个操作所需的必要参数，后期处理做一些清理的工作。</p>
+
+<p>　　我们来看看如何利用接口与接口的匿名实现类模拟这个场景。</p>
+
+
+		<h1><a href="/2015/10/java-fp-java8-lambda">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-fp-java8-lambda-template">Oct 22, 2015 - 采用Java 8中Lambda表达式和默认方法的模板方法模式</a></h1>
@@ -211,39 +234,6 @@
 
 
 		<h1><a href="/2015/10/java-fp-predicate2">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-fp-predicate1">Oct 20, 2015 - Java中函数式编程的谓词函数(Predicates)第一部分</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Cyrille-Martraire/">Cyrille Martraire</a></p>
-
-<p>　　你一直在听说函数式编程将称霸整个编程届，而自己仍然沉浸在普通的Java里？请不要担心，因为你已经在日常Java代码中加入了函数式编程的特性。此外，函数式编程很有趣，能够帮你节省多行代码并且降低错误率。</p>
-
-<p>#什么是谓词函数？</p>
-
-<p>　　许久之前，那时我还在用Java 1.4进行编码，当我第一次发现Apache Commons Collections，便爱上了谓词函数。Apache Commons Collections里的谓词函数仅仅只是一个只有一个方法的接口：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">evaluate</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">):</span> <span class="kt">boolean</span>
-    </code></pre></figure>
-
-<p>　　这就是谓词函数，输入一个对象，返回true或者false。最近诞生了类似Apache Commons Collections的持有Apache 2.0许可的Google Guava。在Google Guava中，定义了Predicate接口，该接口包含一个带有泛型参数的方法：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">input</span><span class="o">):</span> <span class="kt">boolean</span>
-    </code></pre></figure>
-
-<p>　　如果想在程序中使用谓词函数，只需要利用自己的逻辑实现该接口即可。</p>
-
-
-		<h1><a href="/2015/10/java-fp-predicate1">阅读全文</a></h1>
         </div>
     </div>
 </div>
