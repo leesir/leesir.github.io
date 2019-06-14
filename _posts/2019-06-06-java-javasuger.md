@@ -66,7 +66,7 @@ java -jar cfr-0.145.jar TestAssertByteCode.class --sugarasserts false
 
 <br>
 &#160; &#160; &#160; &#160;这才是我们想要的效果，可以看到assert实际上是通过是否开启断言的变量$assertionsDisabled和源代码里的断言表达式进行逻辑与&&来实现的，如果为false，则抛出AssertionError。
-本篇博文以CFR为例，浅析Java目前所包含的语法糖。
+可以看到工具为语法糖代码添加了/* synthetic */注释，非常简洁明了。本篇博文以CFR为例，浅析Java目前所包含的语法糖。
 
 ## **语法糖列表**
 

@@ -178,7 +178,118 @@ public class TestPriStaticInnerClass {
 
 ## 非静态内部类
 
-&#160; &#160; &#160; &#160;非静态内部类的初始化，依赖于外部类的实例，可以访问外部类的实例属性、方法及静态属性、方法。
+&#160; &#160; &#160; &#160;非静态内部类的初始化，依赖于外部类的实例，会用一个实例变量保存外部类实例。内部类可以访问外部类的所有实例属性、方法及静态属性、方法。
 
 #### 公有内部类
 
+&#160; &#160; &#160; &#160;测试代码如下所示：
+
+{% highlight java %}
+public class TestPubInnerClass {
+    private int privateValue = 0;
+    private static int privateStaticValue = 0;
+    public int publicValue = 1;
+    public static int publicStaticValue = 3;
+
+    public static void outPubStaticF() {
+
+    }
+
+    private static void outPriStaticF() {
+
+    }
+
+    public void outPubF() {
+
+    }
+
+    private void outPriF() {
+
+    }
+
+    public class PubInnerClass {
+        public int f() {
+            outPubStaticF();
+            outPriStaticF();
+            outPubF();
+            outPriF();
+            return privateValue + privateStaticValue + publicValue + publicStaticValue;
+        }
+    }
+
+    public static void main(String[] args) {
+        TestPubInnerClass testPubInnerClass = new TestPubInnerClass();
+        PubInnerClass pubInnerClass = testPubInnerClass.new PubInnerClass();
+    }
+}
+{% endhighlight %}
+
+&#160; &#160; &#160; &#160;反编译后的代码如下所示：
+
+{% highlight java %}
+/*
+ * Decompiled with CFR 0.145.
+ */
+public class TestPubInnerClass {
+    private int privateValue = 0;
+    private static int privateStaticValue = 0;
+    public int publicValue = 1;
+    public static int publicStaticValue = 3;
+
+    public static void outPubStaticF() {
+    }
+
+    private static void outPriStaticF() {
+    }
+
+    public void outPubF() {
+    }
+
+    private void outPriF() {
+    }
+
+    public static void main(String[] args) {
+        TestPubInnerClass testPubInnerClass = new TestPubInnerClass();
+        PubInnerClass pubInnerClass = new PubInnerClass(testPubInnerClass);
+    }
+
+    static /* synthetic */ void access$000() {
+        TestPubInnerClass.outPriStaticF();
+    }
+
+    static /* synthetic */ void access$100(TestPubInnerClass x0) {
+        x0.outPriF();
+    }
+
+    static /* synthetic */ int access$200(TestPubInnerClass x0) {
+        return x0.privateValue;
+    }
+
+    static /* synthetic */ int access$300() {
+        return privateStaticValue;
+    }
+
+    public class PubInnerClass {
+        final /* synthetic */ TestPubInnerClass this$0;
+
+        public PubInnerClass(TestPubInnerClass this$0) {
+            this.this$0 = this$0;
+        }
+
+        public int f() {
+            TestPubInnerClass.outPubStaticF();
+            TestPubInnerClass.access$000();
+            this.this$0.outPubF();
+            TestPubInnerClass.access$100(this.this$0);
+            return TestPubInnerClass.access$200(this.this$0) + TestPubInnerClass.access$300() + this.this$0.publicValue + publicStaticValue;
+        }
+    }
+}
+{% endhighlight %}
+
+&#160; &#160; &#160; &#160;可以看到，对于静态属性和方法的处理，与静态内部类的逻辑是一致的。
+对于实例属性和方法，编译器同样为外部类添加了包级可见域的静态方法access$100和access$200，内部类调用方法时，会将外部类实例传参给方法，实现间接调用。
+
+#### 私有内部类
+
+&#160; &#160; &#160; &#160;私有内部类在属性和方法上与公有内部类的处理逻辑一致，除此之外，编译器会额外为私有内部类添加一个构造函数，与私有静态内部类的处理逻辑一致，这里不在赘述。
