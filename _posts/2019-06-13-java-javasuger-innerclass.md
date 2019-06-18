@@ -437,3 +437,4 @@ Error:(64, 36) java: 从内部类引用的本地变量必须是最终变量或�
 ## 5.参考文献
 
 [1] Lee Benfield.[Inner classes have to fake friendship](http://www.benf.org/other/cfr/inner-class-fake-friends.html)[EB/OL].http://www.benf.org/other/cfr/inner-class-fake-friends.html，2019-06-18.<br>
+[2] [浅析java中的语法糖](https://www.cnblogs.com/qingshanli/p/9375040.html)[EB/OL].https://www.cnblogs.com/qingshanli/p/9375040.html，2019-06-18.<br>
