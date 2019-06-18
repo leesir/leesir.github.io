@@ -103,7 +103,7 @@
 
 <p>       静态内部类的初始化，不依赖于外部类的实例，并且不能访问外部类的实例变量，不能调用外部类的实例方法。</p>
 
-<div id="pub-static-innerclass">#### 公有静态内部类</div>
+<h4 id="公有静态内部类">公有静态内部类</h4>
 
 <p>       测试代码如下所示：</p>
 
@@ -181,8 +181,6 @@
 
 <p>       可以看到，对于外部类的公有静态属性或方法，内部类可以直接调用。对于私有静态属性或者方法，编译器将会为其生成一个包级可见域的静态方法，如access$000和access$100，供内部类调用。</p>
 
-<hr />
-
 <h4 id="私有静态内部类">私有静态内部类</h4>
 
 <p>       测试代码如下所示：</p>
@@ -258,8 +256,6 @@
     <span class="o">}</span>
 
 <span class="o">}</span></code></pre></figure>
-
-<hr />
 
 <h2 id="2非静态内部类">2.非静态内部类</h2>
 
@@ -381,7 +377,11 @@
 静态匿名内部类只能访问外部类的静态属性和方法，非静态匿名内部类可以访问外部类的所有属性和方法，与上述内部类逻辑一致。测试代码如下所示：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//JDK 1.7代码</span>
+<span class="kn">package</span> <span class="n">innerclass</span><span class="o">;</span>
+
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestAnonymousClass</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">publicValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">publicStaticValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">privateValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">privateStaticValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 
@@ -391,6 +391,8 @@
             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"thread"</span><span class="o">);</span>
             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateValue</span><span class="o">);</span>
             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicValue</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">});</span>
 
@@ -399,6 +401,7 @@
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"staticThread"</span><span class="o">);</span>
             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">});</span>
 
@@ -410,6 +413,7 @@
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"localThread"</span><span class="o">);</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">localN</span><span class="o">);</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
             <span class="o">}</span>
         <span class="o">});</span>
 
@@ -424,8 +428,15 @@
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">arg1</span><span class="o">);</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateValue</span><span class="o">);</span>
                 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicValue</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+                <span class="n">outF</span><span class="o">();</span>
             <span class="o">}</span>
         <span class="o">};</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">outF</span><span class="o">()</span> <span class="o">{</span>
+
     <span class="o">}</span>
 
     <span class="kd">class</span> <span class="nc">InnerClass</span> <span class="o">{</span>
@@ -438,8 +449,82 @@
 <p>       上面展示的demo，编译后将会产生5个内部类字节码文件，
 分别对应成员变量thread，静态变量staticThread，内部类InnerClass，main方法中的局部匿名内部类localThread，实例方法outF中的局部匿名内部类innerClass。</p>
 
-<p>       thread和localThread属于非静态的匿名内部类，同样会维护一个外部类类型的成员变量引用外部类的实例。
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">outF</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InnerClass</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">arg1</span><span class="o">){</span>
+            <span class="kd">final</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">val$arg1</span><span class="o">;</span>
+            <span class="kd">final</span> <span class="cm">/* synthetic */</span> <span class="n">TestAnonymousClass</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">;</span>
+            <span class="o">{</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span> <span class="o">=</span> <span class="n">testAnonymousClass</span><span class="o">;</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">val</span><span class="n">$arg1</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
+                <span class="kd">super</span><span class="o">(</span><span class="n">testAnonymousClass</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kt">void</span> <span class="nf">innerF</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">val</span><span class="n">$arg1</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">));</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">());</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">.</span><span class="na">publicValue</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+                <span class="n">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">200</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+    <span class="o">}</span></code></pre></figure>
+
+<p>       我们重点看一下上述匿名内部类的反编译代码。thread和localThread属于非静态的匿名内部类，同样会维护一个外部类类型的成员变量引用外部类的实例。
 匿名内部类访问外部类的逻辑同普通内部类一样，直接调用公有属性或方法，调用编译器生成的包级可见域方法间接调用私有属性或方法。</p>
+
+<p>       匿名内部类与普通内部类最大的区别在于，匿名内部类可以访问局部变量和形参，在JDK 1.8以前，对局部变量和方法形参的访问，要求该变量和形参加上final修饰符（形参也属于局部变量，以下统称局部变量）。
+方法结束之后，整个虚拟机栈包括局部变量在内，都会被销毁，而匿名内部类对象和普通类对象一样，回收的逻辑视垃圾回收器而定。这就会导致当匿名内部类对象还没被回收时，所引用的数据已经被销毁了，这明显是不合理的。
+所以Java在编译阶段，就明确要求被匿名内部类访问的局部变量持有final修饰符，同时通过语法糖，将该变量复制成一个成员变量，并通过构造函数传入。这样可以保证即使局部变量被销毁了，匿名内部类对象依然能够访问相等的值。</p>
+
+<p>       在JDK 1.8版本中，引入了”effectively final“，只要局部变量在方法体内不做修改，编译器会自动对局部变量声明final。当然，如果对局部变量有赋值语句，则编译报错：</p>
+
+<pre><code class="language-$xslt">Error:(64, 36) java: 从内部类引用的本地变量必须是最终变量或实际上的最终变量
+</code></pre>
+
+<h2 id="4总结">4.总结</h2>
+
+<p><br /></p>
+<ul>
+  <li>
+    <h4 id="内部类字节码命名格式">内部类字节码命名格式</h4>
+  </li>
+</ul>
+
+<p>       不管什么类型的内部类，都和普通类并无二致。编译器会在外部类字节码文件相同目录下，为内部类生成字节码文件。
+普通内部类的字节码文件命名格式为：OuterClass$InnerClass.class，匿名内部类的命名方式为：OuterClass$index.class，其中index为匿名内部类在源代码中的顺序，如OuterClass$1.class。</p>
+
+<p><br /></p>
+<ul>
+  <li>
+    <h4 id="内部类对外部类的访问">内部类对外部类的访问</h4>
+  </li>
+</ul>
+
+<ol>
+  <li>静态内部类不能访问外部类的实例属性和方法，可以访问外部类的公有或私有的静态属性或方法。</li>
+  <li>非静态内部类可以访问外部类的实例、静态属性和方法，编译器会为内部类生成一个引用外部类实例的实例属性。</li>
+  <li>静态内部类访问外部类公有属性或方法，直接调用OuterClass.pubValue或者OuterClass.pubFunc即可。访问外部类私有属性或方法，通过调用编译器为外部类生成的包级可见域的方法即可。</li>
+  <li>非静态内部类访问外部类属性或方法的逻辑与第三点类似。</li>
+  <li>除上述逻辑之外，匿名内部类引用的局部变量，都必须是final类型的，JDK 1.8之前要求手动声明final，自JDK 1.8起引入了”effectively final“，不再需要手动声明。</li>
+</ol>
+
+<p><br /></p>
+
+<ul>
+  <li>
+    <h4 id="附件">附件</h4>
+  </li>
+</ul>
+
+<p>       本博文使用到的源代码<a href="https://github.com/leesir/blog_code">由此获得</a>。</p>
+
+<p><br /></p>
+
+<h2 id="5参考文献">5.参考文献</h2>
+
+<p>[1] Lee Benfield.<a href="http://www.benf.org/other/cfr/inner-class-fake-friends.html">Inner classes have to fake friendship</a>[EB/OL].http://www.benf.org/other/cfr/inner-class-fake-friends.html，2019-06-18.<br /></p>
 
                     </div>
                     

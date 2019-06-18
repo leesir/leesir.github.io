@@ -77,7 +77,7 @@ java -jar cfr-0.145.jar TestAssertByteCode.class --sugarasserts false
 
 ## 参考文献
 
-[1] [CFR - another java decompiler](http://www.benf.org/other/cfr/)[EB/OL].http://www.benf.org/other/cfr/，2019-06-06.<br>
+[1] Lee Benfield.[CFR - another java decompiler](http://www.benf.org/other/cfr/)[EB/OL].http://www.benf.org/other/cfr/，2019-06-06.<br>
 [2] [Programming With Assertions](https://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html)[EB/OL].https://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html，2019-06-06.<br>
 
 
