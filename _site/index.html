@@ -55,6 +55,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
+        
           <li><a href="/2019/06/java-javasuger-innerclass">Java语法糖-内部类</a></li>
         
           <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
@@ -73,8 +75,6 @@
         
           <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
         
-          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
-        
     </ul>
 </div>
 
@@ -90,6 +90,36 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2019/06/system-logincache">Jun 19, 2019 - 一种基于redis的登录态的设计与实现</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<h2 id="1前言">1.前言</h2>
+
+<p><br /></p>
+
+<p>       本文浅析一种可行的、实现简单的登录态方案。登录态几乎是所有系统都要考虑的问题，旨在维护用户登录之后的状态。
+“用户登录”这个功能已经发展很多年了，伴随着“用户登录”的演进，登录态的实现也在不断完善。从最简单的在url后加一个参数作为标记，到现在大型站点的SSO，
+登录态方案从单应用单机到多应用集群，不断满足不同架构的需求，也不断满足安全方面的需求。</p>
+
+<p>       由于用户登录功能和登录态涉及的面非常广，比如密码的传输和存储、session共享、SSO、网络安全、第三方授权登录等，笔者见识尚浅，无法进行全面分析，
+故本文仅就“登录态在服务器端的维护”一点进行阐述，上述方面不在本文讨论范围之内。</p>
+
+<p><br /></p>
+
+<p class="center"><img src="/images/post_2019_06_19_image1.jpg" alt="login cache" height="60%" width="60%" /></p>
+
+<p><br /></p>
+
+
+		<h1><a href="/2019/06/system-logincache">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2019/06/java-javasuger-innerclass">Jun 13, 2019 - Java语法糖-内部类</a></h1>
@@ -206,24 +236,6 @@
 
 
 		<h1><a href="/2016/07/java-history-beginning-words">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2016/07/project-summary-2">Jul 11, 2016 - 项目总结-2016年07月11日</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<h3 id="关于数据同步">关于数据同步</h3>
-<p>同步流程异步化是提升程序响应、服务解耦的一个非常常用的手段。而对于某些业务来说，异步是唯一的选择，比如支付业务。当拿到某个订单的交易结果时，该结果并不代表最终的支付结果，而支付公司会通过回调或者由调用方轮询访问接口获取真实的支付结果。</p>
-
-<p>笔者所涉及的项目中，同样涉及到“交易——对账——数据”这类不能实时获得数据的问题。用户的操作调用合作方的接口产生了交易之后，新的交易数据生成在合作方的数据库里（即使是合作方，也不会实时得到支付结果，最终会与银行打交道）。如何在用户无感知的情况下进行数据的同步，是提高用户体验的一个关键点。在项目研发过程中经历了许多轮的讨论与实践，现在笔者将数据同步功能的发展历程简单介绍一下。</p>
-
-
-		<h1><a href="/2016/07/project-summary-2">阅读全文</a></h1>
         </div>
     </div>
 </div>

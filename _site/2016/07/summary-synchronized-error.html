@@ -55,6 +55,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
+        
           <li><a href="/2019/06/java-javasuger-innerclass">Java语法糖-内部类</a></li>
         
           <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
@@ -72,8 +74,6 @@
           <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
           <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
-        
-          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
         
     </ul>
 </div>
@@ -97,7 +97,7 @@
                     <div class="post-content">
                         <link rel="stylesheet" href="/css/pygments.css" />
 
-<p>关于关键字synchronized使用不当，造成未同步或者同步不正确，是开发过程中常见的问题。先引出3个问题：</p>
+<p>       关于关键字synchronized使用不当，造成未同步或者同步不正确，是开发过程中常见的问题。先引出3个问题：</p>
 
 <ol>
   <li>同步synchronized的底层实现原理是什么？</li>
@@ -105,20 +105,34 @@
   <li>对包装类型使用synchronized，会有什么效果？</li>
 </ol>
 
+<p><br /></p>
+
 <!-- more -->
 
 <h4 id="1-同步synchronized的底层实现原理是什么">1. 同步synchronized的底层实现原理是什么？</h4>
 
-<p>在对象上使用synchronized，会尝试获取对象的锁。获取成功之后，程序可以进入到同步代码块中执行逻辑。如果获取失败，则会进入到等待该对象锁的等待队列中。试图获取null的锁的操作都将抛出空指针异常，null在虚拟机内部的表示不属于虚拟机规范，所以不同的虚拟机可能会有不同的实现方式。</p>
+<p><br /></p>
 
-<p>对象锁是非公平的（可以使用java.util.concurrent.locks.Lock的实现类实现公平锁，当然会有额外的性能消耗），也就是说，唤醒线程时，并不参考其等待时间，在极端情况下，线程会出现饿死的情况。</p>
+<p>       在对象上使用synchronized，会尝试获取对象的锁。获取成功之后，程序可以进入到同步代码块中执行逻辑。如果获取失败，则会进入到等待该对象锁的等待队列中。
+试图获取null的锁的操作都将抛出空指针异常，null在虚拟机内部的表示不属于虚拟机规范，所以不同的虚拟机可能会有不同的实现方式。</p>
 
-<p>通过synchronized使用对象锁，不需要显示地获取或者释放锁。在编译（前端编译，即javac或者类似编译器，不是JIT编译）过后，如果synchronized同步的是代码块，字节码文件中会存在monitorenter与monitorexit，2个虚拟机指令实现代码块的进入与退出，这也是虚拟机规范之一。而同步方法则不会显示这两个指令，因为同步方法的实现细节不属于虚拟机规范，各个商用虚拟机会有不同的细节，当然，也可以通过monitorenter和monitorexit来实现。感兴趣的读者可以动手写个简单的类，通过命令查看反编译后的执行指令。</p>
+<p>       对象锁是非公平的（可以使用java.util.concurrent.locks.Lock的实现类实现公平锁，当然会有额外的性能消耗），
+也就是说，唤醒线程时，并不参考其等待时间，在极端情况下，线程会出现饿死的情况。</p>
 
-<div class="highlighter-rouge">javap -c -p yourPath/TestClass
+<p>       通过synchronized使用对象锁，不需要显示地获取或者释放锁。在编译（前端编译，即javac或者类似编译器，不是JIT编译）完成后，
+如果synchronized同步的是代码块，字节码文件中会存在monitorenter与monitorexit，2个虚拟机指令实现代码块的进入与退出，这也是虚拟机规范之一。
+而同步方法则不会显示这两个指令，因为同步方法的实现细节不属于虚拟机规范，各个商用虚拟机会有不同的细节，当然，也可以通过monitorenter和monitorexit来实现。
+感兴趣的读者可以动手写个简单的类，通过命令查看反编译后的执行指令。</p>
+
+<div class="highlighter-rouge">//注：TestClass是类名，不是TestClass.class或者TestClass.java等文件名。
+javap -c -p yourPath/TestClass
 </div>
-<p>注：TestClass是类名，不是TestClass.class或者TestClass.java等文件名。</p>
+
+<p><br /></p>
+
 <h4 id="2-对非常量或者非单例对象上使用synchronized会有什么效果">2. 对非常量或者非单例对象上使用synchronized，会有什么效果？</h4>
+
+<p><br /></p>
 
 <p>理解了synchronized的实现原理，就来看看对非常量或者非单例对象上使用synchronized，会有什么效果。</p>
 

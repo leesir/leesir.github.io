@@ -7,6 +7,85 @@
 		<atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>一种基于redis的登录态的设计与实现</title>
+				<description>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/pygments.css&quot; /&gt;
+
+&lt;h2 id=&quot;1前言&quot;&gt;1.前言&lt;/h2&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;       本文浅析一种可行的、实现简单的登录态方案。登录态几乎是所有系统都要考虑的问题，旨在维护用户登录之后的状态。
+“用户登录”这个功能已经发展很多年了，伴随着“用户登录”的演进，登录态的实现也在不断完善。从最简单的在url后加一个参数作为标记，到现在大型站点的SSO，
+登录态方案从单应用单机到多应用集群，不断满足不同架构的需求，也不断满足安全方面的需求。&lt;/p&gt;
+
+&lt;p&gt;       由于用户登录功能和登录态涉及的面非常广，比如密码的传输和存储、session共享、SSO、网络安全、第三方授权登录等，笔者见识尚浅，无法进行全面分析，
+故本文仅就“登录态在服务器端的维护”一点进行阐述，上述方面不在本文讨论范围之内。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/images/post_2019_06_19_image1.jpg&quot; alt=&quot;login cache&quot; height=&quot;60%&quot; width=&quot;60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h2 id=&quot;2功能点&quot;&gt;2.功能点&lt;/h2&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;维持状态&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;       这是登录态最基本的功能。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;时效&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;       登录态需要有时效，不能无限期处于登录状态中。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安全&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;       登录态需要防止伪造或窃取。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;互斥&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;       登录态需要在同类型客户端中实现互斥登录，比如pc上只能允许最后一次登录有效，app类似，但是pc和app的登录不能互相影响，做到隔离。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;强制失效&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;       用户修改密码，或者找回密码，需要强制所有客户端的登录态失效。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3实现&quot;&gt;3.实现&lt;/h2&gt;
+
+&lt;p&gt;       此处仅给出基本方案，以及重要部分的代码实现。方案的最优化应与具体业务挂钩，故不讨论最优解，不追求完美。&lt;/p&gt;
+
+&lt;h4 id=&quot;a-维持状态&quot;&gt;a) 维持状态&lt;/h4&gt;
+
+&lt;p&gt;想要维持状态，客户端请求必须带上sessionId。可以是在&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;5参考文献&quot;&gt;5.参考文献&lt;/h2&gt;
+
+&lt;p&gt;[1] 陈皓.&lt;a href=&quot;https://coolshell.cn/articles/5353.html&quot;&gt;你会做WEB上的用户登录功能吗？&lt;/a&gt;[EB/OL].https://coolshell.cn/articles/5353.html，2019-06-19.&lt;br /&gt;
+[2] &lt;a href=&quot;https://www.cnblogs.com/qingshanli/p/9375040.html&quot;&gt;浅析java中的语法糖&lt;/a&gt;[EB/OL].https://www.cnblogs.com/qingshanli/p/9375040.html，2019-06-18.&lt;br /&gt;&lt;/p&gt;
+</description>
+				<pubDate>Wed, 19 Jun 2019 00:00:00 +0800</pubDate>
+				<link>http://localhost:4000/2019/06/system-logincache</link>
+				<guid isPermaLink="true">http://localhost:4000/2019/06/system-logincache</guid>
+			</item>
+		
+			<item>
 				<title>Java语法糖-内部类</title>
 				<description>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/pygments.css&quot; /&gt;
 
@@ -437,7 +516,8 @@
 
 &lt;h2 id=&quot;5参考文献&quot;&gt;5.参考文献&lt;/h2&gt;
 
-&lt;p&gt;[1] Lee Benfield.&lt;a href=&quot;http://www.benf.org/other/cfr/inner-class-fake-friends.html&quot;&gt;Inner classes have to fake friendship&lt;/a&gt;[EB/OL].http://www.benf.org/other/cfr/inner-class-fake-friends.html，2019-06-18.&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;[1] Lee Benfield.&lt;a href=&quot;http://www.benf.org/other/cfr/inner-class-fake-friends.html&quot;&gt;Inner classes have to fake friendship&lt;/a&gt;[EB/OL].http://www.benf.org/other/cfr/inner-class-fake-friends.html，2019-06-18.&lt;br /&gt;
+[2] &lt;a href=&quot;https://www.cnblogs.com/qingshanli/p/9375040.html&quot;&gt;浅析java中的语法糖&lt;/a&gt;[EB/OL].https://www.cnblogs.com/qingshanli/p/9375040.html，2019-06-18.&lt;br /&gt;&lt;/p&gt;
 </description>
 				<pubDate>Thu, 13 Jun 2019 00:00:00 +0800</pubDate>
 				<link>http://localhost:4000/2019/06/java-javasuger-innerclass</link>
@@ -768,7 +848,7 @@ Oracle在收购Sun之后，把JDK 1.7的计划做了重大调整，把Lambda、J
 				<title>对包装类型变量使用synchronized不当造成的同步不正确</title>
 				<description>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/pygments.css&quot; /&gt;
 
-&lt;p&gt;关于关键字synchronized使用不当，造成未同步或者同步不正确，是开发过程中常见的问题。先引出3个问题：&lt;/p&gt;
+&lt;p&gt;       关于关键字synchronized使用不当，造成未同步或者同步不正确，是开发过程中常见的问题。先引出3个问题：&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;同步synchronized的底层实现原理是什么？&lt;/li&gt;
@@ -776,20 +856,34 @@ Oracle在收购Sun之后，把JDK 1.7的计划做了重大调整，把Lambda、J
   &lt;li&gt;对包装类型使用synchronized，会有什么效果？&lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;!-- more --&gt;
 
 &lt;h4 id=&quot;1-同步synchronized的底层实现原理是什么&quot;&gt;1. 同步synchronized的底层实现原理是什么？&lt;/h4&gt;
 
-&lt;p&gt;在对象上使用synchronized，会尝试获取对象的锁。获取成功之后，程序可以进入到同步代码块中执行逻辑。如果获取失败，则会进入到等待该对象锁的等待队列中。试图获取null的锁的操作都将抛出空指针异常，null在虚拟机内部的表示不属于虚拟机规范，所以不同的虚拟机可能会有不同的实现方式。&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;对象锁是非公平的（可以使用java.util.concurrent.locks.Lock的实现类实现公平锁，当然会有额外的性能消耗），也就是说，唤醒线程时，并不参考其等待时间，在极端情况下，线程会出现饿死的情况。&lt;/p&gt;
+&lt;p&gt;       在对象上使用synchronized，会尝试获取对象的锁。获取成功之后，程序可以进入到同步代码块中执行逻辑。如果获取失败，则会进入到等待该对象锁的等待队列中。
+试图获取null的锁的操作都将抛出空指针异常，null在虚拟机内部的表示不属于虚拟机规范，所以不同的虚拟机可能会有不同的实现方式。&lt;/p&gt;
 
-&lt;p&gt;通过synchronized使用对象锁，不需要显示地获取或者释放锁。在编译（前端编译，即javac或者类似编译器，不是JIT编译）过后，如果synchronized同步的是代码块，字节码文件中会存在monitorenter与monitorexit，2个虚拟机指令实现代码块的进入与退出，这也是虚拟机规范之一。而同步方法则不会显示这两个指令，因为同步方法的实现细节不属于虚拟机规范，各个商用虚拟机会有不同的细节，当然，也可以通过monitorenter和monitorexit来实现。感兴趣的读者可以动手写个简单的类，通过命令查看反编译后的执行指令。&lt;/p&gt;
+&lt;p&gt;       对象锁是非公平的（可以使用java.util.concurrent.locks.Lock的实现类实现公平锁，当然会有额外的性能消耗），
+也就是说，唤醒线程时，并不参考其等待时间，在极端情况下，线程会出现饿死的情况。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;javap -c -p yourPath/TestClass
+&lt;p&gt;       通过synchronized使用对象锁，不需要显示地获取或者释放锁。在编译（前端编译，即javac或者类似编译器，不是JIT编译）完成后，
+如果synchronized同步的是代码块，字节码文件中会存在monitorenter与monitorexit，2个虚拟机指令实现代码块的进入与退出，这也是虚拟机规范之一。
+而同步方法则不会显示这两个指令，因为同步方法的实现细节不属于虚拟机规范，各个商用虚拟机会有不同的细节，当然，也可以通过monitorenter和monitorexit来实现。
+感兴趣的读者可以动手写个简单的类，通过命令查看反编译后的执行指令。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;//注：TestClass是类名，不是TestClass.class或者TestClass.java等文件名。
+javap -c -p yourPath/TestClass
 &lt;/div&gt;
-&lt;p&gt;注：TestClass是类名，不是TestClass.class或者TestClass.java等文件名。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h4 id=&quot;2-对非常量或者非单例对象上使用synchronized会有什么效果&quot;&gt;2. 对非常量或者非单例对象上使用synchronized，会有什么效果？&lt;/h4&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;理解了synchronized的实现原理，就来看看对非常量或者非单例对象上使用synchronized，会有什么效果。&lt;/p&gt;
 
@@ -1128,107 +1222,6 @@ Oracle在收购Sun之后，把JDK 1.7的计划做了重大调整，把Lambda、J
 				<pubDate>Sat, 21 Nov 2015 00:00:00 +0800</pubDate>
 				<link>http://localhost:4000/2015/11/java-cr-code-convention</link>
 				<guid isPermaLink="true">http://localhost:4000/2015/11/java-cr-code-convention</guid>
-			</item>
-		
-			<item>
-				<title>泛型中&lt;? super T>和&lt;? extends T>的区别</title>
-				<description>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/pygments.css&quot; /&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/4343202/difference-between-super-t-and-extends-t-in-java&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;　　我们会经常发现List&amp;lt;? super T&amp;gt;、Set&amp;lt;? extends T&amp;gt;的声明，是什么意思呢？&amp;lt;? super T&amp;gt;表示包括T在内的任何T的父类，&amp;lt;? extends T&amp;gt;表示包括T在内的任何T的子类，下面我们详细分析一下两种通配符具体的区别。&lt;/p&gt;
-
-&lt;h1 id=&quot;extends&quot;&gt;extends&lt;/h1&gt;
-
-&lt;p&gt;　　List&amp;lt;? extends Number&amp;gt; foo3的通配符声明，意味着以下的赋值是合法的：&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Number &quot;extends&quot; Number (in this context)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;  
-&lt;span class=&quot;c1&quot;&gt;// Integer extends Number&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt; 
-&lt;span class=&quot;c1&quot;&gt;// Double extends Number&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;  &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;!-- more --&gt;
-
-&lt;p&gt;　　读取操作&lt;/p&gt;
-
-&lt;p&gt;　　通过以上给定的赋值语句，你一定能从foo3列表中读取到的元素的类型是什么呢？&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;你可以读取到Number，因为以上的列表要么包含Number元素，要么包含Number的类元素。&lt;/li&gt;
-  &lt;li&gt;你不能保证读取到Integer，因为foo3可能指向的是List&amp;lt;Double&amp;gt;。&lt;/li&gt;
-  &lt;li&gt;你不能保证读取到Double，因为foo3可能指向的是List&amp;lt;Integer&amp;gt;。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;　　写入操作&lt;/p&gt;
-
-&lt;p&gt;　　通过以上给定的赋值语句，你能把一个什么类型的元素合法地插入到foo3中呢？&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;你不能插入一个Integer元素，因为foo3可能指向List&amp;lt;Double&amp;gt;。&lt;/li&gt;
-  &lt;li&gt;你不能插入一个Double元素，因为foo3可能指向List&amp;lt;Integer&amp;gt;。&lt;/li&gt;
-  &lt;li&gt;你不能插入一个Number元素，因为foo3可能指向List&amp;lt;Integer&amp;gt;。&lt;/li&gt;
-  &lt;li&gt;你不能往List&amp;lt;? extends T&amp;gt;中插入任何类型的对象，因为你不能保证列表实际指向的类型是什么，你并不能保证列表中实际存储什么类型的对象。唯一可以保证的是，你可以从中读取到T或者T的子类。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;super&quot;&gt;super&lt;/h1&gt;
-
-&lt;p&gt;　　现在考虑一下List&amp;lt;? super T&amp;gt;。List&amp;lt;? super Integer&amp;gt; foo3的通配符声明，意味着以下赋值是合法的：&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Integer is a &quot;superclass&quot; of Integer (in this context)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;  
-&lt;span class=&quot;c1&quot;&gt;// Number is a superclass of Integer&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;   
-&lt;span class=&quot;c1&quot;&gt;// Object is a superclass of Integer&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;   &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;　　读取操作&lt;/p&gt;
-
-&lt;p&gt;　　通过以上给定的赋值语句，你一定能从foo3列表中读取到的元素的类型是什么呢？&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;你不能保证读取到Integer，因为foo3可能指向List&amp;lt;Number&amp;gt;或者List&amp;lt;Object&amp;gt;。&lt;/li&gt;
-  &lt;li&gt;你不能保证读取到Number，因为foo3可能指向List&amp;lt;Object&amp;gt;。&lt;/li&gt;
-  &lt;li&gt;唯一可以保证的是，你可以读取到Object或者Object子类的对象（你并不知道具体的子类是什么）。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;　　写入操作&lt;/p&gt;
-
-&lt;p&gt;　　通过以上给定的赋值语句，你能把一个什么类型的元素合法地插入到foo3中呢？&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;你可以插入Integer对象，因为上述声明的列表都支持Integer。&lt;/li&gt;
-  &lt;li&gt;你可以插入Integer的子类的对象，因为Integer的子类同时也是Integer，原因同上。&lt;/li&gt;
-  &lt;li&gt;你不能插入Double对象，因为foo3可能指向ArrayList&amp;lt;Integer&amp;gt;。&lt;/li&gt;
-  &lt;li&gt;你不能插入Number对象，因为foo3可能指向ArrayList&amp;lt;Integer&amp;gt;。&lt;/li&gt;
-  &lt;li&gt;你不能插入Object对象，因为foo3可能指向ArrayList&amp;lt;Integer&amp;gt;。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;pecs&quot;&gt;PECS&lt;/h1&gt;
-
-&lt;p&gt;请记住PECS原则：生产者（Producer）使用extends，消费者（Consumer）使用super。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;生产者使用extends
-如果你需要一个列表提供T类型的元素（即你想从列表中读取T类型的元素），你需要把这个列表声明成&amp;lt;? extends T&amp;gt;，比如List&amp;lt;? extends Integer&amp;gt;，因此你不能往该列表中添加任何元素。&lt;/li&gt;
-  &lt;li&gt;消费者使用super
-如果需要一个列表使用T类型的元素（即你想把T类型的元素加入到列表中），你需要把这个列表声明成&amp;lt;? super T&amp;gt;，比如List&amp;lt;? super Integer&amp;gt;，因此你不能保证从中读取到的元素的类型。&lt;/li&gt;
-  &lt;li&gt;即是生产者，也是消费者
-如果一个列表即要生产，又要消费，你不能使用泛型通配符声明列表，比如List&amp;lt;Integer&amp;gt;。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;例子&quot;&gt;例子&lt;/h1&gt;
-
-&lt;p&gt;　　请参考java.util.Collections里的copy方法：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/post_2015_10_23_image1.png&quot; alt=&quot;collections_copy_code&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;　　我们可以从Java开发团队的代码中获得到一些启发，copy方法中使用到了PECS原则，实现了对参数的保护。&lt;/p&gt;
-</description>
-				<pubDate>Fri, 23 Oct 2015 00:00:00 +0800</pubDate>
-				<link>http://localhost:4000/2015/10/java-qa-generics-extends-super</link>
-				<guid isPermaLink="true">http://localhost:4000/2015/10/java-qa-generics-extends-super</guid>
 			</item>
 		
 	</channel>

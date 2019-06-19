@@ -55,6 +55,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
+        
           <li><a href="/2019/06/java-javasuger-innerclass">Java语法糖-内部类</a></li>
         
           <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
@@ -73,8 +75,6 @@
         
           <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
         
-          <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
-        
     </ul>
 </div>
 
@@ -90,6 +90,34 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-qa-generics-extends-super">Oct 23, 2015 - 泛型中&lt;? super T>和&lt;? extends T>的区别</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://stackoverflow.com/questions/4343202/difference-between-super-t-and-extends-t-in-java">原文链接</a></p>
+
+<p>　　我们会经常发现List&lt;? super T&gt;、Set&lt;? extends T&gt;的声明，是什么意思呢？&lt;? super T&gt;表示包括T在内的任何T的父类，&lt;? extends T&gt;表示包括T在内的任何T的子类，下面我们详细分析一下两种通配符具体的区别。</p>
+
+<h1 id="extends">extends</h1>
+
+<p>　　List&lt;? extends Number&gt; foo3的通配符声明，意味着以下的赋值是合法的：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Number "extends" Number (in this context)</span>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;();</span>  
+<span class="c1">// Integer extends Number</span>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span> 
+<span class="c1">// Double extends Number</span>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;();</span>  </code></pre></figure>
+
+
+		<h1><a href="/2015/10/java-qa-generics-extends-super">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-fp-java8-lambda">Oct 22, 2015 - 一个Java 8中简单Lambda表达式程序</a></h1>
@@ -185,55 +213,6 @@
 
 
 		<h1><a href="/2015/10/java-fp-java8-functional">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-fp-predicate2">Oct 20, 2015 - Java中函数式编程的谓词函数(Predicates)第二部分</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with_23.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Cyrille-Martraire/">Cyrille Martraire</a></p>
-
-<p>　　在上一篇文章中我们介绍了谓词函数。通过一个简单的只带一个返回值是true或者false的函数的接口，把函数式编程语言的优势带入到了类似Java的面向对象编程语言中。这一小节，我们将会介绍一些高级特性，方便你高效利用谓词函数。</p>
-
-<p>#测试</p>
-
-<p>　　在测试代码中使用谓词的优势尤为明显。当你需要测试一个混合了数据结构与某些条件逻辑的方法时，通过使用谓词，你可以先单独测试数据结构，再测试条件逻辑。</p>
-
-<p>　　第一步，先利用永真谓词或者永假谓词屏蔽用于判断的逻辑，将注意力集中在测试数据结构上：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="c1">// check with the always-true predicate</span>
-
-<span class="kd">final</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">all</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysTrue</span><span class="o">());</span>
-
-<span class="n">assertEquals</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">Iterables</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="n">all</span><span class="o">));</span> 
-
-<span class="c1">// check with the always-false predicat</span>
-
-<span class="n">eassertTrue</span><span class="o">(</span><span class="n">Iterables</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysFalse</span><span class="o">())));</span>
-    </code></pre></figure>
-
-<p>　　第二步，你可以分开测试每个谓词了：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">final</span> <span class="n">CustomerPredicate</span> <span class="n">isForCustomer1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomerPredicate</span><span class="o">(</span><span class="n">CUSTOMER_1</span><span class="o">);</span>
-
-<span class="n">assertTrue</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">ORDER_1</span><span class="o">));</span> <span class="c1">// ORDER_1 is for CUSTOMER_1</span>
-
-<span class="n">assertFalse</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">ORDER_2</span><span class="o">));</span> <span class="c1">// ORDER_2 is for CUSTOMER_2</span>
-    </code></pre></figure>
-
-<p>　　例子简单，却见微知著。为了测试更加复杂的逻辑，你可能需要构建模拟谓词应对测试不够充分的情况。比如，一个第一次返回true，之后都返回false的谓词。通过严格分离关注点，谓词可以大大简化你的测试计划。</p>
-
-<p>　　如果你想测试驱动开发（TDD），谓词是一个不错的选择，如果你能通过测试的方式影响你的设计，之后你便会发现谓词很容易就融入到你的设计中。</p>
-
-
-		<h1><a href="/2015/10/java-fp-predicate2">阅读全文</a></h1>
         </div>
     </div>
 </div>
