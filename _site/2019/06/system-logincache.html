@@ -105,7 +105,7 @@
 登录态方案从单应用单机到多应用集群，不断满足不同架构的需求，也不断满足安全方面的需求。</p>
 
 <p>       由于用户登录功能和登录态涉及的面非常广，比如密码的传输和存储、session共享、SSO、网络安全、第三方授权登录等，笔者见识尚浅，无法进行全面分析，
-故本文仅就“登录态在服务器端的维护”一点进行阐述，上述方面不在本文讨论范围之内。</p>
+故本文仅就“登录态在服务器端的维护”一点进行阐述，上述方面不在本文讨论范围之内。笔者使用的redis版本为2.8.19，spring-data-redis版本为2.1.9。</p>
 
 <p><br /></p>
 
@@ -153,18 +153,92 @@
 
 <h2 id="3实现">3.实现</h2>
 
+<p><br /></p>
+
 <p>       此处仅给出基本方案，以及重要部分的代码实现。方案的最优化应与具体业务挂钩，故不讨论最优解，不追求完美。</p>
+
+<p><br /></p>
 
 <h4 id="a-维持状态">a) 维持状态</h4>
 
-<p>想要维持状态，客户端请求必须带上sessionId。可以是在</p>
+<p>       想要维持状态，除了服务器需要存储登录态之外，客户端请求还必须带上sessionId或者token参数，使服务端能够把请求与登录态关联起来。
+参数必须由服务器按一定规则生成，可以携带在cookie里，也可以携带在restful接口的公共参数里。</p>
+
+<p><br /></p>
+
+<h4 id="b-时效">b) 时效</h4>
+
+<p>       任何登录态的设计都要考虑时效的问题，避免永久登录。</p>
+<ul>
+  <li>可以记录到期时间，如果当前时间大于到期时间，则登录态失效。</li>
+  <li>可以记录登录时间，如果登录时间 + 登录态时效 &lt; 当前时间，则登录态失效。</li>
+  <li>可以将登录态时效作为redis缓存的过期时间，由redis进行维护。服务端如果获取的登录态为空时，则登录态失效。</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="c-安全">c) 安全</h4>
+
+<p>       用户登录之后，可以访问所有要求登录权限的功能。但在登录之后的后续请求中，我们需要确定请求是否来自于登录动作完成的设备。</p>
+
+<p>       如果在请求参数里只带上了sessionId，通常不能满足安全性的要求。因为当sessionId泄露之后，用户的请求就可以被伪造。
+服务端根据一个id不能正确判断请求是否来自于用户，存在安全漏洞，所以一般建议将用token来关联登录态。</p>
+
+<p>       这里涉及到客户端请求的重放和伪造，详情由此进入。</p>
+
+<p><br /></p>
+
+<h4 id="d-互斥">d) 互斥</h4>
+
+<p>       用户在一个设备登录之后，通常要求踢掉同类型设备之前的登录态（注：互斥不是单点登录SSO）。可以将每个用户的登录成功记录，保存为redis的有序集合，
+将sessionId作为member，登录成功的时间长当做score，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//redis命令，添加记录</span>
+<span class="n">ZADD</span> <span class="nl">login_record:</span><span class="n">key</span> <span class="n">score</span> <span class="n">sessionId</span>
+
+<span class="c1">//java代码，value为sessionId，score为登录成功时间戳</span>
+<span class="n">ZSetOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">zSetOperations</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">opsForZSet</span><span class="o">();</span>
+<span class="n">zSetOperations</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">sessionId</span><span class="o">,</span> <span class="n">score</span><span class="o">);</span>
+<span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">expire</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">expireTimestamp</span><span class="o">,</span> <span class="n">timeUnit</span><span class="o">);</span></code></pre></figure>
+
+<p>       通过score倒叙排序，获取第一个sessionId，很简单就能匹配出当前请求的sessionId是否是最后一次登录的id，不一致则返回报错。</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//redis命令，查找有序集合最新一次登录的sessionId</span>
+<span class="n">ZREVRANGE</span> <span class="nl">login_record:</span><span class="n">key</span> <span class="mi">0</span> <span class="mi">0</span>
+
+<span class="n">String</span> <span class="n">sessionId</span> <span class="o">=</span> <span class="n">getSessionIdFromRequest</span><span class="o">();</span>
+<span class="n">ZSetOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">zSetOperations</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">opsForZSet</span><span class="o">();</span>
+<span class="n">String</span> <span class="n">lastLoginSessionId</span> <span class="o">=</span> <span class="n">zSetOperations</span><span class="o">.</span><span class="na">reverseRange</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="k">if</span> <span class="o">(!</span><span class="n">lastLoginSessionId</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">sessionId</span><span class="o">))</span> <span class="o">{</span>
+    <span class="c1">//报错</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>       根据redis提供的有序集合，可以很高效的实现登录互斥。
+在用户登录成功之后，将login_record:key的过期值设置为登录态有效期，过期自动清除内容，也不会占用很多缓存空间。而为了各端的登录互不影响，
+可以将每个端的登录成功记录各保存一份，比如缓存键可以设计为：login_record:app_key，login_record:pc_key，login_record:m_key等。</p>
+
+<p><br /></p>
+
+<h4 id="d-强制失效">d) 强制失效</h4>
+
+<p>       当用户忘记密码、修改密码、修改了重要资料或其他临时紧急情况发生时，通常也需要将某用户的全站登录态做失效处理。
+我们可以对各端的编号做如下定义：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//客户端类型枚举</span>
+<span class="n">PC</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"pc"</span><span class="o">),</span>
+<span class="n">H5</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"m"</span><span class="o">),</span>
+<span class="n">ANDROID</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"android-client"</span><span class="o">),</span>
+<span class="n">IOS</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span> <span class="s">"ios-client"</span><span class="o">),</span>
+<span class="n">APP</span><span class="o">(</span><span class="mi">12</span><span class="o">,</span> <span class="s">"app-client"</span><span class="o">);</span></code></pre></figure>
+
+<p>       </p>
 
 <p><br /></p>
 
 <h2 id="5参考文献">5.参考文献</h2>
 
 <p>[1] 陈皓.<a href="https://coolshell.cn/articles/5353.html">你会做WEB上的用户登录功能吗？</a>[EB/OL].https://coolshell.cn/articles/5353.html，2019-06-19.<br />
-[2] <a href="https://www.cnblogs.com/qingshanli/p/9375040.html">浅析java中的语法糖</a>[EB/OL].https://www.cnblogs.com/qingshanli/p/9375040.html，2019-06-18.<br /></p>
+[2] 廖雪峰.<a href="https://www.liaoxuefeng.com/article/1029274073038464">设计一个可扩展的用户登录系统</a>[EB/OL].https://www.liaoxuefeng.com/article/1029274073038464，2019-06-18.<br /></p>
 
                     </div>
                     
