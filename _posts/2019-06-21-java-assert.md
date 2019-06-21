@@ -20,6 +20,8 @@ tags: [Java Language]
 
 &#160; &#160; &#160; &#160;防御性编程与契约式编程思想的出现，都算的上是软件开发思想的进步，而受制于当时的知识背景，难免在今天略显过时。就此结束讨论，进入正题。
 
+<!-- more -->
+
 &#160; &#160; &#160; &#160;断言关键字自JDK 1.4引入，下面是Oracle官方文档的解释：
 
 >&#160; &#160; &#160; &#160;An assertion is a statement in the JavaTM programming language that enables you to test your assumptions about your program. For example, if you write a method that calculates the speed of a particle, you might assert that the calculated speed is less than the speed of light.
