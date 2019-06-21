@@ -194,21 +194,21 @@
 将sessionId作为member，登录成功的时间长当做score，代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//redis命令，添加记录</span>
-<span class="n">ZADD</span> <span class="nl">login_record:</span><span class="n">key</span> <span class="n">score</span> <span class="n">sessionId</span>
+<span class="no">ZADD</span> <span class="nl">login_record:</span><span class="n">key</span> <span class="n">score</span> <span class="n">sessionId</span>
 
 <span class="c1">//java代码，value为sessionId，score为登录成功时间戳</span>
-<span class="n">ZSetOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">zSetOperations</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">opsForZSet</span><span class="o">();</span>
+<span class="nc">ZSetOperations</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">zSetOperations</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">opsForZSet</span><span class="o">();</span>
 <span class="n">zSetOperations</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">sessionId</span><span class="o">,</span> <span class="n">score</span><span class="o">);</span>
 <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">expire</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">expireTimestamp</span><span class="o">,</span> <span class="n">timeUnit</span><span class="o">);</span></code></pre></figure>
 
 <p>       通过score倒叙排序，获取第一个sessionId，很简单就能匹配出当前请求的sessionId是否是最后一次登录的id，不一致则返回报错。</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//redis命令，查找有序集合最新一次登录的sessionId</span>
-<span class="n">ZREVRANGE</span> <span class="nl">login_record:</span><span class="n">key</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="no">ZREVRANGE</span> <span class="nl">login_record:</span><span class="n">key</span> <span class="mi">0</span> <span class="mi">0</span>
 
-<span class="n">String</span> <span class="n">sessionId</span> <span class="o">=</span> <span class="n">getSessionIdFromRequest</span><span class="o">();</span>
-<span class="n">ZSetOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">zSetOperations</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">opsForZSet</span><span class="o">();</span>
-<span class="n">String</span> <span class="n">lastLoginSessionId</span> <span class="o">=</span> <span class="n">zSetOperations</span><span class="o">.</span><span class="na">reverseRange</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">sessionId</span> <span class="o">=</span> <span class="n">getSessionIdFromRequest</span><span class="o">();</span>
+<span class="nc">ZSetOperations</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">zSetOperations</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">opsForZSet</span><span class="o">();</span>
+<span class="nc">String</span> <span class="n">lastLoginSessionId</span> <span class="o">=</span> <span class="n">zSetOperations</span><span class="o">.</span><span class="na">reverseRange</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
 <span class="k">if</span> <span class="o">(!</span><span class="n">lastLoginSessionId</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">sessionId</span><span class="o">))</span> <span class="o">{</span>
     <span class="c1">//报错</span>
 <span class="o">}</span></code></pre></figure>
@@ -225,11 +225,11 @@
 我们可以对各端的编号做如下定义：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//客户端类型枚举</span>
-<span class="n">PC</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"pc"</span><span class="o">),</span>
-<span class="n">H5</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"m"</span><span class="o">),</span>
-<span class="n">ANDROID</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"android"</span><span class="o">),</span>
-<span class="n">IOS</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span> <span class="s">"ios"</span><span class="o">),</span>
-<span class="n">APP</span><span class="o">(</span><span class="mi">12</span><span class="o">,</span> <span class="s">"app"</span><span class="o">);</span></code></pre></figure>
+<span class="no">PC</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"pc"</span><span class="o">),</span>
+<span class="no">H5</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"m"</span><span class="o">),</span>
+<span class="no">ANDROID</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"android"</span><span class="o">),</span>
+<span class="no">IOS</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span> <span class="s">"ios"</span><span class="o">),</span>
+<span class="no">APP</span><span class="o">(</span><span class="mi">12</span><span class="o">,</span> <span class="s">"app"</span><span class="o">);</span></code></pre></figure>
 
 <p>       给每个用户再维护一个哈希类型的强制登出控制变量，其中一个域表示需要强制登出的端的枚举类型二进制表示的整数，假设哈希field为needReloginTerminal，
 则needReloginTerminal的值和需要强制退出的端的关系如下表所示（第一行表头为needReloginTerminal的值，打钩表示强制退出）：</p>
@@ -264,21 +264,21 @@
 <p>       当用户修改密码之后，我们要强制全端登录态失效，可以这么做：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//redis命令</span>
-<span class="n">HSET</span> <span class="nl">userReloginFlag:</span><span class="n">userId</span> <span class="n">needReloginTerminal</span> <span class="mi">15</span>
+<span class="no">HSET</span> <span class="nl">userReloginFlag:</span><span class="n">userId</span> <span class="n">needReloginTerminal</span> <span class="mi">15</span>
 
 <span class="c1">//Java代码</span>
 <span class="kt">int</span> <span class="n">terminal</span> <span class="o">=</span> <span class="n">getTerminalFromRequest</span><span class="o">();</span>
-<span class="n">HashOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">hashTemplate</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">opsForHash</span><span class="o">();</span>
+<span class="nc">HashOperations</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">hashTemplate</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">opsForHash</span><span class="o">();</span>
 <span class="n">hashTemplate</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nl">userReloginFlag:</span><span class="n">userId</span><span class="o">,</span> <span class="n">needReloginTerminal</span><span class="o">,</span> <span class="mi">15</span><span class="o">);</span></code></pre></figure>
 
 <p>       上述代码执行完毕之后，标志位已经设置好了。下一次请求到来时，我们需要做响应的判断，位运算可以很方便实现这一点：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//redis命令</span>
-<span class="n">HGET</span> <span class="nl">userReloginFlag:</span><span class="n">userId</span> <span class="n">needReloginTerminal</span> <span class="mi">15</span>
+<span class="no">HGET</span> <span class="nl">userReloginFlag:</span><span class="n">userId</span> <span class="n">needReloginTerminal</span> <span class="mi">15</span>
 
 <span class="c1">//Java代码</span>
 <span class="kt">int</span> <span class="n">terminal</span> <span class="o">=</span> <span class="n">getTerminalFromRequest</span><span class="o">();</span>
-<span class="n">HashOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">hashTemplate</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">opsForHash</span><span class="o">();</span>
+<span class="nc">HashOperations</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">hashTemplate</span> <span class="o">=</span> <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">opsForHash</span><span class="o">();</span>
 <span class="kt">int</span> <span class="n">userReloginFlag</span> <span class="o">=</span> <span class="n">hashTemplate</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="nl">userReloginFlag:</span><span class="n">userId</span><span class="o">,</span> <span class="n">needReloginTerminal</span><span class="o">);</span>
 <span class="k">if</span> <span class="o">(</span><span class="n">userReloginFlag</span> <span class="o">&amp;</span> <span class="n">terminal</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">//清除登录态</span>
