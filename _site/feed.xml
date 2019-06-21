@@ -141,11 +141,78 @@
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//客户端类型枚举&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;PC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;pc&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;H5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;m&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;ANDROID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;android-client&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;IOS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ios-client&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;APP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;app-client&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;n&quot;&gt;ANDROID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;android&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;IOS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ios&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;APP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;app&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;       &lt;/p&gt;
+&lt;p&gt;       给每个用户再维护一个哈希类型的强制登出控制变量，其中一个域表示需要强制登出的端的枚举类型二进制表示的整数，假设哈希field为needReloginTerminal，
+则needReloginTerminal的值和需要强制退出的端的关系如下表所示（第一行表头为needReloginTerminal的值，打钩表示强制退出）：&lt;/p&gt;
+
+&lt;!--
+|term-flag|   1   |   2   |   3   |   4   |   5   |   6   |   7   |   8   |   9   |   10  |   11  |   12  |   13  |   14  |   15  |
+|:-------:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| PC      |&amp;radic;|  X    |&amp;radic;|  X    |&amp;radic;|  X    |&amp;radic;|  X    |&amp;radic;|  X    |&amp;radic;|  X    |&amp;radic;|  X    |&amp;radic;|
+| H5      |  X    |&amp;radic;|&amp;radic;|  X    |  X    |&amp;radic;|&amp;radic;|  X    |  X    |&amp;radic;|&amp;radic;|  X    |  X    |&amp;radic;|&amp;radic;|
+| ANDROID |  X    |  X    |  X    |&amp;radic;|&amp;radic;|&amp;radic;|&amp;radic;|  X    |  X    |  X    |  X    |&amp;radic;|&amp;radic;|&amp;radic;|&amp;radic;|
+| IOS     |  X    |  X    |  X    |  X    |  X    |  X    |  X    |&amp;radic;|&amp;radic;|&amp;radic;|&amp;radic;|&amp;radic;|&amp;radic;|&amp;radic;|&amp;radic;|
+--&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/images/post_2019_06_19_image2.png&quot; alt=&quot;login cache&quot; height=&quot;100%&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;       当然在实际情况中，往往android和ios的客户端应视为一类，所以表格又可以简化成如下所示：&lt;/p&gt;
+
+&lt;!--
+|term-flag|   1   |   2   |   3   |   12  |   13  |   14  |   15  |
+|:-------:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| PC      |&amp;radic;|  X    |&amp;radic;|  X    |&amp;radic;|  X    |&amp;radic;|
+| H5      |  X    |&amp;radic;|&amp;radic;|  X    |  X    |&amp;radic;|&amp;radic;|
+| APP     |  X    |  X    |  X    |&amp;radic;|&amp;radic;|&amp;radic;|&amp;radic;|
+--&gt;
+
+&lt;p class=&quot;center&quot;&gt;&lt;img src=&quot;/images/post_2019_06_19_image3.png&quot; alt=&quot;login cache&quot; height=&quot;80%&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;       当用户修改密码之后，我们要强制全端登录态失效，可以这么做：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//redis命令&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HSET&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;userReloginFlag:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;needReloginTerminal&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//Java代码&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;terminal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getTerminalFromRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HashOperations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hashTemplate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stringRedisTemplate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;opsForHash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hashTemplate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;userReloginFlag:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;needReloginTerminal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;       上述代码执行完毕之后，标志位已经设置好了。下一次请求到来时，我们需要做响应的判断，位运算可以很方便实现这一点：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//redis命令&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HGET&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;userReloginFlag:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;needReloginTerminal&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//Java代码&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;terminal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getTerminalFromRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HashOperations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hashTemplate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stringRedisTemplate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;opsForHash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userReloginFlag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hashTemplate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;userReloginFlag:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;needReloginTerminal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userReloginFlag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;terminal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//清除登录态&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;       当然有些业务可能还需要具体的报错信息，可以在哈希userReloginFlag:userId中增加一个域，定义每个端对应的错误信息。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4总结&quot;&gt;4.总结&lt;/h2&gt;
+
+&lt;p&gt;       在登录态的校验过程中，可以采用责任链模式层层判断，只要某一层的校验失败，直接返回报错，而校验优先级顺序则依具体业务而定。
+基于redis的登录态实现，足够高效，实现简单，能够满足大部分登录态的需求，是一种完全可行的方案。而如果将本方案用于实际业务，方案可能需要微调。
+考虑的因素可能有：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;当redis抖动造成的登录态缓存丢失，是否会对业务有重大影响？&lt;/li&gt;
+  &lt;li&gt;是否对redis占用的内存大小非常敏感？&lt;/li&gt;
+  &lt;li&gt;登录态需要存储时间戳，以应对过期时间设置失效的问题。&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 

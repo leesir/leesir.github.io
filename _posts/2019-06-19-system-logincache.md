@@ -132,12 +132,83 @@ if (!lastLoginSessionId.equals(sessionId)) {
 //客户端类型枚举
 PC(1, "pc"),
 H5(2, "m"),
-ANDROID(4, "android-client"),
-IOS(8, "ios-client"),
-APP(12, "app-client");
+ANDROID(4, "android"),
+IOS(8, "ios"),
+APP(12, "app");
 {% endhighlight %}
 
-&#160; &#160; &#160; &#160;
+&#160; &#160; &#160; &#160;给每个用户再维护一个哈希类型的强制登出控制变量，其中一个域表示需要强制登出的端的枚举类型二进制表示的整数，假设哈希field为needReloginTerminal，
+则needReloginTerminal的值和需要强制退出的端的关系如下表所示（第一行表头为needReloginTerminal的值，打钩表示强制退出）：
+
+<!--
+|term-flag|   1   |   2   |   3   |   4   |   5   |   6   |   7   |   8   |   9   |   10  |   11  |   12  |   13  |   14  |   15  |
+|:-------:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| PC      |&radic;|  X    |&radic;|  X    |&radic;|  X    |&radic;|  X    |&radic;|  X    |&radic;|  X    |&radic;|  X    |&radic;|
+| H5      |  X    |&radic;|&radic;|  X    |  X    |&radic;|&radic;|  X    |  X    |&radic;|&radic;|  X    |  X    |&radic;|&radic;|
+| ANDROID |  X    |  X    |  X    |&radic;|&radic;|&radic;|&radic;|  X    |  X    |  X    |  X    |&radic;|&radic;|&radic;|&radic;|
+| IOS     |  X    |  X    |  X    |  X    |  X    |  X    |  X    |&radic;|&radic;|&radic;|&radic;|&radic;|&radic;|&radic;|&radic;|
+-->
+
+{:.center}
+![login cache]({{ site.baseurl }}/images/post_2019_06_19_image2.png){:height="100%" width="100%"}
+
+<br>
+
+&#160; &#160; &#160; &#160;当然在实际情况中，往往android和ios的客户端应视为一类，所以表格又可以简化成如下所示：
+
+<!--
+|term-flag|   1   |   2   |   3   |   12  |   13  |   14  |   15  |
+|:-------:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| PC      |&radic;|  X    |&radic;|  X    |&radic;|  X    |&radic;|
+| H5      |  X    |&radic;|&radic;|  X    |  X    |&radic;|&radic;|
+| APP     |  X    |  X    |  X    |&radic;|&radic;|&radic;|&radic;|
+-->
+
+{:.center}
+![login cache]({{ site.baseurl }}/images/post_2019_06_19_image3.png){:height="80%" width="80%"}
+
+<br>
+
+&#160; &#160; &#160; &#160;当用户修改密码之后，我们要强制全端登录态失效，可以这么做：
+
+{% highlight java %}
+//redis命令
+HSET userReloginFlag:userId needReloginTerminal 15
+
+//Java代码
+int terminal = getTerminalFromRequest();
+HashOperations<String, String, Object> hashTemplate = stringRedisTemplate.opsForHash();
+hashTemplate.put(userReloginFlag:userId, needReloginTerminal, 15);
+{% endhighlight %}
+
+&#160; &#160; &#160; &#160;上述代码执行完毕之后，标志位已经设置好了。下一次请求到来时，我们需要做响应的判断，位运算可以很方便实现这一点：
+
+{% highlight java %}
+//redis命令
+HGET userReloginFlag:userId needReloginTerminal 15
+
+//Java代码
+int terminal = getTerminalFromRequest();
+HashOperations<String, String, Object> hashTemplate = stringRedisTemplate.opsForHash();
+int userReloginFlag = hashTemplate.get(userReloginFlag:userId, needReloginTerminal);
+if (userReloginFlag & terminal > 0) {
+    //清除登录态
+}
+{% endhighlight %}
+
+&#160; &#160; &#160; &#160;当然有些业务可能还需要具体的报错信息，可以在哈希userReloginFlag:userId中增加一个域，定义每个端对应的错误信息。
+
+<br>
+
+## 4.总结
+
+&#160; &#160; &#160; &#160;在登录态的校验过程中，可以采用责任链模式层层判断，只要某一层的校验失败，直接返回报错，而校验优先级顺序则依具体业务而定。
+基于redis的登录态实现，足够高效，实现简单，能够满足大部分登录态的需求，是一种完全可行的方案。而如果将本方案用于实际业务，方案可能需要微调。
+考虑的因素可能有：
+
+1. 当redis抖动造成的登录态缓存丢失，是否会对业务有重大影响？
+2. 是否对redis占用的内存大小非常敏感？
+3. 登录态需要存储时间戳，以应对过期时间设置失效的问题。
 
 <br>
 
