@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
+        
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
         
           <li><a href="/2019/06/java-javasuger-innerclass">Java语法糖-内部类</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
-          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
-        
     </ul>
 </div>
 
@@ -89,6 +89,29 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-fp-java8-functional">Oct 21, 2015 - Function接口 – Java8中java.util.function包下的函数式接口</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，你会发现java.util.function中 Function, Supplier, Consumer, Predicate和其他函数式接口广泛用在支持lambda表达式的API中。这些接口有一个抽象方法，会被lambda表达式的定义所覆盖。在这篇文章中，我会简单描述Function接口，该接口目前已发布在java.util.function中。</p>
+
+<p>　　Function接口的主要方法：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> <span class="c1">//将Function对象应用到输入的参数上，然后返回计算结果。</span>
+
+<span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="c1">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></code></pre></figure>
+
+
+		<h1><a href="/2015/10/java-fp-java8-functional">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-fp-predicate2">Oct 20, 2015 - Java中函数式编程的谓词函数(Predicates)第二部分</a></h1>
@@ -248,45 +271,6 @@
 
 
 		<h1><a href="/2015/10/java-fp-map-fold">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-fp-functional-programming-overview">Oct 17, 2015 - 函数式编程 Functional Programming</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>　　<a href="http://www.javacodegeeks.com/tutorials/java-tutorials/core-java-tutorials/#Functional%20programming">原文链接</a></p>
-
-<p>　　在Java程序员的世界里，第一要素是“类”，而在函数式编程里，第一要素则是“函数”。完全不同的编程理念，确实很难让函数式编程出现在Java工程师日常工作的代码中。</p>
-
-<p>　　先来2篇优秀博文扫盲：</p>
-
-<ul>
-  <li><a href="http://www.ruanyifeng.com/blog/2012/04/functional_programming.html">函数式编程初探</a></li>
-  <li><a href="http://www.cnblogs.com/kym/archive/2011/03/07/1976519.html">函数式编程扫盲篇</a></li>
-</ul>
-
-<p>　　仔细阅读过上面2篇文章之后，相信你已经对函数式编程有了一定的了解。同时，在许多高级语言(Java、C#等)都陆续加入了函数式编程特性的形势下，不难预测函数式编程将再次成为未来的主流编程模型。</p>
-
-<p>　　本系列译文如下：</p>
-
-<ol>
-  <li><a href="http://www.javacodegeeks.com/2012/03/functional-programming-with-map-and.html">Functional programming with Map and Fold in Java</a></li>
-  <li><a href="http://www.javacodegeeks.com/2012/03/java-faking-closure-with-factory-to.html">Java: Faking a closure with a factory to create a domain object</a></li>
-  <li><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with.html">Functional style in Java with predicates – Part 1</a></li>
-  <li><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with_23.html">Functional style in Java with predicates – Part 2</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">Function interface – A functional interface in the java.util.function package in Java 8</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">Predicate and Consumer Interface in java.util.function package in Java 8</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/05/a-simple-application-of-lambda-expressions-in-java-8.html">A simple application of Lambda Expressions in Java 8</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/05/template-method-pattern-using-lambda-expressions-default-methods.html">Template Method Pattern – Using Lambda Expressions, Default Methods</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/06/java-8-lambda-walkthrough.html">Java 8 lambda walkthrough</a>（此篇文章代码居多，不进行翻译，感兴趣的读者可以点击链接阅读原文章）</li>
-</ol>
-
-		<h1><a href="/2015/10/java-fp-functional-programming-overview">阅读全文</a></h1>
         </div>
     </div>
 </div>

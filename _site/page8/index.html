@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
+        
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
         
           <li><a href="/2019/06/java-javasuger-innerclass">Java语法糖-内部类</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
-          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
-        
     </ul>
 </div>
 
@@ -89,6 +89,41 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-fileoutputstream">Oct 12, 2015 - Java IO: FileOutputStream</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/fileoutputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　FileOutputStream可以往文件里写入字节流，它是OutputStream的子类，所以你可以像使用OutputStream那样使用FileOutputStream。</p>
+
+<p>　　这是一个FileOutputStream的例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-text.txt"</span><span class="o">);</span>
+
+<span class="k">while</span><span class="o">(</span><span class="n">moreData</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMoreData</span><span class="o">();</span>
+
+    <span class="n">output</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+
+<span class="o">}</span>
+
+<span class="n">output</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    </code></pre></figure>
+
+
+		<h1><a href="/2015/10/java-io-fileoutputstream">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-fileinputstream">Oct 12, 2015 - Java IO: FileInputStream</a></h1>
@@ -195,31 +230,6 @@
 
 
 		<h1><a href="/2015/10/java-io-systemstream">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-stream">Oct 11, 2015 - Java IO: 流</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://tutorials.jenkov.com/java-io/system-in-out-error.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　Java IO流是既可以从中读取，也可以写入到其中的数据流。正如这个系列教程之前提到过的，流通常会与数据源、数据流向目的地相关联，比如文件、网络等等。</p>
-
-<p>　　流和数组不一样，不能通过索引读写数据。在流中，你也不能像数组那样前后移动读取数据，除非使用RandomAccessFile 处理文件。流仅仅只是一个连续的数据流。</p>
-
-<p>　　某些类似PushbackInputStream 流的实现允许你将数据重新推回到流中，以便重新读取。然而你只能把有限的数据推回流中，并且你不能像操作数组那样随意读取数据。流中的数据只能够顺序访问。</p>
-
-<p>　　Java IO流通常是基于字节或者基于字符的。字节流通常以“stream”命名，比如InputStream和OutputStream。除了DataInputStream 和DataOutputStream 还能够读写int, long, float和double类型的值以外，其他流在一个操作时间内只能读取或者写入一个原始字节。</p>
-
-<p>　　字符流通常以“Reader”或者“Writer”命名。字符流能够读写字符(比如Latin1或者Unicode字符)。可以浏览Java Readers and Writers获取更多关于字符流输入输出的信息。</p>
-
-
-		<h1><a href="/2015/10/java-io-stream">阅读全文</a></h1>
         </div>
     </div>
 </div>

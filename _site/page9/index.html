@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
+        
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
         
           <li><a href="/2019/06/java-javasuger-innerclass">Java语法糖-内部类</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
-          <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
-        
     </ul>
 </div>
 
@@ -89,6 +89,31 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-stream">Oct 11, 2015 - Java IO: 流</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/system-in-out-error.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　Java IO流是既可以从中读取，也可以写入到其中的数据流。正如这个系列教程之前提到过的，流通常会与数据源、数据流向目的地相关联，比如文件、网络等等。</p>
+
+<p>　　流和数组不一样，不能通过索引读写数据。在流中，你也不能像数组那样前后移动读取数据，除非使用RandomAccessFile 处理文件。流仅仅只是一个连续的数据流。</p>
+
+<p>　　某些类似PushbackInputStream 流的实现允许你将数据重新推回到流中，以便重新读取。然而你只能把有限的数据推回流中，并且你不能像操作数组那样随意读取数据。流中的数据只能够顺序访问。</p>
+
+<p>　　Java IO流通常是基于字节或者基于字符的。字节流通常以“stream”命名，比如InputStream和OutputStream。除了DataInputStream 和DataOutputStream 还能够读写int, long, float和double类型的值以外，其他流在一个操作时间内只能读取或者写入一个原始字节。</p>
+
+<p>　　字符流通常以“Reader”或者“Writer”命名。字符流能够读写字符(比如Latin1或者Unicode字符)。可以浏览Java Readers and Writers获取更多关于字符流输入输出的信息。</p>
+
+
+		<h1><a href="/2015/10/java-io-stream">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-reader-writer">Oct 11, 2015 - Java IO: Reader And Writer</a></h1>
@@ -229,25 +254,6 @@
 
 
 		<h1><a href="/2015/10/java-io-array">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-networking">Oct 9, 2015 - Java IO 网络</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://tutorials.jenkov.com/java-io/networking.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　Java中网络的内容或多或少地超出了Java IO的范畴。关于Java网络更多的是在我的Java网络教程中探讨。但是既然网络是一个常见的数据来源以及数据流向地，并且因为你使用Java IO API通过网络连接进行通信，本文将简要触及网络。</p>
-
-<p>　　当两个进程之间建立了网络连接之后，他们通信的方式如同操作文件一样：利用InputStream读取数据，利用OutputStream写入数据。换句话来说，Java网络API用来在不同进程之间建立网络连接，而Java IO则用来在建立了连接之后的进程之间交换数据。</p>
-
-
-		<h1><a href="/2015/10/java-io-networking">阅读全文</a></h1>
         </div>
     </div>
 </div>

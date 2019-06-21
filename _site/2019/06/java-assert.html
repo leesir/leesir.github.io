@@ -88,13 +88,13 @@
 
         </div>
         <div class="col-md-9">
-            
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/06/java-assert">Jun 21, 2019 - Java语法糖-assert</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
+            <div class="article">
+                <div class="well">
+                    <h1><a href="/2019/06/java-assert">Java语法糖-assert</a></h1>
+                    <br>
+                    
+                    <div class="post-content">
+                        <link rel="stylesheet" href="/css/pygments.css" />
 
 <p>       断言关键字自JDK 1.4引入，主要是为了防止程序错误，下面是Oracle官方文档的解释：</p>
 
@@ -191,156 +191,23 @@
 
 <p>[1] <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html">Programming With Assertions</a>[EB/OL].https://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html，2019-06-21.<br /></p>
 
-		<h1><a href="/2019/06/java-assert">阅读全文</a></h1>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="pagination">
+                
+                
+                <a class="btn btn-default" href="/2019/06/system-logincache" class="previous">Older
+                    Post</a>
+                
+            </div>
         </div>
     </div>
-</div>
 
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/06/system-logincache">Jun 19, 2019 - 一种基于redis的登录态的设计与实现</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
+    
 
-<h2 id="1前言">1.前言</h2>
-
-<p><br /></p>
-
-<p>       本文浅析一种可行的、实现简单的登录态方案。登录态几乎是所有系统都要考虑的问题，旨在维护用户登录之后的状态。
-“用户登录”这个功能已经发展很多年了，伴随着“用户登录”的演进，登录态的实现也在不断完善。从最简单的在url后加一个参数作为标记，到现在大型站点的SSO，
-登录态方案从单应用单机到多应用集群，不断满足不同架构的需求，也不断满足安全方面的需求。</p>
-
-<p>       由于用户登录功能和登录态涉及的面非常广，比如密码的传输和存储、session共享、SSO、网络安全、第三方授权登录等，笔者见识尚浅，无法进行全面分析，
-故本文仅就“登录态在服务器端的维护”一点进行阐述，上述方面不在本文讨论范围之内。笔者使用的redis版本为2.8.19，spring-data-redis版本为2.1.9。</p>
-
-<p><br /></p>
-
-<p class="center"><img src="/images/post_2019_06_19_image1.jpg" alt="login cache" height="60%" width="60%" /></p>
-
-<p><br /></p>
-
-
-		<h1><a href="/2019/06/system-logincache">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/06/java-javasuger-innerclass">Jun 13, 2019 - Java语法糖-内部类</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>       Java中有5种内部类，公有静态内部类，私有静态内部类，公有内部类，私有内部类，匿名内部类。这里我们不谈各种内部类的使用场景，不对比优劣，仅从语法糖的角度学习Java是怎么实现内部类的。</p>
-
-<h2 id="1静态内部类">1.静态内部类</h2>
-
-<p>       静态内部类的初始化，不依赖于外部类的实例，并且不能访问外部类的实例变量，不能调用外部类的实例方法。</p>
-
-<h4 id="公有静态内部类">公有静态内部类</h4>
-
-<p>       测试代码如下所示：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPubStaticInnerClass</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">priStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">pubStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">priFOut</span><span class="o">()</span> <span class="o">{</span>
-
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">pubFOut</span><span class="o">()</span> <span class="o">{</span>
-
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">PubStaticInnerClass</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="kt">int</span> <span class="nf">fPubStaticInnerClass</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">priFOut</span><span class="o">();</span>
-            <span class="n">pubFOut</span><span class="o">();</span>
-            <span class="k">return</span> <span class="n">priStaticValue</span> <span class="o">+</span> <span class="n">pubStaticValue</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PubStaticInnerClass</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></figure>
-
-
-		<h1><a href="/2019/06/java-javasuger-innerclass">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/06/java-javasuger">Jun 6, 2019 - Java语法糖</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>       语法糖并不是Java独有的概念，而是一个计算机术语，先来看看百度百科的释义：</p>
-
-<blockquote>
-  <p>语法糖（Syntactic sugar），也译为糖衣语法，是由英国计算机科学家彼得·约翰·兰达（Peter J. Landin）发明的一个术语，指计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。通常来说使用语法糖能够增加程序的可读性，从而减少程序代码出错的机会。</p>
-</blockquote>
-
-<p class="center"><img src="/images/post_2019_06_06_image1.jpg" alt="Syntactic Suger" height="70%" width="70%" /></p>
-
-<p><br />
-       Java语言可以支持某些关键字或者语法的使用，但在编译后的字节码中，却看不到这些代码的痕迹。语法糖可以在性能无损的情况下，提高编程的效率，增加代码可读性，几乎所有的现代编程语言都含有语法糖成分。今天来简单回顾一下Java语言截止至今所包含的语法糖。
-注：必须显示指定vm启动参数-ea或者-enableassertions，才可以让assert生效:</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="c1">//以下代码为命令行启动java的范例，各个IDE也有相应修改参数的地方，这里不再赘述</span>
-
-<span class="n">java</span> <span class="o">-</span><span class="n">ea</span> <span class="n">Main</span>
-<span class="n">java</span> <span class="o">-</span><span class="n">enableassertions</span> <span class="n">Main</span></code></pre></figure>
-
-
-		<h1><a href="/2019/06/java-javasuger">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2016/08/java-history">Aug 14, 2016 - Java的历史</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>       从第一代Java 1.0版本的发布至今，已有接近21年的时间了。21年里，计算机及互联网领域，出现了行业红利，出现了泡沫，出现了危机。伴随着行业起伏的大浪潮，同样出现了许许多多的市值千亿美金级别的软件、互联网公司。</p>
-
-<p>       截止至目前，最新版本的Java 8的体系架构如下图所示：</p>
-
-<p><img src="/images/post_2016_08_14_image1.png" alt="Java8_structure" /></p>
-
-<p>       接下来，从1991年~2000年（Java的古代）、2002年~2006年（Java 的近代）、2006年至今（Java的现代）3个时间段，简单介绍一下Java语言诞生至今的重要时刻的时间线。</p>
-
-
-		<h1><a href="/2016/08/java-history">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-
-<div class="pagination">
-  
-  <span class="page_number ">Page: 1 of 10</span>
-  
-    <a class="btn btn-default" href="/page2" class="next">Older</a>
-  
-</div>
-
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid">
+    <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12 footer navbar-inverse navbar-fixed-bottom">
             <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
@@ -358,3 +225,5 @@
 </body>
 </html>
 
+
+</div>
