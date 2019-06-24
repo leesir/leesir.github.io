@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
+        
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
         
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
           <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
-          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
     </ul>
 </div>
@@ -96,7 +96,7 @@
                     <div class="post-content">
                         <link rel="stylesheet" href="/css/pygments.css" />
 
-<p>       在谈断言之前，必须要谈谈2种编程方式：防御性编程与契约式编程。防御性编程来自于《代码大全》，契约式编程由伯特兰·迈耶与1986年提出。</p>
+<p>       在谈断言之前，必须要谈谈2种编程方式：防御性编程与契约式编程。防御性编程来自于《代码大全》，契约式编程由伯特兰·迈耶于1986年提出。</p>
 
 <p>       防御性编程强调不信任外部输入的参数，要对所有可能出现问题的数据加以判断，这种编程方式的代码中，通常存在大量重复的if语句。</p>
 
@@ -108,6 +108,8 @@
 而当反编译过后，实则大量基础if判断。</p>
 
 <p>       防御性编程与契约式编程思想的出现，都算的上是软件开发思想的进步，而受制于当时的知识背景，难免在今天略显过时。就此结束讨论，进入正题。</p>
+
+<!-- more -->
 
 <p>       断言关键字自JDK 1.4引入，下面是Oracle官方文档的解释：</p>
 
@@ -122,7 +124,7 @@
 <p>       除了在<a href="http://leesir.github.io/2019/06/java-javasuger">Java语法糖</a>这篇中介绍的断言的用法，还有一个差别不大但是可以自定义错误信息的用法，代码如下所示：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="k">assert</span> <span class="nc">Expression1</span> <span class="o">:</span> <span class="nc">Expression2</span> <span class="o">;</span></code></pre></figure>
+<span class="k">assert</span> <span class="n">Expression1</span> <span class="o">:</span> <span class="n">Expression2</span> <span class="o">;</span></code></pre></figure>
 
 <p>       其中，Expression1是一个布尔表达式。Expression2是一个值或者是一个有返回值的方法调用，将作为AssertionError的错误信息提示出来。</p>
 
@@ -134,7 +136,7 @@
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestAssertByteCode</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">assert1</span><span class="o">();</span>
         <span class="n">assert2</span><span class="o">();</span>
         <span class="n">assert3</span><span class="o">();</span>
@@ -154,7 +156,7 @@
      * Expression2为普通值
      */</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">assert2</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">assert2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">assert2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">();</span>
         <span class="k">assert</span> <span class="n">assert2</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">:</span> <span class="s">"assert2"</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -163,7 +165,7 @@
      * Expression2为方法调用
      */</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">assert3</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">assert3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">assert3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">();</span>
         <span class="k">assert</span> <span class="n">assert3</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">getAssert3ErrorMsg</span><span class="o">();</span>
     <span class="o">}</span>
 
@@ -175,30 +177,33 @@
 <p>       assert1、assert2、assert3断言检查失败，输出如下所示：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//assert1</span>
-<span class="nc">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">AssertionError</span>
-	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">assert1</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">19</span><span class="o">)</span>
-	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">8</span><span class="o">)</span>
+<span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">AssertionError</span>
+	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">assert1</span><span class="o">(</span><span class="n">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">19</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="n">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">8</span><span class="o">)</span>
 
 <span class="c1">//assert2</span>
-<span class="nc">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">AssertionError</span><span class="o">:</span> <span class="n">assert2</span>
-	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">assert2</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">21</span><span class="o">)</span>
-	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">9</span><span class="o">)</span>
+<span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">AssertionError</span><span class="o">:</span> <span class="n">assert2</span>
+	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">assert2</span><span class="o">(</span><span class="n">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">21</span><span class="o">)</span>
+	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="n">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">9</span><span class="o">)</span>
 
 <span class="c1">//assert3</span>
-<span class="nc">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">AssertionError</span><span class="o">:</span> <span class="mi">3</span>
-    <span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">assert2</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">21</span><span class="o">)</span>
-    <span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">9</span><span class="o">)</span></code></pre></figure>
+<span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">AssertionError</span><span class="o">:</span> <span class="mi">3</span>
+    <span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">assert2</span><span class="o">(</span><span class="n">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">21</span><span class="o">)</span>
+    <span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="n">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">9</span><span class="o">)</span></code></pre></figure>
 
 <p>       反编译后的代码也比较简单，以assert3为例反编译代码如下所示：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">assert3</span><span class="o">()</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">assert3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">assert3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">();</span>
     <span class="k">if</span> <span class="o">(!</span><span class="n">$assertionsDisabled</span> <span class="o">&amp;&amp;</span> <span class="n">assert3</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">getAssert3ErrorMsg</span><span class="o">());</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">(</span><span class="n">TestAssertByteCode</span><span class="o">.</span><span class="na">getAssert3ErrorMsg</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
 <h2 id="总结">总结</h2>
+
+<p>       目前主流IDE和各公司生产环境的启动命令，都不会默认将断言功能开启。
+即使诸多知乎大牛及oracle官网教程，都对”断言的价值”和”断言的用法”进行了大篇幅的讲述，不过笔者依然不建议使用assert，assert的错误既不方便记录日志，也不够友好。</p>
 
 <h2 id="参考文献">参考文献</h2>
 
@@ -209,6 +214,8 @@
                 </div>
             </div>
             <div class="pagination">
+                
+                <a class="btn btn-default" href="/2019/06/java-javasuger-cc" class="next">Newer Post</a>
                 
                 
                 <a class="btn btn-default" href="/2019/06/system-logincache" class="previous">Older

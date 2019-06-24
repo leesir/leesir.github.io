@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
+        
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
         
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
-          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
-        
     </ul>
 </div>
 
@@ -89,6 +89,23 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-array">Oct 10, 2015 - Java IO 字节和字符数组</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/arrays.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　Java中的字节和字符数组经常被用于临时存储应用程序内部的数据。所以数组也是常见的数据来源以及数据流目的地。如果你在程序执行过程中需要频繁访问文件的内容，你可能会愿意将文件加载到数组中去。当然你可以通过索引直接访问这些数组。但是如果你有一个组件的设计初衷是从InputStream或者Reader而非数组中读取某些数据呢？</p>
+
+
+		<h1><a href="/2015/10/java-io-array">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-networking">Oct 9, 2015 - Java IO 网络</a></h1>
@@ -148,12 +165,12 @@
 <p>这是一块非常简单的Java代码片段</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="o">{</span>      
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="o">[]</span><span class="n">args</span><span class="o">)</span> <span class="o">{</span>        
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="o">[]</span><span class="n">args</span><span class="o">)</span> <span class="o">{</span>        
         <span class="kt">int</span> <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>        
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">99</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>            
              <span class="n">product</span> <span class="o">*=</span> <span class="n">i</span><span class="o">;</span>        	 
         <span class="o">}</span>        
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>    
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>    
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 

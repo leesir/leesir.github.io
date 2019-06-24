@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
+        
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
         
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
           <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
-          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
     </ul>
 </div>
@@ -122,7 +122,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span> 
 
@@ -142,7 +142,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">);</span>
+<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">);</span>
 
 <span class="n">output</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
 
@@ -154,7 +154,7 @@
 
 <p>　　你可以将流整合起来以便实现更高级的输入和输出操作。比如，一次读取一个字节是很慢的，所以可以从磁盘中一次读取一大块数据，然后从读到的数据块中获取字节。为了实现缓冲，可以把InputStream包装到BufferedInputStream中。代码示例：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
 
     </code></pre></figure>
 

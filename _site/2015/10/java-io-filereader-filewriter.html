@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
+        
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
         
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
           <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
-          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
     </ul>
 </div>
@@ -108,7 +108,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
+<span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -144,11 +144,11 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">);</span>
+<span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">);</span>
 
 <span class="k">while</span><span class="o">(</span><span class="n">moreData</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="nc">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMoreData</span><span class="o">();</span>
+    <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMoreData</span><span class="o">();</span>
 
     <span class="n">write</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
 
@@ -163,15 +163,15 @@
 
 <p>　　以下的构造函数取文件名作为参数，将会新写入的内容将会覆盖该文件：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">);</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">);</span>
 
     </code></pre></figure>
 
 <p>　　以下的构造函数取文件名和一个布尔变量作为参数，布尔值表明你是想追加还是覆盖该文件。例子如下：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span> <span class="c1">//appends to file</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span> <span class="c1">//appends to file</span>
 
-<span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">//overwrites file</span></code></pre></figure>
+<span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">//overwrites file</span></code></pre></figure>
 
 <p>　　同样，FileWriter不能指定编码，可以通过OutputStreamWriter配合FileOutputStream替代FileWriter。</p>
 

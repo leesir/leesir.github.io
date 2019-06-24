@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
+        
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
         
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
-          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
-        
     </ul>
 </div>
 
@@ -91,6 +91,46 @@
             
 <div class="article">
     <div class="well">
+        <h1><a href="/2015/10/java-io-file">Oct 13, 2015 - Java IO: File</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/file.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　Java IO API中的FIle类可以让你访问底层文件系统，通过File类，你可以做到以下几点：</p>
+
+<ul>
+  <li>检测文件是否存在</li>
+  <li>读取文件长度</li>
+  <li>重命名或移动文件</li>
+  <li>删除文件</li>
+  <li>检测某个路径是文件还是目录</li>
+  <li>读取目录中的文件列表</li>
+</ul>
+
+<p>　　请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream或者RandomAccessFile。如果你正在使用Java NIO，并且想使用完整的NIO解决方案，你会使用到java.nio.FileChannel(否则你也可以使用File)。</p>
+
+<p>#实例化一个java.io.File对象</p>
+
+<p>　　在使用File之前，必须拥有一个File对象，这是实例化的代码例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
+
+    </code></pre></figure>
+
+<p>　　很简单，对吗？File类同样拥有多种不同实例化方式的构造函数。</p>
+
+
+		<h1><a href="/2015/10/java-io-file">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
         <h1><a href="/2015/10/java-io-PipedOutputStream">Oct 13, 2015 - Java IO: PipedOutputStream</a></h1>
         
         <div class="content">
@@ -102,7 +142,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PipedOutputStream</span><span class="o">(</span><span class="n">pipedInputStream</span><span class="o">);</span>
+<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedOutputStream</span><span class="o">(</span><span class="n">pipedInputStream</span><span class="o">);</span>
 
 <span class="k">while</span><span class="o">(</span><span class="n">moreData</span><span class="o">)</span> <span class="o">{</span>
 
@@ -135,7 +175,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PipedInputStream</span><span class="o">(</span><span class="n">pipedOutputStream</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedInputStream</span><span class="o">(</span><span class="n">pipedOutputStream</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -180,7 +220,7 @@
 
 <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="o">...</span> <span class="c1">//get byte array from somewhere.</span>
 
-<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ByteArrayInputStream</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -222,47 +262,6 @@
 
 
 		<h1><a href="/2015/10/java-io-outputstream">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-inputstream">Oct 12, 2015 - Java IO: InputStream</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://tutorials.jenkov.com/java-io/inputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　InputStream类是Java IO API中所有输入流的基类。InputStream子类包括FileInputStream，BufferedInputStream，PushbackInputStream等等。参考Java IO概述这一小节底部的表格，可以浏览完整的InputStream子类的列表。</p>
-
-<p>#Java InputStream例子</p>
-
-<p>　　InputStream用于读取基于字节的数据，一次读取一个字节，这是一个InputStream的例子：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="nc">InputStream</span> <span class="n">inputstream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">inputstream</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span> 
-
-    <span class="c1">//do something with data...  </span>
-
-    <span class="n">doSomethingWithData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>   
-
-    <span class="n">data</span> <span class="o">=</span> <span class="n">inputstream</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="o">}</span>
-
-<span class="n">inputstream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-
-    </code></pre></figure>
-
-
-		<h1><a href="/2015/10/java-io-inputstream">阅读全文</a></h1>
         </div>
     </div>
 </div>

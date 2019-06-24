@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
+        
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
         
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
           <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
-          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
     </ul>
 </div>
@@ -102,7 +102,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -128,11 +128,11 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
 <span class="k">try</span><span class="o">{</span>
 
-    <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
+    <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
 
     <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -145,7 +145,7 @@
         <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
     <span class="o">}</span>
-<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">){</span>
+<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">){</span>
 
     <span class="c1">//do something with e... log, perhaps rethrow etc.</span>
 
@@ -159,10 +159,10 @@
 
     </code></pre></figure>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>注意到这里把InputStream的关闭代码放到了finally块中，无论在try-catch块中发生了什么，finally内的代码始终会被执行，所以这个InputStream总是会被关闭。
+<div class="highlighter-rouge">注意到这里把InputStream的关闭代码放到了finally块中，无论在try-catch块中发生了什么，finally内的代码始终会被执行，所以这个InputStream总是会被关闭。
 
 但是如果close()方法抛出了异常，告诉你流已经被关闭过了呢？为了解决这个难题，你也需要把close()方法写在try-catch内部，就像这样：
-</code></pre></div></div>
+</div>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
@@ -174,7 +174,7 @@
 
             <span class="n">input</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 
-    <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">){</span>
+    <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">){</span>
 
         <span class="c1">//do something, or ignore.</span>
 

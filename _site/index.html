@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
+        
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
         
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
-          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
-        
     </ul>
 </div>
 
@@ -91,12 +91,63 @@
             
 <div class="article">
     <div class="well">
+        <h1><a href="/2019/06/java-javasuger-cc">Jun 24, 2019 - Java语法糖-条件编译</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<h2 id="前言">前言</h2>
+
+<p><br /></p>
+
+<p>       条件编译，顾名思义，就是有条件地对代码进行编译，对于一套源代码，不同条件可能会编译出不同的两套目标代码。
+条件完全不同于if语句。if语句属于代码逻辑，不管哪个代码分支都会被编译。而条件编译只会编译满足条件的分支的代码。</p>
+
+<p>       条件编译广泛存在于需要跨平台运行的程序里，在真正开始编译之前，预处理过程会把代码扫描一遍，进行初步转换，其中一项任务就是执行条件编译。
+在C和C++中，由预处理命令实现条件编译。预处理命令由#开头，比如#ifdef：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//程序处于调试阶段，可以将调试日志打印出来 </span>
+<span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span></code></pre></figure>
+
+<p><br /></p>
+
+<h2 id="java的条件编译">Java的条件编译</h2>
+
+<p><br /></p>
+
+<p>       令人疑惑的是，为什么Java程序员对条件编译的这个名词比较陌生？好像开发者不需要为程序部署在windows上还是unix上费过脑筋呀。
+这就得谈谈让Java实现“Write once, run anywhere”的JVM了。</p>
+
+<p>       在理想情况下，Java程序可以在任何设备上开发，并且在任何装有正确版本JVM的平台上运行。JVM除了管理运行时环境之外，还屏蔽了底层系统的差异。
+所以不能说Java没有条件编译，而是条件编译的实现下沉到了JVM内部，使得业务开发者无需关注底层细节。</p>
+
+<p>       顺便再聊一下“Write once, run anywhere”（WORA）。有人说这是广告语，有人戏称是“Write once, debug anywhere”。
+在讨论WORA之前，我们必须明确几点：</p>
+
+<blockquote>
+  <p>不能要求Java或者VM语言运行在</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="5参考文献">5.参考文献</h2>
+
+<p>[1] Lee Benfield.<a href="http://www.benf.org/other/cfr/inner-class-fake-friends.html">Inner classes have to fake friendship</a>[EB/OL].http://www.benf.org/other/cfr/inner-class-fake-friends.html，2019-06-18.<br />
+[2] <a href="https://www.cnblogs.com/qingshanli/p/9375040.html">浅析java中的语法糖</a>[EB/OL].https://www.cnblogs.com/qingshanli/p/9375040.html，2019-06-18.<br /></p>
+
+		<h1><a href="/2019/06/java-javasuger-cc">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
         <h1><a href="/2019/06/java-assert">Jun 21, 2019 - Java语法糖-assert</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p>       在谈断言之前，必须要谈谈2种编程方式：防御性编程与契约式编程。防御性编程来自于《代码大全》，契约式编程由伯特兰·迈耶与1986年提出。</p>
+<p>       在谈断言之前，必须要谈谈2种编程方式：防御性编程与契约式编程。防御性编程来自于《代码大全》，契约式编程由伯特兰·迈耶于1986年提出。</p>
 
 <p>       防御性编程强调不信任外部输入的参数，要对所有可能出现问题的数据加以判断，这种编程方式的代码中，通常存在大量重复的if语句。</p>
 
@@ -109,100 +160,6 @@
 
 <p>       防御性编程与契约式编程思想的出现，都算的上是软件开发思想的进步，而受制于当时的知识背景，难免在今天略显过时。就此结束讨论，进入正题。</p>
 
-<p>       断言关键字自JDK 1.4引入，下面是Oracle官方文档的解释：</p>
-
-<blockquote>
-  <p>       An assertion is a statement in the JavaTM programming language that enables you to test your assumptions about your program. For example, if you write a method that calculates the speed of a particle, you might assert that the calculated speed is less than the speed of light.</p>
-
-  <p>       Each assertion contains a boolean expression that you believe will be true when the assertion executes. If it is not true, the system will throw an error. By verifying that the boolean expression is indeed true, the assertion confirms your assumptions about the behavior of your program, increasing your confidence that the program is free of errors.</p>
-
-  <p>       Experience has shown that writing assertions while programming is one of the quickest and most effective ways to detect and correct bugs. As an added benefit, assertions serve to document the inner workings of your program, enhancing maintainability.</p>
-</blockquote>
-
-<p>       除了在<a href="http://leesir.github.io/2019/06/java-javasuger">Java语法糖</a>这篇中介绍的断言的用法，还有一个差别不大但是可以自定义错误信息的用法，代码如下所示：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="k">assert</span> <span class="nc">Expression1</span> <span class="o">:</span> <span class="nc">Expression2</span> <span class="o">;</span></code></pre></figure>
-
-<p>       其中，Expression1是一个布尔表达式。Expression2是一个值或者是一个有返回值的方法调用，将作为AssertionError的错误信息提示出来。</p>
-
-<p>       实例代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">assertcode</span><span class="o">;</span>
-
-<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestAssertByteCode</span> <span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">assert1</span><span class="o">();</span>
-        <span class="n">assert2</span><span class="o">();</span>
-        <span class="n">assert3</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="cm">/**
-     * 测试断言assert Expression1;
-     */</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">assert1</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">assert1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="n">assert1</span><span class="o">++;</span>
-        <span class="k">assert</span> <span class="n">assert1</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="cm">/**
-     * 测试assert Expression1 : Expression2;
-     * Expression2为普通值
-     */</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">assert2</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">assert2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">();</span>
-        <span class="k">assert</span> <span class="n">assert2</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">:</span> <span class="s">"assert2"</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="cm">/**
-     * 测试assert Expression1 : Expression2;
-     * Expression2为方法调用
-     */</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">assert3</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">assert3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">();</span>
-        <span class="k">assert</span> <span class="n">assert3</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">getAssert3ErrorMsg</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getAssert3ErrorMsg</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="mi">3</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></figure>
-
-<p>       assert1、assert2、assert3断言检查失败，输出如下所示：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//assert1</span>
-<span class="nc">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">AssertionError</span>
-	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">assert1</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">19</span><span class="o">)</span>
-	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">8</span><span class="o">)</span>
-
-<span class="c1">//assert2</span>
-<span class="nc">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">AssertionError</span><span class="o">:</span> <span class="n">assert2</span>
-	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">assert2</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">21</span><span class="o">)</span>
-	<span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">9</span><span class="o">)</span>
-
-<span class="c1">//assert3</span>
-<span class="nc">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">AssertionError</span><span class="o">:</span> <span class="mi">3</span>
-    <span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">assert2</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">21</span><span class="o">)</span>
-    <span class="n">at</span> <span class="n">assertcode</span><span class="o">.</span><span class="na">TestAssertByteCode</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">9</span><span class="o">)</span></code></pre></figure>
-
-<p>       反编译后的代码也比较简单，以assert3为例反编译代码如下所示：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">assert3</span><span class="o">()</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">assert3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">();</span>
-    <span class="k">if</span> <span class="o">(!</span><span class="n">$assertionsDisabled</span> <span class="o">&amp;&amp;</span> <span class="n">assert3</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">(</span><span class="nc">TestAssertByteCode</span><span class="o">.</span><span class="na">getAssert3ErrorMsg</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></figure>
-
-<h2 id="总结">总结</h2>
-
-<h2 id="参考文献">参考文献</h2>
-
-<p>[1] <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html">Programming With Assertions</a>[EB/OL].https://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html，2019-06-21.<br /></p>
 
 		<h1><a href="/2019/06/java-assert">阅读全文</a></h1>
         </div>
@@ -277,8 +234,8 @@
         <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PubStaticInnerClass</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PubStaticInnerClass</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -310,32 +267,11 @@
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="c1">//以下代码为命令行启动java的范例，各个IDE也有相应修改参数的地方，这里不再赘述</span>
 
-<span class="n">java</span> <span class="o">-</span><span class="n">ea</span> <span class="nc">Main</span>
-<span class="n">java</span> <span class="o">-</span><span class="n">enableassertions</span> <span class="nc">Main</span></code></pre></figure>
+<span class="n">java</span> <span class="o">-</span><span class="n">ea</span> <span class="n">Main</span>
+<span class="n">java</span> <span class="o">-</span><span class="n">enableassertions</span> <span class="n">Main</span></code></pre></figure>
 
 
 		<h1><a href="/2019/06/java-javasuger">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2016/08/java-history">Aug 14, 2016 - Java的历史</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>       从第一代Java 1.0版本的发布至今，已有接近21年的时间了。21年里，计算机及互联网领域，出现了行业红利，出现了泡沫，出现了危机。伴随着行业起伏的大浪潮，同样出现了许许多多的市值千亿美金级别的软件、互联网公司。</p>
-
-<p>       截止至目前，最新版本的Java 8的体系架构如下图所示：</p>
-
-<p><img src="/images/post_2016_08_14_image1.png" alt="Java8_structure" /></p>
-
-<p>       接下来，从1991年~2000年（Java的古代）、2002年~2006年（Java 的近代）、2006年至今（Java的现代）3个时间段，简单介绍一下Java语言诞生至今的重要时刻的时间线。</p>
-
-
-		<h1><a href="/2016/08/java-history">阅读全文</a></h1>
         </div>
     </div>
 </div>

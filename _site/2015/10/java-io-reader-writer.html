@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
+        
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
         
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
           <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
-          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
     </ul>
 </div>
@@ -108,7 +108,7 @@
 
 <p>　　这是一个简单的Java IO Reader的例子：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\myfile.txt"</span><span class="o">);</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\myfile.txt"</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -130,7 +130,7 @@
 
 <p>　　一个Reader可以和一个InputStream相结合。如果你有一个InputStream输入流，并且想从其中读取字符，可以把这个InputStream包装到InputStreamReader中。把InputStream传递到InputStreamReader的构造函数中：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="n">inputStream</span><span class="o">);</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">inputStream</span><span class="o">);</span>
 
     </code></pre></figure>
 
@@ -140,7 +140,7 @@
 
 <p>　　Writer类是Java IO中所有Writer的基类。子类包括BufferedWriter和PrintWriter等等。这是一个Java IO Writer的例子：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\file-output.txt"</span><span class="o">);</span> 
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\file-output.txt"</span><span class="o">);</span> 
 
 <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello World Writer"</span><span class="o">);</span> 
 
@@ -154,7 +154,7 @@
 
 <p>　　与Reader和InputStream类似，一个Writer可以和一个OutputStream相结合。把OutputStream包装到OutputStreamWriter中，所有写入到OutputStreamWriter的字符都将会传递给OutputStream。这是一个OutputStreamWriter的例子：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OutputStreamWriter</span><span class="o">(</span><span class="n">outputStream</span><span class="o">);</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OutputStreamWriter</span><span class="o">(</span><span class="n">outputStream</span><span class="o">);</span>
 
     </code></pre></figure>
 
@@ -162,9 +162,9 @@
 
 <p>　　和字节流一样，Reader和Writer可以相互结合实现更多更有趣的IO，工作原理和把Reader与InputStream或者Writer与OutputStream相结合类似。举个栗子，可以通过将Reader包装到BufferedReader、Writer包装到BufferedWriter中实现缓冲。以下是例子：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(...));</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(...));</span>
 
-<span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(...));</span>
+<span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">FileWriter</span><span class="o">(...));</span>
 
     </code></pre></figure>
 

@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
+        
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
         
           <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
           <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
-          <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
     </ul>
 </div>
@@ -108,21 +108,21 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooFactory</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">RandomService</span> <span class="n">randomService</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">RandomService</span> <span class="n">randomService</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">FooFactory</span><span class="o">(</span><span class="nc">RandomService</span> <span class="n">randomService</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">FooFactory</span><span class="o">(</span><span class="n">RandomService</span> <span class="n">randomService</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">randomService</span> <span class="o">=</span> <span class="n">randomService</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="nc">Foo</span> <span class="nf">createFoo</span><span class="o">(</span><span class="nc">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Foo</span> <span class="nf">createFoo</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">Foo</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span> <span class="n">baz</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">bar</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">bar</span><span class="o">;</span>
         <span class="kd">private</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">;</span>
 
-        <span class="kd">public</span> <span class="nf">Foo</span><span class="o">(</span><span class="nc">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">Foo</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">bar</span> <span class="o">=</span> <span class="n">bar</span><span class="o">;</span>
             <span class="k">this</span><span class="o">.</span><span class="na">baz</span> <span class="o">=</span> <span class="n">baz</span><span class="o">;</span>
         <span class="o">}</span>
@@ -144,9 +144,9 @@
 
     <span class="nd">@Test</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createsAFoo</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">RandomService</span> <span class="n">randomService</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">RandomService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">RandomService</span> <span class="n">randomService</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="n">RandomService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
         <span class="n">when</span><span class="o">(</span><span class="n">randomService</span><span class="o">.</span><span class="na">random</span><span class="o">(</span><span class="s">"bar"</span><span class="o">,</span> <span class="mi">12</span><span class="o">)).</span><span class="na">thenReturn</span><span class="o">(</span><span class="mi">13</span><span class="o">);</span>
-        <span class="nc">FooFactory</span><span class="o">.</span><span class="na">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FooFactory</span><span class="o">(</span><span class="n">randomService</span><span class="o">).</span><span class="na">createFoo</span><span class="o">(</span><span class="s">"bar"</span><span class="o">,</span> <span class="mi">12</span><span class="o">);</span>
+        <span class="n">FooFactory</span><span class="o">.</span><span class="na">Foo</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FooFactory</span><span class="o">(</span><span class="n">randomService</span><span class="o">).</span><span class="na">createFoo</span><span class="o">(</span><span class="s">"bar"</span><span class="o">,</span> <span class="mi">12</span><span class="o">);</span>
         <span class="n">assertThat</span><span class="o">(</span><span class="n">foo</span><span class="o">.</span><span class="na">awesomeStuff</span><span class="o">(),</span> <span class="n">equalTo</span><span class="o">(</span><span class="mi">39</span><span class="o">));</span>
     <span class="o">}</span>
 
