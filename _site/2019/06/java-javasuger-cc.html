@@ -109,24 +109,48 @@
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//程序处于调试阶段，可以将调试日志打印出来 </span>
 <span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span></code></pre></figure>
 
+<p>       因C\C++的编译会最终生成目标机器的可执行文件，可执行文件是与平台极其相关的，因此C\C++程序可能会出现同一份代码需要分别根据平台进行编译的情况。</p>
+
+<p class="center"><img src="/images/post_2019_06_24_image1.jpg" alt="c compile" /></p>
+
+<p class="center"><a href="https://computer.howstuffworks.com/c1.htm">图片来源</a></p>
+
+<!-- more -->
+
 <p><br /></p>
 
-<h2 id="java的条件编译">Java的条件编译</h2>
+<h2 id="关于java">关于Java</h2>
 
 <p><br /></p>
 
 <p>       令人疑惑的是，为什么Java程序员对条件编译的这个名词比较陌生？好像开发者不需要为程序部署在windows上还是unix上费过脑筋呀。
 这就得谈谈让Java实现“Write once, run anywhere”的JVM了。</p>
 
-<p>       在理想情况下，Java程序可以在任何设备上开发，并且在任何装有正确版本JVM的平台上运行。JVM除了管理运行时环境之外，还屏蔽了底层系统的差异。
-所以不能说Java没有条件编译，而是条件编译的实现下沉到了JVM内部，使得业务开发者无需关注底层细节。</p>
+<p>       在理想情况下，Java程序可以在任何系统上开发，并在任何装有正确版本JVM的平台上运行。JVM除了管理运行时环境之外，还屏蔽了底层系统的差异。
+所以不能说Java没有条件编译，而是条件编译的诸多实现下沉到了JVM内部，使得业务开发者无需关注底层细节。</p>
 
 <p>       顺便再聊一下“Write once, run anywhere”（WORA）。有人说这是广告语，有人戏称是“Write once, debug anywhere”。
-在讨论WORA之前，我们必须明确几点：</p>
+可以明确的是：</p>
 
 <blockquote>
-  <p>不能要求Java或者VM语言运行在</p>
+  <p>通常语言原生的GUI支持都很难做到真正的跨平台，通常需要第三方框架作为替代，比如QT、游戏引擎等。但Java GUI开发也有跨平台成功案例：eclipse和Intellij IDEA。</p>
+
+  <p>如因性能原因需要调用系统底层功能（如Java中的JNI，本地方法调用），这类功能往往和平台是强绑定关系，因此含有JNI的Java程序也很难做到跨平台。</p>
+
+  <p>因编码不当，对诸如文件系统的斜杠或反斜杠等平台相关的数据hard code之后，很难实现跨平台。应尽可能采用语言提供的通用库替代hard code。</p>
+
 </blockquote>
+
+<p>       抛开上述方面，准确来讲，Java实现了WORA，在主流硬件和系统厂商的设备上，实现了跨平台。</p>
+
+<p>       换个角度诠释同样的概念，如果说某个系统是安全的，是否该系统就是绝对安全呢？很明显不是，估计没有什么产品顶得住<a href="https://slab.qq.com/news/kuaixun/1284.html">腾讯科恩实验室</a>的攻击。
+然而，任何黑客攻击都是有目的性的商业行为，比如当你的短信系统被大量ip和大量真实手机号请求的时候，很可能就是短信通道或者运营商通过黑产让企业强制消费。
+而当你的系统做的相对安全，让黑客的投入远大于所得的时候，也就没有了攻击的目的，此时系统就是安全的。</p>
+
+<p>       回到本节主题上来，在商业上，只要满足了绝大部分情况的WORA，那就是WORA，因为完全没有必要为十分小众的硬件和系统体系实现一个完备的JVM。</p>
+
+<p>       程序员群体自视清高，看谁谁傻逼，文人易相轻。
+本应该备受赞美的特性，被小部分杠精抓着喷。甚至不少人随声附和“Write once, debug anywhere”，不知如何评价这种人。</p>
 
 <p><br /></p>
 
