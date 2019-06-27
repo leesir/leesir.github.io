@@ -41,9 +41,9 @@
 这就得谈谈让Java实现“Write once, run anywhere”的JVM了。&lt;/p&gt;
 
 &lt;p&gt;       在理想情况下，Java程序可以在任何系统上开发，并在任何装有正确版本JVM的平台上运行。JVM除了管理运行时环境之外，还屏蔽了底层系统的差异。
-所以不能说Java没有条件编译，而是条件编译的诸多实现下沉到了JVM内部，使得业务开发者无需关注底层细节。&lt;/p&gt;
+所以不能说Java没有条件编译，而是系统层面条件编译的诸多实现下沉到了JVM内部，使得业务开发者无需关注底层细节。&lt;/p&gt;
 
-&lt;p&gt;       顺便再聊一下“Write once, run anywhere”（WORA）。有人说这是广告语，有人戏称是“Write once, debug anywhere”。
+&lt;p&gt;       顺便再聊一下“Write once, run anywhere”（WORA）。有人说这是广告语，有人戏称是“Write once, debug everywhere”。
 可以明确的是：&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -57,21 +57,55 @@
 
 &lt;p&gt;       抛开上述方面，准确来讲，Java实现了WORA，在主流硬件和系统厂商的设备上，实现了跨平台。&lt;/p&gt;
 
-&lt;p&gt;       换个角度诠释同样的概念，如果说某个系统是安全的，是否该系统就是绝对安全呢？很明显不是，估计没有什么产品顶得住&lt;a href=&quot;https://slab.qq.com/news/kuaixun/1284.html&quot;&gt;腾讯科恩实验室&lt;/a&gt;的攻击。
-然而，任何黑客攻击都是有目的性的商业行为，比如当你的短信系统被大量ip和大量真实手机号请求的时候，很可能就是短信通道或者运营商通过黑产让企业强制消费。
+&lt;p&gt;       换个角度诠释同样的概念，如果说某个系统是安全的，是否该系统就绝对安全呢？很明显不是，估计没有什么产品顶得住&lt;a href=&quot;https://slab.qq.com/news/kuaixun/1284.html&quot;&gt;腾讯科恩实验室&lt;/a&gt;的攻击。
+然而，任何黑客攻击都是有目的性的商业行为，比如当你的短信系统被超出正常范围的大量ip和大量真实手机号请求的时候，很可能就是短信通道或者运营商通过黑产让企业强制消费。
 而当你的系统做的相对安全，让黑客的投入远大于所得的时候，也就没有了攻击的目的，此时系统就是安全的。&lt;/p&gt;
 
 &lt;p&gt;       回到本节主题上来，在商业上，只要满足了绝大部分情况的WORA，那就是WORA，因为完全没有必要为十分小众的硬件和系统体系实现一个完备的JVM。&lt;/p&gt;
 
 &lt;p&gt;       程序员群体自视清高，看谁谁傻逼，文人易相轻。
-本应该备受赞美的特性，被小部分杠精抓着喷。甚至不少人随声附和“Write once, debug anywhere”，不知如何评价这种人。&lt;/p&gt;
+本应该备受赞美的特性，被小部分杠精抓着喷。甚至不少人随声附和“Write once, debug everywhere”，请问真的有过“debug everywhere”的经历吗，胡编乱造有什么意思，不知如何评价这种人。&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;5参考文献&quot;&gt;5.参考文献&lt;/h2&gt;
+&lt;h2 id=&quot;实现&quot;&gt;实现&lt;/h2&gt;
 
-&lt;p&gt;[1] Lee Benfield.&lt;a href=&quot;http://www.benf.org/other/cfr/inner-class-fake-friends.html&quot;&gt;Inner classes have to fake friendship&lt;/a&gt;[EB/OL].http://www.benf.org/other/cfr/inner-class-fake-friends.html，2019-06-18.&lt;br /&gt;
-[2] &lt;a href=&quot;https://www.cnblogs.com/qingshanli/p/9375040.html&quot;&gt;浅析java中的语法糖&lt;/a&gt;[EB/OL].https://www.cnblogs.com/qingshanli/p/9375040.html，2019-06-18.&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;       Java仅支持常量条件的if语句条件编译。测试代码如下所示：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conditionalcompile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCC&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;print false&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;       执行java -jar cfr-0.145.jar TestCC.class之后得到以下反编译代码：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/*
+ * Decompiled with CFR 0.145.
+ */&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conditionalcompile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCC&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;       可以看到，打印语句因不可达而直接被抹除了。因为if仅能在方法块内部出现，不像C\C++可以改变整个类的编译分支，所以Java的条件编译功能十分有限。
+因此，如果一个项目的业务代码中出现了条件编译，可以肯定的是，代码结构出了问题，原因很简单：如果2套代码流程确实不会同时出现，直接抽离成2套服务就行了嘛（小声嘀咕：什么中台，微服务，不就这么来的吗）。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;参考文献&quot;&gt;参考文献&lt;/h2&gt;
+
+&lt;p&gt;[1] &lt;a href=&quot;https://gcc.gnu.org/onlinedocs/cpp/Ifdef.html#Ifdef&quot;&gt;Conditional Syntax&lt;/a&gt;[EB/OL].https://gcc.gnu.org/onlinedocs/cpp/Ifdef.html#Ifdef，2019-06-24.&lt;br /&gt;&lt;/p&gt;
 </description>
 				<pubDate>Mon, 24 Jun 2019 00:00:00 +0800</pubDate>
 				<link>http://localhost:4000/2019/06/java-javasuger-cc</link>
