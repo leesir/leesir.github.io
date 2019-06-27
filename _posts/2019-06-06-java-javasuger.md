@@ -70,7 +70,7 @@ java -jar cfr-0.145.jar TestAssertByteCode.class --sugarasserts false
 
 ## **语法糖列表**
 
-* [内部类](http://leesir.github.io/2019/06/java-javasuger-innerclass)、条件编译、[assert关键字](http://leesir.github.io/2019/06/java-assert)(JDK 1.4及更早版本)
+* [内部类](http://leesir.github.io/2019/06/java-javasuger-innerclass)、[条件编译](http://leesir.github.io/2019/06/java-javasuger-cc)、[assert关键字](http://leesir.github.io/2019/06/java-assert)(JDK 1.4及更早版本)
 * 泛型、for-each、自动拆装箱、枚举、可变参数列表(JDK 1.5)
 * switch-with-String、switch-with-enum、try-with-resource(JDK 1.7)
 * lambda(JDK 1.8)
