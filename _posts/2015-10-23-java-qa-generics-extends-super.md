@@ -30,7 +30,7 @@ List<? extends Number> foo3 = new ArrayList<Double>();
 
 　　通过以上给定的赋值语句，你一定能从foo3列表中读取到的元素的类型是什么呢？
 
-* 你可以读取到Number，因为以上的列表要么包含Number元素，要么包含Number的类元素。
+* 你可以读取到Number，因为以上的列表要么包含Number元素，要么包含Number的子类元素。
 * 你不能保证读取到Integer，因为foo3可能指向的是List&lt;Double>。
 * 你不能保证读取到Double，因为foo3可能指向的是List&lt;Integer>。
 
@@ -79,11 +79,16 @@ List<? super Integer> foo3 = new ArrayList<Object>();
 请记住PECS原则：生产者（Producer）使用extends，消费者（Consumer）使用super。
 
 1.	生产者使用extends
-如果你需要一个列表提供T类型的元素（即你想从列表中读取T类型的元素），你需要把这个列表声明成&lt;? extends T>，比如List&lt;? extends Integer>，因此你不能往该列表中添加任何元素。
+
+如果某列表可以提供Integer类型的数据，但不允许被写入，你需要把列表声明成List&lt;? extends Integer>，因此数据使用端不能往该列表中添加任何元素。
+
 2.	消费者使用super
-如果需要一个列表使用T类型的元素（即你想把T类型的元素加入到列表中），你需要把这个列表声明成&lt;? super T>，比如List&lt;? super Integer>，因此你不能保证从中读取到的元素的类型。
+
+如果需要向某列表中输入Integer类型的数据，但限制对其的读取，你需要把列表声明成List&lt;? super Integer>，因此你不能保证从中读取到的元素的类型。
+
 3.	即是生产者，也是消费者
-如果一个列表即要生产，又要消费，你不能使用泛型通配符声明列表，比如List&lt;Integer>。
+
+如果一个列表即要被读取（生产者），又要被写入（消费者），你不能使用泛型通配符声明列表，必须将列表声明为明确的泛型类型，比如List&lt;Integer>。
 
 # 例子
 
