@@ -90,26 +90,53 @@
         <div class="col-md-9">
             <div class="article">
                 <div class="well">
-                    <h1><a href="/2015/10/java-io-concurrent-io">Java IO: 并发IO</a></h1>
+                    <h1><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></h1>
                     <br>
                     
                     <div class="post-content">
                         <link rel="stylesheet" href="/css/pygments.css" />
 
-<p><a href="http://tutorials.jenkov.com/java-io/concurrent-io.html">原文链接</a> 作者: Jakob Jenkov</p>
+<h2 id="前言">前言</h2>
 
-<p>　　有时候你可能需要并发地处理输入和输出。换句话说，你可能有超过一个线程处理输入和产生输出。比如，你有一个程序需要处理磁盘上的大量文件，这个任务可以通过并发操作提高性能。又比如，你有一个web服务器或者聊天服务器，接收许多连接和请求，这些任务都可以通过并发获得性能的提升。</p>
+<p>       缓存在计算机的世界中是一个非常宽泛的概念，因为处处是缓存。操作系统可能缓存DNS的解析结果，浏览器可能缓存host文件，用户访问的资源可能缓存在CDN中，
+CPU可能会缓存操作数所属的内存块，数据库的查询结果也可能是缓存好的。总之不管是在系统架构中的哪一部份，都有缓存的身影。所以，抛开具体应用谈缓存是没有意义的，那样过于空泛。
+可以肯定的是，所有的缓存都是利用了数据的冗余提高性能，空间换时间，计算机的世界处处都是trade off。</p>
+
+<p>       本博文基于项目中的实际操作整理而来，仅讨论在DB和业务代码之间的缓存服务，主要分析笔者经历的项目中，根据不同的业务，采用了哪些更新策略（注，不讨论缓存的替换策略，如LRU等）。</p>
+
+<p><br /></p>
+
+<p class="center"><img src="/images/post_2019_06_27_image1.jpg" alt="c compile" /></p>
+
+<p class="center"><a href="http://web.sfc.keio.ac.jp/~rdv/computer-architecture-2018-wiki/index.php?Memory%20Subsystems">图片来源</a></p>
 
 <!-- more -->
 
-<p>　　如果你需要并发处理IO，这里有几个问题可能需要注意一下：</p>
+<p><br /></p>
 
-<p>　　在同一时刻不能有多个线程同时从InputStream或者Reader中读取数据，也不能同时往OutputStream或者Writer里写数据。你没有办法保证每个线程读取多少数据，以及多个线程写数据时的顺序。</p>
+<h2 id="缓存更新模式">缓存更新模式</h2>
 
-<p>　　如果线程之间能够保证操作的顺序，它们可以使用同一个stream、reader、writer。比如，你有一个线程判断当前的输入流来自哪种类型的请求，然后将流数据传递给其他合适的线程做后续处理。当有序存取流、reader、writer时，这种做法是可行的。请注意，在线程之间传递流数据的代码应当是同步的。</p>
+<p>       缓存更新策略，主要包含以下几种：Cache Aside、Read/Write Through、Write Behind、Refresh Ahead。</p>
 
-<p>　　注意：在Java NIO中，你可以让一个线程读写多个“channel”。比如，你有很多网络连接处于开启状态，但是每个连接中都只有少量数据，类似于聊天服务器，可以让一个线程监视多个频道(连接)。Java NIO是另一个话题了，会后续教程中介绍。</p>
+<h4 id="1cache-aside">1.Cache Aside</h4>
 
+<p>       业务系统中最常用的模式就属Cache Aside了。逻辑非常简单：</p>
+
+<ul>
+  <li>读操作如命中缓存，则返回缓存内容。否则查询数据库，将查询结果存入缓存，再返回查询结果。</li>
+  <li>写操作先将数据库更新，待更新成功后，再清除缓存。</li>
+</ul>
+
+<p>       在写操作中，如果先清除缓存，再更新数据库，缓存中出现脏数据的概率会大很多。因为读操作通常比写操作多的多，并且写操作会因为数据库锁（表锁还是行锁，视表的存储引擎和索引使用情况而定）和更新索引而比读操作慢的多，以至于在写操作清除缓存之后更新数据之前，很可能已经被另一个读操作将脏数据更新到了缓存中。</p>
+
+<p>在笔者的项目中，Cache Aside</p>
+
+<h4 id="2read-through">2.Read Through</h4>
+
+<h2 id="参考文献">参考文献</h2>
+
+<p>[1] 陈皓.<a href="https://coolshell.cn/articles/17416.html">缓存更新的套路</a>[EB/OL].https://coolshell.cn/articles/17416.html，2019-06-28.<br />
+[2] <a href="https://docs.oracle.com/cd/E15357_01/coh.360/e15723/cache_rtwtwbra.htm#COHDG5177">Read-Through, Write-Through, Write-Behind, and Refresh-Ahead Caching</a>[EB/OL].https://docs.oracle.com/cd/E15357_01/coh.360/e15723/cache_rtwtwbra.htm#COHDG5177，2019-06-30.<br /></p>
 
                     </div>
                     
@@ -117,10 +144,8 @@
             </div>
             <div class="pagination">
                 
-                <a class="btn btn-default" href="/2015/10/java-io-exception" class="next">Newer Post</a>
                 
-                
-                <a class="btn btn-default" href="/2015/10/java-io-systemstream" class="previous">Older
+                <a class="btn btn-default" href="/2019/06/java-javasuger-cc" class="previous">Older
                     Post</a>
                 
             </div>

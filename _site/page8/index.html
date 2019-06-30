@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
+        
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
         
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
-          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
     </ul>
 </div>
 
@@ -91,6 +91,27 @@
             
 <div class="article">
     <div class="well">
+        <h1><a href="/2015/10/java-io-outputstream">Oct 12, 2015 - Java IO: OutputStream</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/outputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　OutputStream类是Java IO API中所有输出流的基类。子类包括BufferedOutputStream，FileOutputStream等等。参考Java IO概述这一小节底部的表格，可以浏览完整的子类的列表。</p>
+
+<p>#输出流和目标媒介</p>
+
+<p>　　输出流往往和某些数据的目标媒介相关联，比如文件，网络连接，管道等。更多细节请参考Java IO概述。当写入到输出流的数据逐渐输出完毕时，目标媒介是所有数据的归属地。</p>
+
+
+		<h1><a href="/2015/10/java-io-outputstream">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
         <h1><a href="/2015/10/java-io-inputstream">Oct 12, 2015 - Java IO: InputStream</a></h1>
         
         <div class="content">
@@ -106,7 +127,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">InputStream</span> <span class="n">inputstream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
+<span class="nc">InputStream</span> <span class="n">inputstream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">inputstream</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -145,7 +166,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-text.txt"</span><span class="o">);</span>
+<span class="nc">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-text.txt"</span><span class="o">);</span>
 
 <span class="k">while</span><span class="o">(</span><span class="n">moreData</span><span class="o">)</span> <span class="o">{</span>
 
@@ -180,7 +201,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
+<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span><span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
 
@@ -215,7 +236,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
+<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -239,23 +260,6 @@
     </div>
 </div>
 
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-concurrent-io">Oct 12, 2015 - Java IO: 并发IO</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://tutorials.jenkov.com/java-io/concurrent-io.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　有时候你可能需要并发地处理输入和输出。换句话说，你可能有超过一个线程处理输入和产生输出。比如，你有一个程序需要处理磁盘上的大量文件，这个任务可以通过并发操作提高性能。又比如，你有一个web服务器或者聊天服务器，接收许多连接和请求，这些任务都可以通过并发获得性能的提升。</p>
-
-
-		<h1><a href="/2015/10/java-io-concurrent-io">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
 
 <div class="pagination">
   
@@ -263,7 +267,7 @@
         <a class="btn btn-default" href="/page7" class="previous">Newer</a>
       
   
-  <span class="page_number ">Page: 8 of 10</span>
+  <span class="page_number ">Page: 8 of 11</span>
   
     <a class="btn btn-default" href="/page9" class="next">Older</a>
   

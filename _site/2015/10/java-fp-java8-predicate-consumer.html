@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
+        
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
         
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
         
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
-        
-          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
     </ul>
 </div>
@@ -114,21 +114,21 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//Returns a predicate which evaluates to true only if this predicate</span>
 <span class="c1">//and the provided predicate both evaluate to true.</span>
-<span class="n">and</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span> 
+<span class="n">and</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span> 
 
 <span class="c1">//Returns a predicate which negates the result of this predicate.</span>
 <span class="n">negate</span><span class="o">()</span> 
 
 <span class="c1">//Returns a predicate which evaluates to true if either</span>
 <span class="c1">//this predicate or the provided predicate evaluates to true</span>
-<span class="n">or</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span> 
+<span class="n">or</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span> 
 
 <span class="c1">//Returns true if the input object matches some criteria</span>
-<span class="n">test</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> 
+<span class="n">test</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">)</span> 
 
 <span class="c1">//Returns a predicate that evaluates to true if both or neither</span>
 <span class="c1">//of the component predicates evaluate to true</span>
-<span class="n">xor</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span></code></pre></figure>
+<span class="n">xor</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span></code></pre></figure>
 
 <p>　　除了test()方法是抽象方法以外，其他方法都是默认方法（译者注：在Java 8中，接口可以包含带有实现代码的方法，这些方法称为default方法）。可以使用匿名内部类提供test()方法的实现，也可以使用lambda表达式实现test()。</p>
 
@@ -144,17 +144,17 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Student</span><span class="o">{</span>
 
-    <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="n">firstName</span><span class="o">;</span>
 
-    <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="n">lastName</span><span class="o">;</span>
 
-    <span class="n">Double</span> <span class="n">grade</span><span class="o">;</span>
+    <span class="nc">Double</span> <span class="n">grade</span><span class="o">;</span>
 
-    <span class="n">Double</span> <span class="n">feeDiscount</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+    <span class="nc">Double</span> <span class="n">feeDiscount</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
 
-    <span class="n">Double</span> <span class="n">baseFee</span> <span class="o">=</span> <span class="mf">20000.0</span><span class="o">;</span>
+    <span class="nc">Double</span> <span class="n">baseFee</span> <span class="o">=</span> <span class="mf">20000.0</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">,</span> <span class="n">Double</span> <span class="n">grade</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="nc">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="nc">String</span> <span class="n">lastName</span><span class="o">,</span> <span class="nc">Double</span> <span class="n">grade</span><span class="o">)</span> <span class="o">{</span>
 
         <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
 
@@ -165,9 +165,9 @@
 
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printFee</span><span class="o">(){</span>
 
-        <span class="n">Double</span> <span class="n">newFee</span> <span class="o">=</span> <span class="n">baseFee</span> <span class="o">-</span> <span class="o">((</span><span class="n">baseFee</span> <span class="o">*</span> <span class="n">feeDiscount</span><span class="o">)</span> <span class="o">/</span> <span class="mi">100</span><span class="o">);</span>
+        <span class="nc">Double</span> <span class="n">newFee</span> <span class="o">=</span> <span class="n">baseFee</span> <span class="o">-</span> <span class="o">((</span><span class="n">baseFee</span> <span class="o">*</span> <span class="n">feeDiscount</span><span class="o">)</span> <span class="o">/</span> <span class="mi">100</span><span class="o">);</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"The fee after discount: "</span> <span class="o">+</span> <span class="n">newFee</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"The fee after discount: "</span> <span class="o">+</span> <span class="n">newFee</span><span class="o">);</span>
 
     <span class="o">}</span>
 
@@ -177,7 +177,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PreidcateConsumerDemo</span> <span class="o">{</span>
 
-   <span class="kd">public</span> <span class="kd">static</span> <span class="n">Student</span> <span class="nf">updateStudentFee</span><span class="o">(</span><span class="n">Student</span> <span class="n">student</span><span class="o">,</span> <span class="n">Predicate</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">,</span> <span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="n">consumer</span><span class="o">){</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Student</span> <span class="nf">updateStudentFee</span><span class="o">(</span><span class="nc">Student</span> <span class="n">student</span><span class="o">,</span> <span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">,</span> <span class="nc">Consumer</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="n">consumer</span><span class="o">){</span>
 
         <span class="c1">//Use the predicate to decide when to update the discount.</span>
 
@@ -198,9 +198,9 @@
 
 <p>　　updateStudentFee方法的调用如下所示：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="n">Student</span> <span class="n">student1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="o">(</span><span class="s">"Ashok"</span><span class="o">,</span><span class="s">"Kumar"</span><span class="o">,</span> <span class="mf">9.5</span><span class="o">);</span>
+    <span class="nc">Student</span> <span class="n">student1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="s">"Ashok"</span><span class="o">,</span><span class="s">"Kumar"</span><span class="o">,</span> <span class="mf">9.5</span><span class="o">);</span>
 
     <span class="n">student1</span> <span class="o">=</span> <span class="n">updateStudentFee</span><span class="o">(</span><span class="n">student1</span><span class="o">,</span>
                                 <span class="c1">//Lambda expression for Predicate interface</span>
@@ -210,7 +210,7 @@
 
     <span class="n">student1</span><span class="o">.</span><span class="na">printFee</span><span class="o">();</span>
 
-    <span class="n">Student</span> <span class="n">student2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Student</span><span class="o">(</span><span class="s">"Rajat"</span><span class="o">,</span><span class="s">"Verma"</span><span class="o">,</span> <span class="mf">8.0</span><span class="o">);</span>
+    <span class="nc">Student</span> <span class="n">student2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="s">"Rajat"</span><span class="o">,</span><span class="s">"Verma"</span><span class="o">,</span> <span class="mf">8.0</span><span class="o">);</span>
 
     <span class="n">student2</span> <span class="o">=</span> <span class="n">updateStudentFee</span><span class="o">(</span><span class="n">student2</span><span class="o">,</span>
                                 <span class="n">student</span> <span class="o">-&gt;</span> <span class="n">student</span><span class="o">.</span><span class="na">grade</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="o">,</span>

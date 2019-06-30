@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
+        
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
         
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
         
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
-        
-          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
     </ul>
 </div>
@@ -107,7 +107,7 @@
 <p>　　PipedReader能够从管道中读取字符流。与PipedInputStream类似，不同的是PipedReader读取的是字符而非字节。换句话说，PipedReader用于读取管道中的文本。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedReader</span><span class="o">(</span><span class="n">pipedWriter</span><span class="o">);</span>
+<span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PipedReader</span><span class="o">(</span><span class="n">pipedWriter</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -139,7 +139,7 @@
 <p>　　PipedWriter能够往管道中写入字符流。与PipedOutputStream类似，不同的是PipedWriter处理的是字符而非字节，PipedWriter用于写入文本数据。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">PipedWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedWriter</span><span class="o">(</span><span class="n">pipedReader</span><span class="o">);</span>
+<span class="nc">PipedWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PipedWriter</span><span class="o">(</span><span class="n">pipedReader</span><span class="o">);</span>
 
 <span class="k">while</span><span class="o">(</span><span class="n">moreData</span><span class="o">())</span> <span class="o">{</span>
 
@@ -163,7 +163,7 @@
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="kt">char</span><span class="o">[]</span> <span class="n">chars</span> <span class="o">=</span> <span class="o">...</span> <span class="c1">//get char array from somewhere.</span>
 
-<span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CharArrayReader</span><span class="o">(</span><span class="n">chars</span><span class="o">);</span>
+<span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CharArrayReader</span><span class="o">(</span><span class="n">chars</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -187,7 +187,7 @@
 <p>　　CharArrayWriter能够把字符写入到字符输出流writer中，并且能够将写入的字符转换成字符数组。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">CharArrayWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CharArrayWriter</span><span class="o">();</span>
+<span class="nc">CharArrayWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CharArrayWriter</span><span class="o">();</span>
 
 <span class="c1">//write characters to writer.</span>
 

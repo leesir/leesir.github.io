@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
+        
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
         
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
         
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
-        
-          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
     </ul>
 </div>
@@ -117,7 +117,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
+<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
 
     </code></pre></figure>
 
@@ -133,7 +133,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
+<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
 
 <span class="kt">boolean</span> <span class="n">fileExists</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">exists</span><span class="o">();</span>
 
@@ -145,7 +145,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
+<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
 
 <span class="kt">long</span> <span class="n">length</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
 
@@ -157,9 +157,9 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
+<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
 
-<span class="kt">boolean</span> <span class="n">success</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">renameTo</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data\\new-file.txt"</span><span class="o">));</span>
+<span class="kt">boolean</span> <span class="n">success</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">renameTo</span><span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"c:\\data\\new-file.txt"</span><span class="o">));</span>
 
     </code></pre></figure>
 
@@ -169,7 +169,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
+<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
 
 <span class="kt">boolean</span> <span class="n">success</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">delete</span><span class="o">();</span>
 
@@ -181,7 +181,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data"</span><span class="o">);</span>
+<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"c:\\data"</span><span class="o">);</span>
 
 <span class="kt">boolean</span> <span class="n">isDirectory</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">isDirectory</span><span class="o">();</span>
 
@@ -193,11 +193,11 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data"</span><span class="o">);</span>
+<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"c:\\data"</span><span class="o">);</span>
 
-<span class="n">String</span><span class="o">[]</span> <span class="n">fileNames</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">list</span><span class="o">();</span>
+<span class="nc">String</span><span class="o">[]</span> <span class="n">fileNames</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">list</span><span class="o">();</span>
 
-<span class="n">File</span><span class="o">[]</span> <span class="n">files</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">listFiles</span><span class="o">();</span>
+<span class="nc">File</span><span class="o">[]</span> <span class="n">files</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">listFiles</span><span class="o">();</span>
 
     </code></pre></figure>
 

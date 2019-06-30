@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
+        
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
         
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
         
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
-        
-          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
     </ul>
 </div>
@@ -127,8 +127,8 @@
         <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PubStaticInnerClass</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PubStaticInnerClass</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -138,7 +138,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="c1">//注意参数--removeinnerclasssynthetics false，否则反编译后的代码会重新糖化</span>
-<span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">cfr</span><span class="o">-</span><span class="mf">0.145</span><span class="o">.</span><span class="na">jar</span> <span class="n">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">class</span> <span class="o">--</span><span class="n">removeinnerclasssynthetics</span> <span class="kc">false</span></code></pre></figure>
+<span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">cfr</span><span class="o">-</span><span class="mf">0.145</span><span class="o">.</span><span class="na">jar</span> <span class="nc">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">class</span> <span class="o">--</span><span class="n">removeinnerclasssynthetics</span> <span class="kc">false</span></code></pre></figure>
 
 <p>       将得到如下代码：</p>
 
@@ -156,12 +156,12 @@
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">pubFOut</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PubStaticInnerClass</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PubStaticInnerClass</span><span class="o">();</span>
     <span class="o">}</span>
 
     <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">void</span> <span class="n">access</span><span class="err">$</span><span class="mo">000</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">priFOut</span><span class="o">();</span>
+        <span class="nc">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">priFOut</span><span class="o">();</span>
     <span class="o">}</span>
 
     <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">access</span><span class="err">$</span><span class="mi">100</span><span class="o">()</span> <span class="o">{</span>
@@ -170,9 +170,9 @@
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">PubStaticInnerClass</span> <span class="o">{</span>
         <span class="kd">private</span> <span class="kt">int</span> <span class="nf">fPubStaticInnerClass</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">();</span>
-            <span class="n">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">pubFOut</span><span class="o">();</span>
-            <span class="k">return</span> <span class="n">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">()</span> <span class="o">+</span> <span class="n">pubStaticValue</span><span class="o">;</span>
+            <span class="nc">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">();</span>
+            <span class="nc">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">pubFOut</span><span class="o">();</span>
+            <span class="k">return</span> <span class="nc">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">()</span> <span class="o">+</span> <span class="n">pubStaticValue</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">}</span>
 
@@ -205,8 +205,8 @@
         <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">PriStaticInnerClass</span> <span class="n">priStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriStaticInnerClass</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PriStaticInnerClass</span> <span class="n">priStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PriStaticInnerClass</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -227,12 +227,12 @@
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">pubFOut</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">PriStaticInnerClass</span> <span class="n">priStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriStaticInnerClass</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PriStaticInnerClass</span> <span class="n">priStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PriStaticInnerClass</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">void</span> <span class="n">access</span><span class="err">$</span><span class="mo">000</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">priFOut</span><span class="o">();</span>
+        <span class="nc">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">priFOut</span><span class="o">();</span>
     <span class="o">}</span>
 
     <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">access</span><span class="err">$</span><span class="mi">100</span><span class="o">()</span> <span class="o">{</span>
@@ -244,12 +244,12 @@
         <span class="o">}</span>
 
         <span class="kd">private</span> <span class="kt">int</span> <span class="nf">fPubStaticInnerClass</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">();</span>
-            <span class="n">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">pubFOut</span><span class="o">();</span>
-            <span class="k">return</span> <span class="n">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">()</span> <span class="o">+</span> <span class="n">pubStaticValue</span><span class="o">;</span>
+            <span class="nc">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">();</span>
+            <span class="nc">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">pubFOut</span><span class="o">();</span>
+            <span class="k">return</span> <span class="nc">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">()</span> <span class="o">+</span> <span class="n">pubStaticValue</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="cm">/* synthetic */</span> <span class="n">PriStaticInnerClass</span><span class="o">(</span><span class="mi">1</span> <span class="n">x0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="cm">/* synthetic */</span> <span class="nc">PriStaticInnerClass</span><span class="o">(</span><span class="mi">1</span> <span class="n">x0</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">();</span>
         <span class="o">}</span>
     <span class="o">}</span>
@@ -296,9 +296,9 @@
         <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TestPubInnerClass</span> <span class="n">testPubInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestPubInnerClass</span><span class="o">();</span>
-        <span class="n">PubInnerClass</span> <span class="n">pubInnerClass</span> <span class="o">=</span> <span class="n">testPubInnerClass</span><span class="o">.</span><span class="na">new</span> <span class="nf">PubInnerClass</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">TestPubInnerClass</span> <span class="n">testPubInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TestPubInnerClass</span><span class="o">();</span>
+        <span class="nc">PubInnerClass</span> <span class="n">pubInnerClass</span> <span class="o">=</span> <span class="n">testPubInnerClass</span><span class="o">.</span><span class="na">new</span> <span class="nf">PubInnerClass</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -325,20 +325,20 @@
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">outPriF</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TestPubInnerClass</span> <span class="n">testPubInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestPubInnerClass</span><span class="o">();</span>
-        <span class="n">PubInnerClass</span> <span class="n">pubInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PubInnerClass</span><span class="o">(</span><span class="n">testPubInnerClass</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">TestPubInnerClass</span> <span class="n">testPubInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TestPubInnerClass</span><span class="o">();</span>
+        <span class="nc">PubInnerClass</span> <span class="n">pubInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PubInnerClass</span><span class="o">(</span><span class="n">testPubInnerClass</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">void</span> <span class="n">access</span><span class="err">$</span><span class="mo">000</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">TestPubInnerClass</span><span class="o">.</span><span class="na">outPriStaticF</span><span class="o">();</span>
+        <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">outPriStaticF</span><span class="o">();</span>
     <span class="o">}</span>
 
-    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">void</span> <span class="n">access</span><span class="err">$</span><span class="mi">100</span><span class="o">(</span><span class="n">TestPubInnerClass</span> <span class="n">x0</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">void</span> <span class="n">access</span><span class="err">$</span><span class="mi">100</span><span class="o">(</span><span class="nc">TestPubInnerClass</span> <span class="n">x0</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">x0</span><span class="o">.</span><span class="na">outPriF</span><span class="o">();</span>
     <span class="o">}</span>
 
-    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">access</span><span class="err">$</span><span class="mi">200</span><span class="o">(</span><span class="n">TestPubInnerClass</span> <span class="n">x0</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">access</span><span class="err">$</span><span class="mi">200</span><span class="o">(</span><span class="nc">TestPubInnerClass</span> <span class="n">x0</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">x0</span><span class="o">.</span><span class="na">privateValue</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -347,18 +347,18 @@
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PubInnerClass</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="cm">/* synthetic */</span> <span class="n">TestPubInnerClass</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="cm">/* synthetic */</span> <span class="nc">TestPubInnerClass</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">;</span>
 
-        <span class="kd">public</span> <span class="nf">PubInnerClass</span><span class="o">(</span><span class="n">TestPubInnerClass</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">PubInnerClass</span><span class="o">(</span><span class="nc">TestPubInnerClass</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span> <span class="o">=</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">;</span>
         <span class="o">}</span>
 
         <span class="kd">public</span> <span class="kt">int</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">TestPubInnerClass</span><span class="o">.</span><span class="na">outPubStaticF</span><span class="o">();</span>
-            <span class="n">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">();</span>
+            <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">outPubStaticF</span><span class="o">();</span>
+            <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">();</span>
             <span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">.</span><span class="na">outPubF</span><span class="o">();</span>
-            <span class="n">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">);</span>
-            <span class="k">return</span> <span class="n">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">200</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">)</span> <span class="o">+</span> <span class="n">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">300</span><span class="o">()</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">.</span><span class="na">publicValue</span> <span class="o">+</span> <span class="n">publicStaticValue</span><span class="o">;</span>
+            <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">200</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">)</span> <span class="o">+</span> <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">300</span><span class="o">()</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">.</span><span class="na">publicValue</span> <span class="o">+</span> <span class="n">publicStaticValue</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -384,35 +384,35 @@
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">privateValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">privateStaticValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 
-    <span class="kd">private</span> <span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"thread"</span><span class="o">);</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateValue</span><span class="o">);</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicValue</span><span class="o">);</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"thread"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateValue</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicValue</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">});</span>
 
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Thread</span> <span class="n">staticThread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">Thread</span> <span class="n">staticThread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"staticThread"</span><span class="o">);</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"staticThread"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">});</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">final</span> <span class="kt">int</span> <span class="n">localN</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="n">Thread</span> <span class="n">localThread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Thread</span> <span class="n">localThread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"localThread"</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">localN</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"localThread"</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">localN</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
             <span class="o">}</span>
         <span class="o">});</span>
 
@@ -420,15 +420,15 @@
     <span class="o">}</span>
 
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">outF</span><span class="o">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">arg1</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InnerClass</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InnerClass</span><span class="o">()</span> <span class="o">{</span>
 
             <span class="nd">@Override</span>
             <span class="kt">void</span> <span class="nf">innerF</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">arg1</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateValue</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicValue</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">arg1</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
                 <span class="n">outF</span><span class="o">();</span>
             <span class="o">}</span>
         <span class="o">};</span>
@@ -449,9 +449,9 @@
 分别对应成员变量thread，静态变量staticThread，内部类InnerClass，main方法中的局部匿名内部类localThread，实例方法outF中的局部匿名内部类innerClass。</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">outF</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg1</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InnerClass</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">arg1</span><span class="o">){</span>
+        <span class="nc">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InnerClass</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">arg1</span><span class="o">){</span>
             <span class="kd">final</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">val$arg1</span><span class="o">;</span>
-            <span class="kd">final</span> <span class="cm">/* synthetic */</span> <span class="n">TestAnonymousClass</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">;</span>
+            <span class="kd">final</span> <span class="cm">/* synthetic */</span> <span class="nc">TestAnonymousClass</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">;</span>
             <span class="o">{</span>
                 <span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span> <span class="o">=</span> <span class="n">testAnonymousClass</span><span class="o">;</span>
                 <span class="k">this</span><span class="o">.</span><span class="na">val</span><span class="n">$arg1</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
@@ -460,12 +460,12 @@
 
             <span class="nd">@Override</span>
             <span class="kt">void</span> <span class="nf">innerF</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">val</span><span class="n">$arg1</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">));</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">());</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">.</span><span class="na">publicValue</span><span class="o">);</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
-                <span class="n">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">200</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">val</span><span class="n">$arg1</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">));</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">());</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">.</span><span class="na">publicValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+                <span class="nc">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">200</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">);</span>
             <span class="o">}</span>
         <span class="o">};</span>
     <span class="o">}</span></code></pre></figure>

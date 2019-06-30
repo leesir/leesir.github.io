@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
+        
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
         
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
         
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
-        
-          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
     </ul>
 </div>
@@ -114,7 +114,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">interface</span> <span class="nc">OldPerformer</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">performTask</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">performTask</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">);</span>
 
 <span class="o">}</span></code></pre></figure>
 
@@ -122,11 +122,11 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrePostDemo</span> <span class="o">{</span>
 
-    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">performTask</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="n">OldPerformer</span> <span class="n">performer</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">performTask</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="nc">OldPerformer</span> <span class="n">performer</span><span class="o">)</span> <span class="o">{</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Pre-Processing..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Pre-Processing..."</span><span class="o">);</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Fetching the status for id: "</span> <span class="o">+</span> <span class="n">id</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Fetching the status for id: "</span> <span class="o">+</span> <span class="n">id</span><span class="o">);</span>
 
         <span class="kt">int</span> <span class="n">status</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
 
@@ -134,7 +134,7 @@
 
         <span class="n">performer</span><span class="o">.</span><span class="na">performTask</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">status</span><span class="o">);</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Post-processing..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Post-processing..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
@@ -144,43 +144,43 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrePostDemo</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="c1">//has to be declared final to be accessed within</span>
 
     <span class="c1">//the anonymous inner class.</span>
 
-    <span class="kd">final</span> <span class="n">String</span> <span class="n">outsideOfImpl</span> <span class="o">=</span> <span class="s">"Common Value"</span><span class="o">;</span>
+    <span class="kd">final</span> <span class="nc">String</span> <span class="n">outsideOfImpl</span> <span class="o">=</span> <span class="s">"Common Value"</span><span class="o">;</span>
 
-    <span class="n">performTask</span><span class="o">(</span><span class="s">"1234"</span><span class="o">,</span> <span class="k">new</span> <span class="n">OldPerformer</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">performTask</span><span class="o">(</span><span class="s">"1234"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">OldPerformer</span><span class="o">()</span> <span class="o">{</span>
 
         <span class="nd">@Override</span>
 
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">performTask</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">performTask</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Finding data based on id..."</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Finding data based on id..."</span>
 
         <span class="o">);</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">outsideOfImpl</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">outsideOfImpl</span><span class="o">);</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Asserting that the status matches"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Asserting that the status matches"</span><span class="o">);</span>
 
         <span class="o">}</span>
 
     <span class="o">});</span>
 	
-	    <span class="n">performTask</span><span class="o">(</span><span class="s">"4567"</span><span class="o">,</span> <span class="k">new</span> <span class="n">OldPerformer</span><span class="o">()</span> <span class="o">{</span>
+	    <span class="n">performTask</span><span class="o">(</span><span class="s">"4567"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">OldPerformer</span><span class="o">()</span> <span class="o">{</span>
 
         <span class="nd">@Override</span>
 
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">performTask</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">performTask</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Finding data based on id..."</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Finding data based on id..."</span><span class="o">);</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">outsideOfImpl</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">outsideOfImpl</span><span class="o">);</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Update status of the data found"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Update status of the data found"</span><span class="o">);</span>
 
         <span class="o">}</span>
 
@@ -192,28 +192,28 @@
 
 <p>　　从上面的代码可以看出，匿名内部类外部的变量要想被匿名内部类访问，需要声明成final。例子的代码输出如下：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Pre</span><span class="o">-</span><span class="n">Processing</span><span class="o">...&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-<span class="n">Fetching</span> <span class="n">the</span> <span class="n">status</span> <span class="k">for</span> <span class="nl">id:</span> <span class="mi">1234</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Pre</span><span class="o">-</span><span class="nc">Processing</span><span class="o">...&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+<span class="nc">Fetching</span> <span class="n">the</span> <span class="n">status</span> <span class="k">for</span> <span class="nl">id:</span> <span class="mi">1234</span>
 
-<span class="n">Finding</span> <span class="n">data</span> <span class="n">based</span> <span class="n">on</span> <span class="n">id</span><span class="o">...</span>
+<span class="nc">Finding</span> <span class="n">data</span> <span class="n">based</span> <span class="n">on</span> <span class="n">id</span><span class="o">...</span>
 
-<span class="n">Common</span> <span class="n">Value</span>
+<span class="nc">Common</span> <span class="nc">Value</span>
 
-<span class="n">Asserting</span> <span class="n">that</span> <span class="n">the</span> <span class="n">status</span> <span class="n">matches</span>
+<span class="nc">Asserting</span> <span class="n">that</span> <span class="n">the</span> <span class="n">status</span> <span class="n">matches</span>
 
-<span class="n">Post</span><span class="o">-</span><span class="n">processing</span><span class="o">...</span>
+<span class="nc">Post</span><span class="o">-</span><span class="n">processing</span><span class="o">...</span>
 
-<span class="n">PreProcessing</span><span class="o">...</span>
+<span class="nc">PreProcessing</span><span class="o">...</span>
 
-<span class="n">Fetching</span> <span class="n">the</span> <span class="n">status</span> <span class="k">for</span> <span class="nl">id:</span> <span class="mi">4567</span>
+<span class="nc">Fetching</span> <span class="n">the</span> <span class="n">status</span> <span class="k">for</span> <span class="nl">id:</span> <span class="mi">4567</span>
 
-<span class="n">Finding</span> <span class="n">data</span> <span class="n">based</span> <span class="n">on</span> <span class="n">id</span><span class="o">...</span>
+<span class="nc">Finding</span> <span class="n">data</span> <span class="n">based</span> <span class="n">on</span> <span class="n">id</span><span class="o">...</span>
 
-<span class="n">Common</span> <span class="n">Value</span>
+<span class="nc">Common</span> <span class="nc">Value</span>
 
-<span class="n">Update</span> <span class="n">the</span> <span class="n">status</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span> <span class="n">found</span>
+<span class="nc">Update</span> <span class="n">the</span> <span class="n">status</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span> <span class="n">found</span>
 
-<span class="n">Post</span><span class="o">-</span><span class="n">processing</span><span class="o">...</span></code></pre></figure>
+<span class="nc">Post</span><span class="o">-</span><span class="n">processing</span><span class="o">...</span></code></pre></figure>
 
 <p>#使用Lambda表达式</p>
 
@@ -221,47 +221,47 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrePostLambdaDemo</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
         <span class="c1">//Need not be declared as final for use within a</span>
 
         <span class="c1">//lambda expression, but has to be eventually final.</span>
 
-        <span class="n">String</span> <span class="n">outsideOfImpl</span> <span class="o">=</span> <span class="s">"Common Value"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">outsideOfImpl</span> <span class="o">=</span> <span class="s">"Common Value"</span><span class="o">;</span>
 
-        <span class="n">doSomeProcessing</span><span class="o">(</span><span class="s">"123"</span><span class="o">,</span> <span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="n">doSomeProcessing</span><span class="o">(</span><span class="s">"123"</span><span class="o">,</span> <span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Finding some data based on"</span><span class="o">+</span><span class="n">id</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Finding some data based on"</span><span class="o">+</span><span class="n">id</span><span class="o">);</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">outsideOfImpl</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">outsideOfImpl</span><span class="o">);</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Assert that the status is "</span><span class="o">+</span><span class="n">status</span> <span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Assert that the status is "</span><span class="o">+</span><span class="n">status</span> <span class="o">);</span>
 
         <span class="o">});</span>
 		
-		<span class="n">doSomeProcessing</span><span class="o">(</span><span class="s">"456"</span><span class="o">,</span> <span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+		<span class="n">doSomeProcessing</span><span class="o">(</span><span class="s">"456"</span><span class="o">,</span> <span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Finding data based on id: "</span><span class="o">+</span><span class="n">id</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Finding data based on id: "</span><span class="o">+</span><span class="n">id</span><span class="o">);</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">outsideOfImpl</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">outsideOfImpl</span><span class="o">);</span>
 
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"And updating the status: "</span><span class="o">+</span><span class="n">status</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"And updating the status: "</span><span class="o">+</span><span class="n">status</span><span class="o">);</span>
 
         <span class="o">});</span>
 
     <span class="o">}</span>
 	
-	<span class="kd">static</span> <span class="kt">void</span> <span class="nf">doSomeProcessing</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="n">Performer</span> <span class="n">performer</span> <span class="o">){</span>
+	<span class="kd">static</span> <span class="kt">void</span> <span class="nf">doSomeProcessing</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="nc">Performer</span> <span class="n">performer</span> <span class="o">){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Pre-Processing..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Pre-Processing..."</span><span class="o">);</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Finding status for given id: "</span><span class="o">+</span><span class="n">id</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Finding status for given id: "</span><span class="o">+</span><span class="n">id</span><span class="o">);</span>
 
         <span class="kt">int</span> <span class="n">status</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
 
         <span class="n">performer</span><span class="o">.</span><span class="na">performTask</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">status</span><span class="o">);</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Post-processing..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Post-processing..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
@@ -269,7 +269,7 @@
 
 <span class="kd">interface</span> <span class="nc">Performer</span><span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">performTask</span><span class="o">(</span><span class="n">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">performTask</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">);</span>
 
 <span class="o">}</span></code></pre></figure>
 

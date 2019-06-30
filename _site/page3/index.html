@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
+        
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
         
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
-          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
     </ul>
 </div>
 
@@ -89,6 +89,29 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/07/summary-synchronized-error">Jul 3, 2016 - 对包装类型变量使用synchronized不当造成的同步不正确</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>       关于关键字synchronized使用不当，造成未同步或者同步不正确，是开发过程中常见的问题。先引出3个问题：</p>
+
+<ol>
+  <li>同步synchronized的底层实现原理是什么？</li>
+  <li>对非常量或者非单例对象上使用synchronized，会有什么效果？</li>
+  <li>对包装类型使用synchronized，会有什么效果？</li>
+</ol>
+
+<p><br /></p>
+
+
+		<h1><a href="/2016/07/summary-synchronized-error">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2016/07/boxed-type-conditional-op">Jul 2, 2016 - 包装类型在条件运算中的使用不当造成的空指针异常</a></h1>
@@ -160,11 +183,11 @@
 <p>　　List&lt;? extends Number&gt; foo3的通配符声明，意味着以下的赋值是合法的：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Number "extends" Number (in this context)</span>
-<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;();</span>  
+<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Number</span><span class="o">&gt;();</span>  
 <span class="c1">// Integer extends Number</span>
-<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span> 
+<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span> 
 <span class="c1">// Double extends Number</span>
-<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;();</span>  </code></pre></figure>
+<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;();</span>  </code></pre></figure>
 
 
 		<h1><a href="/2015/10/java-qa-generics-extends-super">阅读全文</a></h1>
@@ -195,34 +218,6 @@
     </div>
 </div>
 
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-fp-java8-lambda-template">Oct 22, 2015 - 采用Java 8中Lambda表达式和默认方法的模板方法模式</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://www.javacodegeeks.com/2013/05/template-method-pattern-using-lambda-expressions-default-methods.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
-
-<p>　　模板方法模式是“四人帮”（译者注：Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides）所著<a href="http://www.flipkart.com/design-patterns-elements-reusable-object-oriented-software-1st/p/itmdytsswfy3qeqn?pid=9788131700075&amp;affid=INMohamblo">《Design Patterns book》</a>一书中所描述的23种设计模式其中的一种，该模式旨在：</p>
-
-<blockquote>
-  <p>“Define the skeleton of an algorithm in an operation, deferring some steps to subclasses.
- TemplateMethod lets subclasses redefine certain steps of an algorithm without changing the algorithm’s structure”。</p>
-</blockquote>
-
-<p>　　即模板方法定义一个算法的架构，并将某些步骤推迟到子类中实现。模板方法允许子类在不改变算法架构的情况下，重新定义算法中某些步骤。</p>
-
-<p>　　为了以更简单的术语描述模板方法，考虑这个场景：假设在一个工作流系统中，为了完成任务，有4个任务必须以给定的执行顺序执行。在这4个任务中，不同工作流系统的实现可以根据自身情况自定义任务的执行内容。</p>
-
-<p>　　模板方法可以应用在上述场景中：将工作流系统的4个核心任务封装到抽象类当中，如果任务可以被自定义，则将可自定义的任务推迟到子类中实现。</p>
-
-
-		<h1><a href="/2015/10/java-fp-java8-lambda-template">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
 
 <div class="pagination">
   
@@ -230,7 +225,7 @@
         <a class="btn btn-default" href="/page2" class="previous">Newer</a>
       
   
-  <span class="page_number ">Page: 3 of 10</span>
+  <span class="page_number ">Page: 3 of 11</span>
   
     <a class="btn btn-default" href="/page4" class="next">Older</a>
   

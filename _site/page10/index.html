@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
+        
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
         
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
-          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
     </ul>
 </div>
 
@@ -89,6 +89,25 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-pipe">Oct 10, 2015 - Java IO 管道</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/pipes.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　Java IO中的管道为运行在同一个JVM中的两个线程提供了通信的能力。所以管道也可以作为数据源以及目标媒介。</p>
+
+<p>　　你不能利用管道与不同的JVM中的线程通信(不同的进程)。在概念上，Java的管道不同于Unix/Linux系统中的管道。在Unix/Linux中，运行在不同地址空间的两个进程可以通过管道通信。在Java中，通信的双方应该是运行在同一进程中的不同线程。</p>
+
+
+		<h1><a href="/2015/10/java-io-pipe">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-array">Oct 10, 2015 - Java IO 字节和字符数组</a></h1>
@@ -155,33 +174,6 @@
     </div>
 </div>
 
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/09/why-zero">Sep 14, 2015 - 为何从10开始到99连续相乘会得到0?</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>这是一块非常简单的Java代码片段</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="o">{</span>      
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="o">[]</span><span class="n">args</span><span class="o">)</span> <span class="o">{</span>        
-        <span class="kt">int</span> <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>        
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">99</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>            
-             <span class="n">product</span> <span class="o">*=</span> <span class="n">i</span><span class="o">;</span>        	 
-        <span class="o">}</span>        
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>    
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></figure>
-
-<p>为什么得出的结果是0呢?</p>
-
-
-		<h1><a href="/2015/09/why-zero">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
 
 <div class="pagination">
   
@@ -189,7 +181,9 @@
         <a class="btn btn-default" href="/page9" class="previous">Newer</a>
       
   
-  <span class="page_number ">Page: 10 of 10</span>
+  <span class="page_number ">Page: 10 of 11</span>
+  
+    <a class="btn btn-default" href="/page11" class="next">Older</a>
   
 </div>
 

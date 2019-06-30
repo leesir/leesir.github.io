@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
+        
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
         
           <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
-          <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
     </ul>
 </div>
 
@@ -89,6 +89,35 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-randomaccessfile">Oct 13, 2015 - Java IO: RandomAccessFile</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/randomaccessfile.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　RandomAccessFile允许你来回读写文件，也可以替换文件中的某些部分。FileInputStream和FileOutputStream没有这样的功能。</p>
+
+<p>#创建一个RandomAccessFile</p>
+
+<p>　　在使用RandomAccessFile之前，必须初始化它。这是例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="nc">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
+
+    </code></pre></figure>
+
+<p>　　请注意构造函数的第二个参数：“rw”，表明你以读写方式打开文件。请查阅Java文档获知你需要以何种方式构造RandomAccessFile。</p>
+
+
+		<h1><a href="/2015/10/java-io-randomaccessfile">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-file">Oct 13, 2015 - Java IO: File</a></h1>
@@ -117,7 +146,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
+<span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">);</span>
 
     </code></pre></figure>
 
@@ -142,7 +171,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedOutputStream</span><span class="o">(</span><span class="n">pipedInputStream</span><span class="o">);</span>
+<span class="nc">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PipedOutputStream</span><span class="o">(</span><span class="n">pipedInputStream</span><span class="o">);</span>
 
 <span class="k">while</span><span class="o">(</span><span class="n">moreData</span><span class="o">)</span> <span class="o">{</span>
 
@@ -175,7 +204,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedInputStream</span><span class="o">(</span><span class="n">pipedOutputStream</span><span class="o">);</span>
+<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PipedInputStream</span><span class="o">(</span><span class="n">pipedOutputStream</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -220,7 +249,7 @@
 
 <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="o">...</span> <span class="c1">//get byte array from somewhere.</span>
 
-<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
+<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ByteArrayInputStream</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -245,27 +274,6 @@
     </div>
 </div>
 
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-outputstream">Oct 12, 2015 - Java IO: OutputStream</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://tutorials.jenkov.com/java-io/outputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　OutputStream类是Java IO API中所有输出流的基类。子类包括BufferedOutputStream，FileOutputStream等等。参考Java IO概述这一小节底部的表格，可以浏览完整的子类的列表。</p>
-
-<p>#输出流和目标媒介</p>
-
-<p>　　输出流往往和某些数据的目标媒介相关联，比如文件，网络连接，管道等。更多细节请参考Java IO概述。当写入到输出流的数据逐渐输出完毕时，目标媒介是所有数据的归属地。</p>
-
-
-		<h1><a href="/2015/10/java-io-outputstream">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
 
 <div class="pagination">
   
@@ -273,7 +281,7 @@
         <a class="btn btn-default" href="/page6" class="previous">Newer</a>
       
   
-  <span class="page_number ">Page: 7 of 10</span>
+  <span class="page_number ">Page: 7 of 11</span>
   
     <a class="btn btn-default" href="/page8" class="next">Older</a>
   
