@@ -105,13 +105,13 @@
 <p>　　许久之前，那时我还在用Java 1.4进行编码，当我第一次发现Apache Commons Collections，便爱上了谓词函数。Apache Commons Collections里的谓词函数仅仅只是一个只有一个方法的接口：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">evaluate</span><span class="o">(</span><span class="nc">Object</span> <span class="n">object</span><span class="o">):</span> <span class="kt">boolean</span>
+<span class="n">evaluate</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">):</span> <span class="kt">boolean</span>
     </code></pre></figure>
 
 <p>　　这就是谓词函数，输入一个对象，返回true或者false。最近诞生了类似Apache Commons Collections的持有Apache 2.0许可的Google Guava。在Google Guava中，定义了Predicate接口，该接口包含一个带有泛型参数的方法：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">apply</span><span class="o">(</span><span class="no">T</span> <span class="n">input</span><span class="o">):</span> <span class="kt">boolean</span>
+<span class="n">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">input</span><span class="o">):</span> <span class="kt">boolean</span>
     </code></pre></figure>
 
 <p>　　如果想在程序中使用谓词函数，只需要利用自己的逻辑实现该接口即可。</p>
@@ -124,9 +124,9 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="c1">//List&lt;PurchaseOrder&gt; orders...</span>
-<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">listOrdersByCustomer</span><span class="o">(</span><span class="nc">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">selection</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;();</span>
-    <span class="k">for</span> <span class="o">(</span><span class="nc">PurchaseOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">orders</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">listOrdersByCustomer</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">selection</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">PurchaseOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">orders</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getCustomer</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">customer</span><span class="o">))</span> <span class="o">{</span>
             <span class="n">selection</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
         <span class="o">}</span>
@@ -138,9 +138,9 @@
 <p>　　以上是获取某个顾客所有订单的代码。不同的功能需要编写多个类似的循环：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">listRecentOrders</span><span class="o">(</span><span class="nc">Date</span> <span class="n">fromDate</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">selection</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;();</span>
-        <span class="k">for</span> <span class="o">(</span><span class="nc">PurchaseOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">orders</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">listRecentOrders</span><span class="o">(</span><span class="n">Date</span> <span class="n">fromDate</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">selection</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">PurchaseOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">orders</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">if</span> <span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getDate</span><span class="o">().</span><span class="na">after</span><span class="o">(</span><span class="n">fromDate</span><span class="o">))</span> <span class="o">{</span>
                 <span class="n">selection</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
             <span class="o">}</span>
@@ -152,9 +152,9 @@
 <p>　　这些重复代码非常明显：除了if的判断条件之外没有任何差异（译者注：方法参数可归为判断条件）。采用谓词函数的思想在于，利用传入到函数内的谓词的调用替代if语句块里的硬编码的判断条件。这意味着，你只需编写一遍带有谓词函数作为参数的方法，就可以覆盖所有的甚至你还不知道的测试用例：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">listOrders</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">selection</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;();</span>
-    <span class="k">for</span> <span class="o">(</span><span class="nc">PurchaseOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">orders</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">listOrders</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">selection</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">PurchaseOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">orders</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">condition</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">order</span><span class="o">))</span> <span class="o">{</span>
             <span class="n">selection</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
         <span class="o">}</span>
@@ -166,9 +166,9 @@
 <p>　　如果需要考虑到复用，可以把谓词函数声明成一个单独的类，否则可以把谓词声明成匿名类：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">final</span> <span class="nc">Customer</span> <span class="n">customer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Customer</span><span class="o">(</span><span class="s">"BruceWaineCorp"</span><span class="o">);</span>
-<span class="kd">final</span> <span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;()</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">apply</span><span class="o">(</span><span class="nc">PurchaseOrder</span> <span class="n">order</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">final</span> <span class="n">Customer</span> <span class="n">customer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Customer</span><span class="o">(</span><span class="s">"BruceWaineCorp"</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">Predicate</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Predicate</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">apply</span><span class="o">(</span><span class="n">PurchaseOrder</span> <span class="n">order</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">order</span><span class="o">.</span><span class="na">getCustomer</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">customer</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">};</span>
@@ -183,8 +183,8 @@
 <p>　　这个类提供给了与我们先前编写的代码功能类似的filter()函数，所以我们可以把方法重构成无循环的版本：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">selectOrders</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="nc">Collections2</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">orders</span><span class="o">,</span> <span class="n">condition</span><span class="o">);</span>
+<span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">selectOrders</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Collections2</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">orders</span><span class="o">,</span> <span class="n">condition</span><span class="o">);</span>
 <span class="o">}</span>
     </code></pre></figure>
 
@@ -197,17 +197,17 @@
 <p>　　在一个类似的场景中，我们可以要求返回在给定的迭代器之上过滤好的只符合谓词函数的元素的迭代器（装饰模式）。</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">Iterator</span> <span class="n">filteredIterator</span> <span class="o">=</span> <span class="nc">Iterators</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">unfilteredIterator</span><span class="o">,</span> <span class="n">condition</span><span class="o">);</span>
+<span class="n">Iterator</span> <span class="n">filteredIterator</span> <span class="o">=</span> <span class="n">Iterators</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">unfilteredIterator</span><span class="o">,</span> <span class="n">condition</span><span class="o">);</span>
     </code></pre></figure>
 
 <p>　　从Java 5开始，Iterable接口和循环使用起来非常方便，所以我们更倾向于使用以下写法：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">selectOrders</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="nc">Iterables</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">orders</span><span class="o">,</span> <span class="n">condition</span><span class="o">);</span>
+<span class="kd">public</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">selectOrders</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Iterables</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">orders</span><span class="o">,</span> <span class="n">condition</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="c1">// you can directly use it in a foreach loop, and it reads well:</span>
-<span class="k">for</span> <span class="o">(</span><span class="nc">PurchaseOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">condition</span><span class="o">))</span> <span class="o">{</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">PurchaseOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">condition</span><span class="o">))</span> <span class="o">{</span>
     <span class="c1">//...</span>
 <span class="o">}</span>
     </code></pre></figure>
@@ -220,33 +220,33 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="c1">// gives you a predicate that checks if an integer is zeroPredicate</span>
-<span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">isZero</span> <span class="o">=</span> <span class="nc">Predicates</span><span class="o">.</span><span class="na">equalTo</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+<span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">isZero</span> <span class="o">=</span> <span class="n">Predicates</span><span class="o">.</span><span class="na">equalTo</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
 <span class="c1">// gives a predicate that checks for non null objects</span>
-<span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">isNotNull</span> <span class="o">=</span> <span class="nc">Predicates</span><span class="o">.</span><span class="na">notNull</span><span class="o">();</span>
+<span class="n">Predicate</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">isNotNull</span> <span class="o">=</span> <span class="n">Predicates</span><span class="o">.</span><span class="na">notNull</span><span class="o">();</span>
 <span class="c1">// gives a predicate that checks for objects that are instanceof the given Class</span>
-<span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">isString</span> <span class="o">=</span> <span class="nc">Predicates</span><span class="o">.</span><span class="na">instanceOf</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="n">Predicate</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">isString</span> <span class="o">=</span> <span class="n">Predicates</span><span class="o">.</span><span class="na">instanceOf</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
     </code></pre></figure>
 
 <p>　　对于给定的谓词，你可以反转它（返回相反的返回值，比如true变成false）：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">Predicates</span><span class="o">.</span><span class="na">not</span><span class="o">(</span><span class="n">predicate</span><span class="o">);</span>
+<span class="n">Predicates</span><span class="o">.</span><span class="na">not</span><span class="o">(</span><span class="n">predicate</span><span class="o">);</span>
     </code></pre></figure>
 
 <p>　　利用AND，OR操作结合多个谓词：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">Predicates</span><span class="o">.</span><span class="na">and</span><span class="o">(</span><span class="n">predicate1</span><span class="o">,</span> <span class="n">predicate2</span><span class="o">);</span>
-<span class="nc">Predicates</span><span class="o">.</span><span class="na">or</span><span class="o">(</span><span class="n">predicate1</span><span class="o">,</span> <span class="n">predicate2</span><span class="o">);</span>
+<span class="n">Predicates</span><span class="o">.</span><span class="na">and</span><span class="o">(</span><span class="n">predicate1</span><span class="o">,</span> <span class="n">predicate2</span><span class="o">);</span>
+<span class="n">Predicates</span><span class="o">.</span><span class="na">or</span><span class="o">(</span><span class="n">predicate1</span><span class="o">,</span> <span class="n">predicate2</span><span class="o">);</span>
 <span class="c1">// gives you a predicate that checks for either zero or null</span>
-<span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">isNullOrZero</span> <span class="o">=</span> <span class="nc">Predicates</span><span class="o">.</span><span class="na">or</span><span class="o">(</span><span class="n">isZero</span><span class="o">,</span> <span class="nc">Predicates</span><span class="o">.</span><span class="na">isNull</span><span class="o">());</span>
+<span class="n">Predicate</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">isNullOrZero</span> <span class="o">=</span> <span class="n">Predicates</span><span class="o">.</span><span class="na">or</span><span class="o">(</span><span class="n">isZero</span><span class="o">,</span> <span class="n">Predicates</span><span class="o">.</span><span class="na">isNull</span><span class="o">());</span>
     </code></pre></figure>
 
 <p>　　当然你也可以拥有返回固定值（true或者false）的特殊谓词（译者注：只返回true即为逻辑学中的永真式，反之为永假式）。这些谓词非常有用，我们可以在之后的例子中证明：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">Predicates</span><span class="o">.</span><span class="na">alwaysTrue</span><span class="o">();</span>
-<span class="nc">Predicates</span><span class="o">.</span><span class="na">alwaysFalse</span><span class="o">();</span>
+<span class="n">Predicates</span><span class="o">.</span><span class="na">alwaysTrue</span><span class="o">();</span>
+<span class="n">Predicates</span><span class="o">.</span><span class="na">alwaysFalse</span><span class="o">();</span>
     </code></pre></figure>
 
 <p>#如何定位谓词</p>

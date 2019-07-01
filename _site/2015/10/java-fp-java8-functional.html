@@ -102,19 +102,19 @@
 
 <p>　　Function接口的主要方法：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="no">R</span> <span class="nf">apply</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">)</span> <span class="c1">//将Function对象应用到输入的参数上，然后返回计算结果。</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> <span class="c1">//将Function对象应用到输入的参数上，然后返回计算结果。</span>
 
-<span class="k">default</span> <span class="o">&lt;</span><span class="no">V</span><span class="o">&gt;</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="c1">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></code></pre></figure>
+<span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="c1">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></code></pre></figure>
 
 <!-- more -->
 
 <p>　　译者注：Function接口中除了apply()之外全部接口如下：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">default</span> <span class="o">&lt;</span><span class="no">V</span><span class="o">&gt;</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="nf">andThen</span><span class="o">(</span><span class="nc">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">R</span><span class="o">,?</span> <span class="kd">extends</span> <span class="no">V</span><span class="o">&gt;</span> <span class="n">after</span><span class="o">)</span> <span class="c1">//返回一个先执行当前函数对象apply方法再执行after函数对象apply方法的函数对象。</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="nf">andThen</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">R</span><span class="o">,?</span> <span class="kd">extends</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">after</span><span class="o">)</span> <span class="c1">//返回一个先执行当前函数对象apply方法再执行after函数对象apply方法的函数对象。</span>
 
-<span class="k">default</span> <span class="o">&lt;</span><span class="no">V</span><span class="o">&gt;</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="nf">compose</span><span class="o">(</span><span class="nc">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">V</span><span class="o">,?</span> <span class="kd">extends</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">before</span><span class="o">)</span> <span class="c1">//返回一个先执行before函数对象apply方法再执行当前函数对象apply方法的函数对象。</span>
+<span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="nf">compose</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">V</span><span class="o">,?</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">before</span><span class="o">)</span> <span class="c1">//返回一个先执行before函数对象apply方法再执行当前函数对象apply方法的函数对象。</span>
 
-<span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span><span class="no">T</span><span class="o">&gt;</span> <span class="nf">identity</span><span class="o">()</span> <span class="c1">//返回一个执行了apply()方法之后只会返回输入参数的函数对象。</span></code></pre></figure>
+<span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">identity</span><span class="o">()</span> <span class="c1">//返回一个执行了apply()方法之后只会返回输入参数的函数对象。</span></code></pre></figure>
 
 <p>　　本章节将会通过创建接受Function接口和参数并调用相应方法的例子探讨apply方法的使用。我们同样能够看到API的调用者如何利用lambda表达式替代接口的实现。除了传递lambda表达式之外，API使用者同样可以传递方法的引用，但这样的例子不在本篇文章中。</p>
 
@@ -127,7 +127,7 @@
 
     <span class="c1">//Function interface</span>
 
-    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">modifyTheValue</span><span class="o">(</span><span class="kt">int</span> <span class="n">valueToBeOperated</span><span class="o">,</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">function</span><span class="o">){</span>
+    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">modifyTheValue</span><span class="o">(</span><span class="kt">int</span> <span class="n">valueToBeOperated</span><span class="o">,</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">function</span><span class="o">){</span>
 
         <span class="kt">int</span> <span class="n">newValue</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">valueToBeOperated</span><span class="o">);</span>
 
@@ -135,7 +135,7 @@
          * Do some operations using the new value.     
          */</span>
 
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newValue</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newValue</span><span class="o">);</span>
 
     <span class="o">}</span>
 
@@ -145,7 +145,7 @@
 <p>　　下面是调用上述方法的例子：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="kt">int</span> <span class="n">incr</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>  <span class="kt">int</span> <span class="n">myNumber</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
 
