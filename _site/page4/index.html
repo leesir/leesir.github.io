@@ -155,9 +155,9 @@
 
 <p>　　Function接口的主要方法：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> <span class="c1">//将Function对象应用到输入的参数上，然后返回计算结果。</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="no">R</span> <span class="nf">apply</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">)</span> <span class="c1">//将Function对象应用到输入的参数上，然后返回计算结果。</span>
 
-<span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="c1">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></code></pre></figure>
+<span class="k">default</span> <span class="o">&lt;</span><span class="no">V</span><span class="o">&gt;</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="c1">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></code></pre></figure>
 
 
 		<h1><a href="/2015/10/java-fp-java8-functional">阅读全文</a></h1>
@@ -185,23 +185,23 @@
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="c1">// check with the always-true predicate</span>
 
-<span class="kd">final</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">all</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysTrue</span><span class="o">());</span>
+<span class="kd">final</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">all</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="nc">Predicates</span><span class="o">.&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysTrue</span><span class="o">());</span>
 
-<span class="n">assertEquals</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">Iterables</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="n">all</span><span class="o">));</span> 
+<span class="n">assertEquals</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">Iterables</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="n">all</span><span class="o">));</span> 
 
 <span class="c1">// check with the always-false predicat</span>
 
-<span class="n">eassertTrue</span><span class="o">(</span><span class="n">Iterables</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysFalse</span><span class="o">())));</span>
+<span class="n">eassertTrue</span><span class="o">(</span><span class="nc">Iterables</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="nc">Predicates</span><span class="o">.&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysFalse</span><span class="o">())));</span>
     </code></pre></figure>
 
 <p>　　第二步，你可以分开测试每个谓词了：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">final</span> <span class="n">CustomerPredicate</span> <span class="n">isForCustomer1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomerPredicate</span><span class="o">(</span><span class="n">CUSTOMER_1</span><span class="o">);</span>
+<span class="kd">final</span> <span class="nc">CustomerPredicate</span> <span class="n">isForCustomer1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CustomerPredicate</span><span class="o">(</span><span class="no">CUSTOMER_1</span><span class="o">);</span>
 
-<span class="n">assertTrue</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">ORDER_1</span><span class="o">));</span> <span class="c1">// ORDER_1 is for CUSTOMER_1</span>
+<span class="n">assertTrue</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="no">ORDER_1</span><span class="o">));</span> <span class="c1">// ORDER_1 is for CUSTOMER_1</span>
 
-<span class="n">assertFalse</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">ORDER_2</span><span class="o">));</span> <span class="c1">// ORDER_2 is for CUSTOMER_2</span>
+<span class="n">assertFalse</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="no">ORDER_2</span><span class="o">));</span> <span class="c1">// ORDER_2 is for CUSTOMER_2</span>
     </code></pre></figure>
 
 <p>　　例子简单，却见微知著。为了测试更加复杂的逻辑，你可能需要构建模拟谓词应对测试不够充分的情况。比如，一个第一次返回true，之后都返回false的谓词。通过严格分离关注点，谓词可以大大简化你的测试计划。</p>
@@ -230,13 +230,13 @@
 <p>　　许久之前，那时我还在用Java 1.4进行编码，当我第一次发现Apache Commons Collections，便爱上了谓词函数。Apache Commons Collections里的谓词函数仅仅只是一个只有一个方法的接口：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">evaluate</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">):</span> <span class="kt">boolean</span>
+<span class="n">evaluate</span><span class="o">(</span><span class="nc">Object</span> <span class="n">object</span><span class="o">):</span> <span class="kt">boolean</span>
     </code></pre></figure>
 
 <p>　　这就是谓词函数，输入一个对象，返回true或者false。最近诞生了类似Apache Commons Collections的持有Apache 2.0许可的Google Guava。在Google Guava中，定义了Predicate接口，该接口包含一个带有泛型参数的方法：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">input</span><span class="o">):</span> <span class="kt">boolean</span>
+<span class="n">apply</span><span class="o">(</span><span class="no">T</span> <span class="n">input</span><span class="o">):</span> <span class="kt">boolean</span>
     </code></pre></figure>
 
 <p>　　如果想在程序中使用谓词函数，只需要利用自己的逻辑实现该接口即可。</p>

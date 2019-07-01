@@ -98,11 +98,10 @@
 
 <h2 id="前言">前言</h2>
 
-<p>       缓存在计算机的世界中是一个非常宽泛的概念，因为处处是缓存。操作系统可能缓存DNS的解析结果，浏览器可能缓存host文件，用户访问的资源可能缓存在CDN中，
-CPU可能会缓存操作数所属的内存块，数据库的查询结果也可能是缓存好的。总之不管是在系统架构中的哪一部份，都有缓存的身影。所以，抛开具体应用谈缓存是没有意义的，那样过于空泛。
-可以肯定的是，所有的缓存都是利用了数据的冗余提高性能，空间换时间，计算机的世界处处都是trade off。</p>
+<p>       缓存在计算机的世界中是一个非常宽泛的概念，因为处处是缓存的身影。操作系统可能缓存DNS的解析结果，浏览器可能缓存页面静态元素，用户访问的资源可能缓存在CDN中，
+CPU可能会缓存操作数所属的内存块，数据库的查询结果也可能是缓存好的。总之不管是在系统架构中的哪一层级，都有缓存的实现。所以，抛开具体应用谈缓存是没有意义的，那样过于空泛，但可以肯定的是，所有的缓存都是利用了数据的冗余提高性能，空间换时间，计算机的世界充斥着trade off。</p>
 
-<p>       本博文基于项目中的实际操作整理而来，仅讨论在DB和业务代码之间的缓存服务，主要分析笔者经历的项目中，根据不同的业务，采用了哪些更新策略（注，不讨论缓存的替换策略，如LRU等）。</p>
+<p>       本博文基于项目中的实际应用整理而来，仅讨论在DB和业务代码之间的缓存服务，主要分析笔者经历的项目中，根据不同的业务，采用了哪些更新策略（注，不讨论缓存的替换策略，如LRU等）。</p>
 
 <p><br /></p>
 
@@ -134,7 +133,7 @@ CPU可能会缓存操作数所属的内存块，数据库的查询结果也可�
 在C和C++中，由预处理命令实现条件编译。预处理命令由#开头，比如#ifdef：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//程序处于调试阶段，可以将调试日志打印出来 </span>
-<span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span></code></pre></figure>
+<span class="err">#</span><span class="n">ifdef</span> <span class="no">DEBUG</span></code></pre></figure>
 
 <p>       因C\C++的编译会最终生成目标机器的可执行文件，可执行文件是与平台极其相关的，因此C\C++程序可能会出现同一份代码需要分别根据平台进行编译的情况。</p>
 
@@ -242,8 +241,8 @@ CPU可能会缓存操作数所属的内存块，数据库的查询结果也可�
         <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PubStaticInnerClass</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PubStaticInnerClass</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 

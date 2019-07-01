@@ -122,13 +122,13 @@
 
 <span class="k">try</span> <span class="o">{</span>
 
-    <span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\..."</span><span class="o">);</span>
+    <span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\..."</span><span class="o">);</span>
 
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"File opened..."</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"File opened..."</span><span class="o">);</span>
 
-<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"File opening failed:"</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"File opening failed:"</span><span class="o">);</span>
 
     <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
 
@@ -144,11 +144,11 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\system.out.txt"</span><span class="o">);</span>
+<span class="nc">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\system.out.txt"</span><span class="o">);</span>
 
-<span class="n">PrintStream</span> <span class="n">printOut</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintStream</span><span class="o">(</span><span class="n">output</span><span class="o">);</span>
+<span class="nc">PrintStream</span> <span class="n">printOut</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PrintStream</span><span class="o">(</span><span class="n">output</span><span class="o">);</span>
 
-<span class="n">System</span><span class="o">.</span><span class="na">setOut</span><span class="o">(</span><span class="n">printOut</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">setOut</span><span class="o">(</span><span class="n">printOut</span><span class="o">);</span>
 
      </code></pre></figure>
 
