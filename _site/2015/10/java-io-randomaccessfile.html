@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
+        
           <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
         
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
         
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
-        
-          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
     </ul>
 </div>
@@ -106,7 +106,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
+<span class="n">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
 
     </code></pre></figure>
 
@@ -120,7 +120,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
+<span class="n">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
 
 <span class="n">file</span><span class="o">.</span><span class="na">seek</span><span class="o">(</span><span class="mi">200</span><span class="o">);</span>
 
@@ -136,7 +136,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
+<span class="n">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">aByte</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -150,7 +150,7 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
+<span class="n">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
 
 <span class="n">file</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
 

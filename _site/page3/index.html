@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
+        
           <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
         
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
         
-          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
-        
     </ul>
 </div>
 
@@ -89,6 +89,28 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/07/project-summary-1">Jul 11, 2016 - Project Summary 1</a></h1>
+        
+        <div class="content">
+		<h1 id="项目总结-2016年07月11日">项目总结-2016年07月11日</h1>
+
+<h3 id="线上服务健康状况监控与统计">线上服务健康状况监控与统计</h3>
+
+<p>统计与监控，个人感觉主要是离线与在线的区别。统计强调的是定时或者定量的离线数据分析，产生各项报表，用于对后续程序的优化及重构做决策。监控则对线上程序的实时状态做出反馈，需要在很短的时间间隔内对程序健康状况生成可视化的结果。一般来说，能满足监控需求的组件，也可满足统计的需求。</p>
+
+<p>针对进程的监控，市面上已经有许多解决方案了。如可以通过zabbix监控PHP实例，通过JMX端口 + jConsole或者visual VM远程监控JVM实例。</p>
+
+<p>对于web服务，利用nginx + zabbix（本身可监控服务器各项指标，如cpu、IO、网络等），可实现单个接口粒度的执行情况统计，如次数、平均响应时间、总响应时间等等。</p>
+
+<p>对于RPC服务的程序，同样可以利用入口的负载均衡LB实现监控</p>
+
+		<h1><a href="/2016/07/project-summary-1">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2016/07/summary-synchronized-error">Jul 3, 2016 - 对包装类型变量使用synchronized不当造成的同步不正确</a></h1>
@@ -183,37 +205,14 @@
 <p>　　List&lt;? extends Number&gt; foo3的通配符声明，意味着以下的赋值是合法的：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Number "extends" Number (in this context)</span>
-<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Number</span><span class="o">&gt;();</span>  
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;();</span>  
 <span class="c1">// Integer extends Number</span>
-<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span> 
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span> 
 <span class="c1">// Double extends Number</span>
-<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;();</span>  </code></pre></figure>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;();</span>  </code></pre></figure>
 
 
 		<h1><a href="/2015/10/java-qa-generics-extends-super">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-fp-java8-lambda">Oct 22, 2015 - 一个Java 8中简单Lambda表达式程序</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://www.javacodegeeks.com/2013/05/a-simple-application-of-lambda-expressions-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
-
-<p>　　我尝试过把Lambda表达式融入到我的代码中，下面的代码例子是此次尝试的结果。对于那些完全不知道Lambda表达式的Java程序员，我强烈建议在继续阅读之前，浏览一下<a href="http://blog.sanaulla.info/2013/03/11/using-lambda-expression-to-sort-a-list-in-java-8-using-netbeans-lambda-support/">这篇文章</a>。</p>
-
-<p>　　Ok，现在你已经熟悉Lambda表达式了（在阅读过推荐的Lambda入门文章之后），那我们现在开始学习一个我认为很好的Lambda表达式的例子。</p>
-
-<p>　　考虑一下这种场景：某些操作在执行之前需要做预处理，执行之后需要做后期处理。待执行的操作会随着行为的不同而变化。预处理会提取出这个操作所需的必要参数，后期处理做一些清理的工作。</p>
-
-<p>　　我们来看看如何利用接口与接口的匿名实现类模拟这个场景。</p>
-
-
-		<h1><a href="/2015/10/java-fp-java8-lambda">阅读全文</a></h1>
         </div>
     </div>
 </div>

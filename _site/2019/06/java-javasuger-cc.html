@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
+        
           <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
         
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
         
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
-        
-          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
     </ul>
 </div>
@@ -107,7 +107,7 @@
 在C和C++中，由预处理命令实现条件编译。预处理命令由#开头，比如#ifdef：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//程序处于调试阶段，可以将调试日志打印出来 </span>
-<span class="err">#</span><span class="n">ifdef</span> <span class="no">DEBUG</span></code></pre></figure>
+<span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span></code></pre></figure>
 
 <p>       因C\C++的编译会最终生成目标机器的可执行文件，可执行文件是与平台极其相关的，因此C\C++程序可能会出现同一份代码需要分别根据平台进行编译的情况。</p>
 
@@ -163,9 +163,9 @@
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCC</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">flag</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"print false"</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"print false"</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -180,7 +180,7 @@
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCC</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 

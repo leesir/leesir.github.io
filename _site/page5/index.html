@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
+        
           <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
         
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
         
-          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
-        
     </ul>
 </div>
 
@@ -89,6 +89,39 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-fp-predicate1">Oct 20, 2015 - Java中函数式编程的谓词函数(Predicates)第一部分</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Cyrille-Martraire/">Cyrille Martraire</a></p>
+
+<p>　　你一直在听说函数式编程将称霸整个编程届，而自己仍然沉浸在普通的Java里？请不要担心，因为你已经在日常Java代码中加入了函数式编程的特性。此外，函数式编程很有趣，能够帮你节省多行代码并且降低错误率。</p>
+
+<p>#什么是谓词函数？</p>
+
+<p>　　许久之前，那时我还在用Java 1.4进行编码，当我第一次发现Apache Commons Collections，便爱上了谓词函数。Apache Commons Collections里的谓词函数仅仅只是一个只有一个方法的接口：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">evaluate</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">):</span> <span class="kt">boolean</span>
+    </code></pre></figure>
+
+<p>　　这就是谓词函数，输入一个对象，返回true或者false。最近诞生了类似Apache Commons Collections的持有Apache 2.0许可的Google Guava。在Google Guava中，定义了Predicate接口，该接口包含一个带有泛型参数的方法：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">input</span><span class="o">):</span> <span class="kt">boolean</span>
+    </code></pre></figure>
+
+<p>　　如果想在程序中使用谓词函数，只需要利用自己的逻辑实现该接口即可。</p>
+
+
+		<h1><a href="/2015/10/java-fp-predicate1">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-fp-faking-closure-factory">Oct 20, 2015 - Java Functional Programming: 伪造闭包工厂，创建域对象</a></h1>
@@ -108,21 +141,21 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FooFactory</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">RandomService</span> <span class="n">randomService</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">RandomService</span> <span class="n">randomService</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">FooFactory</span><span class="o">(</span><span class="nc">RandomService</span> <span class="n">randomService</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">FooFactory</span><span class="o">(</span><span class="n">RandomService</span> <span class="n">randomService</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">randomService</span> <span class="o">=</span> <span class="n">randomService</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="nc">Foo</span> <span class="nf">createFoo</span><span class="o">(</span><span class="nc">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Foo</span> <span class="nf">createFoo</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">Foo</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span> <span class="n">baz</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">bar</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">bar</span><span class="o">;</span>
         <span class="kd">private</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">;</span>
 
-        <span class="kd">public</span> <span class="nf">Foo</span><span class="o">(</span><span class="nc">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">Foo</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">bar</span> <span class="o">=</span> <span class="n">bar</span><span class="o">;</span>
             <span class="k">this</span><span class="o">.</span><span class="na">baz</span> <span class="o">=</span> <span class="n">baz</span><span class="o">;</span>
         <span class="o">}</span>
@@ -227,7 +260,7 @@
 <p>　　PushbackInputStream用于解析InputStream内的数据。有时候你需要提前知道接下来将要读取到的字节内容，才能判断用何种方式进行数据解析。PushBackInputStream允许你这么做，你可以把读取到的字节重新推回到InputStream中，以便再次通过read()读取。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
+<span class="n">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -237,50 +270,13 @@
 <p>　　可以通过PushBackInputStream的构造函数设置推回缓冲区的大小，代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
+<span class="n">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
     </code></pre></figure>
 
 <p>　　这个例子设置了8个字节的缓冲区，意味着你最多可以重新读取8个字节的数据。</p>
 
 
 		<h1><a href="/2015/10/java-io-otherstream">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-otherreader">Oct 16, 2015 - Java IO: 其他字符流(下)</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>作者: Jakob Jenkov</p>
-
-<p>　　本小节会简要概括Java IO中的PushbackReader，LineNumberReader，StreamTokenizer，PrintWriter，StringReader，StringWriter。</p>
-
-<p>#PushbackReader</p>
-
-<p>　　<a href="http://tutorials.jenkov.com/java-io/pushbackreader.html">原文链接</a></p>
-
-<p>　　PushbackReader与PushbackInputStream类似，唯一不同的是PushbackReader处理字符，PushbackInputStream处理字节。代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="n">reader</span><span class="o">.</span><span class="na">unread</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-    </code></pre></figure>
-
-<p>　　同样可以设置缓冲区大小，代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
-    </code></pre></figure>
-
-
-		<h1><a href="/2015/10/java-io-otherreader">阅读全文</a></h1>
         </div>
     </div>
 </div>

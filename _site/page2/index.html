@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
+        
           <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
         
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
         
-          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
-        
     </ul>
 </div>
 
@@ -89,6 +89,55 @@
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2019/06/java-javasuger-innerclass">Jun 13, 2019 - Java语法糖-内部类</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>       Java中有5种内部类，公有静态内部类，私有静态内部类，公有内部类，私有内部类，匿名内部类。这里我们不谈各种内部类的使用场景，不对比优劣，仅从语法糖的角度学习Java是怎么实现内部类的。</p>
+
+<h2 id="1静态内部类">1.静态内部类</h2>
+
+<p>       静态内部类的初始化，不依赖于外部类的实例，并且不能访问外部类的实例变量，不能调用外部类的实例方法。</p>
+
+<h4 id="公有静态内部类">公有静态内部类</h4>
+
+<p>       测试代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPubStaticInnerClass</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">priStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">pubStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">priFOut</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">pubFOut</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">PubStaticInnerClass</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="nf">fPubStaticInnerClass</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">priFOut</span><span class="o">();</span>
+            <span class="n">pubFOut</span><span class="o">();</span>
+            <span class="k">return</span> <span class="n">priStaticValue</span> <span class="o">+</span> <span class="n">pubStaticValue</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PubStaticInnerClass</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+
+		<h1><a href="/2019/06/java-javasuger-innerclass">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2019/06/java-javasuger">Jun 6, 2019 - Java语法糖</a></h1>
@@ -111,8 +160,8 @@
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="c1">//以下代码为命令行启动java的范例，各个IDE也有相应修改参数的地方，这里不再赘述</span>
 
-<span class="n">java</span> <span class="o">-</span><span class="n">ea</span> <span class="nc">Main</span>
-<span class="n">java</span> <span class="o">-</span><span class="n">enableassertions</span> <span class="nc">Main</span></code></pre></figure>
+<span class="n">java</span> <span class="o">-</span><span class="n">ea</span> <span class="n">Main</span>
+<span class="n">java</span> <span class="o">-</span><span class="n">enableassertions</span> <span class="n">Main</span></code></pre></figure>
 
 
 		<h1><a href="/2019/06/java-javasuger">阅读全文</a></h1>
@@ -174,28 +223,6 @@
 
 
 		<h1><a href="/2016/07/project-summary-2">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2016/07/project-summary-1">Jul 11, 2016 - Project Summary 1</a></h1>
-        
-        <div class="content">
-		<h1 id="项目总结-2016年07月11日">项目总结-2016年07月11日</h1>
-
-<h3 id="线上服务健康状况监控与统计">线上服务健康状况监控与统计</h3>
-
-<p>统计与监控，个人感觉主要是离线与在线的区别。统计强调的是定时或者定量的离线数据分析，产生各项报表，用于对后续程序的优化及重构做决策。监控则对线上程序的实时状态做出反馈，需要在很短的时间间隔内对程序健康状况生成可视化的结果。一般来说，能满足监控需求的组件，也可满足统计的需求。</p>
-
-<p>针对进程的监控，市面上已经有许多解决方案了。如可以通过zabbix监控PHP实例，通过JMX端口 + jConsole或者visual VM远程监控JVM实例。</p>
-
-<p>对于web服务，利用nginx + zabbix（本身可监控服务器各项指标，如cpu、IO、网络等），可实现单个接口粒度的执行情况统计，如次数、平均响应时间、总响应时间等等。</p>
-
-<p>对于RPC服务的程序，同样可以利用入口的负载均衡LB实现监控</p>
-
-		<h1><a href="/2016/07/project-summary-1">阅读全文</a></h1>
         </div>
     </div>
 </div>

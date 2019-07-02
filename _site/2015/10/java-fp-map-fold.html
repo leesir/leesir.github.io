@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
+        
           <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
         
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
         
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
-        
-          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
     </ul>
 </div>
@@ -117,8 +117,8 @@
 <p>　　现在将这个方法应用到每份金额上：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="nf">addVAT</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="n">amounts</span><span class="o">,</span> <span class="kt">double</span> <span class="n">rate</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="n">amountsWithVAT</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;();</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="nf">addVAT</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">amounts</span><span class="o">,</span> <span class="kt">double</span> <span class="n">rate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">amountsWithVAT</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;();</span>
     <span class="k">for</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span> <span class="o">:</span> <span class="n">amounts</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">amountsWithVAT</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">addVAT</span><span class="o">(</span><span class="n">amount</span><span class="o">,</span> <span class="n">rate</span><span class="o">));</span>
     <span class="o">}</span>
@@ -131,8 +131,8 @@
 <p>　　现在我们想利用汇率把每一份金额转换成另一种货币的金额，所以我们需要一个新的函数：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="nf">convertCurrency</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="n">amounts</span><span class="o">,</span> <span class="kt">double</span> <span class="n">currencyRate</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="n">amountsInCurrency</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;();</span>
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="nf">convertCurrency</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">amounts</span><span class="o">,</span> <span class="kt">double</span> <span class="n">currencyRate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">amountsInCurrency</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;();</span>
     <span class="k">for</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span> <span class="o">:</span> <span class="n">amounts</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">amountsInCurrency</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">convertCurrency</span><span class="o">(</span><span class="n">amount</span><span class="o">,</span> <span class="n">currencyRate</span><span class="o">));</span>
     <span class="o">}</span>
@@ -153,7 +153,7 @@
 <p>　　函数式编程语言意识到这样特殊的需求（为集合中每个元素应用某个方法）是非常常见的，所以设计者把这种行为封装到了内建函数Map中。这意味着，对于给定的addVAT(double, double) 方法，我们可以直接利用Map操作写出这样的代码：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">List</span> <span class="n">amountsWithVAT</span> <span class="o">=</span> <span class="n">map</span> <span class="o">(</span><span class="n">addVAT</span><span class="o">,</span> <span class="n">amounts</span><span class="o">,</span> <span class="n">rate</span><span class="o">);</span>
+<span class="n">List</span> <span class="n">amountsWithVAT</span> <span class="o">=</span> <span class="n">map</span> <span class="o">(</span><span class="n">addVAT</span><span class="o">,</span> <span class="n">amounts</span><span class="o">,</span> <span class="n">rate</span><span class="o">);</span>
     </code></pre></figure>
 
 <p>　　是的，第一个参数是一个函数。因为在函数式编程语言中，函数是第一要素，所以函数可以被当做是参数传递给方法。</p>
@@ -167,7 +167,7 @@
 <p>　　回到之前提到的包含了金额的列表中，现在我们需要计算列表中每个金额之和。很简单，我们用循环实现：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="kt">double</span> <span class="nf">totalAmount</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="n">amounts</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">double</span> <span class="nf">totalAmount</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">amounts</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">double</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
     <span class="k">for</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span> <span class="o">:</span> <span class="n">amounts</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">sum</span> <span class="o">+=</span> <span class="n">amount</span><span class="o">;</span>
@@ -207,13 +207,13 @@
 <p>　　Google Guava的Iterables提供了一个静态的Map操作方法transform(Iterable, Function)。</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="n">exVat</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="k">new</span> <span class="nc">Double</span><span class="o">[]</span> <span class="o">{</span> <span class="mi">99</span><span class="o">.,</span> <span class="mi">127</span><span class="o">.,</span> <span class="mi">35</span><span class="o">.</span> <span class="o">});</span>
-<span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="n">incVat</span> <span class="o">=</span> <span class="nc">Iterables</span><span class="o">.</span><span class="na">transform</span><span class="o">(</span><span class="n">exVat</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">,</span> <span class="nc">Double</span><span class="o">&gt;()</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nc">Double</span> <span class="nf">apply</span><span class="o">(</span><span class="nc">Double</span> <span class="n">exVat</span><span class="o">)</span> <span class="o">{</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">exVat</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="k">new</span> <span class="n">Double</span><span class="o">[]</span> <span class="o">{</span> <span class="mi">99</span><span class="o">.,</span> <span class="mi">127</span><span class="o">.,</span> <span class="mi">35</span><span class="o">.</span> <span class="o">});</span>
+<span class="n">Iterable</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">incVat</span> <span class="o">=</span> <span class="n">Iterables</span><span class="o">.</span><span class="na">transform</span><span class="o">(</span><span class="n">exVat</span><span class="o">,</span> <span class="k">new</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">,</span> <span class="n">Double</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Double</span> <span class="nf">apply</span><span class="o">(</span><span class="n">Double</span> <span class="n">exVat</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">exVat</span> <span class="o">*</span> <span class="o">(</span><span class="mf">1.196</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">});</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">incVat</span><span class="o">);</span> <span class="c1">//print [118.404, 151.892, 41.86]</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">incVat</span><span class="o">);</span> <span class="c1">//print [118.404, 151.892, 41.86]</span>
     </code></pre></figure>
 
 <p>　　类似的transform方法的实现同样可以用在List和Map集合类中。</p>
@@ -224,30 +224,30 @@
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="c1">// the closure interface with same input/output type</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Closure</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="no">T</span> <span class="nf">execute</span><span class="o">(</span><span class="no">T</span> <span class="n">value</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Closure</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="n">T</span> <span class="nf">execute</span><span class="o">(</span><span class="n">T</span> <span class="n">value</span><span class="o">);</span>
 <span class="o">}</span>
 <span class="c1">// an example of a concrete closure</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SummingClosure</span> <span class="kd">implements</span> <span class="nc">Closure</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SummingClosure</span> <span class="kd">implements</span> <span class="n">Closure</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kt">double</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="nc">Double</span> <span class="nf">execute</span><span class="o">(</span><span class="nc">Double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Double</span> <span class="nf">execute</span><span class="o">(</span><span class="n">Double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">sum</span> <span class="o">+=</span> <span class="n">amount</span><span class="o">;</span> <span class="c1">// apply '+=' operator</span>
         <span class="k">return</span> <span class="n">sum</span><span class="o">;</span> <span class="c1">// return current accumulated value</span>
     <span class="o">}</span>
 <span class="o">}</span> 
 <span class="c1">// the poor man Fold operator</span>
-<span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">foreach</span><span class="o">(</span><span class="nc">Iterable</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="nc">Closure</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">closure</span><span class="o">)</span> <span class="o">{</span>
-    <span class="no">T</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="no">T</span> <span class="n">t</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">foreach</span><span class="o">(</span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="n">Closure</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">closure</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">T</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">T</span> <span class="n">t</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">closure</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
     <span class="o">}</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">;}</span>
 <span class="nd">@Test</span> <span class="c1">// example of use</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testFold</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-    <span class="nc">SummingClosure</span> <span class="n">closure</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SummingClosure</span><span class="o">();</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;</span> <span class="n">exVat</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="k">new</span> <span class="nc">Double</span><span class="o">[]</span> <span class="o">{</span> <span class="mi">99</span><span class="o">.,</span> <span class="mi">127</span><span class="o">.,</span> <span class="mi">35</span><span class="o">.</span> <span class="o">});</span>
-    <span class="nc">Double</span> <span class="n">result</span> <span class="o">=</span> <span class="n">foreach</span><span class="o">(</span><span class="n">exVat</span><span class="o">,</span> <span class="n">closure</span><span class="o">);</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span><span class="c1">// print 261.0</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testFold</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="n">SummingClosure</span> <span class="n">closure</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SummingClosure</span><span class="o">();</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;</span> <span class="n">exVat</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="k">new</span> <span class="n">Double</span><span class="o">[]</span> <span class="o">{</span> <span class="mi">99</span><span class="o">.,</span> <span class="mi">127</span><span class="o">.,</span> <span class="mi">35</span><span class="o">.</span> <span class="o">});</span>
+    <span class="n">Double</span> <span class="n">result</span> <span class="o">=</span> <span class="n">foreach</span><span class="o">(</span><span class="n">exVat</span><span class="o">,</span> <span class="n">closure</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span><span class="c1">// print 261.0</span>
 <span class="o">}</span>
     </code></pre></figure>
 
@@ -260,8 +260,8 @@
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">...{</span>
     <span class="o">...</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="o">(</span><span class="nc">Closure</span> <span class="n">closure</span><span class="o">){...}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">bfs</span><span class="o">(</span><span class="nc">Closure</span> <span class="n">closure</span><span class="o">){...}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="o">(</span><span class="n">Closure</span> <span class="n">closure</span><span class="o">){...}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">bfs</span><span class="o">(</span><span class="n">Closure</span> <span class="n">closure</span><span class="o">){...}</span>
 <span class="o">}</span>
     </code></pre></figure>
 

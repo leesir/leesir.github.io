@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
+        
           <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
         
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
@@ -72,8 +74,6 @@
         
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
         
-          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
-        
     </ul>
 </div>
 
@@ -91,6 +91,21 @@
             
 <div class="article">
     <div class="well">
+        <h1><a href="/2015/09/java-io-overview">Sep 24, 2015 - Java IO 概述</a></h1>
+        
+        <div class="content">
+		<p><a href="http://tutorials.jenkov.com/java-io/overview.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>在这一小节，我会试着给出Java IO(java.io)包下的类的概述。更具体地说，我会根据类的用途对类进行分组。这个分组将会使你在未来的工作中，在对类的用途的判定或者是为某个特定用途选择类时，更加容易。</p>
+
+
+		<h1><a href="/2015/09/java-io-overview">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
         <h1><a href="/2015/09/why-zero">Sep 14, 2015 - 为何从10开始到99连续相乘会得到0?</a></h1>
         
         <div class="content">
@@ -99,12 +114,12 @@
 <p>这是一块非常简单的Java代码片段</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="o">{</span>      
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="o">[]</span><span class="n">args</span><span class="o">)</span> <span class="o">{</span>        
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="o">[]</span><span class="n">args</span><span class="o">)</span> <span class="o">{</span>        
         <span class="kt">int</span> <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>        
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">99</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>            
              <span class="n">product</span> <span class="o">*=</span> <span class="n">i</span><span class="o">;</span>        	 
         <span class="o">}</span>        
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>    
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>    
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 

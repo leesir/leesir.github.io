@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
+        
           <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
         
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
         
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
-        
-          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
     </ul>
 </div>
@@ -119,9 +119,9 @@
 <p>　　ObjectInputStream能够让你从输入流中读取Java对象，而不需要每次读取一个字节。你可以把InputStream包装到ObjectInputStream中，然后就可以从中读取对象了。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">ObjectInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"object.data"</span><span class="o">));</span>
+<span class="n">ObjectInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"object.data"</span><span class="o">));</span>
 
-<span class="nc">MyClass</span> <span class="n">object</span> <span class="o">=</span> <span class="o">(</span><span class="nc">MyClass</span><span class="o">)</span> <span class="n">input</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span> <span class="c1">//etc.</span>
+<span class="n">MyClass</span> <span class="n">object</span> <span class="o">=</span> <span class="o">(</span><span class="n">MyClass</span><span class="o">)</span> <span class="n">input</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span> <span class="c1">//etc.</span>
 
 <span class="n">input</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
     </code></pre></figure>
@@ -137,9 +137,9 @@
 <p>　　ObjectOutputStream能够让你把对象写入到输出流中，而不需要每次写入一个字节。你可以把OutputStream包装到ObjectOutputStream中，然后就可以把对象写入到该输出流中了。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">ObjectOutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="s">"object.data"</span><span class="o">));</span>
+<span class="n">ObjectOutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"object.data"</span><span class="o">));</span>
 
-<span class="nc">MyClass</span> <span class="n">object</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyClass</span><span class="o">();</span>  <span class="n">output</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">object</span><span class="o">);</span> <span class="c1">//etc.</span>
+<span class="n">MyClass</span> <span class="n">object</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="o">();</span>  <span class="n">output</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">object</span><span class="o">);</span> <span class="c1">//etc.</span>
 
 <span class="n">output</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
     </code></pre></figure>

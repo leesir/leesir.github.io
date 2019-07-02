@@ -54,6 +54,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+          <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
+        
           <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
         
           <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
@@ -71,8 +73,6 @@
           <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
         
           <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
-        
-          <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
     </ul>
 </div>
@@ -107,9 +107,9 @@
 <p>　　InputStreamReader会包含一个InputStream，从而可以将该输入字节流转换成字符流，代码例子：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">);</span>
 
-<span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="n">inputStream</span><span class="o">);</span>
+<span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">inputStream</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -145,9 +145,9 @@
 <p>　　InputStreamReader同样拥有其他可选的构造函数，能够让你指定将底层字节流解释成何种编码的字符流。例子如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">);</span>
 
-<span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="n">inputStream</span><span class="o">,</span> <span class="s">"UTF-8"</span><span class="o">);</span>
+<span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">inputStream</span><span class="o">,</span> <span class="s">"UTF-8"</span><span class="o">);</span>
     </code></pre></figure>
 
 <p>　　注意构造函数的第二个参数，此时该InputStreamReader会将输入的字节流转换成UTF8字符流。</p>
@@ -159,9 +159,9 @@
 <p>OutputStreamWriter会包含一个OutputStream，从而可以将该输出字节流转换成字符流，代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">OutputStream</span> <span class="n">outputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">);</span>
+<span class="n">OutputStream</span> <span class="n">outputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">);</span>
 
-<span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OutputStreamWriter</span><span class="o">(</span><span class="n">outputStream</span><span class="o">);</span>
+<span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OutputStreamWriter</span><span class="o">(</span><span class="n">outputStream</span><span class="o">);</span>
 
 <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">);</span>
 
