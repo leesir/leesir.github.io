@@ -105,7 +105,7 @@
 <ul>
   <li>在使用集合类时，将以往JDK版本的类型错配报错，由运行时提前到了编译期，使得代码不再需要处理ClassCastException。</li>
   <li>在访问泛型元素时，不再需要强制转换对象类型，代码更加简洁优雅。</li>
-  <li>泛型类提高了代码复用率。</li>
+  <li>泛型提高了代码复用率。</li>
 </ul>
 
 <p><br /></p>
@@ -123,11 +123,11 @@
 
 <p><br /></p>
 
-<h2 id="实现">实现</h2>
+<h2 id="代码实例">代码实例</h2>
 
 <p><br /></p>
 
-<p>       在编写泛型代码中，需要遵循Java的泛型命名规范。在Oracle官方教程中，最常用的泛型名称如下所示：</p>
+<p>       在编写泛型代码中，需要遵循Java的泛型命名规范。在<a href="https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html">Oracle官方教程</a>中，最常用的泛型名称如下所示：</p>
 
 <ul>
   <li>E，表示元素，广泛用于JDK的集合框架中。</li>
@@ -164,29 +164,117 @@
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
+<p class="center">代码清单java-sugar-generic1</p>
+
+<p><br /></p>
+
 <p>       TestGenericSimple的用法如下所示：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//完整写法</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//1. 完整写法</span>
 <span class="n">TestGenericSimple</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">test1A</span> <span class="o">=</span>  <span class="k">new</span> <span class="n">TestGenericSimple</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(</span><span class="s">"test1A"</span><span class="o">);</span>
 <span class="n">String</span> <span class="n">testAValue</span> <span class="o">=</span> <span class="n">test1A</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span>
 
-<span class="c1">//JDK 1.7之后的类型推导写法</span>
+<span class="c1">//2. JDK 1.7之后的类型推导写法</span>
 <span class="n">TestGenericSimple</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">test1B</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestGenericSimple</span><span class="o">&lt;&gt;(</span><span class="s">"test1B"</span><span class="o">);</span>
 <span class="n">String</span> <span class="n">testBValue</span> <span class="o">=</span> <span class="n">test1A</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span>
 
-<span class="c1">//raw type写法</span>
+<span class="c1">//3. raw type写法</span>
 <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
 <span class="n">TestGenericSimple</span> <span class="n">test1C</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestGenericSimple</span><span class="o">(</span><span class="s">"test1C"</span><span class="o">);</span>
 <span class="n">String</span> <span class="n">testCValue</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">test1C</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span></code></pre></figure>
 
-<p>       在intelliJ IDEA中，会对完整写法给出提示“Explicit type argument String can be replaced with &lt;&gt;”，这是因为可以使用尖括号&lt;&gt;让Java做类型推导。
-而对于泛型类的raw type，编译器会给出警告“Unchecked call”，可以给实例化泛型类的方法或语句上新增@SuppressWarnings(“unchecked”)取消警告。上述3种写法中，推荐第2种，让Java自行做类型推导。</p>
+<p class="center">代码清单java-sugar-generic2</p>
 
 <p><br /></p>
 
-<h4 id="1泛型方法">1.泛型方法</h4>
+<p>       在intelliJ IDEA中，会对完整写法给出提示“Explicit type argument String can be replaced with &lt;&gt;”，这是因为可以使用尖括号&lt;&gt;让Java做类型推导。
+而对于泛型类的raw type，编译器会给出警告“Unchecked call”，可以给实例化泛型类的方法或语句上新增@SuppressWarnings(“unchecked”)取消警告。上述3种写法中，推荐第2种，让Java自行做类型推导。
+注：仅当泛型类在初始化时缺失了泛型参数，才被称作raw type，非泛型类没有raw type的说法。</p>
 
-<p>       泛型方法（静态或非静态）的定义和泛型类的定义类似，不过泛型的作用于仅局限于该方法内部。</p>
+<p><br /></p>
+
+<h4 id="2泛型方法">2.泛型方法</h4>
+
+<p>       泛型方法（静态或非静态）的定义和泛型类的定义类似，不过泛型的范围于仅局限于该方法内部。
+与非泛型方法不同的是，需要将该方法内所有泛型用尖括号包含起来，并写在泛型方法返回值之前。测试代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestGenericMethod</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">p1</span><span class="o">,</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">p2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">p1</span><span class="o">.</span><span class="na">getKey</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">p2</span><span class="o">.</span><span class="na">getKey</span><span class="o">())</span> <span class="o">&amp;&amp;</span>
+                <span class="n">p1</span><span class="o">.</span><span class="na">getValue</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">p2</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">compare2</span><span class="o">(</span><span class="n">T</span> <span class="n">object1</span><span class="o">,</span> <span class="n">T</span> <span class="n">object2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">object1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">object2</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">compare3</span><span class="o">(</span><span class="n">T</span> <span class="n">object1</span><span class="o">,</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">p1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">object1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">p1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="n">K</span> <span class="n">key</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">V</span> <span class="n">value</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">Pair</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setKey</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">K</span> <span class="nf">getKey</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">key</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">V</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单java-sugar-generic3</p>
+
+<p><br /></p>
+
+<p>       在代码清单java-sugar-generic3中，我们定义了1个泛型类Pair，3个泛型方法，分别为compare，compare2，compare3。
+可以看到返回值之前，需要写明该方法的所有泛型，如&lt;K, V&gt;、&lt;T, K, V&gt;。上述代码的调用如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//1. 完整写法</span>
+<span class="kt">boolean</span> <span class="n">compareResult</span> <span class="o">=</span> <span class="n">TestGenericMethod</span><span class="o">.&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span><span class="n">compare</span><span class="o">(</span><span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;(</span><span class="s">"key1"</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;(</span><span class="s">"key2"</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
+<span class="kt">boolean</span> <span class="n">compare3Result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestGenericMethod</span><span class="o">().&lt;</span><span class="n">Object</span><span class="o">,</span> <span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span><span class="n">compare3</span><span class="o">(</span><span class="k">new</span> <span class="n">Object</span><span class="o">(),</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;(</span><span class="s">"key3"</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
+
+<span class="c1">//2. 类型推导写法</span>
+<span class="kt">boolean</span> <span class="n">compareResult1</span> <span class="o">=</span> <span class="n">TestGenericMethod</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;&gt;(</span><span class="s">"key1"</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;&gt;(</span><span class="s">"key2"</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
+<span class="kt">boolean</span> <span class="n">compare3Result1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestGenericMethod</span><span class="o">().</span><span class="na">compare3</span><span class="o">(</span><span class="k">new</span> <span class="n">Object</span><span class="o">(),</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;&gt;(</span><span class="s">"key3"</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span></code></pre></figure>
+
+<p class="center">代码清单java-sugar-generic4</p>
+
+<p><br /></p>
+
+<p>       在代码清单java-sugar-generic4中，有2种写法：完整写法和类型推导写法。同样intelliJ IDEA会对完整写法给出提示“Explicit type argument String can be replaced with &lt;&gt;”，建议实际代码中使用类型推导写法。</p>
+
+<p><br /></p>
+
+<h2 id="泛型其他方面">泛型其他方面</h2>
+
+<p><br /></p>
+
+<p>       在本博文中，展示了Java泛型的语法和用法。由于篇幅关系，将泛型的其他方面单独作为独立的文章进行叙述：</p>
+
+<ul>
+  <li>类型擦除</li>
+  <li>泛型类之间的关系</li>
+  <li>泛型边界与通配符</li>
+</ul>
 
 <p><br /></p>
 
