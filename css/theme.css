@@ -54,3 +54,8 @@ body {
     text-align: center;
     margin: 0 auto;
 }
+
+.combine-header {
+    width: 1200px;
+    margin: 0 auto;
+}
