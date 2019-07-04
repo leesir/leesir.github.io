@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
+        
         <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
         
         <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
         
-        <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,55 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-fp-predicate2">2015-10-20  Java中函数式编程的谓词函数(Predicates)第二部分</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with_23.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Cyrille-Martraire/">Cyrille Martraire</a></p>
+
+<p>　　在上一篇文章中我们介绍了谓词函数。通过一个简单的只带一个返回值是true或者false的函数的接口，把函数式编程语言的优势带入到了类似Java的面向对象编程语言中。这一小节，我们将会介绍一些高级特性，方便你高效利用谓词函数。</p>
+
+<p>#测试</p>
+
+<p>　　在测试代码中使用谓词的优势尤为明显。当你需要测试一个混合了数据结构与某些条件逻辑的方法时，通过使用谓词，你可以先单独测试数据结构，再测试条件逻辑。</p>
+
+<p>　　第一步，先利用永真谓词或者永假谓词屏蔽用于判断的逻辑，将注意力集中在测试数据结构上：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="c1">// check with the always-true predicate</span>
+
+<span class="kd">final</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">all</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysTrue</span><span class="o">());</span>
+
+<span class="n">assertEquals</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">Iterables</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="n">all</span><span class="o">));</span> 
+
+<span class="c1">// check with the always-false predicat</span>
+
+<span class="n">eassertTrue</span><span class="o">(</span><span class="n">Iterables</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysFalse</span><span class="o">())));</span>
+    </code></pre></figure>
+
+<p>　　第二步，你可以分开测试每个谓词了：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">final</span> <span class="n">CustomerPredicate</span> <span class="n">isForCustomer1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomerPredicate</span><span class="o">(</span><span class="n">CUSTOMER_1</span><span class="o">);</span>
+
+<span class="n">assertTrue</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">ORDER_1</span><span class="o">));</span> <span class="c1">// ORDER_1 is for CUSTOMER_1</span>
+
+<span class="n">assertFalse</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">ORDER_2</span><span class="o">));</span> <span class="c1">// ORDER_2 is for CUSTOMER_2</span>
+    </code></pre></figure>
+
+<p>　　例子简单，却见微知著。为了测试更加复杂的逻辑，你可能需要构建模拟谓词应对测试不够充分的情况。比如，一个第一次返回true，之后都返回false的谓词。通过严格分离关注点，谓词可以大大简化你的测试计划。</p>
+
+<p>　　如果你想测试驱动开发（TDD），谓词是一个不错的选择，如果你能通过测试的方式影响你的设计，之后你便会发现谓词很容易就融入到你的设计中。</p>
+
+
+		<h1><a href="/2015/10/java-fp-predicate2">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-fp-predicate1">2015-10-20  Java中函数式编程的谓词函数(Predicates)第一部分</a></h1>
@@ -254,45 +303,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 </ol>
 
 		<h1><a href="/2015/10/java-fp-functional-programming-overview">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-otherstream">2015-10-16  Java IO: 其他字节流(上)</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>作者: Jakob Jenkov</p>
-
-<p>　　本小节会简要概括Java IO中的PushbackInputStream，SequenceInputStream和PrintStream。其中，最常用的是PrintStream，System.out和System.err都是PrintStream类型的变量，请查看<a href="http://leesir.github.io/2015/10/java-io-systemstream/">Java IO: System.in, System.out, System.err</a>浏览更多关于System.out和System.err的信息。</p>
-
-<p>#PushbackInputStream</p>
-
-<p>　　<a href="http://tutorials.jenkov.com/java-io/pushbackinputstream.html">原文链接</a></p>
-
-<p>　　PushbackInputStream用于解析InputStream内的数据。有时候你需要提前知道接下来将要读取到的字节内容，才能判断用何种方式进行数据解析。PushBackInputStream允许你这么做，你可以把读取到的字节重新推回到InputStream中，以便再次通过read()读取。代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="n">input</span><span class="o">.</span><span class="na">unread</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-    </code></pre></figure>
-
-<p>　　可以通过PushBackInputStream的构造函数设置推回缓冲区的大小，代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">PushbackInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
-    </code></pre></figure>
-
-<p>　　这个例子设置了8个字节的缓冲区，意味着你最多可以重新读取8个字节的数据。</p>
-
-
-		<h1><a href="/2015/10/java-io-otherstream">阅读全文</a></h1>
         </div>
     </div>
 </div>

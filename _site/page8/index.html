@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
+        
         <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
         
         <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
         
-        <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,43 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-PipedInputStream">2015-10-13  Java IO: PipedInputStream</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/pipedinputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　PipedInputStream可以从管道中读取字节流数据，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedInputStream</span><span class="o">(</span><span class="n">pipedOutputStream</span><span class="o">);</span>
+
+<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">//do something with data...</span>
+
+    <span class="n">doSomethingWithData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="o">}</span>
+
+<span class="n">input</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    </code></pre></figure>
+
+
+		<h1><a href="/2015/10/java-io-PipedInputStream">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-ByteArray-Filter">2015-10-13  Java IO: ByteArray和Filter</a></h1>
@@ -244,43 +281,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2015/10/java-io-fileoutputstream">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-fileinputstream">2015-10-12  Java IO: FileInputStream</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://tutorials.jenkov.com/java-io/fileinputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　FileInputStream可以以字节流的形式读取文件内容。FileInputStream是InputStream的子类，这意味着你可以把FileInputStream当做InputStream使用(FileInputStream与InputStream的行为类似)。</p>
-
-<p>　　这是一个FileInputStream的例子：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span><span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="c1">//do something with data...</span>
-
-    <span class="n">doSomethingWithData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-
-    <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="o">}</span>
-
-<span class="n">input</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-
-    </code></pre></figure>
-
-
-		<h1><a href="/2015/10/java-io-fileinputstream">阅读全文</a></h1>
         </div>
     </div>
 </div>

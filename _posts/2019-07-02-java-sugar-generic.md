@@ -27,14 +27,13 @@ tags: [Java Language]
 
 <br>
 
-&#160; &#160; &#160; &#160;由于Java泛型属于语法糖，编译过后会将泛型信息擦除，如果不看版本号，单看泛型逻辑的部分，JDK 1.4和JDK 1.5版本的字节码是没有区别的。
-相较于C++和C#的泛型，Java的泛型更像是伪泛型，因为JVM中没有泛型的概念，完全是编译器的magic。
+&#160; &#160; &#160; &#160;由于Java泛型属于语法糖，编译过后会将泛型信息擦除。相较于C++和C#的泛型，Java的泛型更像是伪泛型，因为JVM中没有泛型的概念，完全是编译器的magic。
 
 <!-- more -->
 
 <br>
 
-## 代码实例
+## 代码示例
 
 <br>
 
@@ -193,6 +192,7 @@ boolean compare3Result1 = new TestGenericMethod().compare3(new Object(), new Pai
 
 &#160; &#160; &#160; &#160;在本博文中，展示了Java泛型的语法和用法。由于篇幅关系，将泛型的其他方面单独作为独立的文章进行叙述：
 
+* 泛型的限制
 * 类型擦除
 * 泛型类之间的关系
 * 泛型边界与通配符
@@ -203,7 +203,10 @@ boolean compare3Result1 = new TestGenericMethod().compare3(new Object(), new Pai
 
 &#160; &#160; &#160; &#160;本博文所展示的源代码[由此获得](https://github.com/leesir/blog_code/tree/master/src/generic)。
 
+<br>
+
 ## 参考文献
 
 [1] Josh Juneau.[泛型：工作原理及其重要性](https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html)[EB/OL].https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html，2019-07-02.<br>
 [2] [The Java™ Tutorials - Generics](https://docs.oracle.com/javase/tutorial/java/generics/index.html)[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br>
+[3] [The Java® Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3)[EB/OL].https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3，2019-07-04.<br>

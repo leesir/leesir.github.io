@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
+        
         <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
         
         <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
         
-        <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,45 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-bufferedreaderwriter-filterreaderwriter">2015-10-14  Java IO: 字符流的Buffered和Filter</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>作者: Jakob Jenkov</p>
+
+<p>　　本章节将简要介绍缓冲与过滤相关的reader和writer，主要涉及BufferedReader、BufferedWriter、FilterReader、FilterWriter。</p>
+
+<p>#BufferedReader</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/bufferedreader.html">原文链接</a></p>
+
+<p>　　BufferedReader能为字符输入流提供缓冲区，可以提高许多IO处理的速度。你可以一次读取一大块的数据，而不需要每次从网络或者磁盘中一次读取一个字节。特别是在访问大量磁盘数据时，缓冲通常会让IO快上许多。</p>
+
+<p>　　BufferedReader和BufferedInputStream的主要区别在于，BufferedReader操作字符，而BufferedInputStream操作原始字节。只需要把Reader包装到BufferedReader中，就可以为Reader添加缓冲区(译者注：默认缓冲区大小为8192字节，即8KB)。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">Reader</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
+    </code></pre></figure>
+
+<p>　　你也可以通过传递构造函数的第二个参数，指定缓冲区大小，代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="n">Reader</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+    </code></pre></figure>
+
+<p>　　这个例子设置了8KB的缓冲区。最好把缓冲区大小设置成1024字节的整数倍，这样能更高效地利用内置缓冲区的磁盘。</p>
+
+<p>　　除了能够为输入流提供缓冲区以外，其余方面BufferedReader基本与Reader类似。BufferedReader还有一个额外readLine()方法，可以方便地一次性读取一整行字符。</p>
+
+
+		<h1><a href="/2015/10/java-io-bufferedreaderwriter-filterreaderwriter">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-buffered-data">2015-10-14  Java IO: Buffered和Data</a></h1>
@@ -247,43 +286,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2015/10/java-io-PipedOutputStream">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-PipedInputStream">2015-10-13  Java IO: PipedInputStream</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://tutorials.jenkov.com/java-io/pipedinputstream.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　PipedInputStream可以从管道中读取字节流数据，代码如下：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-
-<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedInputStream</span><span class="o">(</span><span class="n">pipedOutputStream</span><span class="o">);</span>
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="c1">//do something with data...</span>
-
-    <span class="n">doSomethingWithData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-
-    <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="o">}</span>
-
-<span class="n">input</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-
-    </code></pre></figure>
-
-
-		<h1><a href="/2015/10/java-io-PipedInputStream">阅读全文</a></h1>
         </div>
     </div>
 </div>

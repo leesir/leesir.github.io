@@ -104,13 +104,13 @@
 document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s96.cnzz.com/z_stat.php%3Fid%3D1277778288%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
         </div>
         <div class="col-md-9">
-            
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/07/java-sugar-generic-type-erasure">2019-07-04  Java语法糖-泛型-类型擦除</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
+            <div class="article">
+                <div class="well">
+                    <h1><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></h1>
+                    <br>
+                    
+                    <div class="post-content">
+                        <link rel="stylesheet" href="/css/pygments.css" />
 
 <p>       Java编译器将会对泛型代码进行以下擦除逻辑：</p>
 
@@ -250,144 +250,23 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 [2] <a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html">The Java™ Tutorials - Generics</a>[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br />
 [3] <a href="https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3">The Java® Virtual Machine Specification</a>[EB/OL].https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3，2019-07-04.<br /></p>
 
-		<h1><a href="/2019/07/java-sugar-generic-type-erasure">阅读全文</a></h1>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="pagination">
+                
+                
+                <a class="btn btn-default" href="/2019/07/java-sugar-generic" class="previous">Older
+                    Post</a>
+                
+            </div>
         </div>
     </div>
-</div>
 
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/07/java-sugar-generic">2019-07-02  Java语法糖-泛型</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
+    
 
-<h2 id="前言">前言</h2>
-
-<p><br /></p>
-
-<p>       JDK自1.5版本引入泛型机制，代码中常用的容器类（如java.util.Collection和java.util.Map）都属于泛型类。泛型的引入带来了以下好处：</p>
-
-<ul>
-  <li>在使用集合类时，将以往JDK版本的类型错配报错，由运行时提前到了编译期，使得代码不再需要处理ClassCastException。</li>
-  <li>在访问泛型元素时，不再需要强制转换对象类型，代码更加简洁优雅。</li>
-  <li>泛型提高了代码复用率。</li>
-</ul>
-
-<p><br /></p>
-
-<p class="center"><img src="/images/post_2019_07_02_image1.png" alt="c compile" /></p>
-
-<p class="center"><a href="https://www.nextptr.com/series/a554793983/explained-java-generics-and-collections">图片来源</a></p>
-
-<p><br /></p>
-
-<p>       由于Java泛型属于语法糖，编译过后会将泛型信息擦除。相较于C++和C#的泛型，Java的泛型更像是伪泛型，因为JVM中没有泛型的概念，完全是编译器的magic。</p>
-
-
-		<h1><a href="/2019/07/java-sugar-generic">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/06/cache-pattern-practise">2019-06-27  缓存更新策略实践</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<h2 id="前言">前言</h2>
-
-<p>       缓存在计算机的世界中是一个非常宽泛的概念，因为处处是缓存的身影。操作系统可能缓存DNS的解析结果，浏览器可能缓存页面静态元素，用户访问的资源可能缓存在CDN中，
-CPU可能会缓存操作数所属的内存块，数据库的查询结果也可能是缓存好的。总之不管是在系统架构中的哪一层级，都有缓存的实现。所以，抛开具体应用谈缓存是没有意义的，那样过于空泛，但可以肯定的是，所有的缓存都是利用了数据的冗余提高性能，空间换时间，计算机的世界充斥着trade off。</p>
-
-<p>       本博文基于项目中的实际应用整理而来，仅讨论在DB和业务代码之间的缓存服务，主要分析笔者经历的项目中，根据不同的业务，采用了哪些更新策略（注，不讨论缓存的替换策略，如LRU等）。</p>
-
-<p><br /></p>
-
-<p class="center"><img src="/images/post_2019_06_27_image1.jpg" alt="c compile" /></p>
-
-<p class="center"><a href="http://web.sfc.keio.ac.jp/~rdv/computer-architecture-2018-wiki/index.php?Memory%20Subsystems">图片来源</a></p>
-
-
-		<h1><a href="/2019/06/cache-pattern-practise">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/06/java-javasuger-cc">2019-06-24  Java语法糖-条件编译</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<h2 id="前言">前言</h2>
-
-<p><br /></p>
-
-<p>       条件编译，顾名思义，就是有条件地对代码进行编译，对于一套源代码，不同条件可能会编译出不同的两套目标代码。
-条件完全不同于if语句。if语句属于代码逻辑，不管哪个代码分支都会被编译。而条件编译只会编译满足条件的分支的代码。</p>
-
-<p>       条件编译广泛存在于需要跨平台运行的程序里，在真正开始编译之前，预处理过程会把代码扫描一遍，进行初步转换，其中一项任务就是执行条件编译。
-在C和C++中，由预处理命令实现条件编译。预处理命令由#开头，比如#ifdef：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//程序处于调试阶段，可以将调试日志打印出来 </span>
-<span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span></code></pre></figure>
-
-<p>       因C\C++的编译会最终生成目标机器的可执行文件，可执行文件是与平台极其相关的，因此C\C++程序可能会出现同一份代码需要分别根据平台进行编译的情况。</p>
-
-<p class="center"><img src="/images/post_2019_06_24_image1.jpg" alt="c compile" /></p>
-
-<p class="center"><a href="https://computer.howstuffworks.com/c1.htm">图片来源</a></p>
-
-
-		<h1><a href="/2019/06/java-javasuger-cc">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/06/java-assert">2019-06-21  Java语法糖-assert</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>       在谈断言之前，必须要谈谈2种编程方式：防御性编程与契约式编程。防御性编程来自于《代码大全》，契约式编程由伯特兰·迈耶于1986年提出。</p>
-
-<p>       防御性编程强调不信任外部输入的参数，要对所有可能出现问题的数据加以判断，这种编程方式的代码中，通常存在大量重复的if语句。</p>
-
-<p>       契约式编程强调系统内各组件必须按规定实现各自的逻辑，在组件交互的过程中不对参数进行校验，如果发现参数不符合要求，程序将立即终止执行。
-现代编程语言通过断言的机制实现契约式编程，这种编程方式的代码比较简洁。</p>
-
-<p>       然而在现今的软件开发过程中，不可能实现契约式编程：人员流动大、不愿意写文档、不愿意看文档、需求迭代快。
-当然防御性编程也做的不好，否则就不会由bug了。甚至有时候某种做法属于防御性编程还是契约式编程都不清晰，比如使用注解式参数校验框架，看似属于契约式编程：代码简洁、快速失效。
-而当反编译过后，实则大量基础if判断。</p>
-
-<p>       防御性编程与契约式编程思想的出现，都算的上是软件开发思想的进步，而受制于当时的知识背景，难免在今天略显过时。就此结束讨论，进入正题。</p>
-
-
-		<h1><a href="/2019/06/java-assert">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-
-<div class="pagination">
-  
-  <span class="page_number ">Page: 1 of 11</span>
-  
-    <a class="btn btn-default" href="/page2" class="next">Older</a>
-  
-</div>
-
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid">
+    <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12 footer navbar-inverse navbar-fixed-bottom">
             <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
@@ -405,3 +284,5 @@ CPU可能会缓存操作数所属的内存块，数据库的查询结果也可�
 </body>
 </html>
 
+
+</div>

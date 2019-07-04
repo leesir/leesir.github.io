@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
+        
         <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
         
         <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
@@ -85,8 +87,6 @@
         <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
         <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
-        
-        <li><a href="/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T>和&lt;? extends T>的区别</a></li>
         
     </ul>
 </div>
@@ -132,14 +132,13 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p><br /></p>
 
-<p>       由于Java泛型属于语法糖，编译过后会将泛型信息擦除，如果不看版本号，单看泛型逻辑的部分，JDK 1.4和JDK 1.5版本的字节码是没有区别的。
-相较于C++和C#的泛型，Java的泛型更像是伪泛型，因为JVM中没有泛型的概念，完全是编译器的magic。</p>
+<p>       由于Java泛型属于语法糖，编译过后会将泛型信息擦除。相较于C++和C#的泛型，Java的泛型更像是伪泛型，因为JVM中没有泛型的概念，完全是编译器的magic。</p>
 
 <!-- more -->
 
 <p><br /></p>
 
-<h2 id="代码实例">代码实例</h2>
+<h2 id="代码示例">代码示例</h2>
 
 <p><br /></p>
 
@@ -287,6 +286,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       在本博文中，展示了Java泛型的语法和用法。由于篇幅关系，将泛型的其他方面单独作为独立的文章进行叙述：</p>
 
 <ul>
+  <li>泛型的限制</li>
   <li>类型擦除</li>
   <li>泛型类之间的关系</li>
   <li>泛型边界与通配符</li>
@@ -298,16 +298,21 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic">由此获得</a>。</p>
 
+<p><br /></p>
+
 <h2 id="参考文献">参考文献</h2>
 
 <p>[1] Josh Juneau.<a href="https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html">泛型：工作原理及其重要性</a>[EB/OL].https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html，2019-07-02.<br />
-[2] <a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html">The Java™ Tutorials - Generics</a>[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br /></p>
+[2] <a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html">The Java™ Tutorials - Generics</a>[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br />
+[3] <a href="https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3">The Java® Virtual Machine Specification</a>[EB/OL].https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3，2019-07-04.<br /></p>
 
                     </div>
                     
                 </div>
             </div>
             <div class="pagination">
+                
+                <a class="btn btn-default" href="/2019/07/java-sugar-generic-type-erasure" class="next">Newer Post</a>
                 
                 
                 <a class="btn btn-default" href="/2019/06/cache-pattern-practise" class="previous">Older

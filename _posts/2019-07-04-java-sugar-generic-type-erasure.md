@@ -1,0 +1,155 @@
+---
+layout: post
+title: "Java语法糖-泛型-类型擦除"
+description: ""
+category: [Java]
+tags: [Java Language]
+---
+<link rel="stylesheet" href="{{ site.baseurl }}/css/pygments.css">
+
+&#160; &#160; &#160; &#160;Java编译器将会对泛型代码进行以下擦除逻辑：
+
+* 如果泛型不存在类型边界，则使用Object类替代泛型。
+* 如果泛型存在类型边界，则使用边界的类型替代泛型。
+* 编译器自动加入类型转换代码。
+* 存在继承关系的泛型类，编译器将生成桥接方法，在类型擦除过后依然保留多态特性。
+
+&#160; &#160; &#160; &#160;在Java的字节码文件中，只存在普通的类、接口或者方法。泛型擦除不会引入新的类，所以不会产生额外的运行时开销。
+
+<br>
+
+## 代码实例
+
+<br>
+
+&#160; &#160; &#160; &#160;泛型类和泛型方法的擦除逻辑一致，我们以泛型类为例进行说明，不再赘述泛型方法的逻辑。
+
+<br>
+
+#### 1. 无类型边界的泛型类的擦除
+
+&#160; &#160; &#160; &#160;我们定义一个泛型测试类：
+
+{% highlight java %}
+public class GenericClassErasureTest {
+
+    public static void main(String[] args) {
+        Node<String> node = new Node<>("tail", null);
+        System.out.println(node.getData());
+    }
+
+    public static class Node<T> {
+        private T data;
+        private Node<T> next;
+
+        public Node(T data, Node<T> next) {
+            this.data = data;
+            this.next = next;
+        }
+
+        public T getData() { return data; }
+    }
+}
+{% endhighlight %}
+
+{:.center}
+代码清单generic-type-erasure1
+
+<br>
+
+&#160; &#160; &#160; &#160;因为没有类型边界，所以编译器会将泛型转换成Object，实际上Node类应该是这样的：
+
+{% highlight java %}
+public class Node {
+
+    private Object data;
+    private Node next;
+
+    public Node(Object data, Node next) {
+        this.data = data;
+        this.next = next;
+    }
+
+    public Object getData() { return data; }
+    // ...
+}
+{% endhighlight %}
+
+{:.center}
+代码清单generic-type-erasure2
+
+<br>
+
+&#160; &#160; &#160; &#160;特别说明：在使用intelliJ IDEA或者JD-GUI等反编译图形工具，查看泛型类字节码时，依然可以看到泛型信息，这于大家所熟悉的“编译之后泛型擦除”的说法相悖。
+可以用javap -verbose查看class文件的虚拟机指令。以代码清单generic-type-erasure1的Node类为例，运行javap之后的输出如下所示（仅截取方法描述）：
+
+{% highlight java %}
+//构造函数
+public generic.erasure.GenericClassErasureTest$Node(T, generic.erasure.GenericClassErasureTest$Node<T>);
+descriptor: (Ljava/lang/Object;Lgeneric/erasure/GenericClassErasureTest$Node;)V
+
+//getData方法
+public T getData();
+descriptor: ()Ljava/lang/Object;
+{% endhighlight %}
+
+&#160; &#160; &#160; &#160;描述符descriptor展示了方法的参数和返回值的类型，参数类型会按照方法声明的顺序展示在括号()内，返回值类型紧跟其后。
+如果没有参数，则显示()。如果没有返回值，则显示V。
+
+&#160; &#160; &#160; &#160;可以看到，getData的返回值类型是Ljava/lang/Object，也就是类型为Object，证明了字节码中的泛型会转换成具体的类型，而字节码中的泛型T，则属于具体类型的别名。
+事实上，在引入泛型后，字节码新增了Signatures部分，用以记录不属于JVM类型系统的语言级别的类型信息。Signatures的官网说明如下：
+
+> Signatures are used to encode Java programming language type information that is not part of the Java Virtual Machine type system, such as generic type and method declarations and parameterized types.
+> 
+> This kind of type information is needed to support reflection and debugging, and by a Java compiler.
+
+&#160; &#160; &#160; &#160;所以，准确来说，在字节码中能够察觉泛型的存在（这也是反编译工具能够还原泛型的原因），但同时泛型也被具体化了，泛型类被编译成了处理具体类型的普通类。
+
+<br>
+
+#### 2. 有类型边界的泛型类的擦除
+
+&#160; &#160; &#160; &#160;我们同样定义一个泛型测试类：
+
+{% highlight java %}
+public static class UpperBoundTypeClass<T extends String> {
+    private T data;
+
+    public UpperBoundTypeClass(T data) {
+        this.data = data;
+    }
+
+    public T getData() {
+        return data;
+    }
+}
+{% endhighlight %}
+
+{:.center}
+代码清单generic-type-erasure3
+
+<br>
+
+&#160; &#160; &#160; &#160;同样截取方法签名，如下所示：
+
+{% highlight java %}
+//getData方法
+public T getData();
+descriptor: ()Ljava/lang/String;
+{% endhighlight %}
+
+&#160; &#160; &#160; &#160;可以看到方法的实际返回值是String而不是Object。
+
+<br>
+
+## 附件
+
+&#160; &#160; &#160; &#160;本博文所展示的源代码[由此获得](https://github.com/leesir/blog_code/tree/master/src/generic/erasure)。
+
+<br>
+
+## 参考文献
+
+[1] Josh Juneau.[泛型：工作原理及其重要性](https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html)[EB/OL].https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html，2019-07-02.<br>
+[2] [The Java™ Tutorials - Generics](https://docs.oracle.com/javase/tutorial/java/generics/index.html)[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br>
+[3] [The Java® Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3)[EB/OL].https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3，2019-07-04.<br>
