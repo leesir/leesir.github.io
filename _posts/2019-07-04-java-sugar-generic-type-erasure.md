@@ -18,7 +18,7 @@ tags: [Java Language]
 
 <br>
 
-## 代码实例
+## 代码示例
 
 <br>
 
@@ -138,9 +138,13 @@ public T getData();
 descriptor: ()Ljava/lang/String;
 {% endhighlight %}
 
-&#160; &#160; &#160; &#160;可以看到方法的实际返回值是String而不是Object。
+&#160; &#160; &#160; &#160;可以看到方法的实际返回值是String而非Object。
 
 <br>
+
+#### 3. 类型擦除的多态处理——桥接方法
+
+&#160; &#160; &#160; &#160;
 
 ## 附件
 
