@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界与通配符</a></li>
+        
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
         <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
-        <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
-        
     </ul>
 </div>
 
@@ -112,7 +112,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
                     <div class="post-content">
                         <link rel="stylesheet" href="/css/pygments.css" />
 
-<p>       Java编译器将会对泛型代码进行以下擦除逻辑：</p>
+<p>       在Java的字节码文件中，只存在普通的类、接口或者方法。泛型擦除不会引入新的类，所以不会产生额外的运行时开销Java编译器将会对泛型代码进行以下擦除逻辑：</p>
 
 <ul>
   <li>如果泛型不存在类型边界，则使用Object类替代泛型。</li>
@@ -120,8 +120,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
   <li>编译器自动加入类型转换代码。</li>
   <li>存在继承关系的泛型类，编译器将生成桥接方法，在类型擦除过后依然保留多态特性。</li>
 </ul>
-
-<p>       在Java的字节码文件中，只存在普通的类、接口或者方法。泛型擦除不会引入新的类，所以不会产生额外的运行时开销。</p>
 
 <p><br /></p>
 
@@ -297,10 +295,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p><br /></p>
 
-<h2 id="总结">总结</h2>
-
-<p><br /></p>
-
 <h2 id="附件">附件</h2>
 
 <p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic/erasure">由此获得</a>。</p>
@@ -318,6 +312,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
                 </div>
             </div>
             <div class="pagination">
+                
+                <a class="btn btn-default" href="/2019/07/java-sugar-generic-wildcard" class="next">Newer Post</a>
                 
                 
                 <a class="btn btn-default" href="/2019/07/java-sugar-generic" class="previous">Older

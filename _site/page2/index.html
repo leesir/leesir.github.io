@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界与通配符</a></li>
+        
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
         <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
-        <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,32 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2019/06/java-assert">2019-06-21  Java语法糖-assert</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>       在谈断言之前，必须要谈谈2种编程方式：防御性编程与契约式编程。防御性编程来自于《代码大全》，契约式编程由伯特兰·迈耶于1986年提出。</p>
+
+<p>       防御性编程强调不信任外部输入的参数，要对所有可能出现问题的数据加以判断，这种编程方式的代码中，通常存在大量重复的if语句。</p>
+
+<p>       契约式编程强调系统内各组件必须按规定实现各自的逻辑，在组件交互的过程中不对参数进行校验，如果发现参数不符合要求，程序将立即终止执行。
+现代编程语言通过断言的机制实现契约式编程，这种编程方式的代码比较简洁。</p>
+
+<p>       然而在现今的软件开发过程中，不可能实现契约式编程：人员流动大、不愿意写文档、不愿意看文档、需求迭代快。
+当然防御性编程也做的不好，否则就不会由bug了。甚至有时候某种做法属于防御性编程还是契约式编程都不清晰，比如使用注解式参数校验框架，看似属于契约式编程：代码简洁、快速失效。
+而当反编译过后，实则大量基础if判断。</p>
+
+<p>       防御性编程与契约式编程思想的出现，都算的上是软件开发思想的进步，而受制于当时的知识背景，难免在今天略显过时。就此结束讨论，进入正题。</p>
+
+
+		<h1><a href="/2019/06/java-assert">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2019/06/system-logincache">2019-06-19  一种基于redis的登录态的设计与实现</a></h1>
@@ -232,25 +258,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2016/08/java-history">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2016/07/java-history-beginning-words">2016-07-15  Java历史开篇语</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>       见过不少技术团队的leader，写过多年的业务，做了管理岗。说好听点叫业务，难听点就是增删改查，顶多加上mq、缓存、rpc之类的。</p>
-
-<p>       如果在一家公司做了多年，晋升做管理，确实无可厚非，因为这位管理者对本公司的业务和技术架构的演变都非常熟悉。怕就怕在跳到了其他公司做管理，业务背景不同，技术架构又不适用，之前积累的深厚经验就大打折扣了。</p>
-
-<p><img src="/images/post_2016-07-15_image1.jpg" alt="Java" height="100%" width="100%" /></p>
-
-
-		<h1><a href="/2016/07/java-history-beginning-words">阅读全文</a></h1>
         </div>
     </div>
 </div>

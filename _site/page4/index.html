@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界与通配符</a></li>
+        
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
         <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
-        <li><a href="/2015/11/java-cr-code-convention">Java代码规范实践手册</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,42 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/11/java-cr-code-convention">2015-11-21  Java代码规范实践手册</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>　　舒适区最早是心理学的一个概念，它与人类的压力有着直接的关系。顾名思义，处于这一区域，你会感到非常舒服，觉察不到任何真正的压力，或者用自我麻痹来勉强应对它们。因此，我们既没有强烈的改变欲望，也不会主动地付出太多的努力，所有的行为，无非是为了保持舒适的感觉和假象而已。</p>
+
+<p>——摘自《逃离舒适区》</p>
+
+<p>　　程序员从学会第一行“hello world”开始，就逐渐培养起了自己的开发习惯。这些习惯或许来自于讲台上的讲师、搞笑娱乐平台百度知道、同性交友网github等。阅尽网络上难以保证质量的代码，培养了各种各样的毒瘤习惯，而我们却乐在其中。</p>
+
+<p>　　是不是觉得Spark、Flume很高端？TB级数据碉堡了吧？把屈指可数的几个线程玩弄于股掌之中？</p>
+
+<p>　　“Talk is cheap. Show me the code.”– Linus Torvalds(http://coolshell.cn/articles/1278.html)</p>
+
+<p>　　本人从业多年，却依旧写不好一行代码。决心踏出舒适区，从变量命名开始，重塑编码习惯。本文将从代码规范实践的3个等级(初学乍练，融会贯通，登峰造极)，指导开发者如何在项目中引入代码规范。
+题外话：引入代码规范，是为了后续能够顺利进行Code Review。有很多优秀博文已经论述了code review的重要性，其中一篇：http://coolshell.cn/articles/11432.html 。</p>
+
+<p>注：</p>
+
+<ol>
+  <li>本文仅适用于使用intelliJ IDEA(14.1.x)开发并使用Maven执行构建的开发者。</li>
+  <li>业内认可的规范包括Google规范和Sun规范，本次实践所使用的规范是Sun规范。</li>
+  <li>Checkstyle是本次实践的核心工具。本次实践将通过插件使用checkstyle。</li>
+  <li>本次实践的代码规范检查仅用于基础检查。团队各异的规定，还需事先定制好。余额宝，是yuebao，还是yuEBao，还是balancePackage？</li>
+  <li>之后附录里会加入checkstyle的检查内容（没那么快）。</li>
+</ol>
+
+
+		<h1><a href="/2015/11/java-cr-code-convention">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-qa-generics-extends-super">2015-10-23  泛型中&lt;? super T>和&lt;? extends T>的区别</a></h1>
@@ -205,29 +241,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2015/10/java-fp-java8-predicate-consumer">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-fp-java8-functional">2015-10-21  Function接口 – Java8中java.util.function包下的函数式接口</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
-
-<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，你会发现java.util.function中 Function, Supplier, Consumer, Predicate和其他函数式接口广泛用在支持lambda表达式的API中。这些接口有一个抽象方法，会被lambda表达式的定义所覆盖。在这篇文章中，我会简单描述Function接口，该接口目前已发布在java.util.function中。</p>
-
-<p>　　Function接口的主要方法：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">R</span> <span class="nf">apply</span><span class="o">(</span><span class="n">T</span> <span class="n">t</span><span class="o">)</span> <span class="c1">//将Function对象应用到输入的参数上，然后返回计算结果。</span>
-
-<span class="k">default</span> <span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="c1">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></code></pre></figure>
-
-
-		<h1><a href="/2015/10/java-fp-java8-functional">阅读全文</a></h1>
         </div>
     </div>
 </div>
