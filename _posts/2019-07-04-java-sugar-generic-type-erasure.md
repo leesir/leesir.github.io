@@ -209,12 +209,6 @@ descriptor: (Ljava/lang/Object;)V
 
 <br>
 
-## 总结
-
-
-
-<br>
-
 ## 附件
 
 &#160; &#160; &#160; &#160;本博文所展示的源代码[由此获得](https://github.com/leesir/blog_code/tree/master/src/generic/erasure)。
