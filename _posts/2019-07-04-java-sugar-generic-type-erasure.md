@@ -53,6 +53,8 @@ public class GenericClassErasureTest {
 {:.center}
 代码清单generic-type-erasure1
 
+<!-- more -->
+
 <br>
 
 &#160; &#160; &#160; &#160;因为没有类型边界，所以编译器会将泛型转换成Object，实际上Node类应该是这样的：
