@@ -58,7 +58,7 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界与通配符</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -138,7 +138,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doTask1</span><span class="o">(){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task1..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task1..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
@@ -148,7 +148,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doTask4</span><span class="o">(){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task4..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task4..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
@@ -157,19 +157,19 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <span class="cm">/** 
  * One of the extensions of the abstract workflow system 
  */</span>
-<span class="kd">class</span> <span class="nc">WorkflowManager2Impl1</span> <span class="kd">extends</span> <span class="n">WorkflowManager2</span><span class="o">{</span>
+<span class="kd">class</span> <span class="nc">WorkflowManager2Impl1</span> <span class="kd">extends</span> <span class="nc">WorkflowManager2</span><span class="o">{</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doTask2</span><span class="o">(){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task2.1..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task2.1..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doTask3</span><span class="o">(){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task3.1..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task3.1..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
@@ -178,19 +178,19 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <span class="cm">/** 
  * Other extension of the abstract workflow system 
  */</span>
-<span class="kd">class</span> <span class="nc">WorkflowManager2Impl2</span> <span class="kd">extends</span> <span class="n">WorkflowManager2</span><span class="o">{</span>
+<span class="kd">class</span> <span class="nc">WorkflowManager2Impl2</span> <span class="kd">extends</span> <span class="nc">WorkflowManager2</span><span class="o">{</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doTask2</span><span class="o">(){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task2.2..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task2.2..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doTask3</span><span class="o">(){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task3.2..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task3.2..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
@@ -200,17 +200,17 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TemplateMethodPattern</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
-        <span class="n">initiateWorkFlow</span><span class="o">(</span><span class="k">new</span> <span class="n">WorkflowManager2Impl1</span><span class="o">());</span>
+        <span class="n">initiateWorkFlow</span><span class="o">(</span><span class="k">new</span> <span class="nc">WorkflowManager2Impl1</span><span class="o">());</span>
 
-        <span class="n">initiateWorkFlow</span><span class="o">(</span><span class="k">new</span> <span class="n">WorkflowManager2Impl2</span><span class="o">());</span>
+        <span class="n">initiateWorkFlow</span><span class="o">(</span><span class="k">new</span> <span class="nc">WorkflowManager2Impl2</span><span class="o">());</span>
 
     <span class="o">}</span>
 
-    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">initiateWorkFlow</span><span class="o">(</span><span class="n">WorkflowManager2</span> <span class="n">workflowMgr</span><span class="o">){</span>
+    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">initiateWorkFlow</span><span class="o">(</span><span class="nc">WorkflowManager2</span> <span class="n">workflowMgr</span><span class="o">){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Starting the workflow ... the old way"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Starting the workflow ... the old way"</span><span class="o">);</span>
 
         <span class="n">workflowMgr</span><span class="o">.</span><span class="na">doTask1</span><span class="o">();</span>
 
@@ -226,25 +226,25 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>　　输出如下所示：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Starting</span> <span class="n">the</span> <span class="n">workflow</span> <span class="o">...</span> <span class="n">the</span> <span class="n">old</span> <span class="n">way</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Starting</span> <span class="n">the</span> <span class="n">workflow</span> <span class="o">...</span> <span class="n">the</span> <span class="n">old</span> <span class="n">way</span>
 
-<span class="n">Doing</span> <span class="n">Task1</span><span class="o">...</span>
+<span class="nc">Doing</span> <span class="nc">Task1</span><span class="o">...</span>
 
-<span class="n">Doing</span> <span class="n">Task2</span><span class="o">.</span><span class="mi">1</span><span class="o">...</span>
+<span class="nc">Doing</span> <span class="nc">Task2</span><span class="o">.</span><span class="mi">1</span><span class="o">...</span>
 
-<span class="n">Doing</span> <span class="n">Task3</span><span class="o">.</span><span class="mi">1</span><span class="o">...</span>
+<span class="nc">Doing</span> <span class="nc">Task3</span><span class="o">.</span><span class="mi">1</span><span class="o">...</span>
 
-<span class="n">Doing</span> <span class="n">Task4</span><span class="o">...</span>
+<span class="nc">Doing</span> <span class="nc">Task4</span><span class="o">...</span>
 
-<span class="n">Starting</span> <span class="n">the</span> <span class="n">workflow</span> <span class="o">...</span> <span class="n">the</span> <span class="n">old</span> <span class="n">way</span>
+<span class="nc">Starting</span> <span class="n">the</span> <span class="n">workflow</span> <span class="o">...</span> <span class="n">the</span> <span class="n">old</span> <span class="n">way</span>
 
-<span class="n">Doing</span> <span class="n">Task1</span><span class="o">...</span>
+<span class="nc">Doing</span> <span class="nc">Task1</span><span class="o">...</span>
 
-<span class="n">Doing</span> <span class="n">Task2</span><span class="o">.</span><span class="mi">2</span><span class="o">...</span>
+<span class="nc">Doing</span> <span class="nc">Task2</span><span class="o">.</span><span class="mi">2</span><span class="o">...</span>
 
-<span class="n">Doing</span> <span class="n">Task3</span><span class="o">.</span><span class="mi">2</span><span class="o">...</span>
+<span class="nc">Doing</span> <span class="nc">Task3</span><span class="o">.</span><span class="mi">2</span><span class="o">...</span>
 
-<span class="n">Doing</span> <span class="n">Task4</span><span class="o">...</span></code></pre></figure>
+<span class="nc">Doing</span> <span class="nc">Task4</span><span class="o">...</span></code></pre></figure>
 
 <p>　　目前为止一切顺利。但是本篇博客的主要关注点不是模板方法模式，而是如何利用Java 8的Lambda表达式和默认方法实现模板方法模式。我之前已经说过，接口只有在只声明了一个抽象方法的前提下，才可以使用Lambda表达式。这个规则在本篇的例子中应这样解释：WorkflowManager2只能有一个抽象或者说自定义的任务。</p>
 
@@ -256,7 +256,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
     <span class="kd">public</span> <span class="k">default</span> <span class="kt">void</span> <span class="nf">doTask1</span><span class="o">(){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task1..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task1..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
@@ -264,13 +264,13 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
     <span class="kd">public</span> <span class="k">default</span> <span class="kt">void</span> <span class="nf">doTask3</span><span class="o">(){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task3..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task3..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="k">default</span> <span class="kt">void</span> <span class="nf">doTask4</span><span class="o">(){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task4..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task4..."</span><span class="o">);</span>
 
     <span class="o">}</span>
 
@@ -280,23 +280,23 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TemplateMethodPatternLambda</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
        <span class="cm">/**     
         * Using lambda expression to create different      
         * implementation of the abstract workflow 
         */</span>
-        <span class="n">initiateWorkFlow</span><span class="o">(()-&gt;</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task2.1..."</span><span class="o">));</span>
+        <span class="n">initiateWorkFlow</span><span class="o">(()-&gt;</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task2.1..."</span><span class="o">));</span>
 
-        <span class="n">initiateWorkFlow</span><span class="o">(()-&gt;</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task2.2..."</span><span class="o">));</span>
+        <span class="n">initiateWorkFlow</span><span class="o">(()-&gt;</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task2.2..."</span><span class="o">));</span>
 
-        <span class="n">initiateWorkFlow</span><span class="o">(()-&gt;</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task2.3..."</span><span class="o">));</span>
+        <span class="n">initiateWorkFlow</span><span class="o">(()-&gt;</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Doing Task2.3..."</span><span class="o">));</span>
 
     <span class="o">}</span>
 
-    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">initiateWorkFlow</span><span class="o">(</span><span class="n">WorkflowManager</span> <span class="n">workflowMgr</span><span class="o">){</span>
+    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">initiateWorkFlow</span><span class="o">(</span><span class="nc">WorkflowManager</span> <span class="n">workflowMgr</span><span class="o">){</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Starting the workflow ..."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Starting the workflow ..."</span><span class="o">);</span>
 
         <span class="n">workflowMgr</span><span class="o">.</span><span class="na">doTask1</span><span class="o">();</span>
 

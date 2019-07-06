@@ -58,7 +58,7 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界与通配符</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -122,8 +122,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>这第一个问题便是：</p>
 
-<div class="highlighter-rouge">包装类型在条件运算中的使用不当造成的空指针异常。
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>包装类型在条件运算中的使用不当造成的空指针异常。
+</code></pre></div></div>
 
 <p>我们曾在教科书上学到过，条件表达式</p>
 
@@ -154,22 +154,22 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//InnerClass的简化定义如下：</span>
 <span class="kd">private</span> <span class="kd">class</span> <span class="nc">InnerClass</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
     
-    <span class="n">Long</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">Long</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">id</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">testBoxedTypeWithIf</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InnerClass</span><span class="o">();</span>
-    <span class="n">Long</span> <span class="n">idValue</span><span class="o">;</span>
+    <span class="nc">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InnerClass</span><span class="o">();</span>
+    <span class="nc">Long</span> <span class="n">idValue</span><span class="o">;</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">flag</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">idValue</span> <span class="o">=</span> <span class="n">innerClass</span><span class="o">.</span><span class="na">getId</span><span class="o">();</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
         <span class="n">idValue</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idValue</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idValue</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>flag的值为true，所以程序毫无疑问会打印出null。</p>
@@ -177,28 +177,28 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>根据if判断和条件运算的等价关系，我在程序中用了如下的方式实现逻辑：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">testBoxedTypeWithConditionalOperation</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InnerClass</span><span class="o">();</span>
-    <span class="n">Long</span> <span class="n">idValue</span> <span class="o">=</span> <span class="n">flag</span> <span class="o">?</span> <span class="n">innerClass</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">:</span> <span class="mi">0L</span><span class="o">;</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idValue</span><span class="o">);</span>
+    <span class="nc">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InnerClass</span><span class="o">();</span>
+    <span class="nc">Long</span> <span class="n">idValue</span> <span class="o">=</span> <span class="n">flag</span> <span class="o">?</span> <span class="n">innerClass</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">:</span> <span class="mi">0L</span><span class="o">;</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idValue</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>如果使用一样的测试用例，肯定有人会认为这段程序也输出null，至少之前的我是这么认为的。这段程序运行的结果是抛出空指针异常，我们来看看testBoxedTypeWithConditionalOperation方法和testBoxedTypeWithIf方法的反编译代码:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">testBoxedTypeWithConditionalOperation</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InnerClass</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-    <span class="n">Long</span> <span class="n">idValue</span> <span class="o">=</span> <span class="n">Long</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">flag</span> <span class="o">?</span> <span class="n">innerClass</span><span class="o">.</span><span class="na">getId</span><span class="o">().</span><span class="na">longValue</span><span class="o">()</span> <span class="o">:</span> <span class="mi">0L</span><span class="o">);</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idValue</span><span class="o">);</span>
+    <span class="nc">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InnerClass</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="nc">Long</span> <span class="n">idValue</span> <span class="o">=</span> <span class="nc">Long</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">flag</span> <span class="o">?</span> <span class="n">innerClass</span><span class="o">.</span><span class="na">getId</span><span class="o">().</span><span class="na">longValue</span><span class="o">()</span> <span class="o">:</span> <span class="mi">0L</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idValue</span><span class="o">);</span>
 <span class="o">}</span>
 
 <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">testBoxedTypeWithIf</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InnerClass</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-    <span class="n">Long</span> <span class="n">idValue</span><span class="o">;</span>
+    <span class="nc">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InnerClass</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="nc">Long</span> <span class="n">idValue</span><span class="o">;</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">flag</span><span class="o">)</span>
       <span class="n">idValue</span> <span class="o">=</span> <span class="n">innerClass</span><span class="o">.</span><span class="na">getId</span><span class="o">();</span>
     <span class="k">else</span> <span class="o">{</span>
-      <span class="n">idValue</span> <span class="o">=</span> <span class="n">Long</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">0L</span><span class="o">);</span>
+      <span class="n">idValue</span> <span class="o">=</span> <span class="nc">Long</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">0L</span><span class="o">);</span>
     <span class="o">}</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idValue</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idValue</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>可以看到，testBoxedTypeWithConditionalOperation中将条件运算中的包装类型解包装了，在testBoxedTypeWithIf中将原始类型包装了。</p>
@@ -208,9 +208,9 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>所以，在包装类型与条件运算混用的时候，要么用if判断替代条件运算，要么在条件运算的判断条件中先对包装类型是否为空做判断，做法如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">testBoxedTypeWithCorrectConditionalOperation</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InnerClass</span><span class="o">();</span>
-    <span class="n">Long</span> <span class="n">idValue</span> <span class="o">=</span> <span class="n">flag</span> <span class="o">&amp;&amp;</span> <span class="n">innerClass</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">innerClass</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">:</span> <span class="mi">0L</span><span class="o">;</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idValue</span><span class="o">);</span>
+    <span class="nc">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InnerClass</span><span class="o">();</span>
+    <span class="nc">Long</span> <span class="n">idValue</span> <span class="o">=</span> <span class="n">flag</span> <span class="o">&amp;&amp;</span> <span class="n">innerClass</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">innerClass</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">:</span> <span class="mi">0L</span><span class="o">;</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idValue</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>对于本例中用的测试用例，即flag == true，testBoxedTypeWithCorrectConditionalOperation将输出0。</p>

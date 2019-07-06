@@ -58,7 +58,7 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界与通配符</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -107,23 +107,25 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
             
 <div class="article">
     <div class="well">
-        <h1><a href="/2019/07/java-sugar-generic-wildcard">2019-07-05  Java语法糖-泛型-泛型边界与通配符</a></h1>
+        <h1><a href="/2019/07/java-sugar-generic-wildcard">2019-07-05  Java语法糖-泛型-泛型边界</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<h2 id="有界泛型">有界泛型</h2>
+<h2 id="1-有界泛型">1. 有界泛型</h2>
+
+<h4 id="11-有界泛型的定义">1.1 有界泛型的定义</h4>
 
 <p>       当我们需要一个工具类只用于做数值计算，或者只用于做集合的遍历，方法只希望接收Number或者Collection，不希望接受其他类型，否则就得写一大堆instanceof的if判断。
 为了解决这个问题，我们需要定义泛型的上边界，即方法所能接收的层级最高的类型。</p>
 
-<p>       在Java中，用extends关键字可以实现有界泛型的定义。格式为：<T extends="" UpperBoundClass="">，其中UpperBoundClass为上边界类型。代码实例如下所示：</T></p>
+<p>       在Java中，用extends关键字可以实现有界泛型的定义。格式为：&lt;T extends UpperBoundClass&gt;，其中UpperBoundClass为上边界类型。代码实例如下所示：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeNumber</span><span class="o">(</span><span class="n">T</span> <span class="n">number1</span><span class="o">,</span> <span class="n">T</span> <span class="n">number2</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeNumber</span><span class="o">(</span><span class="no">T</span> <span class="n">number1</span><span class="o">,</span> <span class="no">T</span> <span class="n">number2</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">//compute</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Collection</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">iter</span><span class="o">(</span><span class="n">T</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Collection</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">iter</span><span class="o">(</span><span class="no">T</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">//iterate</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -131,31 +133,20 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p><br /></p>
 
-<p>       在使用上述工具方法的时候，可以这么使用：</p>
+<p>       在使用代码清单1的工具方法的时，可以这么使用：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
-<span class="n">Integer</span> <span class="n">number1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-<span class="n">BigDecimal</span> <span class="n">number2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
+<span class="nc">Integer</span> <span class="n">number1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="nc">BigDecimal</span> <span class="n">number2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
 <span class="n">computeNumber</span><span class="o">(</span><span class="n">number1</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span>
-<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
-<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
+<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
+<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
 
 <span class="c1">//compile fail: Wrong 1st argument type</span>
 <span class="n">computeNumber</span><span class="o">(</span><span class="s">"string1"</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span></code></pre></figure>
 
 <p class="center">代码清单2</p>
 
-<p><br /></p>
-
-<p>       可见，只要定义了边界，泛型方法就可以同时处理任意子类。而当传入不属于边界类型的子类时，将会出现编译时的参数类型错误。</p>
-
-<p><br /></p>
-
-<h2 id="参考文献">参考文献</h2>
-
-<p>[1] Josh Juneau.<a href="https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html">泛型：工作原理及其重要性</a>[EB/OL].https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html，2019-07-02.<br />
-[2] <a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html">The Java™ Tutorials - Generics</a>[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br />
-[3] <a href="https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3">The Java® Virtual Machine Specification</a>[EB/OL].https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3，2019-07-04.<br /></p>
 
 		<h1><a href="/2019/07/java-sugar-generic-wildcard">阅读全文</a></h1>
         </div>
@@ -194,175 +185,26 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GenericClassErasureTest</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Node</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="s">"tail"</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Node</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Node</span><span class="o">&lt;&gt;(</span><span class="s">"tail"</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="no">T</span> <span class="n">data</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
 
-        <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="no">T</span> <span class="n">data</span><span class="o">,</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
             <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">data</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="no">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">data</span><span class="o">;</span> <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
 <p class="center">代码清单generic-type-erasure1</p>
 
-<p><br /></p>
-
-<p>       因为没有类型边界，所以编译器会将泛型转换成Object，实际上Node类应该是这样的：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="n">Object</span> <span class="n">data</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Node</span> <span class="n">next</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="n">Object</span> <span class="n">data</span><span class="o">,</span> <span class="n">Node</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">data</span><span class="o">;</span> <span class="o">}</span>
-    <span class="c1">// ...</span>
-<span class="o">}</span></code></pre></figure>
-
-<p class="center">代码清单generic-type-erasure2</p>
-
-<p><br /></p>
-
-<p>       特别说明：在使用intelliJ IDEA或者JD-GUI等反编译图形工具，查看泛型类字节码时，依然可以看到泛型信息，这于大家所熟悉的“编译之后泛型擦除”的说法相悖。
-可以用javap -verbose查看class文件的虚拟机指令。以代码清单generic-type-erasure1的Node类为例，运行javap之后的输出如下所示（仅截取方法描述）：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//构造函数</span>
-<span class="kd">public</span> <span class="n">generic</span><span class="o">.</span><span class="na">erasure</span><span class="o">.</span><span class="na">GenericClassErasureTest</span><span class="n">$Node</span><span class="o">(</span><span class="n">T</span><span class="o">,</span> <span class="n">generic</span><span class="o">.</span><span class="na">erasure</span><span class="o">.</span><span class="na">GenericClassErasureTest</span><span class="n">$Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;);</span>
-<span class="nl">descriptor:</span> <span class="o">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">Object</span><span class="o">;</span><span class="n">Lgeneric</span><span class="o">/</span><span class="n">erasure</span><span class="o">/</span><span class="n">GenericClassErasureTest$Node</span><span class="o">;)</span><span class="n">V</span>
-
-<span class="c1">//getData方法</span>
-<span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">();</span>
-<span class="nl">descriptor:</span> <span class="o">()</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">Object</span><span class="o">;</span></code></pre></figure>
-
-<p>       描述符descriptor展示了方法的参数和返回值的类型，参数类型会按照方法声明的顺序展示在括号()内，返回值类型紧跟其后。
-如果没有参数，则显示()。如果没有返回值，则显示V。</p>
-
-<p>       可以看到，getData的返回值类型是Ljava/lang/Object，也就是类型为Object，证明了字节码中的泛型会转换成具体的类型，而字节码中的泛型T，则属于具体类型的别名。
-事实上，在引入泛型后，字节码新增了Signatures部分，用以记录不属于JVM类型系统的语言级别的类型信息。Signatures的官网说明如下：</p>
-
-<blockquote>
-  <p>Signatures are used to encode Java programming language type information that is not part of the Java Virtual Machine type system, such as generic type and method declarations and parameterized types.</p>
-
-  <p>This kind of type information is needed to support reflection and debugging, and by a Java compiler.</p>
-</blockquote>
-
-<p>       所以，准确来说，在字节码中能够察觉泛型的存在（这也是反编译工具能够还原泛型的原因），但同时泛型也被具体化了，泛型类被编译成了处理具体类型的普通类。</p>
-
-<p><br /></p>
-
-<h4 id="2-有类型边界的泛型类的擦除">2. 有类型边界的泛型类的擦除</h4>
-
-<p>       我们同样定义一个泛型测试类：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">UpperBoundTypeClass</span><span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">UpperBoundTypeClass</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">data</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></figure>
-
-<p class="center">代码清单generic-type-erasure3</p>
-
-<p><br /></p>
-
-<p>       同样截取方法签名，如下所示：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//getData方法</span>
-<span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">();</span>
-<span class="nl">descriptor:</span> <span class="o">()</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="o">;</span></code></pre></figure>
-
-<p>       可以看到方法的实际返回值是String而非Object。</p>
-
-<p><br /></p>
-
-<h4 id="3-类型擦除的多态处理桥接方法">3. 类型擦除的多态处理——桥接方法</h4>
-
-<p>       当编译一个参数化的类或接口的子类或实现类时（以下统称子类），除了类型擦除，编译器还会额外对子类生成桥接方法。
-开发者不需要关心桥接方法，但最好还是了解一下编译器的行为，避免被堆栈信息疑惑。考虑如下代码：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
-
-    <span class="kd">public</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Node.setData"</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyNode</span> <span class="kd">extends</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nf">MyNode</span><span class="o">(</span><span class="n">Integer</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">Integer</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"MyNode.setData"</span><span class="o">);</span>
-        <span class="kd">super</span><span class="o">.</span><span class="na">setData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-    <span class="o">}</span>
-
-<span class="o">}</span></code></pre></figure>
-
-<p class="center">代码清单generic-type-erasure4</p>
-
-<p><br /></p>
-
-<p>       当类型擦除之后，Node类的setData变成setData(Object data)，而MyNode的setData方法参数类型为Integer，所以MyNode的setData没有覆盖Node类的setData，未能实现多态。
-为了让类型擦除之后的继承关系依然保留多态，编译器为子类新生成了以下方法：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Bridge method generated by the compiler</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">Object</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">setData</span><span class="o">((</span><span class="n">Integer</span><span class="o">)</span> <span class="n">data</span><span class="o">);</span>
-<span class="o">}</span></code></pre></figure>
-
-<p class="center">代码清单generic-type-erasure5</p>
-
-<p><br /></p>
-
-<p>       在代码清单generic-type-erasure5中，新的setData与Node类的setData拥有相同的方法签名，实现了多态，方法内部通过强制类型转换，再调用了原先的setData(Integer data)。
-同样可以用javap验证这一点，以下是MyNode的setData(Object data)的字节码内容的截取片段：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Object</span><span class="o">);</span>
-<span class="nl">descriptor:</span> <span class="o">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">Object</span><span class="o">;)</span><span class="n">V</span>
-<span class="o">...</span>
-<span class="mi">2</span><span class="o">:</span> <span class="n">checkcast</span>     <span class="err">#</span><span class="mi">6</span>                  <span class="c1">// class java/lang/Integer</span>
-<span class="o">...</span></code></pre></figure>
-
-<p><br /></p>
-
-<h2 id="附件">附件</h2>
-
-<p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic/erasure">由此获得</a>。</p>
-
-<p><br /></p>
-
-<h2 id="参考文献">参考文献</h2>
-
-<p>[1] Josh Juneau.<a href="https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html">泛型：工作原理及其重要性</a>[EB/OL].https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html，2019-07-02.<br />
-[2] <a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html">The Java™ Tutorials - Generics</a>[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br />
-[3] <a href="https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3">The Java® Virtual Machine Specification</a>[EB/OL].https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3，2019-07-04.<br /></p>
 
 		<h1><a href="/2019/07/java-sugar-generic-type-erasure">阅读全文</a></h1>
         </div>
@@ -448,7 +290,7 @@ CPU可能会缓存操作数所属的内存块，数据库的查询结果也可�
 在C和C++中，由预处理命令实现条件编译。预处理命令由#开头，比如#ifdef：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//程序处于调试阶段，可以将调试日志打印出来 </span>
-<span class="err">#</span><span class="n">ifdef</span> <span class="n">DEBUG</span></code></pre></figure>
+<span class="err">#</span><span class="n">ifdef</span> <span class="no">DEBUG</span></code></pre></figure>
 
 <p>       因C\C++的编译会最终生成目标机器的可执行文件，可执行文件是与平台极其相关的，因此C\C++程序可能会出现同一份代码需要分别根据平台进行编译的情况。</p>
 
