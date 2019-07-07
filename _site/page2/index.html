@@ -58,7 +58,9 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
-        <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,38 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2019/06/java-javasuger-cc">2019-06-24  Java语法糖-条件编译</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<h2 id="前言">前言</h2>
+
+<p><br /></p>
+
+<p>       条件编译，顾名思义，就是有条件地对代码进行编译，对于一套源代码，不同条件可能会编译出不同的两套目标代码。
+条件完全不同于if语句。if语句属于代码逻辑，不管哪个代码分支都会被编译。而条件编译只会编译满足条件的分支的代码。</p>
+
+<p>       条件编译广泛存在于需要跨平台运行的程序里，在真正开始编译之前，预处理过程会把代码扫描一遍，进行初步转换，其中一项任务就是执行条件编译。
+在C和C++中，由预处理命令实现条件编译。预处理命令由#开头，比如#ifdef：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//程序处于调试阶段，可以将调试日志打印出来 </span>
+<span class="err">#</span><span class="n">ifdef</span> <span class="no">DEBUG</span></code></pre></figure>
+
+<p>       因C\C++的编译会最终生成目标机器的可执行文件，可执行文件是与平台极其相关的，因此C\C++程序可能会出现同一份代码需要分别根据平台进行编译的情况。</p>
+
+<p class="center"><img src="/images/post_2019_06_24_image1.jpg" alt="c compile" /></p>
+
+<p class="center"><a href="https://computer.howstuffworks.com/c1.htm">图片来源</a></p>
+
+
+		<h1><a href="/2019/06/java-javasuger-cc">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2019/06/java-assert">2019-06-21  Java语法糖-assert</a></h1>
@@ -237,27 +269,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2019/06/java-javasuger">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2016/08/java-history">2016-08-14  Java的历史</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>       从第一代Java 1.0版本的发布至今，已有接近21年的时间了。21年里，计算机及互联网领域，出现了行业红利，出现了泡沫，出现了危机。伴随着行业起伏的大浪潮，同样出现了许许多多的市值千亿美金级别的软件、互联网公司。</p>
-
-<p>       截止至目前，最新版本的Java 8的体系架构如下图所示：</p>
-
-<p><img src="/images/post_2016_08_14_image1.png" alt="Java8_structure" /></p>
-
-<p>       接下来，从1991年~2000年（Java的古代）、2002年~2006年（Java 的近代）、2006年至今（Java的现代）3个时间段，简单介绍一下Java语言诞生至今的重要时刻的时间线。</p>
-
-
-		<h1><a href="/2016/08/java-history">阅读全文</a></h1>
         </div>
     </div>
 </div>

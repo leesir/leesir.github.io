@@ -58,7 +58,9 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
-        <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,31 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-fp-java8-predicate-consumer">2015-10-21  Predicate和Consumer接口– Java 8中java.util.function包下的接口</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，我也提及了Predicate接口属于java.util.function包，在这篇文章中，我将展示如何应用Predicate接口和Consumer接口。</p>
+
+<p>　　一起看一下Predicate的官方文档：：</p>
+
+<blockquote>
+  <p>Determines if the input object matches some criteria.</p>
+</blockquote>
+
+<p>　　即判断输入的对象是否符合某个条件。</p>
+
+
+		<h1><a href="/2015/10/java-fp-java8-predicate-consumer">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-fp-java8-functional">2015-10-21  Function接口 – Java8中java.util.function包下的函数式接口</a></h1>
@@ -258,35 +283,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2015/10/java-fp-faking-closure-factory">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-fp-map-fold">2015-10-19  Java Functional Programming: Java中函数式编程的Map和Fold(Reduce)</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://www.javacodegeeks.com/2012/03/functional-programming-with-map-and.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Cyrille-Martraire/">Cyrille Martraire</a></p>
-
-<p>　　在函数式编程中，Map和Fold是两个非常有用的操作，它们存在于每一个函数式编程语言中。既然Map和Fold操作如此强大和重要，但是Java语言缺乏Map和Fold机制，那么该如何解释我们使用Java完成日常编码工作呢？实际上你已经在Java中利用手动编写循环的方式实现了Map和Fold操作（译者注：许多动态语言如python都提供了内置的实现）。</p>
-
-<p>　　免责声明：本篇文章仅仅只是一篇入门简介，并非函数式编程的参考。函数式编程爱好者可能会不赞同本文观点。</p>
-
-<p>#你已经很熟悉Map和Fold</p>
-
-<p>　　假设这里有一个List<Double>，存储了不含增值税VAT（译者注：Value Added Tax）的金额列表，现在我们想把这个列表转换成包含增值税金额的列表。首先我们定义一个方法，为金额添加增值税：</Double></p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="kt">double</span> <span class="nf">addVAT</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span><span class="o">,</span> <span class="kt">double</span> <span class="n">rate</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="o">);</span>
-<span class="o">}</span>
-    </code></pre></figure>
-
-
-		<h1><a href="/2015/10/java-fp-map-fold">阅读全文</a></h1>
         </div>
     </div>
 </div>

@@ -58,7 +58,9 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
-        <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
-        
     </ul>
 </div>
 
@@ -107,7 +107,33 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
             
 <div class="article">
     <div class="well">
-        <h1><a href="/2019/07/java-sugar-generic-wildcard">2019-07-05  Java语法糖-泛型-泛型边界</a></h1>
+        <h1><a href="/2019/07/java-sugar-generic-wildcard">2019-07-06  Java语法糖-泛型-通配符</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>       在范型的使用上，问号？</p>
+
+<h2 id="附件">附件</h2>
+
+<p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic">由此获得</a>。</p>
+
+<p><br /></p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<p>[1] Josh Juneau.<a href="https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html">泛型：工作原理及其重要性</a>[EB/OL].https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html，2019-07-02.<br />
+[2] <a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html">The Java™ Tutorials - Generics</a>[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br />
+[3] <a href="https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3">The Java® Virtual Machine Specification</a>[EB/OL].https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3，2019-07-04.<br /></p>
+
+		<h1><a href="/2019/07/java-sugar-generic-wildcard">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
+        <h1><a href="/2019/07/java-sugar-generic-bound">2019-07-05  Java语法糖-泛型-泛型边界</a></h1>
         
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
@@ -148,7 +174,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p class="center">代码清单2</p>
 
 
-		<h1><a href="/2019/07/java-sugar-generic-wildcard">阅读全文</a></h1>
+		<h1><a href="/2019/07/java-sugar-generic-bound">阅读全文</a></h1>
         </div>
     </div>
 </div>
@@ -268,38 +294,6 @@ CPU可能会缓存操作数所属的内存块，数据库的查询结果也可�
 
 
 		<h1><a href="/2019/06/cache-pattern-practise">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/06/java-javasuger-cc">2019-06-24  Java语法糖-条件编译</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<h2 id="前言">前言</h2>
-
-<p><br /></p>
-
-<p>       条件编译，顾名思义，就是有条件地对代码进行编译，对于一套源代码，不同条件可能会编译出不同的两套目标代码。
-条件完全不同于if语句。if语句属于代码逻辑，不管哪个代码分支都会被编译。而条件编译只会编译满足条件的分支的代码。</p>
-
-<p>       条件编译广泛存在于需要跨平台运行的程序里，在真正开始编译之前，预处理过程会把代码扫描一遍，进行初步转换，其中一项任务就是执行条件编译。
-在C和C++中，由预处理命令实现条件编译。预处理命令由#开头，比如#ifdef：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//程序处于调试阶段，可以将调试日志打印出来 </span>
-<span class="err">#</span><span class="n">ifdef</span> <span class="no">DEBUG</span></code></pre></figure>
-
-<p>       因C\C++的编译会最终生成目标机器的可执行文件，可执行文件是与平台极其相关的，因此C\C++程序可能会出现同一份代码需要分别根据平台进行编译的情况。</p>
-
-<p class="center"><img src="/images/post_2019_06_24_image1.jpg" alt="c compile" /></p>
-
-<p class="center"><a href="https://computer.howstuffworks.com/c1.htm">图片来源</a></p>
-
-
-		<h1><a href="/2019/06/java-javasuger-cc">阅读全文</a></h1>
         </div>
     </div>
 </div>
