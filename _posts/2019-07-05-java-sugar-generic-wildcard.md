@@ -147,7 +147,7 @@ descriptor: (Ljava/io/Serializable;)V
 
 ## 附件
 
-&#160; &#160; &#160; &#160;本博文所展示的源代码[由此获得](https://github.com/leesir/blog_code/tree/master/src/generic)。
+&#160; &#160; &#160; &#160;本博文所展示的源代码[由此获得](https://github.com/leesir/blog_code/tree/master/src/generic/boundandWildcard)。
 
 <br>
 
