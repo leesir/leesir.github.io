@@ -145,6 +145,12 @@ descriptor: (Ljava/io/Serializable;)V
 
 <br>
 
+## 附件
+
+&#160; &#160; &#160; &#160;本博文所展示的源代码[由此获得](https://github.com/leesir/blog_code/tree/master/src/generic)。
+
+<br>
+
 ## 参考文献
 
 [1] Josh Juneau.[泛型：工作原理及其重要性](https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html)[EB/OL].https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html，2019-07-02.<br>
