@@ -195,7 +195,8 @@ boolean compare3Result1 = new TestGenericMethod().compare3(new Object(), new Pai
 * 泛型的限制
 * [类型擦除](http://leesir.github.io/2019/07/java-sugar-generic)
 * 泛型类之间的关系
-* 泛型边界与通配符
+* [泛型边界]((http://leesir.github.io/2019/07/java-sugar-generic-wildcard))
+* 通配符
 
 <br>
 
