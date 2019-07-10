@@ -195,8 +195,25 @@ boolean compare3Result1 = new TestGenericMethod().compare3(new Object(), new Pai
 * 泛型的限制
 * [类型擦除](http://leesir.github.io/2019/07/java-sugar-generic)
 * 泛型类之间的关系
-* [泛型边界](http://leesir.github.io/2019/07/java-sugar-generic-wildcard)
+* [泛型边界](http://leesir.github.io/2019/07/java-sugar-generic-bound)
 * 通配符
+
+<br>
+
+## 特别说明
+
+<br>
+
+&#160; &#160; &#160; &#160;在Oracle官方文档中，有关Type Parameter和Type Argument术语的说明如下：
+
+> Many developers use the terms "type parameter" and "type argument" interchangeably, but these terms are not the same.
+>  
+> When coding, one provides type arguments in order to create a parameterized type. 
+> 
+> Therefore, the T in Foo<T> is a type parameter and the String in Foo<String> f is a type argument. This lesson observes this definition when using these terms. 
+
+&#160; &#160; &#160; &#160;也就是在方法声明或者类声明中，T, E, K这种字符属于Type Parameter，而调用过程中的方法形参、类初始化参数属于Type Argument。
+两者翻译含义相近，如有需要将以英文原文代替，不作汉语翻译。
 
 <br>
 

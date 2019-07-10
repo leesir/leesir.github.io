@@ -58,7 +58,9 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -85,8 +87,6 @@
         <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
         <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
-        <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
     </ul>
 </div>
@@ -136,33 +136,33 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PipeExample</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
 
-        <span class="kd">final</span> <span class="nc">PipedOutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PipedOutputStream</span><span class="o">();</span>
-        <span class="kd">final</span> <span class="nc">PipedInputStream</span>  <span class="n">input</span>  <span class="o">=</span> <span class="k">new</span> <span class="nc">PipedInputStream</span><span class="o">(</span><span class="n">output</span><span class="o">);</span>
+        <span class="kd">final</span> <span class="n">PipedOutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PipedOutputStream</span><span class="o">();</span>
+        <span class="kd">final</span> <span class="n">PipedInputStream</span>  <span class="n">input</span>  <span class="o">=</span> <span class="k">new</span> <span class="n">PipedInputStream</span><span class="o">(</span><span class="n">output</span><span class="o">);</span>
 
 
-        <span class="nc">Thread</span> <span class="n">thread1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">Thread</span> <span class="n">thread1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
                 <span class="k">try</span> <span class="o">{</span>
                     <span class="n">output</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello world, pipe!"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
-                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
                 <span class="o">}</span>
             <span class="o">}</span>
         <span class="o">});</span>
 
 
-        <span class="nc">Thread</span> <span class="n">thread2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">Thread</span> <span class="n">thread2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
                 <span class="k">try</span> <span class="o">{</span>
                     <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
                     <span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
-                        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="n">data</span><span class="o">);</span>
+                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="n">data</span><span class="o">);</span>
                         <span class="n">data</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
                     <span class="o">}</span>
-                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
                 <span class="o">}</span>
             <span class="o">}</span>
         <span class="o">});</span>

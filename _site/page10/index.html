@@ -58,7 +58,9 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
-        <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,25 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-systemstream">2015-10-11  Java IO: System.in, System.out, System.err</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/system-in-out-error.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　System.in, System.out, System.err这3个流同样是常见的数据来源和数据流目的地。使用最多的可能是在控制台程序里利用System.out将输出打印到控制台上。</p>
+
+<p>　　JVM启动的时候通过Java运行时初始化这3个流，所以你不需要初始化它们(尽管你可以在运行时替换掉它们)。</p>
+
+
+		<h1><a href="/2015/10/java-io-systemstream">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-stream">2015-10-11  Java IO: 流</a></h1>
@@ -166,7 +185,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
+<span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -202,11 +221,11 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">);</span>
+<span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">);</span>
 
 <span class="k">while</span><span class="o">(</span><span class="n">moreData</span><span class="o">)</span> <span class="o">{</span>
 
-    <span class="nc">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMoreData</span><span class="o">();</span>
+    <span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMoreData</span><span class="o">();</span>
 
     <span class="n">write</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
 
@@ -221,15 +240,15 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>　　以下的构造函数取文件名作为参数，将会新写入的内容将会覆盖该文件：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">);</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">);</span>
 
     </code></pre></figure>
 
 <p>　　以下的构造函数取文件名和一个布尔变量作为参数，布尔值表明你是想追加还是覆盖该文件。例子如下：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span> <span class="c1">//appends to file</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span> <span class="c1">//appends to file</span>
 
-<span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">//overwrites file</span></code></pre></figure>
+<span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output.txt"</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">//overwrites file</span></code></pre></figure>
 
 <p>　　同样，FileWriter不能指定编码，可以通过OutputStreamWriter配合FileOutputStream替代FileWriter。</p>
 
@@ -253,23 +272,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2015/10/java-io-pipe">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-array">2015-10-10  Java IO 字节和字符数组</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://tutorials.jenkov.com/java-io/arrays.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　Java中的字节和字符数组经常被用于临时存储应用程序内部的数据。所以数组也是常见的数据来源以及数据流目的地。如果你在程序执行过程中需要频繁访问文件的内容，你可能会愿意将文件加载到数组中去。当然你可以通过索引直接访问这些数组。但是如果你有一个组件的设计初衷是从InputStream或者Reader而非数组中读取某些数据呢？</p>
-
-
-		<h1><a href="/2015/10/java-io-array">阅读全文</a></h1>
         </div>
     </div>
 </div>

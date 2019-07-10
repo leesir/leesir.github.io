@@ -58,7 +58,9 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
         
-        <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,25 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/07/boxed-type-conditional-op">2016-07-02  包装类型在条件运算中的使用不当造成的空指针异常</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>虽然已有几年开发经验，但是工作中发现，这程序中的坑啊，踩的也真是不亦乐乎，很是惭愧。</p>
+
+<p>即使是最最基础的Java语言本身的特性，也有点儿说不清道不明了。大家都曾努力学习过，都正在努力地工作，为什么一些错误总是一而再再而三的犯呢？我想这不是个人基础的问题，而是没有认真总结与回顾。</p>
+
+<p>所以，即日起，小弟我会把工作上学习中遇到的问题都记录下来，可能有些问题会很白痴，然而不惧贻笑大方方能进步。</p>
+
+
+		<h1><a href="/2016/07/boxed-type-conditional-op">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/11/java-cr-code-convention">2015-11-21  Java代码规范实践手册</a></h1>
@@ -157,11 +176,11 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　List&lt;? extends Number&gt; foo3的通配符声明，意味着以下的赋值是合法的：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Number "extends" Number (in this context)</span>
-<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Number</span><span class="o">&gt;();</span>  
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;();</span>  
 <span class="c1">// Integer extends Number</span>
-<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span> 
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span> 
 <span class="c1">// Double extends Number</span>
-<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;();</span>  </code></pre></figure>
+<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;();</span>  </code></pre></figure>
 
 
 		<h1><a href="/2015/10/java-qa-generics-extends-super">阅读全文</a></h1>
@@ -216,31 +235,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2015/10/java-fp-java8-lambda-template">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-fp-java8-predicate-consumer">2015-10-21  Predicate和Consumer接口– Java 8中java.util.function包下的接口</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
-
-<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，我也提及了Predicate接口属于java.util.function包，在这篇文章中，我将展示如何应用Predicate接口和Consumer接口。</p>
-
-<p>　　一起看一下Predicate的官方文档：：</p>
-
-<blockquote>
-  <p>Determines if the input object matches some criteria.</p>
-</blockquote>
-
-<p>　　即判断输入的对象是否符合某个条件。</p>
-
-
-		<h1><a href="/2015/10/java-fp-java8-predicate-consumer">阅读全文</a></h1>
         </div>
     </div>
 </div>

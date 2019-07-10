@@ -58,7 +58,9 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -85,8 +87,6 @@
         <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
         <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
-        <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
     </ul>
 </div>
@@ -126,7 +126,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
 
     </code></pre></figure>
 
@@ -134,7 +134,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
 
     </code></pre></figure>
 
@@ -152,12 +152,12 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　与BufferedInputStream类似，BufferedOutputStream可以为输出流提供缓冲区。可以构造一个使用默认大小缓冲区的BufferedOutputStream(译者注：默认缓冲区大小8 * 1024B)，代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">));</span>
+<span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">));</span>
     </code></pre></figure>
 
 <p>　　也可以手动设置缓冲区大小，代码如下：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">OutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
     </code></pre></figure>
 
 <p>　　为了更好地使用内置缓冲区的磁盘，同样建议把缓冲区大小设置成1024的整数倍。</p>
@@ -170,7 +170,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>　　DataInputStream可以使你从输入流中读取Java基本类型数据，而不必每次读取字节数据。你可以把InputStream包装到DataInputStream中，然后就可以从此输入流中读取基本类型数据了，代码如下：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">DataInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DataInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"binary.data"</span><span class="o">));</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">DataInputStream</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"binary.data"</span><span class="o">));</span>
 
 <span class="kt">int</span> <span class="n">aByte</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -193,7 +193,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">DataOutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DataOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="s">"binary.data"</span><span class="o">));</span>
+<span class="n">DataOutputStream</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">"binary.data"</span><span class="o">));</span>
 
 <span class="n">output</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="mi">45</span><span class="o">);</span>
 

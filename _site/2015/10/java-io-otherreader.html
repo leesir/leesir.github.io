@@ -58,7 +58,9 @@
     <h1>Recent Posts</h1>
     <ul>
         
-        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-泛型边界</a></li>
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
         
@@ -85,8 +87,6 @@
         <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
         <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
-        <li><a href="/2016/07/boxed-type-conditional-op">包装类型在条件运算中的使用不当造成的空指针异常</a></li>
         
     </ul>
 </div>
@@ -123,7 +123,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　PushbackReader与PushbackInputStream类似，唯一不同的是PushbackReader处理字符，PushbackInputStream处理字节。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
+<span class="n">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -133,7 +133,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　同样可以设置缓冲区大小，代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
+<span class="n">PushbackReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PushbackReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">),</span> <span class="mi">8</span><span class="o">);</span>
     </code></pre></figure>
 
 <!-- more -->
@@ -147,7 +147,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　你可以通过getLineNumber()方法获取当前行号，通过setLineNumber()方法设置当前行数(译者注：setLineNumber()仅仅改变LineNumberReader内的记录行号的变量值，不会改变当前流的读取位置。流的读取依然是顺序进行，意味着你不能通过setLineNumber()实现流的跳跃读取)。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">LineNumberReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LineNumberReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
+<span class="n">LineNumberReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LineNumberReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">));</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -183,20 +183,20 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">StreamTokenizer</span> <span class="n">tokenizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StreamTokenizer</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringReader</span><span class="o">(</span><span class="s">"Mary had 1 little lamb..."</span><span class="o">));</span>
+<span class="n">StreamTokenizer</span> <span class="n">tokenizer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StreamTokenizer</span><span class="o">(</span><span class="k">new</span> <span class="n">StringReader</span><span class="o">(</span><span class="s">"Mary had 1 little lamb..."</span><span class="o">));</span>
 
-<span class="k">while</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">nextToken</span><span class="o">()</span> <span class="o">!=</span> <span class="nc">StreamTokenizer</span><span class="o">.</span><span class="na">TT_EOF</span><span class="o">){</span>
+<span class="k">while</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">nextToken</span><span class="o">()</span> <span class="o">!=</span> <span class="n">StreamTokenizer</span><span class="o">.</span><span class="na">TT_EOF</span><span class="o">){</span>
 
-    <span class="k">if</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">ttype</span> <span class="o">==</span> <span class="nc">StreamTokenizer</span><span class="o">.</span><span class="na">TT_WORD</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">ttype</span> <span class="o">==</span> <span class="n">StreamTokenizer</span><span class="o">.</span><span class="na">TT_WORD</span><span class="o">)</span> <span class="o">{</span>
 
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">sval</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">ttype</span> <span class="o">==</span> <span class="nc">StreamTokenizer</span><span class="o">.</span><span class="na">TT_NUMBER</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">sval</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">ttype</span> <span class="o">==</span> <span class="n">StreamTokenizer</span><span class="o">.</span><span class="na">TT_NUMBER</span><span class="o">)</span> <span class="o">{</span>
 
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">nval</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">nval</span><span class="o">);</span>
 
-    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">ttype</span> <span class="o">==</span> <span class="nc">StreamTokenizer</span><span class="o">.</span><span class="na">TT_EOL</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">ttype</span> <span class="o">==</span> <span class="n">StreamTokenizer</span><span class="o">.</span><span class="na">TT_EOL</span><span class="o">)</span> <span class="o">{</span>
 
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
 
     <span class="o">}</span>
 
@@ -222,7 +222,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　StringReader能够将原始字符串转换成Reader，代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringReader</span><span class="o">(</span><span class="s">"input string..."</span><span class="o">);</span>
+<span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringReader</span><span class="o">(</span><span class="s">"input string..."</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -246,13 +246,13 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　StringWriter能够以字符串的形式从Writer中获取写入到其中数据，代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="nc">StringWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringWriter</span><span class="o">();</span>
+<span class="n">StringWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringWriter</span><span class="o">();</span>
 
 <span class="c1">//write characters to writer.</span>
 
-<span class="nc">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">writer</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+<span class="n">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">writer</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
 
-<span class="nc">StringBuffer</span> <span class="n">dataBuffer</span> <span class="o">=</span> <span class="n">writer</span><span class="o">.</span><span class="na">getBuffer</span><span class="o">();</span>
+<span class="n">StringBuffer</span> <span class="n">dataBuffer</span> <span class="o">=</span> <span class="n">writer</span><span class="o">.</span><span class="na">getBuffer</span><span class="o">();</span>
     </code></pre></figure>
 
 <p>　　toString()方法能够获取StringWriter中的字符串数据。</p>
