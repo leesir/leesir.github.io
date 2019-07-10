@@ -40,6 +40,8 @@ public static double sumOfList1(List<? extends Number> list) {
 {:.center}
 代码清单1
 
+<!-- more -->
+
 <br>
 
 &#160; &#160; &#160; &#160;调用代码清单1的sumOfList1时，可以传入元素类型为Number子类的列表，如：
