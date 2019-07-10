@@ -122,7 +122,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 
-<span class="nc">InputStream</span> <span class="n">inputstream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">inputstream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
 
 <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">inputstream</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -150,13 +150,13 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 	
-<span class="k">try</span><span class="o">(</span> <span class="nc">InputStream</span> <span class="n">inputstream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"file.txt"</span><span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
+<span class="k">try</span><span class="o">(</span> <span class="n">InputStream</span> <span class="n">inputstream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"file.txt"</span><span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
 
 	<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">inputstream</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
 	<span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
 
-		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="n">data</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="n">data</span><span class="o">);</span>
 
 		<span class="n">data</span> <span class="o">=</span> <span class="n">inputstream</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
 
@@ -166,8 +166,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 	
 	</code></pre></figure>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>当执行线程退出try语句块的时候，InputStream变量会被关闭。
-</code></pre></div></div>
+<div class="highlighter-rouge">当执行线程退出try语句块的时候，InputStream变量会被关闭。
+</div>
 
 <p>#read()</p>
 
@@ -218,7 +218,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 	
-<span class="nc">InputStream</span> <span class="n">inputstream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">inputstream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input-text.txt"</span><span class="o">);</span>
 
 <span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span><span class="o">];</span>
 

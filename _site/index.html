@@ -112,7 +112,27 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p>       在范型的使用上，问号？</p>
+<p>       在范型的使用上，问号”?”表示通配符，代表运行时未知类型。通配符可用在：</p>
+<ul>
+  <li>方法形参</li>
+  <li>成员变量</li>
+  <li>局部变量</li>
+  <li>方法返回值（不建议这么做，方法的返回值应该是明确的）</li>
+</ul>
+
+<p>       通配符不能用作泛型方法的实参，不能用于范型类的初始化。</p>
+
+<p><br /></p>
+
+<h2 id="1-有界通配符">1. 有界通配符</h2>
+
+<p>       有界通配符与有界泛型一样，代表着泛型的某个边界。不同的地方在于，有界通配符除了上界之外，还有下界，通过super关键字实现。</p>
+
+<p><br /></p>
+
+<h4 id="11-上界通配符">1.1 上界通配符</h4>
+
+<p><br /></p>
 
 <h2 id="附件">附件</h2>
 
@@ -147,11 +167,11 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>       在Java中，用extends关键字可以实现有界泛型的定义。格式为：&lt;T extends UpperBoundClass&gt;，其中UpperBoundClass为上边界类型。代码实例如下所示：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeNumber</span><span class="o">(</span><span class="no">T</span> <span class="n">number1</span><span class="o">,</span> <span class="no">T</span> <span class="n">number2</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeNumber</span><span class="o">(</span><span class="n">T</span> <span class="n">number1</span><span class="o">,</span> <span class="n">T</span> <span class="n">number2</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">//compute</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Collection</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">iter</span><span class="o">(</span><span class="no">T</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Collection</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">iter</span><span class="o">(</span><span class="n">T</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">//iterate</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -162,11 +182,11 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       在使用代码清单1的工具方法的时，可以这么使用：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
-<span class="nc">Integer</span> <span class="n">number1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-<span class="nc">BigDecimal</span> <span class="n">number2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
+<span class="n">Integer</span> <span class="n">number1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">BigDecimal</span> <span class="n">number2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
 <span class="n">computeNumber</span><span class="o">(</span><span class="n">number1</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span>
-<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
-<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
+<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
+<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
 
 <span class="c1">//compile fail: Wrong 1st argument type</span>
 <span class="n">computeNumber</span><span class="o">(</span><span class="s">"string1"</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span></code></pre></figure>
@@ -211,21 +231,21 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GenericClassErasureTest</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Node</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Node</span><span class="o">&lt;&gt;(</span><span class="s">"tail"</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="s">"tail"</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="no">T</span> <span class="n">data</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
 
-        <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="no">T</span> <span class="n">data</span><span class="o">,</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
             <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="no">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">data</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">data</span><span class="o">;</span> <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 

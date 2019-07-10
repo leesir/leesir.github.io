@@ -121,11 +121,11 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>       在Java中，用extends关键字可以实现有界泛型的定义。格式为：&lt;T extends UpperBoundClass&gt;，其中UpperBoundClass为上边界类型。代码实例如下所示：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeNumber</span><span class="o">(</span><span class="no">T</span> <span class="n">number1</span><span class="o">,</span> <span class="no">T</span> <span class="n">number2</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeNumber</span><span class="o">(</span><span class="n">T</span> <span class="n">number1</span><span class="o">,</span> <span class="n">T</span> <span class="n">number2</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">//compute</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Collection</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">iter</span><span class="o">(</span><span class="no">T</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Collection</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">iter</span><span class="o">(</span><span class="n">T</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">//iterate</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -136,11 +136,11 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       在使用代码清单1的工具方法的时，可以这么使用：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
-<span class="nc">Integer</span> <span class="n">number1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-<span class="nc">BigDecimal</span> <span class="n">number2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
+<span class="n">Integer</span> <span class="n">number1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">BigDecimal</span> <span class="n">number2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
 <span class="n">computeNumber</span><span class="o">(</span><span class="n">number1</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span>
-<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
-<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
+<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
+<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
 
 <span class="c1">//compile fail: Wrong 1st argument type</span>
 <span class="n">computeNumber</span><span class="o">(</span><span class="s">"string1"</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span></code></pre></figure>
@@ -159,11 +159,11 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>       除了可以限制类型之外，有界范型的定义还允许直接访问边界类型，比如：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Collection</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">iter</span><span class="o">(</span><span class="no">T</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Collection</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">iter</span><span class="o">(</span><span class="n">T</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">//iterate</span>
     <span class="k">if</span> <span class="o">(!</span><span class="n">collection</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="nc">Object</span> <span class="n">ele</span> <span class="o">:</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ele</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Object</span> <span class="n">ele</span> <span class="o">:</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ele</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -189,26 +189,26 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       原因很简单，Java不支持类的多继承关系，所以一个类不可能有多个无关系的父类。
 而接口可以多继承接口，所以支持多个接口类型边界。代码示例如下所示：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Number</span> <span class="o">&amp;</span> <span class="nc">Cloneable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeCloneableNumber</span><span class="o">(</span><span class="no">T</span> <span class="n">number</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">number</span><span class="o">.</span><span class="na">intValue</span><span class="o">());</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Number</span> <span class="o">&amp;</span> <span class="n">Cloneable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeCloneableNumber</span><span class="o">(</span><span class="n">T</span> <span class="n">number</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">number</span><span class="o">.</span><span class="na">intValue</span><span class="o">());</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Serializable</span> <span class="o">&amp;</span> <span class="nc">Cloneable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">visitCAndSObject</span><span class="o">(</span><span class="no">T</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Serializable</span> <span class="o">&amp;</span> <span class="n">Cloneable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">visitCAndSObject</span><span class="o">(</span><span class="n">T</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">interface</span> <span class="nc">CAndS</span> <span class="kd">extends</span> <span class="nc">Cloneable</span><span class="o">,</span> <span class="nc">Serializable</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">interface</span> <span class="nc">CAndS</span> <span class="kd">extends</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">Serializable</span> <span class="o">{</span>
 
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">CloneableInteger</span> <span class="kd">extends</span> <span class="nc">Number</span> <span class="kd">implements</span> <span class="nc">Cloneable</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">data</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">CloneableInteger</span> <span class="kd">extends</span> <span class="n">Number</span> <span class="kd">implements</span> <span class="n">Cloneable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Integer</span> <span class="n">data</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">CloneableInteger</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">CloneableInteger</span><span class="o">(</span><span class="n">Integer</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Integer</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">;</span>
     <span class="o">}</span>
 
@@ -217,8 +217,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <span class="c1">//调用</span>
 <span class="c1">//compile success</span>
-<span class="n">computeCloneableNumber</span><span class="o">(</span><span class="k">new</span> <span class="nc">CloneableInteger</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
-<span class="n">visitCAndSObject</span><span class="o">(</span><span class="k">new</span> <span class="nc">CAndS</span><span class="o">(){});</span>
+<span class="n">computeCloneableNumber</span><span class="o">(</span><span class="k">new</span> <span class="n">CloneableInteger</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+<span class="n">visitCAndSObject</span><span class="o">(</span><span class="k">new</span> <span class="n">CAndS</span><span class="o">(){});</span>
 
 <span class="c1">//compile fail，提示Integer不能转成Cloneable</span>
 <span class="n">computeCloneableNumber</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span></code></pre></figure>
@@ -229,11 +229,11 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>       多重边界的范型，编译器类型擦出过后，总是保留最左侧的边界类型作为实际类型，在代码清单4中，computeCloneableNumber和visitCAndSObject在字节码中的方法参数分别为Number和Serializable：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Number</span> <span class="o">&amp;</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Cloneable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeCloneableNumber</span><span class="o">(</span><span class="no">T</span><span class="o">);</span>
-<span class="nl">descriptor:</span> <span class="o">(</span><span class="nc">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="nc">Number</span><span class="o">;)</span><span class="no">V</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Number</span> <span class="o">&amp;</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Cloneable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeCloneableNumber</span><span class="o">(</span><span class="n">T</span><span class="o">);</span>
+<span class="nl">descriptor:</span> <span class="o">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">Number</span><span class="o">;)</span><span class="n">V</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span> <span class="o">&amp;</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Cloneable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">visitCAndSObject</span><span class="o">(</span><span class="no">T</span><span class="o">);</span>
-<span class="nl">descriptor:</span> <span class="o">(</span><span class="nc">Ljava</span><span class="o">/</span><span class="n">io</span><span class="o">/</span><span class="nc">Serializable</span><span class="o">;)</span><span class="no">V</span></code></pre></figure>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span> <span class="o">&amp;</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Cloneable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">visitCAndSObject</span><span class="o">(</span><span class="n">T</span><span class="o">);</span>
+<span class="nl">descriptor:</span> <span class="o">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">io</span><span class="o">/</span><span class="n">Serializable</span><span class="o">;)</span><span class="n">V</span></code></pre></figure>
 
 <p><br /></p>
 
