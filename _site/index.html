@@ -112,7 +112,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         <div class="content">
 		<link rel="stylesheet" href="/css/pygments.css" />
 
-<p>       在范型的使用上，问号”?”表示通配符，代表运行时未知类型。通配符可用在：</p>
+<p>       在范型的使用上，问号”?”表示通配符，代表运行时未知类型。通配符可用作type parameter：</p>
 <ul>
   <li>方法形参</li>
   <li>成员变量</li>
@@ -120,7 +120,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
   <li>方法返回值（不建议这么做，方法的返回值应该是明确的）</li>
 </ul>
 
-<p>       通配符不能用作泛型方法的实参，不能用于范型类的初始化。</p>
+<p>       通配符不能用作泛型方法的实参，不能用于范型类的初始化，即不能用作type argument。</p>
 
 <p><br /></p>
 
@@ -132,11 +132,131 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <h4 id="11-上界通配符">1.1 上界通配符</h4>
 
+<p>       利用“? extends UpperBoundClass”可以实现上界通配符，比如你想实现一个工具方法，对一个数字列表进行求和，可以将方法参数声明为: &lt;? extends Number&gt;：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">sumOfList1</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">Number</span> <span class="n">n</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">n</span><span class="o">.</span><span class="na">doubleValue</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">s</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单1</p>
+
+<p><br /></p>
+
+<p>       调用代码清单1的sumOfList1时，可以传入元素类型为Number子类的列表，如：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sumOfList1</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mf">2.3</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">))));</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sumOfList1</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)));</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sumOfList1</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mf">1.1</span><span class="o">,</span> <span class="mf">2.2</span><span class="o">,</span> <span class="mf">2.3</span><span class="o">)));</span>
+<span class="c1">//output: 7.3, 6.0, 5.6</span></code></pre></figure>
+
+<p class="center">代码清单2</p>
+
+<p><br /></p>
+
+<p>       与上界泛型类似，在处理通配符列表时，我们可以通过对上界类型的公共方法的访问，通过多态忽略具体类型不同对代码的影响。</p>
+
+<p><br /></p>
+
+<h4 id="12-下界通配符">1.2 下界通配符</h4>
+
+<p>       利用“? super LowerBoundClass”可以实现下界通配符，将允许接收的最低层次类型限制在LowerBoundClass。
+与上界通配符完全不同的是，在代码中不能访问下界通配符的元素。在上界通配符中，能够保证元素一定是UpperBoundClass类型，而在下界通配符中，没有办法保证元素一定是什么类型。
+所以我们只能往下界通配符列表中插入一个LowerBoundClass元素，但是不能读取或者遍历该列表。</p>
+
+<p>       代码示例如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sumOfListLower</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">//compile fail: incompatible type</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sumOfListLower</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Integer</span> <span class="n">value</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单3</p>
+
+<p><br /></p>
+
+<h2 id="2-无界通配符">2. 无界通配符</h2>
+
+<p>       利用“?”可以实现无界通配符，表示完全未知的类型。有2种场景非常适合无界通配符：</p>
+
+<ul>
+  <li>当某个方法需要满足不同的参数类型，又仅需要Object类提供的功能时。</li>
+  <li>处于泛型类中，又不依赖于泛型T的方法，比如List.size()。</li>
+</ul>
+
+<p>       我们可以看看JDK中的例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/**
+ * JDK1.8 java.util.Collections
+ *
+ * Reverses the order of the elements in the specified list.&lt;p&gt;
+ *
+ * This method runs in linear time.
+ *
+ * @param  list the list whose elements are to be reversed.
+ * @throws UnsupportedOperationException if the specified list or
+ *         its list-iterator does not support the &lt;tt&gt;set&lt;/tt&gt; operation.
+ */</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">reverse</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">&lt;</span> <span class="n">REVERSE_THRESHOLD</span> <span class="o">||</span> <span class="n">list</span> <span class="k">instanceof</span> <span class="n">RandomAccess</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">mid</span><span class="o">=</span><span class="n">size</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="o">,</span> <span class="n">j</span><span class="o">=</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">mid</span><span class="o">;</span> <span class="n">i</span><span class="o">++,</span> <span class="n">j</span><span class="o">--)</span>
+            <span class="n">swap</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">ListIterator</span> <span class="n">fwd</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">listIterator</span><span class="o">();</span>
+        <span class="n">ListIterator</span> <span class="n">rev</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">listIterator</span><span class="o">(</span><span class="n">size</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">mid</span><span class="o">=</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()&gt;&gt;</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">mid</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">Object</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">fwd</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+            <span class="n">fwd</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">rev</span><span class="o">.</span><span class="na">previous</span><span class="o">());</span>
+            <span class="n">rev</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">tmp</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单4</p>
+
+<p><br /></p>
+
+<p>       在代码清单4的reverse方法中，反转逻辑和具体类型是无关的，所以方法参数采用了List&lt;?&gt;。</p>
+
+<p><br /></p>
+
+<h2 id="3-通配符类型捕获">3. 通配符类型捕获</h2>
+
+<p>       在某些情况下，编译器会代码上下文进行类型推到，这个过程称为通配符捕获。
+通常情况下开发者不需要关注本小节内容，因为通配符捕获的错误仅在下述十分罕见的代码中才会发生：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile fail: incompatible type</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setFalse</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">target</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">target</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单5</p>
+
+<p><br /></p>
+
+<p>       如果要对某些容器做写入操作，最好声明成明确的类型。对于代码清单5的错误，Oracle官方教程给出了具体的解释，具体内容请参考<a href="https://docs.oracle.com/javase/tutorial/java/generics/capture.html">Wildcard Capture and Helper Methods</a>。</p>
+
+<p><br /></p>
+
+<h2 id="延伸">延伸</h2>
+
+<p>       有关通配符上下界的使用，还可以阅读<a href="https://leesir.github.io/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T&gt;和&lt;? extends T&gt;的区别</a>和<a href="https://docs.oracle.com/javase/tutorial/java/generics/wildcardGuidelines.html">Guidelines for Wildcard Use</a>。</p>
+
 <p><br /></p>
 
 <h2 id="附件">附件</h2>
 
-<p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic">由此获得</a>。</p>
+<p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic/boundandWildcard">由此获得</a>。</p>
 
 <p><br /></p>
 
