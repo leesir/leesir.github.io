@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/07/java-sugar-generic-relate">Java语法糖-泛型-类关系</a></li>
+        
         <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
-        <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,23 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-io-concurrent-io">2015-10-12  Java IO: 并发IO</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/concurrent-io.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　有时候你可能需要并发地处理输入和输出。换句话说，你可能有超过一个线程处理输入和产生输出。比如，你有一个程序需要处理磁盘上的大量文件，这个任务可以通过并发操作提高性能。又比如，你有一个web服务器或者聊天服务器，接收许多连接和请求，这些任务都可以通过并发获得性能的提升。</p>
+
+
+		<h1><a href="/2015/10/java-io-concurrent-io">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-systemstream">2015-10-11  Java IO: System.in, System.out, System.err</a></h1>
@@ -257,25 +274,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
     </div>
 </div>
 
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-pipe">2015-10-10  Java IO 管道</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://tutorials.jenkov.com/java-io/pipes.html">原文链接</a> 作者: Jakob Jenkov</p>
-
-<p>　　Java IO中的管道为运行在同一个JVM中的两个线程提供了通信的能力。所以管道也可以作为数据源以及目标媒介。</p>
-
-<p>　　你不能利用管道与不同的JVM中的线程通信(不同的进程)。在概念上，Java的管道不同于Unix/Linux系统中的管道。在Unix/Linux中，运行在不同地址空间的两个进程可以通过管道通信。在Java中，通信的双方应该是运行在同一进程中的不同线程。</p>
-
-
-		<h1><a href="/2015/10/java-io-pipe">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
 
 <div class="pagination">
   
@@ -283,7 +281,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         <a class="btn btn-default" href="/page9" class="previous">Newer</a>
       
   
-  <span class="page_number ">Page: 10 of 11</span>
+  <span class="page_number ">Page: 10 of 12</span>
   
     <a class="btn btn-default" href="/page11" class="next">Older</a>
   
