@@ -117,13 +117,13 @@ interface PayloadList<E,P> extends List<E> {
 
 ## 3. 有界泛型和通配符
 
-
+&#160; &#160; &#160; &#160;虽然type argument的类关系不会延伸到泛型类上，但是我们可以利用通配符
 
 <br>
 
 ## 附件
 
-&#160; &#160; &#160; &#160;本博文所展示的源代码[由此获得](https://github.com/leesir/blog_code/tree/master/src/generic/boundandWildcard)。
+&#160; &#160; &#160; &#160;本博文所展示的源代码[由此获得](https://github.com/leesir/blog_code/tree/master/src/generic/relate)。
 
 <br>
 
