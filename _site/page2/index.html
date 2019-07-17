@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/07/java-sugar-generic-relate">Java语法糖-泛型-类关系</a></li>
+        
         <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/project-summary-1">Project Summary 1</a></li>
         
-        <li><a href="/2016/07/summary-synchronized-error">对包装类型变量使用synchronized不当造成的同步不正确</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,32 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2019/06/cache-pattern-practise">2019-06-27  缓存更新策略实践</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<h2 id="前言">前言</h2>
+
+<p>       缓存在计算机的世界中是一个非常宽泛的概念，因为处处是缓存的身影。操作系统可能缓存DNS的解析结果，浏览器可能缓存页面静态元素，用户访问的资源可能缓存在CDN中，
+CPU可能会缓存操作数所属的内存块，数据库的查询结果也可能是缓存好的。总之不管是在系统架构中的哪一层级，都有缓存的实现。所以，抛开具体应用谈缓存是没有意义的，那样过于空泛，但可以肯定的是，所有的缓存都是利用了数据的冗余提高性能，空间换时间，计算机的世界充斥着trade off。</p>
+
+<p>       本博文基于项目中的实际应用整理而来，仅讨论在DB和业务代码之间的缓存服务，主要分析笔者经历的项目中，根据不同的业务，采用了哪些更新策略（注，不讨论缓存的替换策略，如LRU等）。</p>
+
+<p><br /></p>
+
+<p class="center"><img src="/images/post_2019_06_27_image1.jpg" alt="c compile" /></p>
+
+<p class="center"><a href="http://web.sfc.keio.ac.jp/~rdv/computer-architecture-2018-wiki/index.php?Memory%20Subsystems">图片来源</a></p>
+
+
+		<h1><a href="/2019/06/cache-pattern-practise">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2019/06/java-javasuger-cc">2019-06-24  Java语法糖-条件编译</a></h1>
@@ -242,37 +268,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
     </div>
 </div>
 
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/06/java-javasuger">2019-06-06  Java语法糖</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>       语法糖并不是Java独有的概念，而是一个计算机术语，先来看看百度百科的释义：</p>
-
-<blockquote>
-  <p>语法糖（Syntactic sugar），也译为糖衣语法，是由英国计算机科学家彼得·约翰·兰达（Peter J. Landin）发明的一个术语，指计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。通常来说使用语法糖能够增加程序的可读性，从而减少程序代码出错的机会。</p>
-</blockquote>
-
-<p class="center"><img src="/images/post_2019_06_06_image1.jpg" alt="Syntactic Suger" height="70%" width="70%" /></p>
-
-<p><br />
-       Java语言可以支持某些关键字或者语法的使用，但在编译后的字节码中，却看不到这些代码的痕迹。语法糖可以在性能无损的情况下，提高编程的效率，增加代码可读性，几乎所有的现代编程语言都含有语法糖成分。今天来简单回顾一下Java语言截止至今所包含的语法糖。
-注：必须显示指定vm启动参数-ea或者-enableassertions，才可以让assert生效:</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="c1">//以下代码为命令行启动java的范例，各个IDE也有相应修改参数的地方，这里不再赘述</span>
-
-<span class="n">java</span> <span class="o">-</span><span class="n">ea</span> <span class="n">Main</span>
-<span class="n">java</span> <span class="o">-</span><span class="n">enableassertions</span> <span class="n">Main</span></code></pre></figure>
-
-
-		<h1><a href="/2019/06/java-javasuger">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
 
 <div class="pagination">
   
@@ -280,7 +275,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         <a class="btn btn-default" href="/index.html" class="previous">Newer</a>
       
   
-  <span class="page_number ">Page: 2 of 11</span>
+  <span class="page_number ">Page: 2 of 12</span>
   
     <a class="btn btn-default" href="/page3" class="next">Older</a>
   
