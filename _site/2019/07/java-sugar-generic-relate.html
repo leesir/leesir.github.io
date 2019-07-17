@@ -124,7 +124,11 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p><br /></p>
 
+<!-- more -->
+
 <h2 id="1-数组">1. 数组</h2>
+
+<p><br /></p>
 
 <p>       我们早已习惯类的继承关系，对于一个父类B，不管是在赋值语句，还是在容器中，或者是在方法参数上，我们总能B的子类型完成业务逻辑。比如：</p>
 
@@ -158,6 +162,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p><br /></p>
 
 <h2 id="2-不变">2. 不变</h2>
+
+<p><br /></p>
 
 <p>       但是在泛型中，type argument的类型关系和泛型类的类型关系并不直观。考虑类型List&lt;Number &gt;，在赋值时，我们能给它传递什么呢？考虑如下代码：</p>
 
@@ -206,13 +212,64 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p><br /></p>
 
-<h2 id="3-有界泛型和通配符">3. 有界泛型和通配符</h2>
+<h2 id="3-通配符">3. 通配符</h2>
+
+<p><br /></p>
+
+<p>       虽然type argument的类关系不会延伸到泛型类上，但是我们可以利用通配符实现特定的类型关系。
+我们已经知道List &lt;Number &gt;和List&lt;Integer&gt;无直接关系，但是List &lt;Number &gt;和List&lt;Integer&gt;都同属于List &lt;? &gt;的子类。</p>
+
+<p>       <strong><em>注：本节的测试代码不建议在实际业务中使用，晦涩难懂，不利于维护。</em></strong></p>
+
+<h4 id="31-通配符协变">3.1 通配符协变</h4>
+
+<p>       利用上界通配符可以实现协变关系，考虑以下代码：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">wildcardCovariance</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">numList</span> <span class="o">=</span> <span class="n">intList</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单5</p>
+
+<p><br /></p>
+
+<p>       在代码清单5中，将一个上界为Integer的列表，赋值给了上界为Number的列表。</p>
+
+<h4 id="32-通配符逆变">3.2 通配符逆变</h4>
+
+<p>       利用下界通配符可以实现逆变关系，考虑以下代码：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">wildcardContravariance</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">numList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="n">numList</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单6</p>
+
+<p><br /></p>
+
+<p>       在代码清单6中，将一个下界为Number的列表，赋值给了下界为Integer的列表。具体类型与通配符之间的关系如下图所示：</p>
+
+<p><br /></p>
+
+<p class="center"><img src="/images/post_2019_07_16_image3.gif" alt="c compile" /></p>
+
+<p class="center"><a href="https://docs.oracle.com/javase/tutorial/java/generics/inheritance.html">图片来源</a></p>
+
+<p><br /></p>
+
+<h2 id="延伸">延伸</h2>
+
+<p>       有关通配符上下界的使用，还可以阅读<a href="https://leesir.github.io/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T&gt;和&lt;? extends T&gt;的区别</a>和<a href="https://docs.oracle.com/javase/tutorial/java/generics/wildcardGuidelines.html">Guidelines for Wildcard Use</a>。</p>
 
 <p><br /></p>
 
 <h2 id="附件">附件</h2>
 
-<p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic/boundandWildcard">由此获得</a>。</p>
+<p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic/relate">由此获得</a>。</p>
 
 <p><br /></p>
 

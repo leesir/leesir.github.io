@@ -17,7 +17,11 @@ tags: [Java Language]
 
 <br>
 
+<!-- more -->
+
 ## 1. 数组
+
+<br>
 
 &#160; &#160; &#160; &#160;我们早已习惯类的继承关系，对于一个父类B，不管是在赋值语句，还是在容器中，或者是在方法参数上，我们总能B的子类型完成业务逻辑。比如：
 
@@ -57,6 +61,8 @@ Number[] numberArray = {1, 0.5, new BigDecimal("")};
 <br>
 
 ## 2. 不变
+
+<br>
 
 &#160; &#160; &#160; &#160;但是在泛型中，type argument的类型关系和泛型类的类型关系并不直观。考虑类型List&lt;Number &gt;，在赋值时，我们能给它传递什么呢？考虑如下代码：
 
@@ -115,9 +121,66 @@ interface PayloadList<E,P> extends List<E> {
 
 <br>
 
-## 3. 有界泛型和通配符
+## 3. 通配符
 
-&#160; &#160; &#160; &#160;虽然type argument的类关系不会延伸到泛型类上，但是我们可以利用通配符
+<br>
+
+&#160; &#160; &#160; &#160;虽然type argument的类关系不会延伸到泛型类上，但是我们可以利用通配符实现特定的类型关系。
+我们已经知道List &lt;Number &gt;和List&lt;Integer&gt;无直接关系，但是List &lt;Number &gt;和List&lt;Integer&gt;都同属于List &lt;? &gt;的子类。
+
+&#160; &#160; &#160; &#160;***注：本节的测试代码不建议在实际业务中使用，晦涩难懂，不利于维护。***
+
+#### 3.1 通配符协变
+
+&#160; &#160; &#160; &#160;利用上界通配符可以实现协变关系，考虑以下代码：
+
+{% highlight java %}
+//compile success
+public static void wildcardCovariance() {
+    List<? extends Integer> intList = new ArrayList<>();
+    List<? extends Number> numList = intList;
+}
+{% endhighlight %}
+
+{:.center}
+代码清单5
+
+<br>
+
+&#160; &#160; &#160; &#160;在代码清单5中，将一个上界为Integer的列表，赋值给了上界为Number的列表。
+
+#### 3.2 通配符逆变
+
+&#160; &#160; &#160; &#160;利用下界通配符可以实现逆变关系，考虑以下代码：
+
+{% highlight java %}
+//compile success
+public static void wildcardContravariance() {
+    List<? super Number> numList = new ArrayList<>();
+    List<? super Integer> intList = numList;
+}
+{% endhighlight %}
+
+{:.center}
+代码清单6
+
+<br>
+
+&#160; &#160; &#160; &#160;在代码清单6中，将一个下界为Number的列表，赋值给了下界为Integer的列表。具体类型与通配符之间的关系如下图所示：
+
+<br>
+
+{:.center}
+![c compile]({{ site.baseurl }}/images/post_2019_07_16_image3.gif)
+
+{:.center}
+[图片来源](https://docs.oracle.com/javase/tutorial/java/generics/inheritance.html)
+
+<br>
+
+## 延伸
+
+&#160; &#160; &#160; &#160;有关通配符上下界的使用，还可以阅读[泛型中<? super T>和<? extends T>的区别](https://leesir.github.io/2015/10/java-qa-generics-extends-super)和[Guidelines for Wildcard Use](https://docs.oracle.com/javase/tutorial/java/generics/wildcardGuidelines.html)。
 
 <br>
 
