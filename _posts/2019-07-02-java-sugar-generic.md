@@ -186,17 +186,31 @@ boolean compare3Result1 = new TestGenericMethod().compare3(new Object(), new Pai
 
 <br>
 
+## 泛型的限制
+
+<br>
+
+&#160; &#160; &#160; &#160;泛型在使用上有一定的限制，主要在以下几个方面：
+
+* 在初始化泛型类时，不能用原始类型作为Type Argument。
+* 不能创建Type Parameter的实例，即不能E e = new E()。
+* 不能声明泛型静态变量，因为静态变量属于类信息，是所有实例共享的内容，而泛型则属于实例信息。一个变量不能既是实例共享的，又是实例独享的。
+* 不能对参数化的类型使用instanceof或者强制转换操作。
+* 不能创建泛型数组。
+* 泛型擦除后的raw type一致的参数化类型，不能重载方法。
+
+<br>
+
 ## 泛型其他方面
 
 <br>
 
 &#160; &#160; &#160; &#160;在本博文中，展示了Java泛型的语法和用法。由于篇幅关系，将泛型的其他方面单独作为独立的文章进行叙述：
 
-* [类型擦除](http://leesir.github.io/2019/07/java-sugar-generic)
+* [类型擦除](http://leesir.github.io/2019/07/java-sugar-generic-type-erasure)
 * [泛型类之间的关系](http://leesir.github.io/2019/07/java-sugar-generic-relate)
 * [泛型边界](http://leesir.github.io/2019/07/java-sugar-generic-bound)
 * [通配符](http://leesir.github.io/2019/07/java-sugar-generic-wildcard)
-* 泛型的限制
 
 <br>
 
