@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Derrick Lee's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="combine-header">
+                <a class="navbar-brand" href="/">Derrick Lee's Blog</a>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li class="active visible-xs-block"><a href="/links.html">Links</a></li>
+                        <li class="active"><a href="/archive.html">Archive</a></li>
+                        <li class="active"><a href="/categories.html">Categories</a></li>
+                        <li class="active"><a href="/tags.html">Tags</a></li>
+                        <li class="active"><a href="/about.html">About</a></li>
+                        
+                        <li class="active"><a href="https://github.com/leesir/leesir.github.io">Github</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container container-left">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+    <h4>Stay foolish, Stay ugly</h4>
+</div>
+
+<div class="sidebar well">
+    <h1>Recent Posts</h1>
+    <ul>
+        
+        <li><a href="/2019/07/accurate-money">一种精确的理财金额算法的设计与实现（以等额本息为例）</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-relate">Java语法糖-泛型-类关系</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-wildcard">Java语法糖-泛型-通配符</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-bound">Java语法糖-泛型-泛型边界</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic-type-erasure">Java语法糖-泛型-类型擦除</a></li>
+        
+        <li><a href="/2019/07/java-sugar-generic">Java语法糖-泛型</a></li>
+        
+        <li><a href="/2019/06/cache-pattern-practise">缓存更新策略实践</a></li>
+        
+        <li><a href="/2019/06/java-javasuger-cc">Java语法糖-条件编译</a></li>
+        
+        <li><a href="/2019/06/java-assert">Java语法糖-assert</a></li>
+        
+        <li><a href="/2019/06/system-logincache">一种基于redis的登录态的设计与实现</a></li>
+        
+        <li><a href="/2019/06/java-javasuger-innerclass">Java语法糖-内部类</a></li>
+        
+        <li><a href="/2019/06/java-javasuger">Java语法糖</a></li>
+        
+        <li><a href="/2016/08/java-history">Java的历史</a></li>
+        
+        <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
+        
+        <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
+        
+    </ul>
+</div>
+
+<div class="sidebar well">
+    <h1>Links</h1>
+<ul>
+  <li><a href="http://ifeve.com/" target="_blank">并发编程网</a></li>
+  <li><a href="http://www.infoq.com/cn" target="_blank">InfoQ</a></li>
+</ul>
+
+</div>
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s96.cnzz.com/z_stat.php%3Fid%3D1277778288%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+        </div>
+        <div class="col-md-9">
+            <div class="article">
+                <div class="well">
+                    <h1><a href="/2019/07/accurate-money">一种精确的理财金额算法的设计与实现（以等额本息为例）</a></h1>
+                    <br>
+                    
+                    <div class="post-content">
+                        <link rel="stylesheet" href="/css/pygments.css" />
+
+<p>       在现代金融活动中，借贷是一种最常见的方式。借贷经过各种包装和杠杆，就形成了各式各样的金融产品。
+本问以P2P系统中的等额本息借贷关系为例，讨论如何保证金额在不同流程中计算的准确性。</p>
+
+<p>       一般来说，多期的回款或者还款计划会在项目成立（也就是满标），放款完成之后生成。
+在后续的所有流程中，均不会更改已生成的金额数据，比如在还款成功之后，只会变更计划的状态为已还清。对于本文中可能会出现的名词，现如下定义：</p>
+
+<blockquote>
+  <p>投资人：出钱的人。当借贷关系成立时，资金流出方，当借贷关系结束时，资金流入方。</p>
+
+  <p>借款人：借钱的人。当借贷关系成立时，资金流入方，当借贷关系结束时，资金流出方。</p>
+
+  <p>标的：将借款人的需求包装而成的金融产品。</p>
+
+  <p>投资：投资人将钱转给托管机构（支付或者银行），对某一个标的进行认购。</p>
+
+  <p>放款：当标的成立之后，托管机构将钱转给借款人。</p>
+
+  <p>还款：借款人将钱转给投资人。</p>
+
+  <p>资金端：拥有投资人资源，提供资金保障。</p>
+
+  <p>资产端：拥有借款人资源，提供借款需求。</p>
+</blockquote>
+
+<p class="center"><img src="/images/post_2019_07_30_image1.jpg" alt="c compile" /></p>
+
+<p class="center"><a href="https://money.usnews.com/investing/investing-101/articles/how-to-invest-like-millennial-millionaire-grant-sabatier">图片来源</a></p>
+
+<!-- more -->
+
+<p><br /></p>
+
+<h2 id="等额本息算法定义">等额本息算法定义</h2>
+
+<p><br /></p>
+
+<p><strong><em>重要说明：<a href="https://baike.baidu.com/item/%E7%AD%89%E9%A2%9D%E6%9C%AC%E6%81%AF">等额本息</a>的重点在于每月偿还本息一致，或者还款总额一致。不同机构给出的还款计划的利息、本金、剩余本金明细可能不完全一致，
+比如<a href="http://finance.sina.com.cn/calc/money_loan.html">新浪理财计算器</a>，与<a href="https://www.cmbchina.com/CmbWebPubInfo/Cal_Loan_Per.aspx?chnl=dkjsq">招商银行贷款计算器</a>在金额10000元，利率10%，期限12个月的情况下就不完全一致，如下图所示：</em></strong></p>
+
+<p class="center"><img src="/images/post_2019_07_30_image2.png" alt="c compile" /></p>
+
+<p><br /></p>
+
+<p>       本文所采用的算法伪代码描述如下：</p>
+
+<blockquote>
+  <p>定义剩余本金p = 借款金额</p>
+
+  <p>计算出每月应还本息总额n</p>
+
+  <p>对每一期做如下计算：</p>
+
+  <p>{</p>
+
+  <p>非最后一期，计算出每月应还利息为m，应还本金为n - m</p>
+
+  <p>最后一期，当期应还本金为剩余本金p，应还利息为n - p</p>
+
+  <p>p = p - 当期应还本金</p>
+
+  <p>第i期剩余本金 = p</p>
+
+  <p>}</p>
+</blockquote>
+
+<p>       完整Java代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/**
+ * 等额本息，计算每月应收或者应还总额
+ *
+ * @param amount 金额基数
+ * @param rate 利率
+ * @param period 总月数
+ */</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">BigDecimal</span> <span class="nf">calculateMonthTotal</span><span class="o">(</span><span class="n">BigDecimal</span> <span class="n">amount</span><span class="o">,</span> <span class="n">BigDecimal</span> <span class="n">rate</span><span class="o">,</span> <span class="kt">int</span> <span class="n">period</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//月利率</span>
+    <span class="kt">double</span> <span class="n">monthRate</span> <span class="o">=</span> <span class="n">rate</span><span class="o">.</span><span class="na">doubleValue</span><span class="o">()</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">/</span> <span class="mi">12</span><span class="o">;</span>
+    <span class="c1">//每月回款总额，等于本金 + 利息</span>
+    <span class="k">return</span> <span class="n">amount</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">monthRate</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">monthRate</span><span class="o">,</span> <span class="n">period</span><span class="o">)))</span>
+            <span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">monthRate</span><span class="o">,</span> <span class="n">period</span><span class="o">)</span> <span class="o">-</span> <span class="mi">1</span><span class="o">),</span> <span class="mi">2</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_HALF_UP</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Plan</span><span class="o">&gt;</span> <span class="nf">calculateInvestPlan</span><span class="o">(</span><span class="n">BigDecimal</span> <span class="n">investAmount</span><span class="o">,</span> <span class="n">BigDecimal</span> <span class="n">rate</span><span class="o">,</span> <span class="kt">int</span> <span class="n">period</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//月利率</span>
+    <span class="kt">double</span> <span class="n">monthRate</span> <span class="o">=</span> <span class="n">rate</span><span class="o">.</span><span class="na">doubleValue</span><span class="o">()</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">/</span> <span class="mi">12</span><span class="o">;</span>
+    <span class="c1">//每月回款总额，等于本金 + 利息</span>
+    <span class="n">BigDecimal</span> <span class="n">monthIncome</span> <span class="o">=</span> <span class="n">calculateMonthTotal</span><span class="o">(</span><span class="n">investAmount</span><span class="o">,</span> <span class="n">rate</span><span class="o">,</span> <span class="n">period</span><span class="o">);</span>
+    <span class="n">BigDecimal</span> <span class="n">monthInterest</span><span class="o">;</span>
+    <span class="n">BigDecimal</span> <span class="n">remainPrincipal</span> <span class="o">=</span> <span class="n">investAmount</span><span class="o">;</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Plan</span><span class="o">&gt;</span> <span class="n">investIncomeList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">period</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">period</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">BigDecimal</span> <span class="n">multiply</span> <span class="o">=</span> <span class="n">investAmount</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">monthRate</span><span class="o">));</span>
+        <span class="n">BigDecimal</span> <span class="n">sub</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">monthRate</span><span class="o">,</span> <span class="n">period</span><span class="o">)).</span><span class="na">subtract</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">monthRate</span><span class="o">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)));</span>
+        <span class="c1">//每月利息</span>
+        <span class="n">monthInterest</span> <span class="o">=</span> <span class="n">multiply</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">sub</span><span class="o">).</span><span class="na">divide</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">monthRate</span><span class="o">,</span> <span class="n">period</span><span class="o">)</span> <span class="o">-</span> <span class="mi">1</span><span class="o">),</span> <span class="mi">2</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_HALF_UP</span><span class="o">);</span>
+        <span class="n">Plan</span> <span class="n">investIncome</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Plan</span><span class="o">();</span>
+        <span class="n">investIncome</span><span class="o">.</span><span class="na">setTotal</span><span class="o">(</span><span class="n">monthIncome</span><span class="o">);</span>
+        <span class="n">investIncome</span><span class="o">.</span><span class="na">setPeriod</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">period</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">//不是最后一期</span>
+            <span class="n">investIncome</span><span class="o">.</span><span class="na">setPrincipal</span><span class="o">(</span><span class="n">monthIncome</span><span class="o">.</span><span class="na">subtract</span><span class="o">(</span><span class="n">monthInterest</span><span class="o">));</span>
+            <span class="n">investIncome</span><span class="o">.</span><span class="na">setInterest</span><span class="o">(</span><span class="n">monthInterest</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">//最后一期做差值</span>
+            <span class="n">investIncome</span><span class="o">.</span><span class="na">setPrincipal</span><span class="o">(</span><span class="n">remainPrincipal</span><span class="o">);</span>
+            <span class="n">investIncome</span><span class="o">.</span><span class="na">setInterest</span><span class="o">(</span><span class="n">monthIncome</span><span class="o">.</span><span class="na">subtract</span><span class="o">(</span><span class="n">investIncome</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">()));</span>
+        <span class="o">}</span>
+        <span class="n">remainPrincipal</span> <span class="o">=</span> <span class="n">remainPrincipal</span><span class="o">.</span><span class="na">subtract</span><span class="o">(</span><span class="n">investIncome</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">());</span>
+        <span class="n">investIncome</span><span class="o">.</span><span class="na">setOutstanding</span><span class="o">(</span><span class="n">remainPrincipal</span><span class="o">);</span>
+        <span class="n">investIncomeList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">investIncome</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">investIncomeList</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Plan</span> <span class="o">{</span>
+    <span class="c1">//当前期数</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">period</span><span class="o">;</span>
+    <span class="c1">//当期本金</span>
+    <span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">principal</span><span class="o">;</span>
+    <span class="c1">//当期利息</span>
+    <span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">interest</span><span class="o">;</span>
+    <span class="c1">//剩余本金</span>
+    <span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">outstanding</span><span class="o">;</span>
+    <span class="c1">//应还总额</span>
+    <span class="kd">private</span> <span class="n">BigDecimal</span> <span class="n">total</span><span class="o">;</span>
+
+    <span class="c1">//gets and sets</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单1</p>
+
+<p><br /></p>
+
+<h2 id="无中介费的情况">无中介费的情况</h2>
+
+<p><br /></p>
+
+<p>       在明确了使用的算法之后，首先考虑无中介费用的情况，也就是sum(投资人收益) = 借款人成本。
+先计算出每个投资人的回款计划，比如：</p>
+
+<p>       借款人的还款计划不需要计算，只需累加投资人的数据即可。算法伪代码描述如下：</p>
+
+<blockquote>
+  <p>定义剩余本金p = 借款金额</p>
+
+  <p>对借款人每一期数据做如下计算：</p>
+
+  <p>{</p>
+
+  <p>第i期应还本金 = sum(所有投资人第i期应收本金)，第i期应还利息 = sum(所有投资人第i期应收利息)</p>
+
+  <p>p = p - 当期应还本金</p>
+
+  <p>第i期剩余本金 = p</p>
+
+  <p>}</p>
+</blockquote>
+
+<p>       完整代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/**
+ * 计算借款人还款计划
+ *
+ * @param amount 借款金额
+ * @param period 总期数
+ * @return
+ */</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Plan</span><span class="o">&gt;</span> <span class="nf">calculateRepayPlan</span><span class="o">(</span><span class="n">BigDecimal</span> <span class="n">amount</span><span class="o">,</span> <span class="kt">int</span> <span class="n">period</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//借款人还款计划</span>
+    <span class="n">BigDecimal</span> <span class="n">remainPrincipal</span> <span class="o">=</span> <span class="n">amount</span><span class="o">;</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Plan</span><span class="o">&gt;</span> <span class="n">repayPlanList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">period</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">period</span><span class="o">;</span> <span class="n">index</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">Plan</span> <span class="n">totalSum</span> <span class="o">=</span> <span class="n">calculateSumInvestPlan</span><span class="o">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="n">Plan</span> <span class="n">repayPlan</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Plan</span><span class="o">();</span>
+        <span class="n">repayPlan</span><span class="o">.</span><span class="na">setInterest</span><span class="o">(</span><span class="n">totalSum</span><span class="o">.</span><span class="na">getInterest</span><span class="o">());</span>
+        <span class="n">repayPlan</span><span class="o">.</span><span class="na">setPrincipal</span><span class="o">(</span><span class="n">totalSum</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">());</span>
+        <span class="n">remainPrincipal</span> <span class="o">=</span> <span class="n">remainPrincipal</span><span class="o">.</span><span class="na">subtract</span><span class="o">(</span><span class="n">repayPlan</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">());</span>
+        <span class="n">repayPlan</span><span class="o">.</span><span class="na">setOutstanding</span><span class="o">(</span><span class="n">remainPrincipal</span><span class="o">);</span>
+        <span class="n">repayPlanList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">repayPlan</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">repayPlanList</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单2</p>
+
+<p><br /></p>
+
+<h2 id="有中介费的情况">有中介费的情况</h2>
+
+<p><br /></p>
+
+<p>       当然在实际情况中，借款肯定是有服务费的（监管规定总费率不能超过36%），此时标准的等额本息公式已经不再适用了。
+在标准公式中，只存在本金和利息的计算，为了让借款人和投资人的计划表的每月总额符合等额本息，需要取巧。假设有服务费A为2%，服务费B为3%，且要和基础利率10%一起做等额本息计算，算法伪代码如下所示：</p>
+
+<blockquote>
+  <p>定义剩余本金p = 借款金额</p>
+
+  <p>计算出借款人每月应还总额n</p>
+
+  <p>对借款人每一期数据做如下计算：</p>
+
+  <p>{</p>
+
+  <p>第i期应还本金pi = sum(所有投资人第i期应收本金)，第i期应还利息ii = sum(所有投资人第i期应收利息)</p>
+
+  <p>第i期总服务费k = n - pi - ii</p>
+
+  <p>//服务费K如何分配，可以自行定义，可以按照比例均摊，比如：</p>
+
+  <p>第i期服务费A = 向下取整(k * 2 / 3)，第i期服务费B = k - 第i期服务费A</p>
+
+  <p>p = p - 当期应还本金</p>
+
+  <p>第i期剩余本金 = p</p>
+
+  <p>}</p>
+</blockquote>
+
+<p>       采用向下取整是为了防止费用总类很多时，只入不舍，造成最后一期费用为负数。完整代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/**
+ * 计算借款人还款计划，有服务费
+ *
+ * @param amount 借款金额
+ * @param period 总期数
+ * @return
+ */</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Plan</span><span class="o">&gt;</span> <span class="nf">calculateRepayPlanWithFee</span><span class="o">(</span><span class="n">BigDecimal</span> <span class="n">amount</span><span class="o">,</span> <span class="n">BigDecimal</span> <span class="n">rate</span><span class="o">,</span> <span class="kt">int</span> <span class="n">period</span><span class="o">,</span> <span class="n">BigDecimal</span> <span class="n">feeA</span><span class="o">,</span> <span class="n">BigDecimal</span> <span class="n">feeB</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//借款人还款计划</span>
+    <span class="n">BigDecimal</span> <span class="n">remainPrincipal</span> <span class="o">=</span> <span class="n">amount</span><span class="o">;</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Plan</span><span class="o">&gt;</span> <span class="n">repayPlanList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">period</span><span class="o">);</span>
+    <span class="n">BigDecimal</span> <span class="n">monthRepay</span> <span class="o">=</span> <span class="n">calculateMonthTotal</span><span class="o">(</span><span class="n">amount</span><span class="o">,</span> <span class="n">rate</span><span class="o">,</span> <span class="n">period</span><span class="o">);</span>
+    <span class="n">BigDecimal</span> <span class="n">totalServiceFeeRate</span> <span class="o">=</span> <span class="n">feeA</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">feeB</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">period</span><span class="o">;</span> <span class="n">index</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">Plan</span> <span class="n">totalSum</span> <span class="o">=</span> <span class="n">calculateSumInvestPlan</span><span class="o">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="n">Plan</span> <span class="n">repayPlan</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Plan</span><span class="o">();</span>
+        <span class="n">repayPlan</span><span class="o">.</span><span class="na">setInterest</span><span class="o">(</span><span class="n">totalSum</span><span class="o">.</span><span class="na">getInterest</span><span class="o">());</span>
+        <span class="n">repayPlan</span><span class="o">.</span><span class="na">setPrincipal</span><span class="o">(</span><span class="n">totalSum</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">());</span>
+        <span class="n">remainPrincipal</span> <span class="o">=</span> <span class="n">remainPrincipal</span><span class="o">.</span><span class="na">subtract</span><span class="o">(</span><span class="n">repayPlan</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">());</span>
+        <span class="n">repayPlan</span><span class="o">.</span><span class="na">setOutstanding</span><span class="o">(</span><span class="n">remainPrincipal</span><span class="o">);</span>
+        <span class="n">BigDecimal</span> <span class="n">totalServiceFee</span> <span class="o">=</span> <span class="n">monthRepay</span><span class="o">.</span><span class="na">subtract</span><span class="o">(</span><span class="n">totalSum</span><span class="o">.</span><span class="na">getTotal</span><span class="o">()).</span><span class="na">setScale</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_DOWN</span><span class="o">);</span>
+        <span class="c1">//存在手续费，各手续费按利率的比例分配</span>
+        <span class="n">BigDecimal</span> <span class="n">manageFeeA</span> <span class="o">=</span> <span class="n">feeA</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="n">totalServiceFeeRate</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_HALF_UP</span><span class="o">).</span><span class="na">multiply</span><span class="o">(</span><span class="n">totalServiceFee</span><span class="o">).</span><span class="na">setScale</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">ROUND_DOWN</span><span class="o">);</span>
+        <span class="n">repayPlan</span><span class="o">.</span><span class="na">setManagerFeeA</span><span class="o">(</span><span class="n">manageFeeA</span><span class="o">);</span>
+        <span class="n">totalServiceFee</span> <span class="o">=</span> <span class="n">totalServiceFee</span><span class="o">.</span><span class="na">subtract</span><span class="o">(</span><span class="n">manageFeeA</span><span class="o">);</span>
+        <span class="n">repayPlan</span><span class="o">.</span><span class="na">setManagerFeeB</span><span class="o">(</span><span class="n">totalServiceFee</span><span class="o">);</span>
+        <span class="n">repayPlanList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">repayPlan</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">repayPlanList</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单3</p>
+
+<p><br /></p>
+
+<h2 id="总结">总结</h2>
+
+<p><br /></p>
+
+<p>       1. 本文从投资人优先的角度，先计算投资人的计划数据，再由此生成借款人的计划数据。由一份数据源，累加生成后续所需的数据源，从而保证了金额的准确性。
+在计算借款人计划时，不能再运用等额本息公式进行计算，否则会因为精度问题导致每期还款总额与出借人应收总额不一致。</p>
+
+<p>       2. 如果需要把某一个数摊为n期，建议在1～n-1期都用向下取整（只舍不入），并在第n期计算差值，这样可以保证1～n期的总和准确，并且第n期不会成为负数。</p>
+
+<p>       3. 由于除了本金和利息之外的费用都不属于标准等额本息公式的范畴，如何分配这些费用依各方自身需求而定，本文采用的是按比例均摊。</p>
+
+<p>       4. 本文同时涉及资金端和资产端，在实际系统中两边资金流的出入必须对应，并且金额准确。在本文中，借款人第i期的还款总额 = sum(所有投资人第i期)。</p>
+
+<p><br /></p>
+
+<h2 id="附件">附件</h2>
+
+<p><br /></p>
+
+<p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic/relate">由此获得</a>。</p>
+
+<p><br /></p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<p>[1] Josh Juneau.<a href="https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html">泛型：工作原理及其重要性</a>[EB/OL].https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html，2019-07-02.<br />
+[2] <a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html">The Java™ Tutorials - Generics</a>[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br />
+[3] <a href="https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3">The Java® Virtual Machine Specification</a>[EB/OL].https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3，2019-07-04.<br />
+[4] <a href="https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance">泛型中的协变和逆变</a>[EB/OL].https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance，2019-07-16.<br /></p>
+
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="pagination">
+                
+                
+                <a class="btn btn-default" href="/2019/07/java-sugar-generic-relate" class="previous">Older
+                    Post</a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2019 Derrick Lee's Blog. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
+            under
+            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+
+</div>
