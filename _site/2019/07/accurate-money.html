@@ -115,13 +115,13 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       在现代金融活动中，借贷是一种最常见的方式。借贷经过各种包装和杠杆，就形成了各式各样的金融产品。
 本问以P2P系统中的等额本息借贷关系为例，讨论如何保证金额在不同流程中计算的准确性。</p>
 
-<p>       一般来说，多期的回款或者还款计划会在项目成立（也就是满标），放款完成之后生成。
+<p>       一般来说，投资人的回款计划，以及借款人的还款计划会在项目成立（也就是满标），放款完成之后生成。
 在后续的所有流程中，均不会更改已生成的金额数据，比如在还款成功之后，只会变更计划的状态为已还清。对于本文中可能会出现的名词，现如下定义：</p>
 
 <blockquote>
-  <p>投资人：出钱的人。当借贷关系成立时，资金流出方，当借贷关系结束时，资金流入方。</p>
+  <p>投资人：出钱的人。当借贷关系成立时，为资金流出方，当借贷关系结束时，为资金流入方。</p>
 
-  <p>借款人：借钱的人。当借贷关系成立时，资金流入方，当借贷关系结束时，资金流出方。</p>
+  <p>借款人：借钱的人。当借贷关系成立时，为资金流入方，当借贷关系结束时，为资金流出方。</p>
 
   <p>标的：将借款人的需求包装而成的金融产品。</p>
 
@@ -148,7 +148,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p><br /></p>
 
-<p><strong><em>重要说明：<a href="https://baike.baidu.com/item/%E7%AD%89%E9%A2%9D%E6%9C%AC%E6%81%AF">等额本息</a>的重点在于每月偿还本息一致，或者还款总额一致。不同机构给出的还款计划的利息、本金、剩余本金明细可能不完全一致，
+<p><strong><em>重要说明：<a href="https://baike.baidu.com/item/%E7%AD%89%E9%A2%9D%E6%9C%AC%E6%81%AF">等额本息</a>的重点在于每月偿还本息一致，或者还款总额一致。不同机构给出的计划的利息、本金、剩余本金明细可能不完全一致，
 比如<a href="http://finance.sina.com.cn/calc/money_loan.html">新浪理财计算器</a>，与<a href="https://www.cmbchina.com/CmbWebPubInfo/Cal_Loan_Per.aspx?chnl=dkjsq">招商银行贷款计算器</a>在金额10000元，利率10%，期限12个月的情况下就不完全一致，如下图所示：</em></strong></p>
 
 <p class="center"><img src="/images/post_2019_07_30_image2.png" alt="c compile" /></p>
@@ -252,6 +252,11 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       在明确了使用的算法之后，首先考虑无中介费用的情况，也就是sum(投资人收益) = 借款人成本。
 先计算出每个投资人的回款计划，比如：</p>
 
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//投资人1回款计划</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Plan</span><span class="o">&gt;</span> <span class="n">investIncomeList</span> <span class="o">=</span> <span class="n">calculateInvestPlan</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"10000"</span><span class="o">),</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"10"</span><span class="o">),</span> <span class="mi">12</span><span class="o">);</span>
+<span class="c1">//投资人2回款计划</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Plan</span><span class="o">&gt;</span> <span class="n">investIncomeList2</span> <span class="o">=</span> <span class="n">calculateInvestPlan</span><span class="o">(</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"23000"</span><span class="o">),</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"10"</span><span class="o">),</span> <span class="mi">12</span><span class="o">);</span></code></pre></figure>
+
 <p>       借款人的还款计划不需要计算，只需累加投资人的数据即可。算法伪代码描述如下：</p>
 
 <blockquote>
@@ -303,7 +308,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p><br /></p>
 
-<p>       当然在实际情况中，借款肯定是有服务费的（监管规定总费率不能超过36%），此时标准的等额本息公式已经不再适用了。
+<p>       当然在实际情况中，服务费是普遍存在的，这也是网贷中介收入的来源之一（监管规定总费率不能超过36%），而此时标准的等额本息公式已经不再适用了。
 在标准公式中，只存在本金和利息的计算，为了让借款人和投资人的计划表的每月总额符合等额本息，需要取巧。假设有服务费A为2%，服务费B为3%，且要和基础利率10%一起做等额本息计算，算法伪代码如下所示：</p>
 
 <blockquote>
@@ -367,14 +372,66 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p><br /></p>
 
+<h2 id="存在问题">存在问题</h2>
+
+<p><br /></p>
+
+<p>       由于借款人的还款计划由投资人的回款计划汇总而来，与标准公式计算出来的还款计划可能存在明细上的查别。依然使用本文的例子，考虑如下情况：</p>
+
+<p>       投资人1投资了10000元，回款计划表如下所示：</p>
+
+<p class="center"><img src="/images/post_2019_07_30_image3.png" alt="c compile" /></p>
+
+<p class="center">表1 投资人1回款计划</p>
+
+<p><br /></p>
+
+<p>       投资人2投资了23000元，回款计划表如下所示：</p>
+
+<p class="center"><img src="/images/post_2019_07_30_image4.png" alt="c compile" /></p>
+
+<p class="center">表2 投资人2回款计划</p>
+
+<p><br /></p>
+
+<p>       借款人投资了33000元，还款计划表如下所示：</p>
+
+<p class="center"><img src="/images/post_2019_07_30_image5.png" alt="c compile" height="100%" width="100%" /></p>
+
+<p class="center">表3 用15%生成的还款计划</p>
+
+<p><br /></p>
+
+<p>       在表3中，每月应还总额是标准值，但是利息和本金却是非标准的，原因是在生成每个投资人的每期数据时，都会进行四舍五入。
+当我们用10%的利率做33000元12期等额本息时，每一期只会做一次四舍五入。多次舍入和一次舍入，是造成差异的根本原因。</p>
+
+<p class="center"><img src="/images/post_2019_07_30_image6.png" alt="c compile" /></p>
+
+<p class="center">表4 用10%生成的还款计划</p>
+
+<p><br /></p>
+
+<p>       在表3和表4中，每一期的本金或者利息都有些许不一致。但笔者认为这种差异不算问题，原因如下：</p>
+
+<ul>
+  <li>
+    <p>等额本息应优先关注总额而非明细，除非明细相差特别大。</p>
+  </li>
+  <li>
+    <p>如果以借款人优先的角度，先计算借款人还款计划，可以解决还款计划非标的问题。但在生成投资人回款计划时，势必也会出现某个回款计划非标的情况，这是不可调和的。</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
 <h2 id="总结">总结</h2>
 
 <p><br /></p>
 
-<p>       1. 本文从投资人优先的角度，先计算投资人的计划数据，再由此生成借款人的计划数据。由一份数据源，累加生成后续所需的数据源，从而保证了金额的准确性。
-在计算借款人计划时，不能再运用等额本息公式进行计算，否则会因为精度问题导致每期还款总额与出借人应收总额不一致。</p>
+<p>       1. 本文从投资人优先的角度，先计算投资人的计划数据，再由此生成借款人的计划数据。由一份数据源，再生产后续所需的数据源，从而保证了金额的准确性。
+在计算借款人计划时，不能再运用等额本息公式进行计算，否则会因为精度问题导致每期还款总额与出借人应收总额不一致。如果资产端从借款人角度分析还款计划，会发现有细微查别，但笔者认为这不是错误。</p>
 
-<p>       2. 如果需要把某一个数摊为n期，建议在1～n-1期都用向下取整（只舍不入），并在第n期计算差值，这样可以保证1～n期的总和准确，并且第n期不会成为负数。</p>
+<p>       2. 如果需要把某一个数total摊为n期，建议在1～n-1期都用向下取整（只舍不入），并在第n期的值设为total - sum(1~n-1)，这样可以保证1～n期的总和准确，并且第n期不会成为负数。</p>
 
 <p>       3. 由于除了本金和利息之外的费用都不属于标准等额本息公式的范畴，如何分配这些费用依各方自身需求而定，本文采用的是按比例均摊。</p>
 
@@ -386,7 +443,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p><br /></p>
 
-<p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic/relate">由此获得</a>。</p>
+<p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/main/java/accuratemoney">由此获得</a>。</p>
 
 <p><br /></p>
 
