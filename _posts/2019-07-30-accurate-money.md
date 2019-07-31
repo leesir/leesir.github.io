@@ -351,9 +351,8 @@ public static List<Plan> calculateRepayPlanWithFee(BigDecimal amount, BigDecimal
 
 <br>
 
-## 参考文献
+## 参考链接
 
-[1] Josh Juneau.[泛型：工作原理及其重要性](https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html)[EB/OL].https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html，2019-07-02.<br>
-[2] [The Java™ Tutorials - Generics](https://docs.oracle.com/javase/tutorial/java/generics/index.html)[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br>
-[3] [The Java® Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3)[EB/OL].https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3，2019-07-04.<br>
-[4] [泛型中的协变和逆变](https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance)[EB/OL].https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance，2019-07-16.<br>
+[1] [等额本息](https://baike.baidu.com/item/%E7%AD%89%E9%A2%9D%E6%9C%AC%E6%81%AF)[EB/OL].https://baike.baidu.com/item/%E7%AD%89%E9%A2%9D%E6%9C%AC%E6%81%AF，2019-07-30.<br>
+[2] [理财计算器](http://finance.sina.com.cn/calc/money_loan.html)[EB/OL].http://finance.sina.com.cn/calc/money_loan.html，2019-07-30.<br>
+[3] [个人贷款计算器](https://www.cmbchina.com/CmbWebPubInfo/Cal_Loan_Per.aspx?chnl=dkjsq)[EB/OL].https://www.cmbchina.com/CmbWebPubInfo/Cal_Loan_Per.aspx?chnl=dkjsq，2019-07-30.<br>
