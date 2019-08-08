@@ -106,38 +106,156 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         <div class="col-md-9">
             <div class="article">
                 <div class="well">
-                    <h1><a href="/2015/10/java-fp-functional-programming-overview">函数式编程 Functional Programming</a></h1>
+                    <h1><a href="/2019/08/bug-1">工作问题记录（一）：事务的错误使用方式</a></h1>
                     <br>
                     
                     <div class="post-content">
                         <link rel="stylesheet" href="/css/pygments.css" />
 
-<p>　　<a href="http://www.javacodegeeks.com/tutorials/java-tutorials/core-java-tutorials/#Functional%20programming">原文链接</a></p>
+<p>       事务是数据库的原子操作，由一个或者一组操作组合而成。事务的重要性不言而喻，本文也无需过多阐述背景，直接进入正题。</p>
 
-<p>　　在Java程序员的世界里，第一要素是“类”，而在函数式编程里，第一要素则是“函数”。完全不同的编程理念，确实很难让函数式编程出现在Java工程师日常工作的代码中。</p>
+<p>       在实际的代码中，使用事务通常有以下几种方式：</p>
 
-<p>　　先来2篇优秀博文扫盲：</p>
+<blockquote>
+  <p>注解式：如spring的org.springframework.transaction.annotation.Transactional。</p>
 
-<ul>
-  <li><a href="http://www.ruanyifeng.com/blog/2012/04/functional_programming.html">函数式编程初探</a></li>
-  <li><a href="http://www.cnblogs.com/kym/archive/2011/03/07/1976519.html">函数式编程扫盲篇</a></li>
-</ul>
+  <p>声明式：如在spring配置文件中编写的<tx>标签的相关内容。</tx></p>
 
-<p>　　仔细阅读过上面2篇文章之后，相信你已经对函数式编程有了一定的了解。同时，在许多高级语言(Java、C#等)都陆续加入了函数式编程特性的形势下，不难预测函数式编程将再次成为未来的主流编程模型。</p>
+  <p>手写代码：自行编写事务，手动commit。</p>
+</blockquote>
 
-<p>　　本系列译文如下：</p>
+<p>       除数据库之外，缓存也有原子操作，以redis为例：</p>
 
-<ol>
-  <li><a href="http://www.javacodegeeks.com/2012/03/functional-programming-with-map-and.html">Functional programming with Map and Fold in Java</a></li>
-  <li><a href="http://www.javacodegeeks.com/2012/03/java-faking-closure-with-factory-to.html">Java: Faking a closure with a factory to create a domain object</a></li>
-  <li><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with.html">Functional style in Java with predicates – Part 1</a></li>
-  <li><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with_23.html">Functional style in Java with predicates – Part 2</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">Function interface – A functional interface in the java.util.function package in Java 8</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">Predicate and Consumer Interface in java.util.function package in Java 8</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/05/a-simple-application-of-lambda-expressions-in-java-8.html">A simple application of Lambda Expressions in Java 8</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/05/template-method-pattern-using-lambda-expressions-default-methods.html">Template Method Pattern – Using Lambda Expressions, Default Methods</a></li>
-  <li><a href="http://www.javacodegeeks.com/2013/06/java-8-lambda-walkthrough.html">Java 8 lambda walkthrough</a>（此篇文章代码居多，不进行翻译，感兴趣的读者可以点击链接阅读原文章）</li>
-</ol>
+<blockquote>
+  <p>SET命令：SET key value expiration EX seconds PX milliseconds NX XX，其中NX参数的说明如下：Only set the key if it does not already exist。</p>
+
+  <p>SETEX命令：给某个key设置某个值，并为其设置过期时间。注：此命令可由SET命令替代。</p>
+
+  <p>MULTI/EXEC语句块：由MULTI命令和EXEC命令包裹的语句块属于原子操作。</p>
+</blockquote>
+
+<p class="center"><img src="/images/post_2019_08_08_image1.jpg" alt="c compile" /></p>
+
+<!-- more -->
+
+<p><br /></p>
+
+<p>       本文就数据库事务，简要说明下项目中遇到的错误使用方式。</p>
+
+<p><br /></p>
+
+<h4 id="1-在事务代码块内使用锁">1. 在事务代码块内使用锁</h4>
+
+<p><br /></p>
+
+<p>       在事务代码块内，当前线程与其他线程竞争临界资源，考虑以下伪代码：</p>
+
+<blockquote>
+  <p>//thread1</p>
+
+  <p>1 start transaction;</p>
+
+  <p>2 update tb_1 set column = 10 where id = 1;</p>
+
+  <p>3 get lock for condition1;</p>
+
+  <p>4 process critical Code;</p>
+
+  <p>5 release lock;</p>
+
+  <p>6 commit;</p>
+</blockquote>
+
+<p><br /></p>
+
+<p>       这么做有什么问题呢？当其他线程同样竞争condition1的锁，并且进行tb_1数据查询时，会存在问题。考虑以下伪代码：</p>
+
+<blockquote>
+  <p>//thread2</p>
+
+  <p>1 get lock for condition1;</p>
+
+  <p>2 select * from tb_1 where where id = 1;</p>
+
+  <p>3 release lock;</p>
+</blockquote>
+
+<p>       通常我们认为，在事务执行完成之后，后续的访问一定能读到最新数据。
+但在这个例子中，当线程thread2进入临界区时，thread1完全有可能没有提交或者正在提交事务，thread2没有读到最新的值，让人感觉事务“不生效”。
+这个例子错误的地方在于，thread1中临界区范围划定错误，应将范围扩大至包含整个事务，如：</p>
+
+<blockquote>
+  <p>//thread1</p>
+
+  <p>1 get lock for condition1;</p>
+
+  <p>2 start transaction;</p>
+
+  <p>3 update tb_1 set column = 10 where id = 1;</p>
+
+  <p>4 commit;</p>
+
+  <p>5 process critical Code;</p>
+
+  <p>6 release lock;</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 id="2-在事务代码块内发送队列消息">2. 在事务代码块内发送队列消息</h4>
+
+<p><br /></p>
+
+<p>       同样地，在事务代码块内发送某些通知给消费者，考虑以下代码：</p>
+
+<blockquote>
+  <p>//producer</p>
+
+  <p>1 start transaction;</p>
+
+  <p>2 update tb_1 set column = 10 where id = 1;</p>
+
+  <p>3 send mq;</p>
+
+  <p>4 commit;</p>
+</blockquote>
+
+<p><br /></p>
+
+<p>       当消费者收到消息并进行tb_1数据查询时，也会出现问题，比如：</p>
+
+<blockquote>
+  <p>//consumer</p>
+
+  <p>1 receive mq</p>
+
+  <p>2 select * from tb_1 where where id = 1;</p>
+</blockquote>
+
+<p><br /></p>
+
+<p>       当消费者开始业务操作时，生产者完全有可能没有提交或者正在提交事务。正确的做法是将发送mq的代码挪到事务外，如：</p>
+
+<blockquote>
+  <p>//producer</p>
+
+  <p>1 start transaction;</p>
+
+  <p>2 update tb_1 set column = 10 where id = 1;</p>
+
+  <p>3 commit;</p>
+
+  <p>4 send mq;</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 id="总结">总结</h4>
+
+<p><br /></p>
+
+<p>       本文所举的2个错误案例，都曾在笔者的项目中出现，案例错误的地方在于在事务代码块中进行依赖本事务数据的线程协作。
+事务作为数据处理单元，应职责单一。如果需要在数据更新之后通知其他线程进行相关操作，则应把协作代码放到事务代码之后。</p>
 
                     </div>
                     
@@ -145,10 +263,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
             </div>
             <div class="pagination">
                 
-                <a class="btn btn-default" href="/2015/10/java-fp-map-fold" class="next">Newer Post</a>
                 
-                
-                <a class="btn btn-default" href="/2015/10/java-io-otherstream" class="previous">Older
+                <a class="btn btn-default" href="/2019/07/accurate-money" class="previous">Older
                     Post</a>
                 
             </div>

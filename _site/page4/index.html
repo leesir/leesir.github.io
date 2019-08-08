@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/08/bug-1">工作问题记录（一）：事务的错误使用方式</a></li>
+        
         <li><a href="/2019/07/accurate-money">一种精确的理财金额算法的设计与实现（以等额本息为例）</a></li>
         
         <li><a href="/2019/07/java-sugar-generic-relate">Java语法糖-泛型-类关系</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
         
-        <li><a href="/2016/07/project-summary-2">项目总结-2016年07月11日</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,24 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2016/07/project-summary-2">2016-07-11  项目总结-2016年07月11日</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<h3 id="关于数据同步">关于数据同步</h3>
+<p>同步流程异步化是提升程序响应、服务解耦的一个非常常用的手段。而对于某些业务来说，异步是唯一的选择，比如支付业务。当拿到某个订单的交易结果时，该结果并不代表最终的支付结果，而支付公司会通过回调或者由调用方轮询访问接口获取真实的支付结果。</p>
+
+<p>笔者所涉及的项目中，同样涉及到“交易——对账——数据”这类不能实时获得数据的问题。用户的操作调用合作方的接口产生了交易之后，新的交易数据生成在合作方的数据库里（即使是合作方，也不会实时得到支付结果，最终会与银行打交道）。如何在用户无感知的情况下进行数据的同步，是提高用户体验的一个关键点。在项目研发过程中经历了许多轮的讨论与实践，现在笔者将数据同步功能的发展历程简单介绍一下。</p>
+
+
+		<h1><a href="/2016/07/project-summary-2">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2016/07/project-summary-1">2016-07-11  Project Summary 1</a></h1>
@@ -201,34 +219,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2015/11/java-cr-code-convention">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-qa-generics-extends-super">2015-10-23  泛型中&lt;? super T>和&lt;? extends T>的区别</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p><a href="http://stackoverflow.com/questions/4343202/difference-between-super-t-and-extends-t-in-java">原文链接</a></p>
-
-<p>　　我们会经常发现List&lt;? super T&gt;、Set&lt;? extends T&gt;的声明，是什么意思呢？&lt;? super T&gt;表示包括T在内的任何T的父类，&lt;? extends T&gt;表示包括T在内的任何T的子类，下面我们详细分析一下两种通配符具体的区别。</p>
-
-<h1 id="extends">extends</h1>
-
-<p>　　List&lt;? extends Number&gt; foo3的通配符声明，意味着以下的赋值是合法的：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Number "extends" Number (in this context)</span>
-<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;();</span>  
-<span class="c1">// Integer extends Number</span>
-<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span> 
-<span class="c1">// Double extends Number</span>
-<span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Double</span><span class="o">&gt;();</span>  </code></pre></figure>
-
-
-		<h1><a href="/2015/10/java-qa-generics-extends-super">阅读全文</a></h1>
         </div>
     </div>
 </div>
