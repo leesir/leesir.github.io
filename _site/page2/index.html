@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/09/prod-jvm-params">生产环境JVM参数配置记录（一）</a></li>
+        
         <li><a href="/2019/08/bug-1">工作问题记录（一）：事务的错误使用方式</a></li>
         
         <li><a href="/2019/07/accurate-money">一种精确的理财金额算法的设计与实现（以等额本息为例）</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/08/java-history">Java的历史</a></li>
         
-        <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,54 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2019/07/java-sugar-generic-bound">2019-07-05  Java语法糖-泛型-泛型边界</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<h2 id="1-有界泛型">1. 有界泛型</h2>
+
+<h4 id="11-有界泛型的定义">1.1 有界泛型的定义</h4>
+
+<p>       当我们需要一个工具类只用于做数值计算，或者只用于做集合的遍历，方法只希望接收Number或者Collection，不希望接受其他类型，否则就得写一大堆instanceof的if判断。
+为了解决这个问题，我们需要定义泛型的上边界，即方法所能接收的层级最高的类型。</p>
+
+<p>       在Java中，用extends关键字可以实现有界泛型的定义。格式为：&lt;T extends UpperBoundClass&gt;，其中UpperBoundClass为上边界类型。代码实例如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeNumber</span><span class="o">(</span><span class="n">T</span> <span class="n">number1</span><span class="o">,</span> <span class="n">T</span> <span class="n">number2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//compute</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Collection</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">iter</span><span class="o">(</span><span class="n">T</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//iterate</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单1</p>
+
+<p><br /></p>
+
+<p>       在使用代码清单1的工具方法的时，可以这么使用：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="n">Integer</span> <span class="n">number1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">BigDecimal</span> <span class="n">number2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
+<span class="n">computeNumber</span><span class="o">(</span><span class="n">number1</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span>
+<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
+<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
+
+<span class="c1">//compile fail: Wrong 1st argument type</span>
+<span class="n">computeNumber</span><span class="o">(</span><span class="s">"string1"</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span></code></pre></figure>
+
+<p class="center">代码清单2</p>
+
+
+		<h1><a href="/2019/07/java-sugar-generic-bound">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2019/07/java-sugar-generic-type-erasure">2019-07-04  Java语法糖-泛型-类型擦除</a></h1>
@@ -252,32 +300,6 @@ CPU可能会缓存操作数所属的内存块，数据库的查询结果也可�
 
 
 		<h1><a href="/2019/06/java-javasuger-cc">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/06/java-assert">2019-06-21  Java语法糖-assert</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>       在谈断言之前，必须要谈谈2种编程方式：防御性编程与契约式编程。防御性编程来自于《代码大全》，契约式编程由伯特兰·迈耶于1986年提出。</p>
-
-<p>       防御性编程强调不信任外部输入的参数，要对所有可能出现问题的数据加以判断，这种编程方式的代码中，通常存在大量重复的if语句。</p>
-
-<p>       契约式编程强调系统内各组件必须按规定实现各自的逻辑，在组件交互的过程中不对参数进行校验，如果发现参数不符合要求，程序将立即终止执行。
-现代编程语言通过断言的机制实现契约式编程，这种编程方式的代码比较简洁。</p>
-
-<p>       然而在现今的软件开发过程中，不可能实现契约式编程：人员流动大、不愿意写文档、不愿意看文档、需求迭代快。
-当然防御性编程也做的不好，否则就不会由bug了。甚至有时候某种做法属于防御性编程还是契约式编程都不清晰，比如使用注解式参数校验框架，看似属于契约式编程：代码简洁、快速失效。
-而当反编译过后，实则大量基础if判断。</p>
-
-<p>       防御性编程与契约式编程思想的出现，都算的上是软件开发思想的进步，而受制于当时的知识背景，难免在今天略显过时。就此结束讨论，进入正题。</p>
-
-
-		<h1><a href="/2019/06/java-assert">阅读全文</a></h1>
         </div>
     </div>
 </div>

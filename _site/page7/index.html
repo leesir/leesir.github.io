@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/09/prod-jvm-params">生产环境JVM参数配置记录（一）</a></li>
+        
         <li><a href="/2019/08/bug-1">工作问题记录（一）：事务的错误使用方式</a></li>
         
         <li><a href="/2019/07/accurate-money">一种精确的理财金额算法的设计与实现（以等额本息为例）</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/08/java-history">Java的历史</a></li>
         
-        <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
-        
     </ul>
 </div>
 
@@ -105,6 +105,45 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
         </div>
         <div class="col-md-9">
             
+<div class="article">
+    <div class="well">
+        <h1><a href="/2015/10/java-fp-functional-programming-overview">2015-10-17  函数式编程 Functional Programming</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>　　<a href="http://www.javacodegeeks.com/tutorials/java-tutorials/core-java-tutorials/#Functional%20programming">原文链接</a></p>
+
+<p>　　在Java程序员的世界里，第一要素是“类”，而在函数式编程里，第一要素则是“函数”。完全不同的编程理念，确实很难让函数式编程出现在Java工程师日常工作的代码中。</p>
+
+<p>　　先来2篇优秀博文扫盲：</p>
+
+<ul>
+  <li><a href="http://www.ruanyifeng.com/blog/2012/04/functional_programming.html">函数式编程初探</a></li>
+  <li><a href="http://www.cnblogs.com/kym/archive/2011/03/07/1976519.html">函数式编程扫盲篇</a></li>
+</ul>
+
+<p>　　仔细阅读过上面2篇文章之后，相信你已经对函数式编程有了一定的了解。同时，在许多高级语言(Java、C#等)都陆续加入了函数式编程特性的形势下，不难预测函数式编程将再次成为未来的主流编程模型。</p>
+
+<p>　　本系列译文如下：</p>
+
+<ol>
+  <li><a href="http://www.javacodegeeks.com/2012/03/functional-programming-with-map-and.html">Functional programming with Map and Fold in Java</a></li>
+  <li><a href="http://www.javacodegeeks.com/2012/03/java-faking-closure-with-factory-to.html">Java: Faking a closure with a factory to create a domain object</a></li>
+  <li><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with.html">Functional style in Java with predicates – Part 1</a></li>
+  <li><a href="http://www.javacodegeeks.com/2012/05/functional-style-in-java-with_23.html">Functional style in Java with predicates – Part 2</a></li>
+  <li><a href="http://www.javacodegeeks.com/2013/04/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8.html">Function interface – A functional interface in the java.util.function package in Java 8</a></li>
+  <li><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">Predicate and Consumer Interface in java.util.function package in Java 8</a></li>
+  <li><a href="http://www.javacodegeeks.com/2013/05/a-simple-application-of-lambda-expressions-in-java-8.html">A simple application of Lambda Expressions in Java 8</a></li>
+  <li><a href="http://www.javacodegeeks.com/2013/05/template-method-pattern-using-lambda-expressions-default-methods.html">Template Method Pattern – Using Lambda Expressions, Default Methods</a></li>
+  <li><a href="http://www.javacodegeeks.com/2013/06/java-8-lambda-walkthrough.html">Java 8 lambda walkthrough</a>（此篇文章代码居多，不进行翻译，感兴趣的读者可以点击链接阅读原文章）</li>
+</ol>
+
+		<h1><a href="/2015/10/java-fp-functional-programming-overview">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
 <div class="article">
     <div class="well">
         <h1><a href="/2015/10/java-io-otherstream">2015-10-16  Java IO: 其他字节流(上)</a></h1>
@@ -251,47 +290,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2015/10/java-io-pipedreaderwriter-chararrayreaderwriter">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2015/10/java-io-inputstreamreader-outputstreamwriter">2015-10-14  Java IO: InputStreamReader和OutputStreamWriter</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<p>作者: Jakob Jenkov</p>
-
-<p>　　本章节将简要介绍InputStreamReader和OutputStreamWriter。细心的读者可能会发现，在之前的文章中，IO中的类要么以Stream结尾，要么以Reader或者Writer结尾，那这两个同时以字节流和字符流的类名后缀结尾的类是什么用途呢？简单来说，这两个类把字节流转换成字符流，中间做了数据的转换，类似适配器模式的思想。</p>
-
-<p>#InputStreamReader</p>
-
-<p>　　<a href="http://tutorials.jenkov.com/java-io/inputstreamreader.html">原文链接</a></p>
-
-<p>　　InputStreamReader会包含一个InputStream，从而可以将该输入字节流转换成字符流，代码例子：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">"c:\\data\\input.txt"</span><span class="o">);</span>
-
-<span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">inputStream</span><span class="o">);</span>
-
-<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
-
-    <span class="kt">char</span> <span class="n">theChar</span> <span class="o">=</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">data</span><span class="o">;</span>
-
-    <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
-
-<span class="o">}</span>
-
-<span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-    </code></pre></figure>
-
-
-		<h1><a href="/2015/10/java-io-inputstreamreader-outputstreamwriter">阅读全文</a></h1>
         </div>
     </div>
 </div>

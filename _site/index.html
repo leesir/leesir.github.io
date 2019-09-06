@@ -58,6 +58,8 @@
     <h1>Recent Posts</h1>
     <ul>
         
+        <li><a href="/2019/09/prod-jvm-params">生产环境JVM参数配置记录（一）</a></li>
+        
         <li><a href="/2019/08/bug-1">工作问题记录（一）：事务的错误使用方式</a></li>
         
         <li><a href="/2019/07/accurate-money">一种精确的理财金额算法的设计与实现（以等额本息为例）</a></li>
@@ -86,8 +88,6 @@
         
         <li><a href="/2016/08/java-history">Java的历史</a></li>
         
-        <li><a href="/2016/07/java-history-beginning-words">Java历史开篇语</a></li>
-        
     </ul>
 </div>
 
@@ -107,6 +107,43 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
             
 <div class="article">
     <div class="well">
+        <h1><a href="/2019/09/prod-jvm-params">2019-09-05  生产环境JVM参数配置记录（一）</a></h1>
+        
+        <div class="content">
+		<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>       本文记录笔者参与的某Java服务的JVM启动参数。</p>
+
+<p><br /></p>
+
+<h4 id="-djavaawtheadlesstrue">-Djava.awt.headless=true</h4>
+
+<p>       从JDk1.4起，可以通过此参数以无外设（显示器、键盘等）模式运行JVM实例。无外设模式下，代码中仅能使用部分GUI组件，比如Canvas类。
+当使用了Button和Frame等依赖于显示设备的类时，将会抛出HeadlessException。</p>
+
+<p>       当然，在Java服务端开发中，不会用到java.awt.*的类，使用此参数可以防止误拷贝了Java GUI开发的代码所引发的问题。</p>
+
+<p><br /></p>
+
+<h4 id="-djavanetpreferipv4stacktrue">-Djava.net.preferIPv4Stack=true</h4>
+
+<p>       此参数默认为false，如果操作系统支持IPv6，JVM可以与IPv4及IPv6的主机进行socket通信。
+设置为true，则告诉JVM仅允许与IPv4的主机进行socket通信。</p>
+
+<p><br /></p>
+
+<p class="center"><img src="/images/post_2019_09_05_image1.png" alt="c compile" /></p>
+
+<p class="center"><a href="https://technology.amis.nl/2018/12/09/jvm-performance-openj9-uses-least-memory-graalvm-most-openjdk-distributions-differ/">图片来源</a></p>
+
+
+		<h1><a href="/2019/09/prod-jvm-params">阅读全文</a></h1>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="well">
         <h1><a href="/2019/08/bug-1">2019-08-08  工作问题记录（一）：事务的错误使用方式</a></h1>
         
         <div class="content">
@@ -119,7 +156,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <blockquote>
   <p>注解式：如spring的org.springframework.transaction.annotation.Transactional。</p>
 
-  <p>声明式：如在spring配置文件中编写的<tx>标签的相关内容。</tx></p>
+  <p>声明式：如在spring配置文件中编写的&lt;tx&gt;标签的相关内容。</p>
 
   <p>手写代码：自行编写事务，手动commit。</p>
 </blockquote>
@@ -249,54 +286,6 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 
 		<h1><a href="/2019/07/java-sugar-generic-wildcard">阅读全文</a></h1>
-        </div>
-    </div>
-</div>
-
-<div class="article">
-    <div class="well">
-        <h1><a href="/2019/07/java-sugar-generic-bound">2019-07-05  Java语法糖-泛型-泛型边界</a></h1>
-        
-        <div class="content">
-		<link rel="stylesheet" href="/css/pygments.css" />
-
-<h2 id="1-有界泛型">1. 有界泛型</h2>
-
-<h4 id="11-有界泛型的定义">1.1 有界泛型的定义</h4>
-
-<p>       当我们需要一个工具类只用于做数值计算，或者只用于做集合的遍历，方法只希望接收Number或者Collection，不希望接受其他类型，否则就得写一大堆instanceof的if判断。
-为了解决这个问题，我们需要定义泛型的上边界，即方法所能接收的层级最高的类型。</p>
-
-<p>       在Java中，用extends关键字可以实现有界泛型的定义。格式为：&lt;T extends UpperBoundClass&gt;，其中UpperBoundClass为上边界类型。代码实例如下所示：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">computeNumber</span><span class="o">(</span><span class="n">T</span> <span class="n">number1</span><span class="o">,</span> <span class="n">T</span> <span class="n">number2</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">//compute</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">Collection</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">iter</span><span class="o">(</span><span class="n">T</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">//iterate</span>
-<span class="o">}</span></code></pre></figure>
-
-<p class="center">代码清单1</p>
-
-<p><br /></p>
-
-<p>       在使用代码清单1的工具方法的时，可以这么使用：</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
-<span class="n">Integer</span> <span class="n">number1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-<span class="n">BigDecimal</span> <span class="n">number2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
-<span class="n">computeNumber</span><span class="o">(</span><span class="n">number1</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span>
-<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
-<span class="n">iter</span><span class="o">(</span><span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">)));</span>
-
-<span class="c1">//compile fail: Wrong 1st argument type</span>
-<span class="n">computeNumber</span><span class="o">(</span><span class="s">"string1"</span><span class="o">,</span> <span class="n">number2</span><span class="o">);</span></code></pre></figure>
-
-<p class="center">代码清单2</p>
-
-
-		<h1><a href="/2019/07/java-sugar-generic-bound">阅读全文</a></h1>
         </div>
     </div>
 </div>
