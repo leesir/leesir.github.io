@@ -22,8 +22,8 @@ tags: [Summary]
 
 #### -Djava.net.preferIPv4Stack=true 
 
-&#160; &#160; &#160; &#160;此参数默认为false，如果操作系统支持IPv6，JVM可以与IPv4及IPv6的主机进行socket通信。
-设置为true，则告诉JVM仅允许与IPv4的主机进行socket通信。
+&#160; &#160; &#160; &#160;此参数默认为false，如果操作系统支持IPv6，JVM可以与IPv4及IPv6主机进行socket通信。
+设置为true，则告诉JVM仅允许与IPv4主机进行socket通信。
 
 <br>
 
@@ -40,8 +40,8 @@ tags: [Summary]
 
 #### -server
 
-&#160; &#160; &#160; &#160;告诉JVM以服务器模式运行，目前64位操作系统仅有server模式。相对于client模式，server模式的初始堆和运行时垃圾回收都会不同，
-不关注启动速度，关注运行时的效率和优化。
+&#160; &#160; &#160; &#160;以服务器模式运行JVM。64位JDK仅支持server模式，相对于client模式，server模式的初始堆和运行时垃圾回收都会不同。
+server模式不关注启动速度，关注运行时的效率和优化。有关server和client模式的选择，请点击[这里](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/server-class.html)。
 
 <br>
 
@@ -131,3 +131,4 @@ UseCMSCompactAtFullCollection标志默认开启，表示在CMS回收之后进行
 [1] Artem Ananiev.[Using Headless Mode in the Java SE Platform](https://www.oracle.com/technetwork/articles/javase/headless-136834.html)[EB/OL].https://www.oracle.com/technetwork/articles/javase/headless-136834.html，2019-09-05.<br>
 [2] [Networking IPv6 User Guide for JDK/JRE 5.0](https://docs.oracle.com/javase/6/docs/technotes/guides/net/ipv6_guide/)[EB/OL].https://docs.oracle.com/javase/6/docs/technotes/guides/net/ipv6_guide/，2019-09-05.<br>
 [3] [Java Platform, Standard Edition Tools Reference](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html)[EB/OL].https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html，2019-09-05.<br>
+[4] [Server-Class Machine Detection](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/server-class.html)[EB/OL].https://docs.oracle.com/javase/8/docs/technotes/guides/vm/server-class.html，2019-09-05.<br>
