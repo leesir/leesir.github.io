@@ -125,23 +125,23 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="c1">// check with the always-true predicate</span>
 
-<span class="kd">final</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">all</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysTrue</span><span class="o">());</span>
+<span class="kd">final</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">all</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="nc">Predicates</span><span class="o">.&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysTrue</span><span class="o">());</span>
 
-<span class="n">assertEquals</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">Iterables</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="n">all</span><span class="o">));</span> 
+<span class="n">assertEquals</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">Iterables</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="n">all</span><span class="o">));</span> 
 
 <span class="c1">// check with the always-false predicat</span>
 
-<span class="n">eassertTrue</span><span class="o">(</span><span class="n">Iterables</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="n">Predicates</span><span class="o">.&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysFalse</span><span class="o">())));</span>
+<span class="n">eassertTrue</span><span class="o">(</span><span class="nc">Iterables</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">orders</span><span class="o">.</span><span class="na">selectOrders</span><span class="o">(</span><span class="nc">Predicates</span><span class="o">.&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">alwaysFalse</span><span class="o">())));</span>
     </code></pre></figure>
 
 <p>　　第二步，你可以分开测试每个谓词了：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">final</span> <span class="n">CustomerPredicate</span> <span class="n">isForCustomer1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomerPredicate</span><span class="o">(</span><span class="n">CUSTOMER_1</span><span class="o">);</span>
+<span class="kd">final</span> <span class="nc">CustomerPredicate</span> <span class="n">isForCustomer1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CustomerPredicate</span><span class="o">(</span><span class="no">CUSTOMER_1</span><span class="o">);</span>
 
-<span class="n">assertTrue</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">ORDER_1</span><span class="o">));</span> <span class="c1">// ORDER_1 is for CUSTOMER_1</span>
+<span class="n">assertTrue</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="no">ORDER_1</span><span class="o">));</span> <span class="c1">// ORDER_1 is for CUSTOMER_1</span>
 
-<span class="n">assertFalse</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">ORDER_2</span><span class="o">));</span> <span class="c1">// ORDER_2 is for CUSTOMER_2</span>
+<span class="n">assertFalse</span><span class="o">(</span><span class="n">isForCustomer1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="no">ORDER_2</span><span class="o">));</span> <span class="c1">// ORDER_2 is for CUSTOMER_2</span>
     </code></pre></figure>
 
 <p>　　例子简单，却见微知著。为了测试更加复杂的逻辑，你可能需要构建模拟谓词应对测试不够充分的情况。比如，一个第一次返回true，之后都返回false的谓词。通过严格分离关注点，谓词可以大大简化你的测试计划。</p>
@@ -169,7 +169,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerSpecific</span> <span class="o">{</span>   
 
-    <span class="n">Customer</span> <span class="nf">getCustomer</span><span class="o">();</span>
+    <span class="nc">Customer</span> <span class="nf">getCustomer</span><span class="o">();</span>
 
 <span class="o">}</span>
     </code></pre></figure>
@@ -179,17 +179,17 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　一旦我们定义了CustomerSpecific接口，我们可以通过实现它定义我们的谓词，不需要像之前一样根据主体类型定位谓词。这项优化在一个大型项目中仅仅只是影响了一小部分的谓词类。在这种情况下，CustomerPredicate通过实现CustomerSpecific进行重定位，并且泛型类型也是CustomerSpecific。</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">CustomerPredicate</span> <span class="kd">implements</span> <span class="n">Predicate</span><span class="o">&lt;</span><span class="n">CustomerSpecific</span><span class="o">&gt;,</span> <span class="n">CustomerSpecific</span> <span class="o">{</span>  
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">CustomerPredicate</span> <span class="kd">implements</span> <span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">CustomerSpecific</span><span class="o">&gt;,</span> <span class="nc">CustomerSpecific</span> <span class="o">{</span>  
 
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Customer</span> <span class="n">customer</span><span class="o">;</span>  <span class="c1">// valued constructor omitted for clarity  </span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Customer</span> <span class="n">customer</span><span class="o">;</span>  <span class="c1">// valued constructor omitted for clarity  </span>
 
-    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">getCustomer</span><span class="o">()</span> <span class="o">{</span>    
+    <span class="kd">public</span> <span class="nc">Customer</span> <span class="nf">getCustomer</span><span class="o">()</span> <span class="o">{</span>    
 
         <span class="k">return</span> <span class="n">customer</span><span class="o">;</span>
 
     <span class="o">}</span>  
 
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">apply</span><span class="o">(</span><span class="n">CustomerSpecific</span> <span class="n">specific</span><span class="o">)</span> <span class="o">{</span>   
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">apply</span><span class="o">(</span><span class="nc">CustomerSpecific</span> <span class="n">specific</span><span class="o">)</span> <span class="o">{</span>   
  
         <span class="k">return</span> <span class="n">specific</span><span class="o">.</span><span class="na">getCustomer</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">customer</span><span class="o">);</span>  
 
@@ -201,9 +201,9 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　注意到例子中的谓词可以实现CustomerSpecific，所以同样可以针对自身做evaluate计算（译者注：即调用谓词的apply或者evaluate等方法）。当使用这类特征模拟（译者注：在静态语言中模拟动态语言特有的特性）的接口时，需要特别注意对泛型的设计，比如在类PurchaseOrders中接收Predicate<PurchaseOrder>作为参数的方法，需要稍作修改，使该方法能够接收PurchaseOrder任何父类的谓词：</PurchaseOrder></p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">selectOrders</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span> 
+<span class="kd">public</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">selectOrders</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span> 
   
-    <span class="k">return</span> <span class="n">Iterables</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">orders</span><span class="o">,</span> <span class="n">condition</span><span class="o">);</span>
+    <span class="k">return</span> <span class="nc">Iterables</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">orders</span><span class="o">,</span> <span class="n">condition</span><span class="o">);</span>
 
 <span class="o">}</span>
     </code></pre></figure>
@@ -239,17 +239,17 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
 <span class="cm">/** Optimization method: pre-computed list of pending orders */</span>
 
-<span class="kd">private</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">selectPendingOrders</span><span class="o">()</span> <span class="o">{</span>
+<span class="kd">private</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">selectPendingOrders</span><span class="o">()</span> <span class="o">{</span>
 
     <span class="c1">// ... optimized stuff...</span>
 
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">selectOrders</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="nf">selectOrders</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">PurchaseOrder</span><span class="o">&gt;</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="c1">// internal complicity here: recognize friend class to enable optimization</span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">condition</span> <span class="k">instanceof</span> <span class="n">PendingOrderPredicate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">condition</span> <span class="k">instanceof</span> <span class="nc">PendingOrderPredicate</span><span class="o">)</span> <span class="o">{</span>
 
         <span class="k">return</span> <span class="nf">selectPendingOrders</span><span class="o">();</span><span class="c1">// faster way</span>
 
@@ -257,7 +257,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
     <span class="c1">// otherwise, back to the usual case</span>
 
-    <span class="k">return</span> <span class="n">Iterables</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">orders</span><span class="o">,</span> <span class="n">condition</span><span class="o">);</span>
+    <span class="k">return</span> <span class="nc">Iterables</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">orders</span><span class="o">,</span> <span class="n">condition</span><span class="o">);</span>
 
 <span class="o">}</span>
     </code></pre></figure>
@@ -281,13 +281,13 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　我们来举一个广播股票价格的应用程序的例子。在注册的时候，我们必须声明对哪类股票的观察比较感兴趣。我们只需要简单传递当操作到我们感兴趣的股票时返回true的股票类谓词：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">StockPredicate</span> <span class="kd">implements</span> <span class="n">Predicate</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">StockPredicate</span> <span class="kd">implements</span> <span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="o">{</span>
 
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">tickers</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">tickers</span><span class="o">;</span>
 
     <span class="c1">// Constructors omitted for clarity</span>
 
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">apply</span><span class="o">(</span><span class="n">String</span> <span class="n">ticker</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">apply</span><span class="o">(</span><span class="nc">String</span> <span class="n">ticker</span><span class="o">)</span> <span class="o">{</span>
 
         <span class="k">return</span> <span class="n">tickers</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">ticker</span><span class="o">);</span>
 
@@ -299,7 +299,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　现在我们假设应用程序已经可以利用消息主题广播标准的股票代码集合，每一个主题都拥有相应的谓词。如果检测到我们将要使用的谓词，是被包含于或者被归类为某个标准谓词，我们就可以订阅它。在我们的例子中，归类是一个非常简单的工作，只需要在我们的谓词中添加额外的方法即可：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">encompasses</span><span class="o">(</span><span class="n">StockPredicate</span> <span class="n">predicate</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">encompasses</span><span class="o">(</span><span class="nc">StockPredicate</span> <span class="n">predicate</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="k">return</span> <span class="n">tickers</span><span class="o">.</span><span class="na">containsAll</span><span class="o">(</span><span class="n">predicate</span><span class="o">.</span><span class="na">tickers</span><span class="o">);</span>
 

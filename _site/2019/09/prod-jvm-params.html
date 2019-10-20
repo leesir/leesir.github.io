@@ -127,8 +127,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <h4 id="-djavanetpreferipv4stacktrue">-Djava.net.preferIPv4Stack=true</h4>
 
-<p>       此参数默认为false，如果操作系统支持IPv6，JVM可以与IPv4及IPv6的主机进行socket通信。
-设置为true，则告诉JVM仅允许与IPv4的主机进行socket通信。</p>
+<p>       此参数默认为false，如果操作系统支持IPv6，JVM可以与IPv4及IPv6主机进行socket通信。
+设置为true，则告诉JVM仅允许与IPv4主机进行socket通信。</p>
 
 <p><br /></p>
 
@@ -142,8 +142,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <h4 id="-server">-server</h4>
 
-<p>       告诉JVM以服务器模式运行，目前64位操作系统仅有server模式。相对于client模式，server模式的初始堆和运行时垃圾回收都会不同，
-不关注启动速度，关注运行时的效率和优化。</p>
+<p>       以服务器模式运行JVM。64位JDK仅支持server模式，相对于client模式，server模式的初始堆和运行时垃圾回收都会不同。
+server模式不关注启动速度，关注运行时的效率和优化。有关server和client模式的选择，请点击<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/vm/server-class.html">这里</a>。</p>
 
 <p><br /></p>
 
@@ -162,7 +162,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <h4 id="-xxsurvivorratio7">-XX:SurvivorRatio=7</h4>
 
-<p>       设置新生代中EDEN和1个survivor的比例，默认值为8，既新生代等于10个survivor的大小。此命令完全可以不用设置，沿用默认值即可。</p>
+<p>       设置新生代中EDEN和1个survivor的比例，默认值为8，既新生代等于10个survivor的大小。此命令完全可以不用设置，延用默认值即可。</p>
 
 <p><br /></p>
 
@@ -232,7 +232,8 @@ UseCMSCompactAtFullCollection标志默认开启，表示在CMS回收之后进行
 
 <p>[1] Artem Ananiev.<a href="https://www.oracle.com/technetwork/articles/javase/headless-136834.html">Using Headless Mode in the Java SE Platform</a>[EB/OL].https://www.oracle.com/technetwork/articles/javase/headless-136834.html，2019-09-05.<br />
 [2] <a href="https://docs.oracle.com/javase/6/docs/technotes/guides/net/ipv6_guide/">Networking IPv6 User Guide for JDK/JRE 5.0</a>[EB/OL].https://docs.oracle.com/javase/6/docs/technotes/guides/net/ipv6_guide/，2019-09-05.<br />
-[3] <a href="https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html">Java Platform, Standard Edition Tools Reference</a>[EB/OL].https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html，2019-09-05.<br /></p>
+[3] <a href="https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html">Java Platform, Standard Edition Tools Reference</a>[EB/OL].https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html，2019-09-05.<br />
+[4] <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/vm/server-class.html">Server-Class Machine Detection</a>[EB/OL].https://docs.oracle.com/javase/8/docs/technotes/guides/vm/server-class.html，2019-09-05.<br /></p>
 
                     </div>
                     

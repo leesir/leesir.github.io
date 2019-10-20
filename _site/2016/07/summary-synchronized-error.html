@@ -140,7 +140,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 感兴趣的读者可以动手写个简单的类，通过命令查看反编译后的执行指令。</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//注：TestClass是类名，不是TestClass.class或者TestClass.java等文件名。</span>
-<span class="n">javap</span> <span class="o">-</span><span class="n">c</span> <span class="o">-</span><span class="n">p</span> <span class="n">yourPath</span><span class="o">/</span><span class="n">TestClass</span></code></pre></figure>
+<span class="n">javap</span> <span class="o">-</span><span class="n">c</span> <span class="o">-</span><span class="n">p</span> <span class="n">yourPath</span><span class="o">/</span><span class="nc">TestClass</span></code></pre></figure>
 
 <p><br /></p>
 
@@ -154,7 +154,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>       所以，当我们使用一个内部私有对象实现同步的时候，需要将该变量定义成常量，如：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Object</span> <span class="n">monitor</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">();</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Object</span> <span class="n">monitor</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">();</span></code></pre></figure>
 
 <p>       对于Spring等对象容器来说，你需要关注通过配置文件往容器加入的对象，是否是单例（Spring默认是单例，既scope = singleton）。
 非单例的对象，当应用程序向容器索取对象时，容器可能会返回一个新建的对象，从而使同步逻辑失效。</p>
@@ -178,7 +178,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>所以，当我们对非常量的包装类型，如Boolean类型的变量上使用同步时，比如：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Boolean</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nc">Boolean</span> <span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
 
 <span class="o">...</span>
 <span class="c1">//thread1</span>

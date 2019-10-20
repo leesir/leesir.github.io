@@ -1,0 +1,147 @@
+I"�<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>       事务是数据库的原子操作，由一个或者一组操作组合而成。事务的重要性不言而喻，本文也无需过多阐述背景，直接进入正题。</p>
+
+<p>       在实际的代码中，使用事务通常有以下几种方式：</p>
+
+<blockquote>
+  <p>注解式：如spring的org.springframework.transaction.annotation.Transactional。</p>
+
+  <p>声明式：如在spring配置文件中编写的&lt;tx&gt;标签的相关内容。</p>
+
+  <p>手写代码：自行编写事务，手动commit。</p>
+</blockquote>
+
+<p>       除数据库之外，缓存也有原子操作，以redis为例：</p>
+
+<blockquote>
+  <p>SET命令：SET key value expiration EX seconds PX milliseconds NX XX，其中NX参数的说明如下：Only set the key if it does not already exist。</p>
+
+  <p>SETEX命令：给某个key设置某个值，并为其设置过期时间。注：此命令可由SET命令替代。</p>
+
+  <p>MULTI/EXEC语句块：由MULTI命令和EXEC命令包裹的语句块属于原子操作。</p>
+</blockquote>
+
+<p class="center"><img src="/images/post_2019_08_08_image1.jpg" alt="c compile" /></p>
+
+<!-- more -->
+
+<p><br /></p>
+
+<p>       本文就数据库事务，简要说明下项目中遇到的错误使用方式。</p>
+
+<p><br /></p>
+
+<h4 id="1-在事务代码块内使用锁">1. 在事务代码块内使用锁</h4>
+
+<p><br /></p>
+
+<p>       在事务代码块内，当前线程与其他线程竞争临界资源，考虑以下伪代码：</p>
+
+<blockquote>
+  <p>//thread1</p>
+
+  <p>1 start transaction;</p>
+
+  <p>2 update tb_1 set column = 10 where id = 1;</p>
+
+  <p>3 get lock for condition1;</p>
+
+  <p>4 process critical Code;</p>
+
+  <p>5 release lock;</p>
+
+  <p>6 commit;</p>
+</blockquote>
+
+<p><br /></p>
+
+<p>       这么做有什么问题呢？当其他线程同样竞争condition1的锁，并且进行tb_1数据查询时，会存在问题。考虑以下伪代码：</p>
+
+<blockquote>
+  <p>//thread2</p>
+
+  <p>1 get lock for condition1;</p>
+
+  <p>2 select * from tb_1 where where id = 1;</p>
+
+  <p>3 release lock;</p>
+</blockquote>
+
+<p>       通常我们认为，在事务执行完成之后，后续的访问一定能读到最新数据。
+但在这个例子中，当线程thread2进入临界区时，thread1完全有可能没有提交或者正在提交事务，thread2没有读到最新的值，让人感觉事务“不生效”。
+这个例子错误的地方在于，thread1中临界区范围划定错误，应将范围扩大至包含整个事务，如：</p>
+
+<blockquote>
+  <p>//thread1</p>
+
+  <p>1 get lock for condition1;</p>
+
+  <p>2 start transaction;</p>
+
+  <p>3 update tb_1 set column = 10 where id = 1;</p>
+
+  <p>4 commit;</p>
+
+  <p>5 process critical Code;</p>
+
+  <p>6 release lock;</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 id="2-在事务代码块内发送队列消息">2. 在事务代码块内发送队列消息</h4>
+
+<p><br /></p>
+
+<p>       同样地，在事务代码块内发送某些通知给消费者，考虑以下代码：</p>
+
+<blockquote>
+  <p>//producer</p>
+
+  <p>1 start transaction;</p>
+
+  <p>2 update tb_1 set column = 10 where id = 1;</p>
+
+  <p>3 send mq;</p>
+
+  <p>4 commit;</p>
+</blockquote>
+
+<p><br /></p>
+
+<p>       当消费者收到消息并进行tb_1数据查询时，也会出现问题，比如：</p>
+
+<blockquote>
+  <p>//consumer</p>
+
+  <p>1 receive mq</p>
+
+  <p>2 select * from tb_1 where where id = 1;</p>
+</blockquote>
+
+<p><br /></p>
+
+<p>       当消费者开始业务操作时，生产者完全有可能没有提交或者正在提交事务。正确的做法是将发送mq的代码挪到事务外，如：</p>
+
+<blockquote>
+  <p>//producer</p>
+
+  <p>1 start transaction;</p>
+
+  <p>2 update tb_1 set column = 10 where id = 1;</p>
+
+  <p>3 commit;</p>
+
+  <p>4 send mq;</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 id="总结">总结</h4>
+
+<p><br /></p>
+
+<p>       本文所举的2个错误案例，都曾在笔者的项目中出现，案例错误的地方在于在事务代码块中进行依赖本事务变更数据的线程协作。
+事务作为数据处理单元，应职责单一。如果需要在数据更新之后通知其他线程进行相关操作，则应把协作代码放到事务代码之后。</p>
+:ET

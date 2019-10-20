@@ -125,13 +125,13 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　BufferedReader和BufferedInputStream的主要区别在于，BufferedReader操作字符，而BufferedInputStream操作原始字节。只需要把Reader包装到BufferedReader中，就可以为Reader添加缓冲区(译者注：默认缓冲区大小为8192字节，即8KB)。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">Reader</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
+<span class="nc">Reader</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">));</span>
     </code></pre></figure>
 
 <p>　　你也可以通过传递构造函数的第二个参数，指定缓冲区大小，代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">Reader</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+<span class="nc">Reader</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"c:\\data\\input-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
     </code></pre></figure>
 
 <p>　　这个例子设置了8KB的缓冲区。最好把缓冲区大小设置成1024字节的整数倍，这样能更高效地利用内置缓冲区的磁盘。</p>
@@ -147,14 +147,14 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>　　与BufferedReader类似，BufferedWriter可以为输出流提供缓冲区。可以构造一个使用默认大小缓冲区的BufferedWriter(译者注：默认缓冲区大小8 * 1024B)，代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">));</span>
+<span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">));</span>
     </code></pre></figure>
 
-<div class="highlighter-rouge">也可以手动设置缓冲区大小，代码如下：
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>也可以手动设置缓冲区大小，代码如下：
+</code></pre></div></div>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"> 
-<span class="n">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+<span class="nc">Writer</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileWriter</span><span class="o">(</span><span class="s">"c:\\data\\output-file.txt"</span><span class="o">),</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
     </code></pre></figure>
 
 <p>　　为了更好地使用内置缓冲区的磁盘，同样建议把缓冲区大小设置成1024的整数倍。除了能够为输出流提供缓冲区以外，其余方面BufferedWriter基本与Writer类似。类似地，BufferedWriter也提供了writeLine()方法，能够把一行字符写入到底层的字符输出流中。值得注意是，你需要手动flush()方法确保写入到此输出流的数据真正写入到磁盘或者网络中。</p>

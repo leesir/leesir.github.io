@@ -1,0 +1,102 @@
+I"�<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>作者: Jakob Jenkov</p>
+
+<p>　　本章节将简要介绍管道与字符数组相关的reader和writer，主要涉及PipedReader、PipedWriter、CharArrayReader、CharArrayWriter。</p>
+
+<p>#PipedReader</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/pipedreader.html">原文链接</a></p>
+
+<p>　　PipedReader能够从管道中读取字符流。与PipedInputStream类似，不同的是PipedReader读取的是字符而非字节。换句话说，PipedReader用于读取管道中的文本。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PipedReader</span><span class="o">(</span><span class="n">pipedWriter</span><span class="o">);</span>
+
+<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">//do something with data...</span>
+
+    <span class="n">doSomethingWithData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="o">}</span>
+
+<span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    </code></pre></figure>
+
+<p>　　注意：为了清晰，代码忽略了一些必要的异常处理。想了解更多异常处理的信息，请参考<a href="http://leesir.github.io/2015/10/java-io-exception/">Java IO异常处理</a>。</p>
+
+<p>　　read()方法返回一个包含了读取到的字符内容的int类型变量(译者注：0~65535)。如果方法返回-1，表明PipedReader中已经没有剩余可读取字符，此时可以关闭PipedReader。-1是一个int类型，不是byte或者char类型，这是不一样的。</p>
+
+<p>　　正如你所看到的例子那样，一个PipedReader需要与一个PipedWriter相关联，当这两种流联系起来时，就形成了一条管道。要想更多地了解Java IO中的管道，请参考<a href="http://leesir.github.io/2015/10/java-io-pipe/">Java IO管道</a>。</p>
+
+<!-- more -->
+
+<p>#PipedWriter</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/pipedwriter.html">原文链接</a></p>
+
+<p>　　PipedWriter能够往管道中写入字符流。与PipedOutputStream类似，不同的是PipedWriter处理的是字符而非字节，PipedWriter用于写入文本数据。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="nc">PipedWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PipedWriter</span><span class="o">(</span><span class="n">pipedReader</span><span class="o">);</span>
+
+<span class="k">while</span><span class="o">(</span><span class="n">moreData</span><span class="o">())</span> <span class="o">{</span>
+
+    <span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getMoreData</span><span class="o">();</span>
+
+    <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+
+<span class="o">}</span>
+
+<span class="n">writer</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    </code></pre></figure>
+
+<p>　　PipedWriter的write()方法取一个包含了待写入字节的int类型变量作为参数进行写入，同时也有采用字符串、字符数组作为参数的write()方法。</p>
+
+<p>#CharArrayReader</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/chararrayreader.html">原文链接</a></p>
+
+<p>　　CharArrayReader能够让你从字符数组中读取字符流。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kt">char</span><span class="o">[]</span> <span class="n">chars</span> <span class="o">=</span> <span class="o">...</span> <span class="c1">//get char array from somewhere.</span>
+
+<span class="nc">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CharArrayReader</span><span class="o">(</span><span class="n">chars</span><span class="o">);</span>
+
+<span class="kt">int</span> <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="k">while</span><span class="o">(</span><span class="n">data</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">//do something with data</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="o">}</span>
+
+<span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    </code></pre></figure>
+
+<p>　　如果数据的存储媒介是字符数组，CharArrayReader可以很方便的读取到你想要的数据。CharArrayReader会包含一个字符数组，然后将字符数组转换成字符流。(译者注：CharArrayReader有2个构造函数，一个是CharArrayReader(char[] buf)，将整个字符数组创建成一个字符流。另外一个是CharArrayReader(char[] buf, int offset, int length)，把buf从offset开始，length个字符创建成一个字符流。更多细节请参考<a href="http://docs.oracle.com/javase/7/docs/api/">Java官方文档</a>)</p>
+
+<p>#CharArrayWriter</p>
+
+<p>　　<a href="http://tutorials.jenkov.com/java-io/chararraywriter.html">原文链接</a></p>
+
+<p>　　CharArrayWriter能够把字符写入到字符输出流writer中，并且能够将写入的字符转换成字符数组。代码如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="nc">CharArrayWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CharArrayWriter</span><span class="o">();</span>
+
+<span class="c1">//write characters to writer.</span>
+
+<span class="kt">char</span><span class="o">[]</span> <span class="n">chars</span> <span class="o">=</span> <span class="n">writer</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
+    </code></pre></figure>
+
+<p>　　当你需要以字符数组的形式访问写入到writer中的字符流数据时，CharArrayWriter是个不错的选择。</p>
+:ET

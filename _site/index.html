@@ -127,8 +127,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <h4 id="-djavanetpreferipv4stacktrue">-Djava.net.preferIPv4Stack=true</h4>
 
-<p>       此参数默认为false，如果操作系统支持IPv6，JVM可以与IPv4及IPv6的主机进行socket通信。
-设置为true，则告诉JVM仅允许与IPv4的主机进行socket通信。</p>
+<p>       此参数默认为false，如果操作系统支持IPv6，JVM可以与IPv4及IPv6主机进行socket通信。
+设置为true，则告诉JVM仅允许与IPv4主机进行socket通信。</p>
 
 <p><br /></p>
 
@@ -274,9 +274,9 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>       利用“? extends UpperBoundClass”可以实现上界通配符，比如你想实现一个工具方法，对一个数字列表进行求和，可以将方法参数声明为: &lt;? extends Number&gt;：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">sumOfList1</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">sumOfList1</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">double</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Number</span> <span class="n">n</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Number</span> <span class="n">n</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">s</span> <span class="o">+=</span> <span class="n">n</span><span class="o">.</span><span class="na">doubleValue</span><span class="o">();</span>
     <span class="o">}</span>
     <span class="k">return</span> <span class="n">s</span><span class="o">;</span>

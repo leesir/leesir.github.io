@@ -137,21 +137,21 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GenericClassErasureTest</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Node</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="s">"tail"</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Node</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Node</span><span class="o">&lt;&gt;(</span><span class="s">"tail"</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getData</span><span class="o">());</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="no">T</span> <span class="n">data</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
 
-        <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="no">T</span> <span class="n">data</span><span class="o">,</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
             <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">data</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="no">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">data</span><span class="o">;</span> <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -165,15 +165,15 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
 
-    <span class="kd">private</span> <span class="n">Object</span> <span class="n">data</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Node</span> <span class="n">next</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Object</span> <span class="n">data</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Node</span> <span class="n">next</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="n">Object</span> <span class="n">data</span><span class="o">,</span> <span class="n">Node</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="nc">Object</span> <span class="n">data</span><span class="o">,</span> <span class="nc">Node</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
         <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">data</span><span class="o">;</span> <span class="o">}</span>
+    <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">data</span><span class="o">;</span> <span class="o">}</span>
     <span class="c1">// ...</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -185,12 +185,12 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 可以用javap -verbose查看class文件的虚拟机指令。以代码清单generic-type-erasure1的Node类为例，运行javap之后的输出如下所示（仅截取方法描述）：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//构造函数</span>
-<span class="kd">public</span> <span class="n">generic</span><span class="o">.</span><span class="na">erasure</span><span class="o">.</span><span class="na">GenericClassErasureTest</span><span class="n">$Node</span><span class="o">(</span><span class="n">T</span><span class="o">,</span> <span class="n">generic</span><span class="o">.</span><span class="na">erasure</span><span class="o">.</span><span class="na">GenericClassErasureTest</span><span class="n">$Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;);</span>
-<span class="nl">descriptor:</span> <span class="o">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">Object</span><span class="o">;</span><span class="n">Lgeneric</span><span class="o">/</span><span class="n">erasure</span><span class="o">/</span><span class="n">GenericClassErasureTest$Node</span><span class="o">;)</span><span class="n">V</span>
+<span class="kd">public</span> <span class="n">generic</span><span class="o">.</span><span class="na">erasure</span><span class="o">.</span><span class="na">GenericClassErasureTest</span><span class="n">$Node</span><span class="o">(</span><span class="no">T</span><span class="o">,</span> <span class="n">generic</span><span class="o">.</span><span class="na">erasure</span><span class="o">.</span><span class="na">GenericClassErasureTest</span><span class="n">$Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;);</span>
+<span class="nl">descriptor:</span> <span class="o">(</span><span class="nc">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="nc">Object</span><span class="o">;</span><span class="nc">Lgeneric</span><span class="o">/</span><span class="n">erasure</span><span class="o">/</span><span class="nc">GenericClassErasureTest</span><span class="n">$Node</span><span class="o">;)</span><span class="no">V</span>
 
 <span class="c1">//getData方法</span>
-<span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">();</span>
-<span class="nl">descriptor:</span> <span class="o">()</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">Object</span><span class="o">;</span></code></pre></figure>
+<span class="kd">public</span> <span class="no">T</span> <span class="nf">getData</span><span class="o">();</span>
+<span class="nl">descriptor:</span> <span class="o">()</span><span class="nc">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="nc">Object</span><span class="o">;</span></code></pre></figure>
 
 <p>       描述符descriptor展示了方法的参数和返回值的类型，参数类型会按照方法声明的顺序展示在括号()内，返回值类型紧跟其后。
 如果没有参数，则显示()。如果没有返回值，则显示V。</p>
@@ -212,14 +212,14 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>       我们同样定义一个泛型测试类：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">UpperBoundTypeClass</span><span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">UpperBoundTypeClass</span><span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="no">T</span> <span class="n">data</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">UpperBoundTypeClass</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">UpperBoundTypeClass</span><span class="o">(</span><span class="no">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="no">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -231,8 +231,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       同样截取方法签名，如下所示：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//getData方法</span>
-<span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">();</span>
-<span class="nl">descriptor:</span> <span class="o">()</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="o">;</span></code></pre></figure>
+<span class="kd">public</span> <span class="no">T</span> <span class="nf">getData</span><span class="o">();</span>
+<span class="nl">descriptor:</span> <span class="o">()</span><span class="nc">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="nc">String</span><span class="o">;</span></code></pre></figure>
 
 <p>       可以看到方法的实际返回值是String而非Object。</p>
 
@@ -243,28 +243,28 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       当编译一个参数化的类或接口的子类或实现类时（以下统称子类），除了类型擦除，编译器还会额外对子类生成桥接方法。
 开发者不需要关心桥接方法，但最好还是了解一下编译器的行为，避免被堆栈信息疑惑。考虑如下代码：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="no">T</span> <span class="n">data</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="no">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Node.setData"</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="no">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Node.setData"</span><span class="o">);</span>
         <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyNode</span> <span class="kd">extends</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nf">MyNode</span><span class="o">(</span><span class="n">Integer</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyNode</span> <span class="kd">extends</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">MyNode</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">super</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">Integer</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"MyNode.setData"</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"MyNode.setData"</span><span class="o">);</span>
         <span class="kd">super</span><span class="o">.</span><span class="na">setData</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
     <span class="o">}</span>
 
@@ -278,8 +278,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 为了让类型擦除之后的继承关系依然保留多态，编译器为子类新生成了以下方法：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Bridge method generated by the compiler</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">Object</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">setData</span><span class="o">((</span><span class="n">Integer</span><span class="o">)</span> <span class="n">data</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="nc">Object</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">setData</span><span class="o">((</span><span class="nc">Integer</span><span class="o">)</span> <span class="n">data</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p class="center">代码清单generic-type-erasure5</p>
@@ -290,7 +290,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 同样可以用javap验证这一点，以下是MyNode的setData(Object data)的字节码内容的截取片段：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Object</span><span class="o">);</span>
-<span class="nl">descriptor:</span> <span class="o">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">Object</span><span class="o">;)</span><span class="n">V</span>
+<span class="nl">descriptor:</span> <span class="o">(</span><span class="nc">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="nc">Object</span><span class="o">;)</span><span class="no">V</span>
 <span class="o">...</span>
 <span class="mi">2</span><span class="o">:</span> <span class="n">checkcast</span>     <span class="err">#</span><span class="mi">6</span>                  <span class="c1">// class java/lang/Integer</span>
 <span class="o">...</span></code></pre></figure>

@@ -1,0 +1,103 @@
+I"k<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://stackoverflow.com/questions/4343202/difference-between-super-t-and-extends-t-in-java">原文链接</a></p>
+
+<p>　　我们会经常发现List&lt;? super T&gt;、Set&lt;? extends T&gt;的声明，是什么意思呢？&lt;? super T&gt;表示包括T在内的任何T的父类，&lt;? extends T&gt;表示包括T在内的任何T的子类，下面我们详细分析一下两种通配符具体的区别。</p>
+
+<h1 id="extends">extends</h1>
+
+<p>　　List&lt;? extends Number&gt; foo3的通配符声明，意味着以下的赋值是合法的：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Number "extends" Number (in this context)</span>
+<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Number</span><span class="o">&gt;();</span>  
+<span class="c1">// Integer extends Number</span>
+<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span> 
+<span class="c1">// Double extends Number</span>
+<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Double</span><span class="o">&gt;();</span>  </code></pre></figure>
+
+<!-- more -->
+
+<p>　　读取操作</p>
+
+<p>　　通过以上给定的赋值语句，你一定能从foo3列表中读取到的元素的类型是什么呢？</p>
+
+<ul>
+  <li>你可以读取到Number，因为以上的列表要么包含Number元素，要么包含Number的子类元素。</li>
+  <li>你不能保证读取到Integer，因为foo3可能指向的是List&lt;Double&gt;。</li>
+  <li>你不能保证读取到Double，因为foo3可能指向的是List&lt;Integer&gt;。</li>
+</ul>
+
+<p>　　写入操作</p>
+
+<p>　　通过以上给定的赋值语句，你能把一个什么类型的元素合法地插入到foo3中呢？</p>
+
+<ul>
+  <li>你不能插入一个Integer元素，因为foo3可能指向List&lt;Double&gt;。</li>
+  <li>你不能插入一个Double元素，因为foo3可能指向List&lt;Integer&gt;。</li>
+  <li>你不能插入一个Number元素，因为foo3可能指向List&lt;Integer&gt;。</li>
+  <li>你不能往List&lt;? extends T&gt;中插入任何类型的对象，因为你不能保证列表实际指向的类型是什么，你并不能保证列表中实际存储什么类型的对象。唯一可以保证的是，你可以从中读取到T或者T的子类。</li>
+</ul>
+
+<h1 id="super">super</h1>
+
+<p>　　现在考虑一下List&lt;? super T&gt;。List&lt;? super Integer&gt; foo3的通配符声明，意味着以下赋值是合法的：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// Integer is a "superclass" of Integer (in this context)</span>
+<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span>  
+<span class="c1">// Number is a superclass of Integer</span>
+<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Number</span><span class="o">&gt;();</span>   
+<span class="c1">// Object is a superclass of Integer</span>
+<span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">foo3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;();</span>   </code></pre></figure>
+
+<p>　　读取操作</p>
+
+<p>　　通过以上给定的赋值语句，你一定能从foo3列表中读取到的元素的类型是什么呢？</p>
+
+<ul>
+  <li>你不能保证读取到Integer，因为foo3可能指向List&lt;Number&gt;或者List&lt;Object&gt;。</li>
+  <li>你不能保证读取到Number，因为foo3可能指向List&lt;Object&gt;。</li>
+  <li>唯一可以保证的是，你可以读取到Object或者Object子类的对象（你并不知道具体的子类是什么）。</li>
+</ul>
+
+<p>　　写入操作</p>
+
+<p>　　通过以上给定的赋值语句，你能把一个什么类型的元素合法地插入到foo3中呢？</p>
+
+<ul>
+  <li>你可以插入Integer对象，因为上述声明的列表都支持Integer。</li>
+  <li>你可以插入Integer的子类的对象，因为Integer的子类同时也是Integer，原因同上。</li>
+  <li>你不能插入Double对象，因为foo3可能指向ArrayList&lt;Integer&gt;。</li>
+  <li>你不能插入Number对象，因为foo3可能指向ArrayList&lt;Integer&gt;。</li>
+  <li>你不能插入Object对象，因为foo3可能指向ArrayList&lt;Integer&gt;。</li>
+</ul>
+
+<h1 id="pecs">PECS</h1>
+
+<p>请记住PECS原则：生产者（Producer）使用extends，消费者（Consumer）使用super。</p>
+
+<ol>
+  <li>生产者使用extends</li>
+</ol>
+
+<p>如果某列表可以提供Integer类型的数据，但不允许被写入，你需要把列表声明成List&lt;? extends Integer&gt;，因此数据使用端不能往该列表中添加任何元素。</p>
+
+<ol>
+  <li>消费者使用super</li>
+</ol>
+
+<p>如果需要向某列表中输入Integer类型的数据，但限制对其的读取，你需要把列表声明成List&lt;? super Integer&gt;，因此你不能保证从中读取到的元素的类型。</p>
+
+<ol>
+  <li>即是生产者，也是消费者</li>
+</ol>
+
+<p>如果一个列表即要被读取（生产者），又要被写入（消费者），你不能使用泛型通配符声明列表，必须将列表声明为明确的泛型类型，比如List&lt;Integer&gt;。</p>
+
+<h1 id="例子">例子</h1>
+
+<p>　　请参考java.util.Collections里的copy方法：</p>
+
+<p><img src="/images/post_2015_10_23_image1.png" alt="collections_copy_code" /></p>
+
+<p>　　我们可以从Java开发团队的代码中获得到一些启发，copy方法中使用到了PECS原则，实现了对参数的保护。</p>
+:ET

@@ -1,0 +1,170 @@
+I"�/<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>       在考虑泛型类之间关系之前，我们需要熟悉以下术语，用于描述程序设计语言的类型关系：</p>
+
+<blockquote>
+  <p>协变（Covariance）：使你能够使用比原始指定的类型派生程度更大的类型。你可以向List<Derived>类型的变量分配List<Of Derived="">。</Of></Derived></p>
+
+  <p>逆变（Contravariance）：使你能够使用比原始指定的类型更泛型（派生程度更小）的类型。你可以向List<base />类型的变量分配List<Of Base=""></Of></p>
+
+  <p>不变（Invariance）：这意味着，你只能使用原始指定的类型。固定泛型类型参数既不是协变类型，也不是逆变类型。你无法向List<base />类型的变量分配List(Of Base)。</p>
+</blockquote>
+
+<p><br /></p>
+
+<!-- more -->
+
+<h2 id="1-数组">1. 数组</h2>
+
+<p><br /></p>
+
+<p>       我们早已习惯类的继承关系，对于一个父类B，不管是在赋值语句，还是在容器中，或者是在方法参数上，我们总能B的子类型完成业务逻辑。比如：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Object</span> <span class="n">obj</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+    <span class="n">funcArg</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mf">0.5</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">funcArg</span><span class="o">(</span><span class="nc">Object</span> <span class="n">param</span><span class="o">)</span> <span class="o">{}</span></code></pre></figure>
+
+<p class="center">代码清单1</p>
+
+<p><br /></p>
+
+<p>       对于数组来说，考虑以下代码：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="nc">Number</span><span class="o">[]</span> <span class="n">integerArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Integer</span><span class="o">[]{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">};</span>
+<span class="nc">Number</span><span class="o">[]</span> <span class="n">bigDecimalArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">[]{</span><span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">(</span><span class="s">""</span><span class="o">)};</span>
+<span class="nc">Number</span><span class="o">[]</span> <span class="n">numberArray</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mf">0.5</span><span class="o">,</span> <span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">(</span><span class="s">""</span><span class="o">)};</span></code></pre></figure>
+
+<p class="center">代码清单2</p>
+
+<p><br /></p>
+
+<p>       从代码清单2中可以发现，在数组的赋值中，依然遵循普通类的赋值关系，可以将子类型数组赋值给父类数组，这样的关系称为协变。</p>
+
+<p><br /></p>
+
+<h2 id="2-不变">2. 不变</h2>
+
+<p><br /></p>
+
+<p>       但是在泛型中，type argument的类型关系和泛型类的类型关系并不直观。考虑类型List&lt;Number &gt;，在赋值时，我们能给它传递什么呢？考虑如下代码：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Number</span><span class="o">&gt;</span> <span class="n">numberList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+<span class="c1">//compile fail: require Number, found Integer, type mismatch.</span>
+<span class="n">numberList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span></code></pre></figure>
+
+<p class="center">代码清单3</p>
+
+<p><br /></p>
+
+<p>       在代码清单3中可以看到，即使type argument存在关系，比如Integer是Number的子类，并不意味着泛型类之间存在关系。
+实际上，确定类型的泛型类是不变的，List &lt;Number &gt;和List&lt;Integer&gt;无直接关系，仅存在一个共同父类Object，如下图所示：</p>
+
+<p><br /></p>
+
+<p class="center"><img src="/images/post_2019_07_16_image1.gif" alt="c compile" /></p>
+
+<p class="center"><a href="https://docs.oracle.com/javase/tutorial/java/generics/inheritance.html">图片来源</a></p>
+
+<p><br /></p>
+
+<p>       确定类型的泛型类要想建立关系，和普通类一样，必须通过extends或者implements显示地定义类层级。比如JDK集合框架中的例子，ArrayList&lt;String &gt;是Iterable&lt;String &gt;的子类。</p>
+
+<p>       除了与父类拥有一样的type parameter之外，子类还可以额外新增不同的type parameter，考虑官方教程的代码例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="kd">interface</span> <span class="nc">PayloadList</span><span class="o">&lt;</span><span class="no">E</span><span class="o">,</span><span class="no">P</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">List</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">setPayload</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="no">P</span> <span class="n">val</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单4</p>
+
+<p><br /></p>
+
+<p>       在代码清单4中，子类PayloadList新增了type parameter P，对于任意的P，比如PayloadList&lt;String,String&gt;，PayloadList&lt;String,Number&gt;，PayloadList&lt;String,Integer&gt;，
+都同属于List&lt;String &gt;的子类。类关系如下图所示：</p>
+
+<p><br /></p>
+
+<p class="center"><img src="/images/post_2019_07_16_image2.gif" alt="c compile" /></p>
+
+<p class="center"><a href="https://docs.oracle.com/javase/tutorial/java/generics/inheritance.html">图片来源</a></p>
+
+<p><br /></p>
+
+<h2 id="3-通配符">3. 通配符</h2>
+
+<p><br /></p>
+
+<p>       虽然type argument的类关系不会延伸到泛型类上，但是我们可以利用通配符实现特定的类型关系。
+我们已经知道List &lt;Number &gt;和List&lt;Integer&gt;无直接关系，但是List &lt;Number &gt;和List&lt;Integer&gt;都同属于List &lt;? &gt;的子类。</p>
+
+<p>       <strong><em>注：本节的测试代码不建议在实际业务中使用，晦涩难懂，不利于维护。</em></strong></p>
+
+<h4 id="31-通配符协变">3.1 通配符协变</h4>
+
+<p>       利用上界通配符可以实现协变关系，考虑以下代码：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">wildcardCovariance</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">numList</span> <span class="o">=</span> <span class="n">intList</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单5</p>
+
+<p><br /></p>
+
+<p>       在代码清单5中，将一个上界为Integer的列表，赋值给了上界为Number的列表。</p>
+
+<h4 id="32-通配符逆变">3.2 通配符逆变</h4>
+
+<p>       利用下界通配符可以实现逆变关系，考虑以下代码：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">wildcardContravariance</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">numList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="n">numList</span><span class="o">;</span>
+<span class="o">}</span></code></pre></figure>
+
+<p class="center">代码清单6</p>
+
+<p><br /></p>
+
+<p>       在代码清单6中，将一个下界为Number的列表，赋值给了下界为Integer的列表。具体类型与通配符之间的关系如下图所示：</p>
+
+<p><br /></p>
+
+<p class="center"><img src="/images/post_2019_07_16_image3.gif" alt="c compile" /></p>
+
+<p class="center"><a href="https://docs.oracle.com/javase/tutorial/java/generics/inheritance.html">图片来源</a></p>
+
+<p><br /></p>
+
+<h2 id="延伸">延伸</h2>
+
+<p>       有关通配符上下界的使用，还可以阅读<a href="https://leesir.github.io/2015/10/java-qa-generics-extends-super">泛型中&lt;? super T&gt;和&lt;? extends T&gt;的区别</a>和<a href="https://docs.oracle.com/javase/tutorial/java/generics/wildcardGuidelines.html">Guidelines for Wildcard Use</a>。</p>
+
+<p><br /></p>
+
+<h2 id="附件">附件</h2>
+
+<p>       本博文所展示的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/generic/relate">由此获得</a>。</p>
+
+<p><br /></p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<p>[1] Josh Juneau.<a href="https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html">泛型：工作原理及其重要性</a>[EB/OL].https://www.oracle.com/technetwork/cn/articles/java/juneau-generics-2255374-zhs.html，2019-07-02.<br />
+[2] <a href="https://docs.oracle.com/javase/tutorial/java/generics/index.html">The Java™ Tutorials - Generics</a>[EB/OL].https://docs.oracle.com/javase/tutorial/java/generics/index.html，2019-07-02.<br />
+[3] <a href="https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3">The Java® Virtual Machine Specification</a>[EB/OL].https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-4.html#jvms-4.3，2019-07-04.<br />
+[4] <a href="https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance">泛型中的协变和逆变</a>[EB/OL].https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance，2019-07-16.<br /></p>
+:ET

@@ -134,9 +134,9 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>       利用“? extends UpperBoundClass”可以实现上界通配符，比如你想实现一个工具方法，对一个数字列表进行求和，可以将方法参数声明为: &lt;? extends Number&gt;：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">sumOfList1</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">sumOfList1</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">double</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Number</span> <span class="n">n</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Number</span> <span class="n">n</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">s</span> <span class="o">+=</span> <span class="n">n</span><span class="o">.</span><span class="na">doubleValue</span><span class="o">();</span>
     <span class="o">}</span>
     <span class="k">return</span> <span class="n">s</span><span class="o">;</span>
@@ -151,9 +151,9 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       调用代码清单1的sumOfList1时，可以传入元素类型为Number子类的列表，如：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sumOfList1</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mf">2.3</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">))));</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sumOfList1</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)));</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sumOfList1</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mf">1.1</span><span class="o">,</span> <span class="mf">2.2</span><span class="o">,</span> <span class="mf">2.3</span><span class="o">)));</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sumOfList1</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mf">2.3</span><span class="o">,</span> <span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">(</span><span class="s">"2"</span><span class="o">))));</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sumOfList1</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)));</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sumOfList1</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mf">1.1</span><span class="o">,</span> <span class="mf">2.2</span><span class="o">,</span> <span class="mf">2.3</span><span class="o">)));</span>
 <span class="c1">//output: 7.3, 6.0, 5.6</span></code></pre></figure>
 
 <p class="center">代码清单2</p>
@@ -173,13 +173,13 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       代码示例如下所示：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sumOfListLower</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sumOfListLower</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 <span class="o">}</span>
 
 <span class="c1">//compile fail: incompatible type</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sumOfListLower</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Integer</span> <span class="n">value</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sumOfListLower</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Integer</span> <span class="n">value</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p class="center">代码清单3</p>
@@ -208,16 +208,16 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
  * @throws UnsupportedOperationException if the specified list or
  *         its list-iterator does not support the &lt;tt&gt;set&lt;/tt&gt; operation.
  */</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">reverse</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">reverse</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;?&gt;</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">&lt;</span> <span class="n">REVERSE_THRESHOLD</span> <span class="o">||</span> <span class="n">list</span> <span class="k">instanceof</span> <span class="n">RandomAccess</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">&lt;</span> <span class="no">REVERSE_THRESHOLD</span> <span class="o">||</span> <span class="n">list</span> <span class="k">instanceof</span> <span class="nc">RandomAccess</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">mid</span><span class="o">=</span><span class="n">size</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="o">,</span> <span class="n">j</span><span class="o">=</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">mid</span><span class="o">;</span> <span class="n">i</span><span class="o">++,</span> <span class="n">j</span><span class="o">--)</span>
             <span class="n">swap</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">);</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="n">ListIterator</span> <span class="n">fwd</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">listIterator</span><span class="o">();</span>
-        <span class="n">ListIterator</span> <span class="n">rev</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">listIterator</span><span class="o">(</span><span class="n">size</span><span class="o">);</span>
+        <span class="nc">ListIterator</span> <span class="n">fwd</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">listIterator</span><span class="o">();</span>
+        <span class="nc">ListIterator</span> <span class="n">rev</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">listIterator</span><span class="o">(</span><span class="n">size</span><span class="o">);</span>
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">mid</span><span class="o">=</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()&gt;&gt;</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">mid</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">Object</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">fwd</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+            <span class="nc">Object</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">fwd</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
             <span class="n">fwd</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">rev</span><span class="o">.</span><span class="na">previous</span><span class="o">());</span>
             <span class="n">rev</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">tmp</span><span class="o">);</span>
         <span class="o">}</span>
@@ -238,7 +238,7 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 通常情况下开发者不需要关注本小节内容，因为通配符捕获的错误仅在下述十分罕见的代码中才会发生：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile fail: incompatible type</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setFalse</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?&gt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setFalse</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;?&gt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">target</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">target</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
 <span class="o">}</span></code></pre></figure>
 

@@ -1,0 +1,70 @@
+I"�<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://tutorials.jenkov.com/java-io/randomaccessfile.html">原文链接</a> 作者: Jakob Jenkov</p>
+
+<p>　　RandomAccessFile允许你来回读写文件，也可以替换文件中的某些部分。FileInputStream和FileOutputStream没有这样的功能。</p>
+
+<p>#创建一个RandomAccessFile</p>
+
+<p>　　在使用RandomAccessFile之前，必须初始化它。这是例子：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="nc">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
+
+    </code></pre></figure>
+
+<p>　　请注意构造函数的第二个参数：“rw”，表明你以读写方式打开文件。请查阅Java文档获知你需要以何种方式构造RandomAccessFile。</p>
+
+<!-- more -->
+
+<p>#在RandomAccessFile中来回读写</p>
+
+<p>　　在RandomAccessFile的某个位置读写之前，必须把文件指针指向该位置。通过seek()方法可以达到这一目标。可以通过调用getFilePointer()获得当前文件指针的位置。例子如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="nc">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
+
+<span class="n">file</span><span class="o">.</span><span class="na">seek</span><span class="o">(</span><span class="mi">200</span><span class="o">);</span>
+
+<span class="kt">long</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">getFilePointer</span><span class="o">();</span>
+
+<span class="n">file</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    </code></pre></figure>
+
+<p>#读取RandomAccessFile</p>
+
+<p>　　RandomAccessFile中的任何一个read()方法都可以读取RandomAccessFile的数据。例子如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="nc">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
+
+<span class="kt">int</span> <span class="n">aByte</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+
+<span class="n">file</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    </code></pre></figure>
+
+<p>#写入RandomAccessFile</p>
+
+<p>　　RandomAccessFile中的任何一个write()方法都可以往RandomAccessFile中写入数据。例子如下：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+
+<span class="nc">RandomAccessFile</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RandomAccessFile</span><span class="o">(</span><span class="s">"c:\\data\\file.txt"</span><span class="o">,</span> <span class="s">"rw"</span><span class="o">);</span>
+
+<span class="n">file</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+
+<span class="n">file</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+    </code></pre></figure>
+
+<p>　　与read()方法类似，write()方法在调用结束之后自动移动文件指针，所以你不需要频繁地把指针移动到下一个将要写入数据的位置。</p>
+
+<p>#RandomAccessFile异常处理</p>
+
+<p>　　为了本篇内容清晰，暂时忽略RandomAccessFile异常处理的内容。RandomAccessFile与其他流一样，在使用完毕之后必须关闭。想要了解更多信息，请参考<a href="http://leesir.github.io/2015/10/java-io-exception">Java IO异常处理</a>。</p>
+:ET

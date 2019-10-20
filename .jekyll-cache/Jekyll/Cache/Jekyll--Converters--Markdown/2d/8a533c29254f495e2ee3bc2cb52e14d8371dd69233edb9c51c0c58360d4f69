@@ -1,0 +1,126 @@
+I"'.<link rel="stylesheet" href="/css/pygments.css" />
+
+<p><a href="http://www.javacodegeeks.com/2013/04/predicate-and-consumer-interface-in-java-util-function-package-in-java-8.html">原文链接</a> 作者: <a href="http://www.javacodegeeks.com/author/Mohamed-Sanaulla/">Mohamed Sanaulla</a></p>
+
+<p>　　早先我写了一篇<a href="http://blog.sanaulla.info/2013/03/21/introduction-to-functional-interfaces-a-concept-recreated-in-java-8/">《函数式接口》</a>，探讨了Java8中函数式接口的用法。如果你正在浏览Java8的API，我也提及了Predicate接口属于java.util.function包，在这篇文章中，我将展示如何应用Predicate接口和Consumer接口。</p>
+
+<p>　　一起看一下Predicate的官方文档：：</p>
+
+<blockquote>
+  <p>Determines if the input object matches some criteria.</p>
+</blockquote>
+
+<p>　　即判断输入的对象是否符合某个条件。</p>
+
+<!-- more -->
+
+<p>　　在Predicate接口中，有以下5个方法（你肯定好奇为何此接口属于函数式接口。如果你这么想，在使用接口前应该好好研读方法的注释）：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//Returns a predicate which evaluates to true only if this predicate</span>
+<span class="c1">//and the provided predicate both evaluate to true.</span>
+<span class="n">and</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span> 
+
+<span class="c1">//Returns a predicate which negates the result of this predicate.</span>
+<span class="n">negate</span><span class="o">()</span> 
+
+<span class="c1">//Returns a predicate which evaluates to true if either</span>
+<span class="c1">//this predicate or the provided predicate evaluates to true</span>
+<span class="n">or</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span> 
+
+<span class="c1">//Returns true if the input object matches some criteria</span>
+<span class="n">test</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">)</span> 
+
+<span class="c1">//Returns a predicate that evaluates to true if both or neither</span>
+<span class="c1">//of the component predicates evaluate to true</span>
+<span class="n">xor</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span></code></pre></figure>
+
+<p>　　除了test()方法是抽象方法以外，其他方法都是默认方法（译者注：在Java 8中，接口可以包含带有实现代码的方法，这些方法称为default方法）。可以使用匿名内部类提供test()方法的实现，也可以使用lambda表达式实现test()。</p>
+
+<p>　　Consumer接口的文档声明如下：</p>
+
+<blockquote>
+  <p>An operation which accepts a single input argument and returns no result. Unlike most other functional interfaces, Consumer is expected to operate via side-effects.</p>
+</blockquote>
+
+<p>　　即接口表示一个接受单个输入参数并且没有返回值的操作。不像其他函数式接口，Consumer接口期望执行带有副作用的操作（译者注：Consumer的操作可能会更改输入参数的内部状态）。</p>
+
+<p>　　Consumer接口中有2个方法，有且只有一个声明为accept(T t)的方法，接收一个输入参数并且没有返回值。为了详细说明Predicate和Consumer接口，我们来考虑一下学生的例子：Student类包含姓名，分数以及待付费用，每个学生可根据分数获得不同程度的费用折扣。</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Student</span><span class="o">{</span>
+
+    <span class="nc">String</span> <span class="n">firstName</span><span class="o">;</span>
+
+    <span class="nc">String</span> <span class="n">lastName</span><span class="o">;</span>
+
+    <span class="nc">Double</span> <span class="n">grade</span><span class="o">;</span>
+
+    <span class="nc">Double</span> <span class="n">feeDiscount</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+
+    <span class="nc">Double</span> <span class="n">baseFee</span> <span class="o">=</span> <span class="mf">20000.0</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="nc">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="nc">String</span> <span class="n">lastName</span><span class="o">,</span> <span class="nc">Double</span> <span class="n">grade</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+
+        <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+
+        <span class="k">this</span><span class="o">.</span><span class="na">grade</span> <span class="o">=</span> <span class="n">grade</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printFee</span><span class="o">(){</span>
+
+        <span class="nc">Double</span> <span class="n">newFee</span> <span class="o">=</span> <span class="n">baseFee</span> <span class="o">-</span> <span class="o">((</span><span class="n">baseFee</span> <span class="o">*</span> <span class="n">feeDiscount</span><span class="o">)</span> <span class="o">/</span> <span class="mi">100</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"The fee after discount: "</span> <span class="o">+</span> <span class="n">newFee</span><span class="o">);</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span></code></pre></figure>
+
+<p>　　我们分别声明一个接受Student对象的Predicate接口以及Consumer接口的实现类。如果你还不熟悉Function接口，那么你需要花几分钟阅读一下<a href="http://blog.sanaulla.info/2013/03/27/function-interface-a-functional-interface-in-the-java-util-function-package-in-java-8/">这篇文章</a>。这个例子使用Predicate接口实现类的test()方法判断输入的Student对象是否拥有费用打折的资格，然后使用Consumer接口的实现类更新输入的Student对象的折扣。</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PreidcateConsumerDemo</span> <span class="o">{</span>
+
+   <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Student</span> <span class="nf">updateStudentFee</span><span class="o">(</span><span class="nc">Student</span> <span class="n">student</span><span class="o">,</span> <span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">,</span> <span class="nc">Consumer</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="n">consumer</span><span class="o">){</span>
+
+        <span class="c1">//Use the predicate to decide when to update the discount.</span>
+
+        <span class="k">if</span> <span class="o">(</span> <span class="n">predicate</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">student</span><span class="o">)){</span>
+
+            <span class="c1">//Use the consumer to update the discount value.</span>
+
+            <span class="n">consumer</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">student</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">student</span><span class="o">;</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span></code></pre></figure>
+
+<p>　　Predicate和Consumer接口的test()和accept()方法都接受一个泛型参数。不同的是test()方法进行某些逻辑判断并返回一个boolean值，而accept()接受并改变某个对象的内部值。</p>
+
+<p>　　updateStudentFee方法的调用如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="nc">Student</span> <span class="n">student1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="s">"Ashok"</span><span class="o">,</span><span class="s">"Kumar"</span><span class="o">,</span> <span class="mf">9.5</span><span class="o">);</span>
+
+    <span class="n">student1</span> <span class="o">=</span> <span class="n">updateStudentFee</span><span class="o">(</span><span class="n">student1</span><span class="o">,</span>
+                                <span class="c1">//Lambda expression for Predicate interface</span>
+                                <span class="n">student</span> <span class="o">-&gt;</span> <span class="n">student</span><span class="o">.</span><span class="na">grade</span> <span class="o">&gt;</span> <span class="mf">8.5</span><span class="o">,</span>
+                                <span class="c1">//Lambda expression for Consumer inerface</span>
+                                <span class="n">student</span> <span class="o">-&gt;</span> <span class="n">student</span><span class="o">.</span><span class="na">feeDiscount</span> <span class="o">=</span> <span class="mf">30.0</span><span class="o">);</span>
+
+    <span class="n">student1</span><span class="o">.</span><span class="na">printFee</span><span class="o">();</span>
+
+    <span class="nc">Student</span> <span class="n">student2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="s">"Rajat"</span><span class="o">,</span><span class="s">"Verma"</span><span class="o">,</span> <span class="mf">8.0</span><span class="o">);</span>
+
+    <span class="n">student2</span> <span class="o">=</span> <span class="n">updateStudentFee</span><span class="o">(</span><span class="n">student2</span><span class="o">,</span>
+                                <span class="n">student</span> <span class="o">-&gt;</span> <span class="n">student</span><span class="o">.</span><span class="na">grade</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="o">,</span>
+                                <span class="n">student</span> <span class="o">-&gt;</span> <span class="n">student</span><span class="o">.</span><span class="na">feeDiscount</span> <span class="o">=</span> <span class="mf">20.0</span><span class="o">);</span>
+
+    <span class="n">student2</span><span class="o">.</span><span class="na">printFee</span><span class="o">();</span>
+
+<span class="o">}</span></code></pre></figure>
+:ET

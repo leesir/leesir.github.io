@@ -159,22 +159,22 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <p>       我们可以看看ArrayList的类定义：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">RandomAccess</span><span class="o">,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">AbstractList</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">List</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;,</span> <span class="nc">RandomAccess</span><span class="o">,</span> <span class="nc">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span></code></pre></figure>
 
 <p>       接下来我们写一个自定义泛型类：</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestGenericSimple</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">T</span> <span class="n">data</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestGenericSimple</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="no">T</span> <span class="n">data</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nf">TestGenericSimple</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">TestGenericSimple</span><span class="o">(</span><span class="no">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="no">T</span> <span class="nf">getData</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="n">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setData</span><span class="o">(</span><span class="no">T</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -186,17 +186,17 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       TestGenericSimple的用法如下所示：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//1. 完整写法</span>
-<span class="n">TestGenericSimple</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">test1A</span> <span class="o">=</span>  <span class="k">new</span> <span class="n">TestGenericSimple</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(</span><span class="s">"test1A"</span><span class="o">);</span>
-<span class="n">String</span> <span class="n">testAValue</span> <span class="o">=</span> <span class="n">test1A</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span>
+<span class="nc">TestGenericSimple</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">test1A</span> <span class="o">=</span>  <span class="k">new</span> <span class="nc">TestGenericSimple</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;(</span><span class="s">"test1A"</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">testAValue</span> <span class="o">=</span> <span class="n">test1A</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span>
 
 <span class="c1">//2. JDK 1.7之后的类型推导写法</span>
-<span class="n">TestGenericSimple</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">test1B</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestGenericSimple</span><span class="o">&lt;&gt;(</span><span class="s">"test1B"</span><span class="o">);</span>
-<span class="n">String</span> <span class="n">testBValue</span> <span class="o">=</span> <span class="n">test1A</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span>
+<span class="nc">TestGenericSimple</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">test1B</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TestGenericSimple</span><span class="o">&lt;&gt;(</span><span class="s">"test1B"</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">testBValue</span> <span class="o">=</span> <span class="n">test1A</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span>
 
 <span class="c1">//3. raw type写法</span>
 <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
-<span class="n">TestGenericSimple</span> <span class="n">test1C</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestGenericSimple</span><span class="o">(</span><span class="s">"test1C"</span><span class="o">);</span>
-<span class="n">String</span> <span class="n">testCValue</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">test1C</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span></code></pre></figure>
+<span class="nc">TestGenericSimple</span> <span class="n">test1C</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TestGenericSimple</span><span class="o">(</span><span class="s">"test1C"</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">testCValue</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">test1C</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span></code></pre></figure>
 
 <p class="center">代码清单java-sugar-generic2</p>
 
@@ -215,42 +215,42 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestGenericMethod</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">p1</span><span class="o">,</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">p2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">K</span><span class="o">,</span> <span class="no">V</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">compare</span><span class="o">(</span><span class="nc">Pair</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span> <span class="no">V</span><span class="o">&gt;</span> <span class="n">p1</span><span class="o">,</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span> <span class="no">V</span><span class="o">&gt;</span> <span class="n">p2</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">p1</span><span class="o">.</span><span class="na">getKey</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">p2</span><span class="o">.</span><span class="na">getKey</span><span class="o">())</span> <span class="o">&amp;&amp;</span>
                 <span class="n">p1</span><span class="o">.</span><span class="na">getValue</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">p2</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">compare2</span><span class="o">(</span><span class="n">T</span> <span class="n">object1</span><span class="o">,</span> <span class="n">T</span> <span class="n">object2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">compare2</span><span class="o">(</span><span class="no">T</span> <span class="n">object1</span><span class="o">,</span> <span class="no">T</span> <span class="n">object2</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">object1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">object2</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">compare3</span><span class="o">(</span><span class="n">T</span> <span class="n">object1</span><span class="o">,</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">p1</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">K</span><span class="o">,</span> <span class="no">V</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">compare3</span><span class="o">(</span><span class="no">T</span> <span class="n">object1</span><span class="o">,</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span> <span class="no">V</span><span class="o">&gt;</span> <span class="n">p1</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">object1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">p1</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span> <span class="no">V</span><span class="o">&gt;</span> <span class="o">{</span>
 
-        <span class="kd">private</span> <span class="n">K</span> <span class="n">key</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="n">V</span> <span class="n">value</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="no">K</span> <span class="n">key</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="no">V</span> <span class="n">value</span><span class="o">;</span>
 
-        <span class="kd">public</span> <span class="nf">Pair</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">Pair</span><span class="o">(</span><span class="no">K</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
             <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setKey</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setKey</span><span class="o">(</span><span class="no">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValue</span><span class="o">(</span><span class="no">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">K</span> <span class="nf">getKey</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="no">K</span> <span class="nf">getKey</span><span class="o">()</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">key</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">V</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="no">V</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">}</span>
@@ -264,12 +264,12 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 可以看到返回值之前，需要写明该方法的所有泛型，如&lt;K, V&gt;、&lt;T, K, V&gt;。上述代码的调用如下所示：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//1. 完整写法</span>
-<span class="kt">boolean</span> <span class="n">compareResult</span> <span class="o">=</span> <span class="n">TestGenericMethod</span><span class="o">.&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span><span class="n">compare</span><span class="o">(</span><span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;(</span><span class="s">"key1"</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;(</span><span class="s">"key2"</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
-<span class="kt">boolean</span> <span class="n">compare3Result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestGenericMethod</span><span class="o">().&lt;</span><span class="n">Object</span><span class="o">,</span> <span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span><span class="n">compare3</span><span class="o">(</span><span class="k">new</span> <span class="n">Object</span><span class="o">(),</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;(</span><span class="s">"key3"</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
+<span class="kt">boolean</span> <span class="n">compareResult</span> <span class="o">=</span> <span class="nc">TestGenericMethod</span><span class="o">.&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span><span class="n">compare</span><span class="o">(</span><span class="k">new</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;(</span><span class="s">"key1"</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="k">new</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;(</span><span class="s">"key2"</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
+<span class="kt">boolean</span> <span class="n">compare3Result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TestGenericMethod</span><span class="o">().&lt;</span><span class="nc">Object</span><span class="o">,</span> <span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span><span class="n">compare3</span><span class="o">(</span><span class="k">new</span> <span class="nc">Object</span><span class="o">(),</span> <span class="k">new</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;(</span><span class="s">"key3"</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
 
 <span class="c1">//2. 类型推导写法</span>
-<span class="kt">boolean</span> <span class="n">compareResult1</span> <span class="o">=</span> <span class="n">TestGenericMethod</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;&gt;(</span><span class="s">"key1"</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;&gt;(</span><span class="s">"key2"</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
-<span class="kt">boolean</span> <span class="n">compare3Result1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestGenericMethod</span><span class="o">().</span><span class="na">compare3</span><span class="o">(</span><span class="k">new</span> <span class="n">Object</span><span class="o">(),</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;&gt;(</span><span class="s">"key3"</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span></code></pre></figure>
+<span class="kt">boolean</span> <span class="n">compareResult1</span> <span class="o">=</span> <span class="nc">TestGenericMethod</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">new</span> <span class="nc">Pair</span><span class="o">&lt;&gt;(</span><span class="s">"key1"</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="k">new</span> <span class="nc">Pair</span><span class="o">&lt;&gt;(</span><span class="s">"key2"</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
+<span class="kt">boolean</span> <span class="n">compare3Result1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TestGenericMethod</span><span class="o">().</span><span class="na">compare3</span><span class="o">(</span><span class="k">new</span> <span class="nc">Object</span><span class="o">(),</span> <span class="k">new</span> <span class="nc">Pair</span><span class="o">&lt;&gt;(</span><span class="s">"key3"</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span></code></pre></figure>
 
 <p class="center">代码清单java-sugar-generic4</p>
 

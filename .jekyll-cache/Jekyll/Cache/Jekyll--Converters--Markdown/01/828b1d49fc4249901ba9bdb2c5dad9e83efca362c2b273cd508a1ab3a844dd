@@ -1,0 +1,432 @@
+I"V�<link rel="stylesheet" href="/css/pygments.css" />
+
+<p>       Java中有5种内部类，公有静态内部类，私有静态内部类，公有内部类，私有内部类，匿名内部类。这里我们不谈各种内部类的使用场景，不对比优劣，仅从语法糖的角度学习Java是怎么实现内部类的。</p>
+
+<h2 id="1静态内部类">1.静态内部类</h2>
+
+<p>       静态内部类的初始化，不依赖于外部类的实例，并且不能访问外部类的实例变量，不能调用外部类的实例方法。</p>
+
+<h4 id="公有静态内部类">公有静态内部类</h4>
+
+<p>       测试代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPubStaticInnerClass</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">priStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">pubStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">priFOut</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">pubFOut</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">PubStaticInnerClass</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="nf">fPubStaticInnerClass</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">priFOut</span><span class="o">();</span>
+            <span class="n">pubFOut</span><span class="o">();</span>
+            <span class="k">return</span> <span class="n">priStaticValue</span> <span class="o">+</span> <span class="n">pubStaticValue</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PubStaticInnerClass</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<!-- more -->
+
+<p>       运行命令：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="c1">//注意参数--removeinnerclasssynthetics false，否则反编译后的代码会重新糖化</span>
+<span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">cfr</span><span class="o">-</span><span class="mf">0.145</span><span class="o">.</span><span class="na">jar</span> <span class="nc">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">class</span> <span class="o">--</span><span class="n">removeinnerclasssynthetics</span> <span class="kc">false</span></code></pre></figure>
+
+<p>       将得到如下代码：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="cm">/*
+ * Decompiled with CFR 0.145.
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPubStaticInnerClass</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">priStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">pubStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">priFOut</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">pubFOut</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PubStaticInnerClass</span> <span class="n">pubStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PubStaticInnerClass</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">void</span> <span class="n">access</span><span class="err">$</span><span class="mo">000</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">priFOut</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">access</span><span class="err">$</span><span class="mi">100</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">priStaticValue</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">PubStaticInnerClass</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="nf">fPubStaticInnerClass</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">();</span>
+            <span class="nc">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">pubFOut</span><span class="o">();</span>
+            <span class="k">return</span> <span class="nc">TestPubStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">()</span> <span class="o">+</span> <span class="n">pubStaticValue</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">}</span></code></pre></figure>
+
+<p>       可以看到，对于外部类的公有静态属性或方法，内部类可以直接调用。对于私有静态属性或者方法，编译器将会为其生成一个包级可见域的静态方法，如access$000和access$100，供内部类调用。</p>
+
+<h4 id="私有静态内部类">私有静态内部类</h4>
+
+<p>       测试代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPriStaticInnerClass</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">priStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">pubStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">priFOut</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">pubFOut</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">PriStaticInnerClass</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="nf">fPubStaticInnerClass</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">priFOut</span><span class="o">();</span>
+            <span class="n">pubFOut</span><span class="o">();</span>
+            <span class="k">return</span> <span class="n">priStaticValue</span> <span class="o">+</span> <span class="n">pubStaticValue</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PriStaticInnerClass</span> <span class="n">priStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PriStaticInnerClass</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>       私有静态内部类在访问外部类的静态属性或方法的逻辑，与公有静态内部类的逻辑是一致的，不同的地方在于编译器对构造函数的处理。
+私有静态内部类的默认构造函数是私有的，编译器为此额外生成了一个无逻辑内部类TestPriStaticInnerClass$1.class和一个以此类为参数的包级可见域的构造函数，
+通过传入null调用新生成的带参数的构造函数。反编译后的代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/*
+ * Decompiled with CFR 0.145.
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPriStaticInnerClass</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">priStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">pubStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">priFOut</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">pubFOut</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">PriStaticInnerClass</span> <span class="n">priStaticInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PriStaticInnerClass</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">void</span> <span class="n">access</span><span class="err">$</span><span class="mo">000</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">priFOut</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">access</span><span class="err">$</span><span class="mi">100</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">priStaticValue</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">PriStaticInnerClass</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="nf">PriStaticInnerClass</span><span class="o">()</span> <span class="o">{</span>
+        <span class="o">}</span>
+
+        <span class="kd">private</span> <span class="kt">int</span> <span class="nf">fPubStaticInnerClass</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">();</span>
+            <span class="nc">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">pubFOut</span><span class="o">();</span>
+            <span class="k">return</span> <span class="nc">TestPriStaticInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">()</span> <span class="o">+</span> <span class="n">pubStaticValue</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="cm">/* synthetic */</span> <span class="nc">PriStaticInnerClass</span><span class="o">(</span><span class="mi">1</span> <span class="n">x0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">}</span></code></pre></figure>
+
+<h2 id="2非静态内部类">2.非静态内部类</h2>
+
+<p>       非静态内部类的初始化，依赖于外部类的实例，会用一个实例变量保存外部类实例。内部类可以访问外部类的所有实例属性、方法及静态属性、方法。</p>
+
+<h4 id="公有内部类">公有内部类</h4>
+
+<p>       测试代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPubInnerClass</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">privateValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">privateStaticValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">publicValue</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">publicStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">outPubStaticF</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">outPriStaticF</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">outPubF</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">outPriF</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PubInnerClass</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">outPubStaticF</span><span class="o">();</span>
+            <span class="n">outPriStaticF</span><span class="o">();</span>
+            <span class="n">outPubF</span><span class="o">();</span>
+            <span class="n">outPriF</span><span class="o">();</span>
+            <span class="k">return</span> <span class="n">privateValue</span> <span class="o">+</span> <span class="n">privateStaticValue</span> <span class="o">+</span> <span class="n">publicValue</span> <span class="o">+</span> <span class="n">publicStaticValue</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">TestPubInnerClass</span> <span class="n">testPubInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TestPubInnerClass</span><span class="o">();</span>
+        <span class="nc">PubInnerClass</span> <span class="n">pubInnerClass</span> <span class="o">=</span> <span class="n">testPubInnerClass</span><span class="o">.</span><span class="na">new</span> <span class="nf">PubInnerClass</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>       反编译后的代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/*
+ * Decompiled with CFR 0.145.
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPubInnerClass</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">privateValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">privateStaticValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">publicValue</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">publicStaticValue</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">outPubStaticF</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">outPriStaticF</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">outPubF</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">outPriF</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">TestPubInnerClass</span> <span class="n">testPubInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TestPubInnerClass</span><span class="o">();</span>
+        <span class="nc">PubInnerClass</span> <span class="n">pubInnerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PubInnerClass</span><span class="o">(</span><span class="n">testPubInnerClass</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">void</span> <span class="n">access</span><span class="err">$</span><span class="mo">000</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">outPriStaticF</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">void</span> <span class="n">access</span><span class="err">$</span><span class="mi">100</span><span class="o">(</span><span class="nc">TestPubInnerClass</span> <span class="n">x0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">x0</span><span class="o">.</span><span class="na">outPriF</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">access</span><span class="err">$</span><span class="mi">200</span><span class="o">(</span><span class="nc">TestPubInnerClass</span> <span class="n">x0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">x0</span><span class="o">.</span><span class="na">privateValue</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">access</span><span class="err">$</span><span class="mi">300</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">privateStaticValue</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PubInnerClass</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="cm">/* synthetic */</span> <span class="nc">TestPubInnerClass</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">PubInnerClass</span><span class="o">(</span><span class="nc">TestPubInnerClass</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span> <span class="o">=</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">outPubStaticF</span><span class="o">();</span>
+            <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">();</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">.</span><span class="na">outPubF</span><span class="o">();</span>
+            <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">200</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">)</span> <span class="o">+</span> <span class="nc">TestPubInnerClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">300</span><span class="o">()</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">.</span><span class="na">publicValue</span> <span class="o">+</span> <span class="n">publicStaticValue</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>       可以看到，对于静态属性和方法的处理，与静态内部类的逻辑是一致的。
+对于实例属性和方法，编译器同样为外部类添加了包级可见域的静态方法access$100和access$200，内部类调用方法时，会将外部类实例传参给方法，实现间接调用。</p>
+
+<h4 id="私有内部类">私有内部类</h4>
+
+<p>       私有内部类在属性和方法上与公有内部类的处理逻辑一致，除此之外，编译器会额外为私有内部类添加一个构造函数，与私有静态内部类的处理逻辑一致，这里不再赘述。</p>
+
+<h2 id="3匿名内部类">3.匿名内部类</h2>
+
+<p>       匿名内部类的情况比上述内部类稍有不同，不过也是有迹可循。匿名内部类不像内部类一样，有公有私有一说，只有静态或非静态、成员或局部一说。
+静态匿名内部类只能访问外部类的静态属性和方法，非静态匿名内部类可以访问外部类的所有属性和方法，与上述内部类逻辑一致。测试代码如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//JDK 1.7代码</span>
+<span class="kn">package</span> <span class="n">innerclass</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestAnonymousClass</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">publicValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">publicStaticValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">privateValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">privateStaticValue</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"thread"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateValue</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicValue</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">Thread</span> <span class="n">staticThread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"staticThread"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="kt">int</span> <span class="n">localN</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="nc">Thread</span> <span class="n">localThread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"localThread"</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">localN</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">outF</span><span class="o">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">arg1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InnerClass</span><span class="o">()</span> <span class="o">{</span>
+
+            <span class="nd">@Override</span>
+            <span class="kt">void</span> <span class="nf">innerF</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">arg1</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">privateStaticValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+                <span class="n">outF</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">outF</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">class</span> <span class="nc">InnerClass</span> <span class="o">{</span>
+        <span class="kt">void</span> <span class="nf">innerF</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>       上面展示的demo，编译后将会产生5个内部类字节码文件，
+分别对应成员变量thread，静态变量staticThread，内部类InnerClass，main方法中的局部匿名内部类localThread，实例方法outF中的局部匿名内部类innerClass。</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">outF</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">InnerClass</span> <span class="n">innerClass</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InnerClass</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">arg1</span><span class="o">){</span>
+            <span class="kd">final</span> <span class="cm">/* synthetic */</span> <span class="kt">int</span> <span class="n">val$arg1</span><span class="o">;</span>
+            <span class="kd">final</span> <span class="cm">/* synthetic */</span> <span class="nc">TestAnonymousClass</span> <span class="k">this</span><span class="err">$</span><span class="mi">0</span><span class="o">;</span>
+            <span class="o">{</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span> <span class="o">=</span> <span class="n">testAnonymousClass</span><span class="o">;</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">val</span><span class="n">$arg1</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
+                <span class="kd">super</span><span class="o">(</span><span class="n">testAnonymousClass</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kt">void</span> <span class="nf">innerF</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">val</span><span class="n">$arg1</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mo">000</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">));</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">100</span><span class="o">());</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">.</span><span class="na">publicValue</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">publicStaticValue</span><span class="o">);</span>
+                <span class="nc">TestAnonymousClass</span><span class="o">.</span><span class="na">access</span><span class="err">$</span><span class="mi">200</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">this</span><span class="err">$</span><span class="mi">0</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+    <span class="o">}</span></code></pre></figure>
+
+<p>       我们重点看一下上述匿名内部类的反编译代码。thread和localThread属于非静态的匿名内部类，同样会维护一个外部类类型的成员变量引用外部类的实例。
+匿名内部类访问外部类的逻辑同普通内部类一样，直接调用公有属性或方法，调用编译器生成的包级可见域方法间接调用私有属性或方法。</p>
+
+<p>       匿名内部类与普通内部类最大的区别在于，匿名内部类可以访问局部变量和形参，在JDK 1.8以前，对局部变量和方法形参的访问，要求该变量和形参加上final修饰符（形参也属于局部变量，以下统称局部变量）。
+方法结束之后，整个虚拟机栈包括局部变量在内，都会被销毁，而匿名内部类对象和普通类对象一样，回收的逻辑视垃圾回收器而定。这就会导致当匿名内部类对象还没被回收时，所引用的数据已经被销毁了，这明显是不合理的。
+所以Java在编译阶段，就明确要求被匿名内部类访问的局部变量持有final修饰符，同时通过语法糖，将该变量复制成一个成员变量，并通过构造函数传入。这样可以保证即使局部变量被销毁了，匿名内部类对象依然能够访问相等的值。</p>
+
+<p>       在JDK 1.8版本中，引入了”effectively final“，只要局部变量在方法体内不做修改，编译器会自动对局部变量声明final。当然，如果对局部变量有赋值语句，则编译报错：</p>
+
+<pre><code class="language-$xslt">Error:(64, 36) java: 从内部类引用的本地变量必须是最终变量或实际上的最终变量
+</code></pre>
+
+<h2 id="4总结">4.总结</h2>
+
+<p><br /></p>
+<ul>
+  <li>
+    <h4 id="内部类字节码命名格式">内部类字节码命名格式</h4>
+  </li>
+</ul>
+
+<p>       不管什么类型的内部类，都和普通类并无二致。编译器会在外部类字节码文件相同目录下，为内部类生成字节码文件。
+普通内部类的字节码文件命名格式为：OuterClass$InnerClass.class，匿名内部类的命名方式为：OuterClass$index.class，其中index为匿名内部类在源代码中的顺序，如OuterClass$1.class。</p>
+
+<p><br /></p>
+<ul>
+  <li>
+    <h4 id="内部类对外部类的访问">内部类对外部类的访问</h4>
+  </li>
+</ul>
+
+<ol>
+  <li>静态内部类不能访问外部类的实例属性和方法，可以访问外部类的公有或私有的静态属性或方法。</li>
+  <li>非静态内部类可以访问外部类的实例、静态属性和方法，编译器会为内部类生成一个引用外部类实例的实例属性。</li>
+  <li>静态内部类访问外部类公有属性或方法，直接调用OuterClass.pubValue或者OuterClass.pubFunc即可。访问外部类私有属性或方法，通过调用编译器为外部类生成的包级可见域的方法即可。</li>
+  <li>非静态内部类访问外部类属性或方法的逻辑与第三点类似。</li>
+  <li>除上述逻辑之外，匿名内部类引用的局部变量，都必须是final类型的，JDK 1.8之前要求手动声明final，自JDK 1.8起引入了”effectively final“，不再需要手动声明。</li>
+</ol>
+
+<p><br /></p>
+
+<ul>
+  <li>
+    <h4 id="附件">附件</h4>
+  </li>
+</ul>
+
+<p>       本博文使用到的源代码<a href="https://github.com/leesir/blog_code/tree/master/src/innerclass">由此获得</a>。</p>
+
+<p><br /></p>
+
+<h2 id="5参考文献">5.参考文献</h2>
+
+<p>[1] Lee Benfield.<a href="http://www.benf.org/other/cfr/inner-class-fake-friends.html">Inner classes have to fake friendship</a>[EB/OL].http://www.benf.org/other/cfr/inner-class-fake-friends.html，2019-06-18.<br />
+[2] <a href="https://www.cnblogs.com/qingshanli/p/9375040.html">浅析java中的语法糖</a>[EB/OL].https://www.cnblogs.com/qingshanli/p/9375040.html，2019-06-18.<br /></p>
+:ET

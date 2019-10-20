@@ -133,14 +133,14 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       我们早已习惯类的继承关系，对于一个父类B，不管是在赋值语句，还是在容器中，或者是在方法参数上，我们总能B的子类型完成业务逻辑。比如：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Object</span> <span class="n">obj</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Object</span> <span class="n">obj</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
     <span class="n">funcArg</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
     <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mf">0.5</span><span class="o">);</span>
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">funcArg</span><span class="o">(</span><span class="n">Object</span> <span class="n">param</span><span class="o">)</span> <span class="o">{}</span></code></pre></figure>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">funcArg</span><span class="o">(</span><span class="nc">Object</span> <span class="n">param</span><span class="o">)</span> <span class="o">{}</span></code></pre></figure>
 
 <p class="center">代码清单1</p>
 
@@ -149,9 +149,9 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       对于数组来说，考虑以下代码：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
-<span class="n">Number</span><span class="o">[]</span> <span class="n">integerArray</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">[]{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">};</span>
-<span class="n">Number</span><span class="o">[]</span> <span class="n">bigDecimalArray</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">[]{</span><span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">""</span><span class="o">)};</span>
-<span class="n">Number</span><span class="o">[]</span> <span class="n">numberArray</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mf">0.5</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">""</span><span class="o">)};</span></code></pre></figure>
+<span class="nc">Number</span><span class="o">[]</span> <span class="n">integerArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Integer</span><span class="o">[]{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">};</span>
+<span class="nc">Number</span><span class="o">[]</span> <span class="n">bigDecimalArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">[]{</span><span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">(</span><span class="s">""</span><span class="o">)};</span>
+<span class="nc">Number</span><span class="o">[]</span> <span class="n">numberArray</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mf">0.5</span><span class="o">,</span> <span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">(</span><span class="s">""</span><span class="o">)};</span></code></pre></figure>
 
 <p class="center">代码清单2</p>
 
@@ -168,10 +168,10 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       但是在泛型中，type argument的类型关系和泛型类的类型关系并不直观。考虑类型List&lt;Number &gt;，在赋值时，我们能给它传递什么呢？考虑如下代码：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="n">numberList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Number</span><span class="o">&gt;</span> <span class="n">numberList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 
 <span class="c1">//compile fail: require Number, found Integer, type mismatch.</span>
-<span class="n">numberList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span></code></pre></figure>
+<span class="n">numberList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span></code></pre></figure>
 
 <p class="center">代码清单3</p>
 
@@ -193,8 +193,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 <p>       除了与父类拥有一样的type parameter之外，子类还可以额外新增不同的type parameter，考虑官方教程的代码例子：</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
-<span class="kd">interface</span> <span class="nc">PayloadList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">,</span><span class="n">P</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kt">void</span> <span class="nf">setPayload</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">P</span> <span class="n">val</span><span class="o">);</span>
+<span class="kd">interface</span> <span class="nc">PayloadList</span><span class="o">&lt;</span><span class="no">E</span><span class="o">,</span><span class="no">P</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">List</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">setPayload</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="no">P</span> <span class="n">val</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
 <p class="center">代码清单4</p>
@@ -227,8 +227,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">wildcardCovariance</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-    <span class="n">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">numList</span> <span class="o">=</span> <span class="n">intList</span><span class="o">;</span>
+    <span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">numList</span> <span class="o">=</span> <span class="n">intList</span><span class="o">;</span>
 <span class="o">}</span></code></pre></figure>
 
 <p class="center">代码清单5</p>
@@ -243,8 +243,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1277778288'%3E%3C/span%3E%3C
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">//compile success</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">wildcardContravariance</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Number</span><span class="o">&gt;</span> <span class="n">numList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-    <span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="n">numList</span><span class="o">;</span>
+    <span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="n">numList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="n">numList</span><span class="o">;</span>
 <span class="o">}</span></code></pre></figure>
 
 <p class="center">代码清单6</p>
