@@ -11,6 +11,12 @@ tags: [Summary]
 
 <br>
 
+{:.center}
+![c compile]({{ site.baseurl }}/images/post_2019_10_31_image1.jpg)
+
+{:.center}
+[图片来源](https://sandeepdass003.wordpress.com/2018/02/23/design-patterns-in-software-design/)
+
 ## 主动使用的设计模式
 
 <br>
