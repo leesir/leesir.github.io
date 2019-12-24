@@ -22,6 +22,8 @@ tags: [Summary]
 {:.center}
 [图片来源](http://www.wiseworkplace.com.au/_blog/WISE_Blog/post/reasonableperson/)
 
+<!-- more -->
+
 <br>
 
 #### 法律层面的考虑
@@ -50,8 +52,6 @@ if (年利率大于36) {
 代码清单1
 
 &#160; &#160; &#160; &#160;在实际工程中，可以将36%做成配置项，根据实际需要灵活调整。
-
-<!-- more -->
 
 <br>
 
