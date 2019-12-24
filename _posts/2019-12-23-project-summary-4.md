@@ -44,6 +44,8 @@ if (年利率大于36) {
 }
 
 返回成功
+{% endhighlight %}
+
 {:.center}
 代码清单1
 
@@ -67,6 +69,8 @@ if (年利率大于36) {
 for (int i = 0; i < 600; i++) {
     System.out.println((int)(830 + Math.random() * 150));
 }
+{% endhighlight %}
+
 {:.center}
 代码清单2
 
